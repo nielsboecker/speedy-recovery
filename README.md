@@ -1,4 +1,4 @@
-# speedy-recovery
+# Speedy Recovery
 GOSH (Great Ormond Street Hospital) and its digital unit GOSH DRIVE (Digital Research Informatics and Virtual Environments) are committed to making young patients’ hospital stays as tolerable as possible. Inherently, this goal can only be achieved if parents are assured and confident, and hospital staff is well-informed and approachable. 
 
 We aim to use modern technology to help GOSH in their pursuit of their goals and generally explore the potential of patient-centred software in healthcare. Therefore, we will develop a web app that serves three different user groups: patient, parent and staff. The app will provide a calendar that is tailored to the respective user’s needs. All three groups have very different demands and expectations, which makes our project interesting from a user experience perspective. 
