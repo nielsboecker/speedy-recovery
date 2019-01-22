@@ -12,7 +12,7 @@ const propTypes = {};
 
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
 
-class App extends React.Component {
+class Calendar extends React.Component {
   constructor(...args) {
     super(...args);
 
@@ -45,9 +45,6 @@ class App extends React.Component {
               events={this.state.events}
               step={60}
               views={allViews}
-              // min={new Date(2008, 0, 1, 8, 0)} // 8.00 AM
-              // max={new Date(2008, 0, 1, 17, 0)} // Max will be 6.00 PM!
-              // date={new Date(2018, 0, 1)}
               defaultDate={new Date()}
               onSelectEvent={event => alert(event.title)}
               onSelectSlot={this.handleSelect}
@@ -57,6 +54,6 @@ class App extends React.Component {
   }
 }
 
-App.propTypes = propTypes;
+Calendar.propTypes = propTypes;
 
-export default App;
+export default Calendar;
