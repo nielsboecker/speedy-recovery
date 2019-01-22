@@ -5,24 +5,13 @@ import {
     Image,
     Menu
 } from 'semantic-ui-react'
-
-const menuStyle = {
-    border: 'none',
-    borderRadius: 0,
-    boxShadow: 'none',
-    marginBottom: '1em',
-    marginTop: '4em',
-    transition: 'box-shadow 0.5s ease, padding 0.5s ease',
-};
+import './Header.css';
 
 class Header extends Component {
     render() {
         return (
             <header>
-                <Menu
-                    borderless
-                    style={menuStyle}
-                >
+                <Menu borderless>
                     <Container text>
                         <Menu.Item>
                             <Image size='mini' src='https://react.semantic-ui.com/logo.png' />
