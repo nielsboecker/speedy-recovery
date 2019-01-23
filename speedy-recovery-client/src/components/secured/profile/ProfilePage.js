@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Divider, Icon, Table } from 'semantic-ui-react'
+import { Icon, Table } from 'semantic-ui-react'
 
 class ProfilePage extends Component {
     render() {

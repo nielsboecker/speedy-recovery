@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import WelcomeBox from "./WelcomeBox";
 import './StartPage.css';
-import {Header, Image, Grid} from "semantic-ui-react";
+import {Image, Grid} from "semantic-ui-react";
 
 class StartPage extends Component {
     render() {

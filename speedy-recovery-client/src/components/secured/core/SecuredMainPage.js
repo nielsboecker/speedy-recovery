@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import Header from '../shared/Header';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import { Container } from 'semantic-ui-react';
 import HomePage from "../home/HomePage";
 import CalendarPage from "../calendar/CalendarPage";
@@ -13,7 +13,7 @@ class SecuredMainPage extends Component {
 
         return (
             <div>
-                <Router>
+                <BrowserRouter>
                     <Fragment>
                         <Header/>
 
@@ -25,7 +25,7 @@ class SecuredMainPage extends Component {
                             <Route path={`${match.url}/profile`} component={ProfilePage} />
                         </Container>
                     </Fragment>
-                </Router>
+                </BrowserRouter>
             </div>
         );
     }
