@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import {
     Container,
     Dropdown,
@@ -10,20 +11,21 @@ import {
 import './Header.css';
 
 class Header extends Component {
+
     render() {
         return (
             <header>
                 <Menu borderless>
                     <Container text>
-                        <Menu.Item>
+                        <Menu.Item header as={Link} to="/secured/home">
                             <Image size='mini' src='https://react.semantic-ui.com/logo.png' />
+                            Speedy Recovery
                         </Menu.Item>
-                        <Menu.Item header>Speedy Recovery</Menu.Item>
-                        <Menu.Item as='a'>
+                        <Menu.Item as={Link} to="/secured/calendar">
                             <Icon name='calendar alternate' />
                             Calendar
                         </Menu.Item>
-                        <Menu.Item as='a'>
+                        <Menu.Item as={Link} to="/secured/messaging">
                             <Icon name='mail' />
                              Messages
                             <Label color='teal' circular floating>
@@ -34,11 +36,11 @@ class Header extends Component {
                         <Menu.Menu position='right'>
                             <Dropdown text='Robert Smith' pointing className='link item'>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/secured/profile">
                                         <Icon name='user' />
                                         My Profile
                                     </Dropdown.Item>
-                                    <Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/">
                                         <Icon name='log out' />
                                          Log Out
                                     </Dropdown.Item>

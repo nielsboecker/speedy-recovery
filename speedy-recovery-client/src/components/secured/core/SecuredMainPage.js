@@ -9,19 +9,20 @@ import ProfilePage from "../profile/ProfilePage";
 
 class SecuredMainPage extends Component {
     render() {
-        return (
+        const { match }= this.props;
 
+        return (
             <div>
                 <Router>
                     <Fragment>
                         <Header/>
 
                         <Container text>
-                            <Route path={`${this.props.match.url}`} exact component={HomePage} />
-                            <Route path={`${this.props.match.url}/home`} component={HomePage} />
-                            <Route path={`${this.props.match.url}/calendar`} component={CalendarPage} />
-                            <Route path={`${this.props.match.url}/messaging`} component={MessagingPage} />
-                            <Route path={`${this.props.match.url}/profile`} component={ProfilePage} />
+                            <Route path={`${match.url}`} exact component={HomePage} />
+                            <Route path={`${match.url}/home`} component={HomePage} />
+                            <Route path={`${match.url}/calendar`} component={CalendarPage} />
+                            <Route path={`${match.url}/messaging`} component={MessagingPage} />
+                            <Route path={`${match.url}/profile`} component={ProfilePage} />
                         </Container>
                     </Fragment>
                 </Router>
