@@ -3,17 +3,17 @@ import events from '../src/events'
 import BigCalendar from 'react-big-calendar'
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.less'
 import moment from 'moment';
-moment.locale('en-GB');
-const propTypes = {};
+
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
 
+moment.locale('en-GB');
 const localizer = BigCalendar.momentLocalizer(moment);
+
 const DragAndDropCalendar = withDragAndDrop(BigCalendar);
 
-class Dnd extends React.Component {
+class CalendarPage extends React.Component {
     constructor(...args) {
         super(...args);
         this.state = {
@@ -44,27 +44,11 @@ class Dnd extends React.Component {
         this.setState({
             events: nextEvents,
         })
-
-        // alert(`${event.title} was dropped onto ${updatedEvent.start}`)
     }
 
-    resizeEvent = ({ event, start, end }) => {
-        const { events } = this.state;
 
-        const nextEvents = events.map(existingEvent => {
-            return existingEvent.id === event.id
-                ? { ...existingEvent, start, end }
-                : existingEvent
-        });
+    newEvent = ({start, end}) => {
 
-        this.setState({
-            events: nextEvents,
-        })
-
-        //alert(`${event.title} was resized to ${start}-${end}`)
-    };
-
-    newEvent= ({start, end}) => {
         //Change next two lines to make nicer way of adding an event
         const title = window.prompt('New Event name');
         const description = window.prompt('Event Description');
@@ -93,20 +77,15 @@ class Dnd extends React.Component {
                 localizer={localizer}
                 events={this.state.events}
                 onEventDrop={this.moveEvent}
-                resizable
-                onEventResize={this.resizeEvent}
                 onSelectSlot={this.newEvent}
                 defaultView={BigCalendar.Views.MONTH}
                 defaultDate={new Date()}
                 step={60}
                 views={allViews}
-
             />
             </div>
         )
     }
 }
 
-Dnd.propTypes =  propTypes;
-
-export default Dnd
+export default CalendarPage

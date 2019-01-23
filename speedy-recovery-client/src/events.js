@@ -3,14 +3,15 @@ export default [
         id: 0,
         title: 'All Day Event very long title',
         allDay: true,
-        start: new Date(2019, 3, 0),
-        end: new Date(2019, 3, 1),
+        start: new Date(2019, 0, 1),
+        end: new Date(2019, 0, 1),
+        description: 'event description',
     },
     {
         id: 1,
         title: 'Long Event',
-        start: new Date(2019, 3, 7),
-        end: new Date(2019, 3, 10),
+        start: new Date(2019, 0, 7),
+        end: new Date(2019, 0, 10),
         description: 'event description',
     },
 
@@ -39,8 +40,8 @@ export default [
     {
         id: 5,
         title: 'Conference',
-        start: new Date(2019, 3, 11),
-        end: new Date(2019, 3, 13),
+        start: new Date(2019, 0, 11),
+        end: new Date(2019, 0, 13),
         desc: 'Big conference for important people',
     },
     {

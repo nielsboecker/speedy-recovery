@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import CalendarPage from "./CalendarPage";
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
+  ReactDOM.render(<CalendarPage />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
