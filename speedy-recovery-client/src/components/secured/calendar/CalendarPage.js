@@ -93,6 +93,8 @@ class CalendarPage extends React.Component {
         var resultsStr = "";
 
         for (var key in AppointmentData) {
+            var nextEvent = {id: AppointmentData[key].id,
+                            title: AppointmentData[key].description,}
             resultsStr = resultsStr + AppointmentData[key].id;
         }
 

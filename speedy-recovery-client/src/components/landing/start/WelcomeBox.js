@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from "react-router-dom";
 import { Button, Form, Grid, Header, Image, Message, Segment, Container, Card } from 'semantic-ui-react'
 import './WelcomeBox.css';
 
@@ -21,21 +22,35 @@ class WelcomeBox extends Component {
                             </Card.Content>
 
                             <Card.Content>
-                            <Form size='large'>
-                                <Segment stacked>
-                                    <Button color='teal' fluid size='large'>
-                                        Log in
-                                    </Button>
-                                    <Button color='teal' fluid size='large'>
-                                        Sign up
-                                    </Button>
-                                </Segment>
-                            </Form>
+
+                                <Form size='large'>
+                                    <Segment>
+                                        <Button color='teal'
+                                                fluid
+                                                size='large'
+                                                className="button"
+                                                as={Link}
+                                                to="/secured"
+                                        >
+                                            Log in
+                                        </Button>
+                                        <Button
+                                            color='teal'
+                                            fluid
+                                            size='large'
+                                            className="button"
+                                            as={Link}
+                                            to="/TODO"
+                                        >
+                                            Sign up
+                                        </Button>
+                                    </Segment>
+                                </Form>
                             </Card.Content>
 
                             <Card.Content>
                                 <Message>
-                                    Need help? <a href='#'>Click here!</a>
+                                    Need help? <a href='/TODO'>Click here!</a>
                                 </Message>
                             </Card.Content>
                         </Card>
