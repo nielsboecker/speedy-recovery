@@ -1,11 +1,12 @@
 import React from 'react'
 import events from './events'
+import AppointmentData from './appointmentExample.json'
 import BigCalendar from 'react-big-calendar'
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+import 'react-big-calendar/lib/css/react-big-calendar.css'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.less'
-import './CalendarPage.css';
-import moment from 'moment';
+import './CalendarPage.css'
+import moment from 'moment'
 
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
 
@@ -22,7 +23,10 @@ class CalendarPage extends React.Component {
         };
 
         this.moveEvent = this.moveEvent.bind(this);
-        this.newEvent = this.newEvent.bind(this)
+        this.newEvent = this.newEvent.bind(this);
+        this.convertData = this.convertData.bind(this);
+
+        this.convertData('sdf');
     }
 
     moveEvent({ event, start, end, isAllDay: droppedOnAllDaySlot }) {
@@ -65,10 +69,45 @@ class CalendarPage extends React.Component {
             })
     };
 
+    convertData() {
+        /*Data required from JSON:
+        * 1) id
+        * 2) status
+        * 3) Service Category
+        * 4) Service Type
+        * 5) Appointment Type code
+        * 6) Reason reference display
+        * 7) Priority
+        * 8) Description
+        * 9) Start
+        * 10) End
+        * 11) Created
+        * 12) Comment
+        * 13) Patient
+        * 14) Practitioner
+        * 15) Location
+        * */
+
+        var testEvents = [];
+
+        var resultsStr = "";
+
+        for (var key in AppointmentData) {
+            resultsStr = resultsStr + AppointmentData[key].id;
+        }
+
+        return resultsStr;
+    }
+
     render() {
         return (
+
             <div style={{height: 550}}>
-            <DragAndDropCalendar
+                <div>
+                    <h1>Testing</h1>
+                    <h2>{this.convertData()}</h2>
+                </div>
+                <DragAndDropCalendar
                 popup
                 selectable
                 localizer={localizer}
@@ -79,8 +118,8 @@ class CalendarPage extends React.Component {
                 defaultDate={new Date()}
                 step={60}
                 views={allViews}
+
             />
-            <p></p>
             </div>
 
         )
