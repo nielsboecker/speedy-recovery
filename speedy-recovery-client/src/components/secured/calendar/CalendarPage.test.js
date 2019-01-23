@@ -7,8 +7,3 @@ it('renders without crashing', () => {
   ReactDOM.render(<CalendarPage />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
-
-it('test json conversion', () => {
-
-});
-

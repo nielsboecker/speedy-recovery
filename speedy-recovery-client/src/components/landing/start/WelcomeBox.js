@@ -26,12 +26,11 @@ class WelcomeBox extends Component {
                                 <Form size='large'>
                                     <Segment>
                                         <Button color='teal'
-
-                                            fluid
-                                            size='large'
-                                            className="button"
-                                            as={Link}
-                                            to="/secured"
+                                                fluid
+                                                size='large'
+                                                className="button"
+                                                as={Link}
+                                                to="/secured"
                                         >
                                             Log in
                                         </Button>

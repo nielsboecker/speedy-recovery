@@ -1,5 +1,5 @@
 import React from 'react'
-import events from './events'
+// import events from './events'
 import AppointmentData from './appointmentExample.json'
 import BigCalendar from 'react-big-calendar'
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
@@ -19,20 +19,20 @@ class CalendarPage extends React.Component {
     constructor(...args) {
         super(...args);
         this.state = {
-            events: events,
+            // events: events,
+            data: [],
         };
 
         this.moveEvent = this.moveEvent.bind(this);
         this.newEvent = this.newEvent.bind(this);
-        this.convertData = this.convertData.bind(this);
 
-        this.convertData('sdf');
+        this.convertData();
     }
 
     moveEvent({ event, start, end, isAllDay: droppedOnAllDaySlot }) {
-        const { events } = this.state;
+        const { data } = this.state;
 
-        const idx = events.indexOf(event);
+        const idx = data.indexOf(event);
         let allDay = event.allDay;
 
         if (!event.allDay && droppedOnAllDaySlot) {
@@ -43,11 +43,11 @@ class CalendarPage extends React.Component {
 
         const updatedEvent = { ...event, start, end, allDay };
 
-        const nextEvents = [...events];
+        const nextEvents = [...data];
         nextEvents.splice(idx, 1, updatedEvent);
 
         this.setState({
-            events: nextEvents,
+            data: nextEvents,
         })
     }
 
@@ -57,8 +57,8 @@ class CalendarPage extends React.Component {
         const description = window.prompt('Event Description');
         if (title)
             this.setState({
-                events: [
-                    ...this.state.events,
+                data: [
+                    ...this.state.data,
                     {
                         start,
                         end,
@@ -88,32 +88,26 @@ class CalendarPage extends React.Component {
         * 15) Location
         * */
 
-        var testEvents = [];
-
-        var resultsStr = "";
-
         for (var key in AppointmentData) {
             var nextEvent = {id: AppointmentData[key].id,
-                            title: AppointmentData[key].description,}
-            resultsStr = resultsStr + AppointmentData[key].id;
+                            title: AppointmentData[key].description,
+                            start: new Date(AppointmentData[key].start),
+                            end: new Date(AppointmentData[key].end),
+                            description: AppointmentData[key].comment};
+            this.state.data.push(nextEvent);
         }
-
-        return resultsStr;
     }
 
     render() {
         return (
 
             <div style={{height: 550}}>
-                <div>
-                    <h1>Testing</h1>
-                    <h2>{this.convertData()}</h2>
-                </div>
+
                 <DragAndDropCalendar
                 popup
                 selectable
                 localizer={localizer}
-                events={this.state.events}
+                events={this.state.data}
                 onEventDrop={this.moveEvent}
                 onSelectSlot={this.newEvent}
                 defaultView={BigCalendar.Views.MONTH}
