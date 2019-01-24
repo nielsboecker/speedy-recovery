@@ -54,7 +54,6 @@ class CalendarPage extends React.Component {
     newEvent = ({start, end}) => {
         //Change next two lines to make nicer way of adding an event
         const title = window.prompt('New Event name');
-        const description = window.prompt('Event Description');
         if (title)
             this.setState({
                 data: [
@@ -63,7 +62,6 @@ class CalendarPage extends React.Component {
                         start,
                         end,
                         title,
-                        description,
                     },
                 ],
             })
@@ -72,28 +70,36 @@ class CalendarPage extends React.Component {
     convertData() {
         /*Data required from JSON:
         * 1) id
-        * 2) status
-        * 3) Service Category
-        * 4) Service Type
-        * 5) Appointment Type code
-        * 6) Reason reference display
-        * 7) Priority
-        * 8) Description
-        * 9) Start
-        * 10) End
-        * 11) Created
-        * 12) Comment
-        * 13) Patient
-        * 14) Practitioner
-        * 15) Location
+        * 2) status of patient
+        * 3) Service Type
+        * 4) Appointment Type code
+        * 5) Reason reference display
+        * 6) Priority
+        * 7) Description/title
+        * 8) Start date
+        * 9) End date
+        * 10) Date created
+        * 11) Comment
+        * 12) Patient
+        * 13) Practitioner
+        * 14) Location
         * */
 
-        for (var key in AppointmentData) {
+        for (let key in AppointmentData) {
             var nextEvent = {id: AppointmentData[key].id,
+                            status: AppointmentData[key].status,
+                            s_type: AppointmentData[key].serviceType.display,
+                            app_type: AppointmentData[key].appointmentType.code,
+                            reason: AppointmentData[key].reasonReference.display,
+                            priority: AppointmentData[key].priority,
                             title: AppointmentData[key].description,
                             start: new Date(AppointmentData[key].start),
                             end: new Date(AppointmentData[key].end),
-                            description: AppointmentData[key].comment};
+                            created: new Date(AppointmentData[key].created),
+                            comment: AppointmentData[key].comment,
+                            patient: AppointmentData[key].participant[0].actor.display,
+                            practitioner: AppointmentData[key].participant[1].actor.display,
+                            location: AppointmentData[key].participant[2].actor.display };
             this.state.data.push(nextEvent);
         }
     }
