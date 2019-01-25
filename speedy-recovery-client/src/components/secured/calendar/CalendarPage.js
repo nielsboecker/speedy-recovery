@@ -1,6 +1,4 @@
 import React from 'react'
-// import events from './events'
-import AppointmentData from './test_files/appointmentExample.json'
 import BigCalendar from 'react-big-calendar'
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
