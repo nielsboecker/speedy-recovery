@@ -1,6 +1,6 @@
 import React from 'react'
 // import events from './events'
-import AppointmentData from './appointmentExample.json'
+import AppointmentData from './test_files/appointmentExample.json'
 import BigCalendar from 'react-big-calendar'
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
@@ -19,20 +19,20 @@ class CalendarPage extends React.Component {
     constructor(...args) {
         super(...args);
         this.state = {
-            // events: events,
+            events: [],
             data: [],
         };
 
         this.moveEvent = this.moveEvent.bind(this);
         this.newEvent = this.newEvent.bind(this);
 
-        this.convertData();
+        // this.convertData();
     }
 
     moveEvent({ event, start, end, isAllDay: droppedOnAllDaySlot }) {
-        const { data } = this.state;
+        const { events } = this.state;
 
-        const idx = data.indexOf(event);
+        const idx = events.indexOf(event);
         let allDay = event.allDay;
 
         if (!event.allDay && droppedOnAllDaySlot) {
@@ -43,11 +43,11 @@ class CalendarPage extends React.Component {
 
         const updatedEvent = { ...event, start, end, allDay };
 
-        const nextEvents = [...data];
+        const nextEvents = [...events];
         nextEvents.splice(idx, 1, updatedEvent);
 
         this.setState({
-            data: nextEvents,
+            events: nextEvents,
         })
     }
 
@@ -56,8 +56,8 @@ class CalendarPage extends React.Component {
         const title = window.prompt('New Event name');
         if (title)
             this.setState({
-                data: [
-                    ...this.state.data,
+                events: [
+                    ...this.state.events,
                     {
                         start,
                         end,
@@ -70,37 +70,33 @@ class CalendarPage extends React.Component {
     convertData() {
         /*Data required from JSON:
         * 1) id
-        * 2) status of patient
-        * 3) Service Type
-        * 4) Appointment Type code
-        * 5) Reason reference display
-        * 6) Priority
-        * 7) Description/title
-        * 8) Start date
-        * 9) End date
-        * 10) Date created
-        * 11) Comment
-        * 12) Patient
-        * 13) Practitioner
-        * 14) Location
+        * 2) Title
+        * 3) status of patient
+        * 4) Meeting reason
+        * 5) Priority
+        * 6) Description/title
+        * 7) Start date
+        * 8) End date
+        * 9) Comment
+        * 10) Patient
+        * 11) Practitioner
+        * 12) Location
         * */
 
-        for (let key in AppointmentData) {
-            var nextEvent = {id: AppointmentData[key].id,
-                            status: AppointmentData[key].status,
-                            s_type: AppointmentData[key].serviceType.display,
-                            app_type: AppointmentData[key].appointmentType.code,
-                            reason: AppointmentData[key].reasonReference.display,
-                            priority: AppointmentData[key].priority,
-                            title: AppointmentData[key].description,
-                            start: new Date(AppointmentData[key].start),
-                            end: new Date(AppointmentData[key].end),
-                            created: new Date(AppointmentData[key].created),
-                            comment: AppointmentData[key].comment,
-                            patient: AppointmentData[key].participant[0].actor.display,
-                            practitioner: AppointmentData[key].participant[1].actor.display,
-                            location: AppointmentData[key].participant[2].actor.display };
-            this.state.data.push(nextEvent);
+        for (let key in this.state.data) {
+            var nextEvent = {id: this.state.data[key].id,
+                            title: this.state.data[key].text.div,
+                            status: this.state.data[key].status,
+                            reason: this.state.data[key].type.coding[0].display,
+                            priority: this.state.data[key].priority,
+                            description: this.state.data[key].description,
+                            start: new Date(this.state.data[key].start),
+                            end: new Date(this.state.data[key].end),
+                            comment: this.state.data[key].comment,
+                            patient: this.state.data[key].participant[0].actor.display,
+                            practitioner: this.state.data[key].participant[1].actor.display,
+                            location: this.state.data[key].participant[2].actor.display };
+            this.state.events.push(nextEvent);
         }
     }
 
@@ -108,12 +104,12 @@ class CalendarPage extends React.Component {
         return (
 
             <div style={{height: 550}}>
-
+                {this.convertData()}
                 <DragAndDropCalendar
                 popup
                 selectable
                 localizer={localizer}
-                events={this.state.data}
+                events={this.state.events}
                 onEventDrop={this.moveEvent}
                 onSelectSlot={this.newEvent}
                 defaultView={BigCalendar.Views.MONTH}
