@@ -74,8 +74,8 @@
     },
     "priority": 5,
     "description": "Discussion on the results of your recent CT",
-    "start": "2013-12-10T09:00:00Z",
-    "end": "2013-12-10T11:00:00Z",
+    "start": "2019-01-10T09:00:00Z",
+    "end": "2019-01-10T11:00:00Z",
     "comment": "Further expand on the results of the CT and determine the next steps that may be appropriate.",
     "participant": [
       {

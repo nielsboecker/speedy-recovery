@@ -23,8 +23,6 @@ class CalendarPage extends React.Component {
 
         this.moveEvent = this.moveEvent.bind(this);
         this.newEvent = this.newEvent.bind(this);
-
-        // this.convertData();
     }
 
     moveEvent({ event, start, end, isAllDay: droppedOnAllDaySlot }) {
@@ -67,18 +65,8 @@ class CalendarPage extends React.Component {
 
     convertData() {
         /*Data required from JSON:
-        * 1) id
-        * 2) Title
-        * 3) status of patient
-        * 4) Meeting reason
-        * 5) Priority
-        * 6) Description/title
-        * 7) Start date
-        * 8) End date
-        * 9) Comment
-        * 10) Patient
-        * 11) Practitioner
-        * 12) Location
+        *   id, title of appointment, status of patient, meeting reason, priority, description, start date, end date,
+        *   comments, patient name, practitioner name, location
         * */
 
         for (let key in this.state.data) {

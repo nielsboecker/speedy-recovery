@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import CalendarPage from "./CalendarPage";
-import AppointmentData from './test_files/appointmentExample.json';
+import AppointmentData from './test_files/smallAppointmentList.json';
 import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -15,11 +15,12 @@ it('renders without crashing', () => {
 
 describe ('test fhir json to calendar conversion', () => {
 
+  const wrapper = mount (
+      <CalendarPage />
+  );
+
   it('data and events are empty when no data input', () => {
 
-    const wrapper = mount(
-        <CalendarPage />
-    );
 
     expect(wrapper.state().events).toEqual([]);
     expect(wrapper.state().data).toEqual([]);
@@ -28,12 +29,9 @@ describe ('test fhir json to calendar conversion', () => {
 
   it('data converted properly from json to calendar format', () => {
 
-    const wrapper = mount (
-        <CalendarPage />
-    );
-
     wrapper.setState({data: AppointmentData});
 
+    //appointment 1
     expect(wrapper.state().events[0].id).toEqual('example');
     expect(wrapper.state().events[0].title).toEqual('<div>Brian MRI results discussion</div>');
     expect(wrapper.state().events[0].status).toEqual('booked');
@@ -48,7 +46,24 @@ describe ('test fhir json to calendar conversion', () => {
     expect(wrapper.state().events[0].practitioner).toEqual('Dr Adam Careful');
     expect(wrapper.state().events[0].location).toEqual('South Wing, second floor');
 
+    //appointment 2
+    expect(wrapper.state().events[1].id).toEqual('example2');
+    expect(wrapper.state().events[1].title).toEqual('<div>CT results discussion</div>');
+    expect(wrapper.state().events[1].status).toEqual('booked');
+    expect(wrapper.state().events[1].reason).toEqual('General Discussion');
+    expect(wrapper.state().events[1].priority).toEqual(5);
+    expect(wrapper.state().events[1].description).toEqual('Discussion on the results of your recent CT');
+    expect(wrapper.state().events[1].start).toEqual(new Date('2019-01-10T09:00:00Z'));
+    expect(wrapper.state().events[1].end).toEqual(new Date('2019-01-10T11:00:00Z'));
+    expect(wrapper.state().events[1].comment).toEqual('Further expand on the results of the CT and determine the ' +
+        'next steps that may be appropriate.');
+    expect(wrapper.state().events[1].patient).toEqual('Joe James Bloggs');
+    expect(wrapper.state().events[1].practitioner).toEqual('Dr Adam Doctors');
+    expect(wrapper.state().events[1].location).toEqual('North Wing, third floor');
+
   });
+
+
 });
 
 
