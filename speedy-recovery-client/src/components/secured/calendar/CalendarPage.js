@@ -1,9 +1,9 @@
 import React from 'react'
 import BigCalendar from 'react-big-calendar'
-import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.less'
 import './CalendarPage.css'
+import AppointmentData from './test_files/smallAppointmentList.json';
 import moment from 'moment'
 
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
@@ -11,41 +11,23 @@ let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
 moment.locale('en-GB');
 const localizer = BigCalendar.momentLocalizer(moment);
 
-const DragAndDropCalendar = withDragAndDrop(BigCalendar);
-
 class CalendarPage extends React.Component {
     constructor(...args) {
         super(...args);
         this.state = {
             events: [],
-            data: [],
+            data: AppointmentData,
+            appointment: [],
         };
-
-        this.moveEvent = this.moveEvent.bind(this);
         this.newEvent = this.newEvent.bind(this);
+        this.convertData();
     }
 
-    moveEvent({ event, start, end, isAllDay: droppedOnAllDaySlot }) {
-        const { events } = this.state;
-
-        const idx = events.indexOf(event);
-        let allDay = event.allDay;
-
-        if (!event.allDay && droppedOnAllDaySlot) {
-            allDay = true
-        } else if (event.allDay && !droppedOnAllDaySlot) {
-            allDay = false
-        }
-
-        const updatedEvent = { ...event, start, end, allDay };
-
-        const nextEvents = [...events];
-        nextEvents.splice(idx, 1, updatedEvent);
-
+    onSelectEvent = event => {
         this.setState({
-            events: nextEvents,
-        })
-    }
+            appointment: event,
+        });
+    };
 
     newEvent = ({start, end}) => {
         //Change next two lines to make nicer way of adding an event
@@ -71,7 +53,7 @@ class CalendarPage extends React.Component {
 
         for (let key in this.state.data) {
             var nextEvent = {id: this.state.data[key].id,
-                            title: this.state.data[key].text.div,
+                            title: this.state.data[key].text.div.substring(5,this.state.data[key].text.div.length - 6),
                             status: this.state.data[key].status,
                             reason: this.state.data[key].type.coding[0].display,
                             priority: this.state.data[key].priority,
@@ -83,6 +65,7 @@ class CalendarPage extends React.Component {
                             practitioner: this.state.data[key].participant[1].actor.display,
                             location: this.state.data[key].participant[2].actor.display };
             this.state.events.push(nextEvent);
+
         }
     }
 
@@ -90,20 +73,70 @@ class CalendarPage extends React.Component {
         return (
 
             <div style={{height: 550}}>
-                {this.convertData()}
-                <DragAndDropCalendar
+                <BigCalendar
                 popup
+                onDrilldown
                 selectable
                 localizer={localizer}
                 events={this.state.events}
-                onEventDrop={this.moveEvent}
-                onSelectSlot={this.newEvent}
+                onSelectEvent={this.onSelectEvent}
+                // onSelectSlot={this.newEvent}
                 defaultView={BigCalendar.Views.MONTH}
                 defaultDate={new Date()}
                 step={60}
                 views={allViews}
 
             />
+                <p></p>
+            <center>
+                <div className="ui card" >
+                    <div className="content">
+                        <div className="header">Appointment Details</div>
+                    </div>
+                    <div className="content">
+                        <div className="ui small feed">
+                            <div className="event">
+                                <div className="content">
+                                    <div className="summary">
+                                        Title: {this.state.appointment.title}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="event">
+                                <div className="content">
+                                    <div className="summary">
+                                        Doctor: {this.state.appointment.practitioner}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="event">
+                                <div className="content">
+                                    <div className="summary">
+                                        Patient: {this.state.appointment.patient}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="event">
+                                <div className="content">
+                                    <div className="summary">
+                                        Location: {this.state.appointment.location}
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="event">
+                                <div className="content">
+                                    <div className="summary">
+                                        Comments: {this.state.appointment.comment}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="extra content">
+                        <button className="ui button">Request Cancellation</button>
+                    </div>
+                </div>
+            </center>
             </div>
 
         )

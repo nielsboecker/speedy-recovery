@@ -33,13 +33,13 @@ describe ('test fhir json to calendar conversion', () => {
 
     //appointment 1
     expect(wrapper.state().events[0].id).toEqual('example');
-    expect(wrapper.state().events[0].title).toEqual('<div>Brian MRI results discussion</div>');
+    expect(wrapper.state().events[0].title).toEqual('Brian MRI results discussion');
     expect(wrapper.state().events[0].status).toEqual('booked');
     expect(wrapper.state().events[0].reason).toEqual('General Discussion');
     expect(wrapper.state().events[0].priority).toEqual(5);
     expect(wrapper.state().events[0].description).toEqual('Discussion on the results of your recent MRI');
-    expect(wrapper.state().events[0].start).toEqual(new Date('2013-12-10T09:00:00Z'));
-    expect(wrapper.state().events[0].end).toEqual(new Date('2013-12-10T11:00:00Z'));
+    expect(wrapper.state().events[0].start).toEqual(new Date('2019-01-01T09:00:00Z'));
+    expect(wrapper.state().events[0].end).toEqual(new Date('2019-01-01T11:00:00Z'));
     expect(wrapper.state().events[0].comment).toEqual('Further expand on the results of the MRI and determine the' +
                                                       ' next actions that may be appropriate.');
     expect(wrapper.state().events[0].patient).toEqual('Peter James Chalmers');
@@ -48,13 +48,13 @@ describe ('test fhir json to calendar conversion', () => {
 
     //appointment 2
     expect(wrapper.state().events[1].id).toEqual('example2');
-    expect(wrapper.state().events[1].title).toEqual('<div>CT results discussion</div>');
+    expect(wrapper.state().events[1].title).toEqual('CT results discussion');
     expect(wrapper.state().events[1].status).toEqual('booked');
     expect(wrapper.state().events[1].reason).toEqual('General Discussion');
     expect(wrapper.state().events[1].priority).toEqual(5);
     expect(wrapper.state().events[1].description).toEqual('Discussion on the results of your recent CT');
-    expect(wrapper.state().events[1].start).toEqual(new Date('2019-01-10T09:00:00Z'));
-    expect(wrapper.state().events[1].end).toEqual(new Date('2019-01-10T11:00:00Z'));
+    expect(wrapper.state().events[1].start).toEqual(new Date('2019-01-15T11:00:00Z'));
+    expect(wrapper.state().events[1].end).toEqual(new Date('2019-01-15T13:00:00Z'));
     expect(wrapper.state().events[1].comment).toEqual('Further expand on the results of the CT and determine the ' +
         'next steps that may be appropriate.');
     expect(wrapper.state().events[1].patient).toEqual('Joe James Bloggs');
