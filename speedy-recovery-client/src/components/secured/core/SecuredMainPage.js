@@ -17,7 +17,7 @@ class SecuredMainPage extends Component {
                     <Fragment>
                         <Header/>
 
-                        <Container text>
+                        <Container >
                             <Route path={`${match.url}`} exact component={HomePage} />
                             <Route path={`${match.url}/home`} component={HomePage} />
                             <Route path={`${match.url}/calendar`} component={CalendarPage} />

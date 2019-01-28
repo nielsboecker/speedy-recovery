@@ -21,7 +21,6 @@ describe ('test fhir json to calendar conversion', () => {
 
   it('data and events are empty when no data input', () => {
 
-
     // expect(wrapper.state().events).toEqual([]);
     // expect(wrapper.state().data).toEqual(AppointmentData);
 

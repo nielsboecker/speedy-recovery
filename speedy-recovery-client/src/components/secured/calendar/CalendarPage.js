@@ -4,6 +4,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.less'
 import './CalendarPage.css'
 import AppointmentData from './test_files/smallAppointmentList.json';
+import { Grid, Segment } from 'semantic-ui-react'
 import moment from 'moment'
 
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
@@ -71,74 +72,101 @@ class CalendarPage extends React.Component {
 
     render() {
         return (
-
-            <div style={{height: 550}}>
-                <BigCalendar
-                popup
-                onDrilldown
-                selectable
-                localizer={localizer}
-                events={this.state.events}
-                onSelectEvent={this.onSelectEvent}
-                // onSelectSlot={this.newEvent}
-                defaultView={BigCalendar.Views.MONTH}
-                defaultDate={new Date()}
-                step={60}
-                views={allViews}
-
-            />
-                <p></p>
-            <center>
-                <div className="ui card" >
-                    <div className="content">
-                        <div className="header">Appointment Details</div>
-                    </div>
-                    <div className="content">
-                        <div className="ui small feed">
-                            <div className="event">
-                                <div className="content">
-                                    <div className="summary">
-                                        Title: {this.state.appointment.title}
+            <Grid divided='vertically'>
+                <Grid.Row columns={2}>
+                    <Grid.Column width={12}>
+                        <Segment>
+                        <div style={{height: 450}}>
+                        <BigCalendar
+                            popup
+                            onDrilldown
+                            selectable
+                            localizer={localizer}
+                            events={this.state.events}
+                            onSelectEvent={this.onSelectEvent}
+                            // onSelectSlot={this.newEvent}
+                            defaultView={BigCalendar.Views.MONTH}
+                            defaultDate={new Date()}
+                            step={60}
+                            views={allViews}
+                        />
+                        </div>
+                        </Segment>
+                    </Grid.Column>
+                    <Grid.Column width={4}>
+                        <Segment>
+                            <center>
+                        <div className="ui card" >
+                            <div className="content">
+                                <div className="header">Appointment Details</div>
+                            </div>
+                            <div className="content">
+                                <div className="ui small feed">
+                                    <div className="event">
+                                        <div className="content">
+                                            <div className="summary">
+                                                Patient: {this.state.appointment.patient}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="event">
+                                        <div className="content">
+                                            <div className="summary">
+                                                Title: {this.state.appointment.title}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="event">
+                                        <div className="content">
+                                            <div className="summary">
+                                                Doctor: {this.state.appointment.practitioner}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="event">
+                                        <div className="content">
+                                            <div className="summary">
+                                                Date: {(this.state.appointment.start !== undefined) ?
+                                                this.state.appointment.start.toLocaleDateString() : ''
+                                            }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="event">
+                                        <div className="content">
+                                            <div className="summary">
+                                                Time: {(this.state.appointment.start !== undefined) ?
+                                                this.state.appointment.start.toLocaleTimeString() : ''
+                                            }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="event">
+                                        <div className="content">
+                                            <div className="summary">
+                                                Location: {this.state.appointment.location}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="event">
+                                        <div className="content">
+                                            <div className="summary">
+                                                Comments: {this.state.appointment.comment}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="event">
-                                <div className="content">
-                                    <div className="summary">
-                                        Doctor: {this.state.appointment.practitioner}
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="event">
-                                <div className="content">
-                                    <div className="summary">
-                                        Patient: {this.state.appointment.patient}
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="event">
-                                <div className="content">
-                                    <div className="summary">
-                                        Location: {this.state.appointment.location}
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="event">
-                                <div className="content">
-                                    <div className="summary">
-                                        Comments: {this.state.appointment.comment}
-                                    </div>
-                                </div>
+                            <div className="extra content">
+                                <button className="ui button">Request Cancellation</button>
                             </div>
                         </div>
-                    </div>
-                    <div className="extra content">
-                        <button className="ui button">Request Cancellation</button>
-                    </div>
-                </div>
-            </center>
-            </div>
+                            </center>
+                        </Segment>
 
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
         )
     }
 }
