@@ -6,6 +6,7 @@ import HomePage from "../home/HomePage";
 import CalendarPage from "../calendar/CalendarPage";
 import MessagingPage from "../messaging/MessagingPage";
 import ProfilePage from "../profile/ProfilePage";
+import ConversationPage from "../conversation/ConversationPage";
 
 class SecuredMainPage extends Component {
     render() {
@@ -23,6 +24,8 @@ class SecuredMainPage extends Component {
                             <Route path={`${match.url}/calendar`} component={CalendarPage} />
                             <Route path={`${match.url}/messaging`} component={MessagingPage} />
                             <Route path={`${match.url}/profile`} component={ProfilePage} />
+                            <Route path={`${match.url}/conversation`} component={ConversationPage} />
+
                         </Container>
                     </Fragment>
                 </BrowserRouter>
