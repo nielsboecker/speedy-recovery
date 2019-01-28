@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {Icon, Table} from 'semantic-ui-react'
+import {Grid, Icon, Table} from 'semantic-ui-react'
 import TestUserData from './test_files/patient';
 
 class ProfilePage extends Component {
@@ -17,51 +17,55 @@ class ProfilePage extends Component {
             : <Fragment><Icon name="user doctor"/>Doctor</Fragment>;
 
         return (
-            <div>
-                <h1>Profile</h1>
+            <Grid verticalAlign='middle' columns={3} centered>
+                <Grid.Row>
+                    <Grid.Column width={12}>
+                        <h1>Profile</h1>
 
-                <Table definition>
-                    <Table.Body>
+                        <Table definition>
+                            <Table.Body>
 
-                        <Table.Row>
-                            <Table.Cell width={4}>Name</Table.Cell>
-                            <Table.Cell>{this.state.user.name}</Table.Cell>
-                        </Table.Row>
+                                <Table.Row>
+                                    <Table.Cell width={4}>Name</Table.Cell>
+                                    <Table.Cell>{this.state.user.name}</Table.Cell>
+                                </Table.Row>
 
-                        <Table.Row>
-                            <Table.Cell>Role</Table.Cell>
-                            <Table.Cell>
-                                {roleText}
-                            </Table.Cell>
-                        </Table.Row>
+                                <Table.Row>
+                                    <Table.Cell>Role</Table.Cell>
+                                    <Table.Cell>
+                                        {roleText}
+                                    </Table.Cell>
+                                </Table.Row>
 
-                        <Table.Row>
-                            <Table.Cell>Healthcare provider</Table.Cell>
-                            <Table.Cell>
-                                <Icon name="medkit" />
-                                {this.state.user.careProvider}
-                            </Table.Cell>
-                        </Table.Row>
+                                <Table.Row>
+                                    <Table.Cell>Healthcare provider</Table.Cell>
+                                    <Table.Cell>
+                                        <Icon name="medkit" />
+                                        {this.state.user.careProvider}
+                                    </Table.Cell>
+                                </Table.Row>
 
-                        <Table.Row>
-                            <Table.Cell>Email</Table.Cell>
-                            <Table.Cell>
-                                <Icon name="mail" />
-                                {this.state.user.email}
-                            </Table.Cell>
-                        </Table.Row>
+                                <Table.Row>
+                                    <Table.Cell>Email</Table.Cell>
+                                    <Table.Cell>
+                                        <Icon name="mail" />
+                                        {this.state.user.email}
+                                    </Table.Cell>
+                                </Table.Row>
 
-                        <Table.Row>
-                            <Table.Cell>Phone</Table.Cell>
-                            <Table.Cell>
-                                <Icon name="phone" />
-                                {this.state.user.phone && this.state.user.phone[0].value}
-                            </Table.Cell>
-                        </Table.Row>
+                                <Table.Row>
+                                    <Table.Cell>Phone</Table.Cell>
+                                    <Table.Cell>
+                                        <Icon name="phone" />
+                                        {this.state.user.phone && this.state.user.phone[0].value}
+                                    </Table.Cell>
+                                </Table.Row>
 
-                    </Table.Body>
-                </Table>
-            </div>
+                            </Table.Body>
+                        </Table>
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
         );
     };
 
