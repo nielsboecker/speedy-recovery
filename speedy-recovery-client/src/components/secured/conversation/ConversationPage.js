@@ -1,32 +1,8 @@
-// Follow the following link for setup
-// https://www.npmjs.com/package/react-chat-elements
-
-// tool to install in order to run this file
-// npm install --save react-bootstrap
-
 import React, {Component} from 'react';
-// RCE CSS
 import 'react-chat-elements/dist/main.css';
-// // MessageBox component
-import { MessageBox } from 'react-chat-elements';
-// MessageBox component
-import { ChatItem } from 'react-chat-elements';
-import { SystemMessage } from 'react-chat-elements';
 import { MessageList } from 'react-chat-elements';
-import { ChatList } from 'react-chat-elements';
 import { Input } from 'react-chat-elements';
-// import ReactDOM from 'react-dom';
-// import { Button} from 'react-bootstrap';
 import { Button } from 'react-chat-elements'
-import { Popup } from 'react-chat-elements'
-
-import { SideBar } from 'react-chat-elements'
-import { Navbar } from 'react-chat-elements'
-import { Dropdown } from 'react-chat-elements'
-import { Avatar } from 'react-chat-elements'
-import { LocationMessage } from 'react-chat-elements'
-import { BrowserRouter as Router, Link } from "react-router-dom";
-
 
 function handleClick(e) {
     e.preventDefault();
