@@ -67,12 +67,11 @@ class ProfilePage extends Component {
 
     componentDidMount() {
         // TODO: Update state when data from FHIR is available instead
-        this.convertData();
+        this.convertAndSetData(TestUserData);
     }
 
-    convertData() {
+    convertAndSetData(dataFromFhir) {
         // TODO: Access actual FHIR data, consider missing values for optional fields
-        const dataFromFhir = TestUserData;
 
         const user = {
             role: dataFromFhir.resourceType,
