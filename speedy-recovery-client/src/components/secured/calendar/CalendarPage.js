@@ -4,7 +4,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.less'
 import './CalendarPage.css'
 import AppointmentData from './test_files/smallAppointmentList.json';
-import { Grid, Segment, Modal, Header } from 'semantic-ui-react'
+import { Grid, Segment, Modal, Table, Button } from 'semantic-ui-react'
 import moment from 'moment'
 
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
@@ -21,32 +21,8 @@ class CalendarPage extends React.Component {
             appointment: [],
             isEditModalOpen: false,
         };
-        this.newEvent = this.newEvent.bind(this);
         this.convertData();
     }
-
-    onSelectEvent = event => {
-        // this.setState({
-        //     appointment: event,
-        // });
-
-    };
-
-    newEvent = ({start, end}) => {
-        //Change next two lines to make nicer way of adding an event
-        const title = window.prompt('New Event name');
-        if (title)
-            this.setState({
-                events: [
-                    ...this.state.events,
-                    {
-                        start,
-                        end,
-                        title,
-                    },
-                ],
-            })
-    };
 
     convertData() {
         /*Data required from JSON:
@@ -83,17 +59,16 @@ class CalendarPage extends React.Component {
     render() {
         return (
             <Grid divided='vertically'>
-                <Grid.Row columns={2}>
-                    <Grid.Column width={12}>
+
+                    <Grid.Column >
                         <Segment>
-                        <div style={{height: 450}}>
+                        <div style={{height: 550}}>
                         <BigCalendar
                             popup
                             onDrilldown
                             selectable
                             localizer={localizer}
                             events={this.state.events}
-                            // onSelectEvent={this.onSelectEvent}
                             onSelectEvent={this.toggleEditModal}
                             defaultView={BigCalendar.Views.MONTH}
                             defaultDate={new Date()}
@@ -101,94 +76,50 @@ class CalendarPage extends React.Component {
                             views={allViews}
                         />
 
-                            <Modal open={this.state.isEditModalOpen} toggle={this.toggleEditModal}
+                            <Modal open={this.state.isEditModalOpen} toggle={this.toggleEditModal} closeIcon
                                 onClose={this.toggleEditModal}>
-                                <Modal.Header>Appointment Details</Modal.Header>
-                                <Modal.Content image>
+                                <Modal.Header>Appointment Details - {this.state.appointment.patient}</Modal.Header>
+                                <Modal.Content >
 
                                     <Modal.Description>
-                                        <Header>Default Profile Image</Header>
-                                        <p>We've found the following gravatar image associated with your e-mail address.</p>
-                                        <p>Is it okay to use this photo?</p>
+                                        <Table padded celled  >
+                                            <Table.Header>
+                                            <Table.Row>
+                                                <Table.HeaderCell>Appointment Title</Table.HeaderCell>
+                                                <Table.HeaderCell>Doctor</Table.HeaderCell>
+                                                <Table.HeaderCell>Date</Table.HeaderCell>
+                                                <Table.HeaderCell>Time</Table.HeaderCell>
+                                                <Table.HeaderCell>Location</Table.HeaderCell>
+                                                <Table.HeaderCell>Comments</Table.HeaderCell>
+                                            </Table.Row>
+                                            </Table.Header>
+                                            <Table.Body>
+                                            <Table.Row>
+                                                <Table.Cell data-label="Title">{this.state.appointment.title}</Table.Cell>
+                                                <Table.Cell data-label="Doctor">{this.state.appointment.practitioner}</Table.Cell>
+                                                <Table.Cell data-label="Date">{(this.state.appointment.start !== undefined) ?
+                                                    this.state.appointment.start.toLocaleDateString() : ''
+                                                }</Table.Cell>
+                                                <Table.Cell data-label="Time">{(this.state.appointment.start !== undefined) ?
+                                                    this.state.appointment.start.toLocaleTimeString() : ''
+                                                }</Table.Cell>
+                                                <Table.Cell data-label="Location">{this.state.appointment.location}</Table.Cell>
+                                                <Table.Cell data-label="Comments">{this.state.appointment.comment}</Table.Cell>
+                                            </Table.Row>
+
+                                            </Table.Body>
+                                        </Table>
+                                        <Grid>
+                                            <Grid.Row centered>
+                                                <Button className="ui button">Request Cancellation</Button>
+                                            </Grid.Row>
+                                        </Grid>
                                     </Modal.Description>
                                 </Modal.Content>
                             </Modal>
                         </div>
                         </Segment>
                     </Grid.Column>
-                    <Grid.Column width={4}>
-                        <Segment>
-                            <center>
-                        <div className="ui card" >
-                            <div className="content">
-                                <div className="header">Appointment Details</div>
-                            </div>
-                            <div className="content">
-                                <div className="ui small feed">
-                                    <div className="event">
-                                        <div className="content">
-                                            <div className="summary">
-                                                Patient: {this.state.appointment.patient}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="event">
-                                        <div className="content">
-                                            <div className="summary">
-                                                Title: {this.state.appointment.title}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="event">
-                                        <div className="content">
-                                            <div className="summary">
-                                                Doctor: {this.state.appointment.practitioner}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="event">
-                                        <div className="content">
-                                            <div className="summary">
-                                                Date: {(this.state.appointment.start !== undefined) ?
-                                                this.state.appointment.start.toLocaleDateString() : ''
-                                            }
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="event">
-                                        <div className="content">
-                                            <div className="summary">
-                                                Time: {(this.state.appointment.start !== undefined) ?
-                                                this.state.appointment.start.toLocaleTimeString() : ''
-                                            }
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="event">
-                                        <div className="content">
-                                            <div className="summary">
-                                                Location: {this.state.appointment.location}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="event">
-                                        <div className="content">
-                                            <div className="summary">
-                                                Comments: {this.state.appointment.comment}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="extra content">
-                                <button className="ui button">Request Cancellation</button>
-                            </div>
-                        </div>
-                            </center>
-                        </Segment>
-
-                    </Grid.Column>
-                </Grid.Row>
             </Grid>
         )
     }
