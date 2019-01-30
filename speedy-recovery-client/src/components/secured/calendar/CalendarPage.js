@@ -4,7 +4,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.less'
 import './CalendarPage.css'
 import AppointmentData from './test_files/smallAppointmentList.json';
-import { Grid, Segment } from 'semantic-ui-react'
+import { Grid, Segment, Modal, Header } from 'semantic-ui-react'
 import moment from 'moment'
 
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
@@ -19,15 +19,17 @@ class CalendarPage extends React.Component {
             events: [],
             data: AppointmentData,
             appointment: [],
+            isEditModalOpen: false,
         };
         this.newEvent = this.newEvent.bind(this);
         this.convertData();
     }
 
     onSelectEvent = event => {
-        this.setState({
-            appointment: event,
-        });
+        // this.setState({
+        //     appointment: event,
+        // });
+
     };
 
     newEvent = ({start, end}) => {
@@ -70,6 +72,14 @@ class CalendarPage extends React.Component {
         }
     }
 
+    toggleEditModal = event => {
+            this.setState({
+                isEditModalOpen: !this.state.isEditModalOpen,
+                appointment: event,
+            });
+    };
+
+
     render() {
         return (
             <Grid divided='vertically'>
@@ -83,13 +93,26 @@ class CalendarPage extends React.Component {
                             selectable
                             localizer={localizer}
                             events={this.state.events}
-                            onSelectEvent={this.onSelectEvent}
-                            // onSelectSlot={this.newEvent}
+                            // onSelectEvent={this.onSelectEvent}
+                            onSelectEvent={this.toggleEditModal}
                             defaultView={BigCalendar.Views.MONTH}
                             defaultDate={new Date()}
                             step={60}
                             views={allViews}
                         />
+
+                            <Modal open={this.state.isEditModalOpen} toggle={this.toggleEditModal}
+                                onClose={this.toggleEditModal}>
+                                <Modal.Header>Appointment Details</Modal.Header>
+                                <Modal.Content image>
+
+                                    <Modal.Description>
+                                        <Header>Default Profile Image</Header>
+                                        <p>We've found the following gravatar image associated with your e-mail address.</p>
+                                        <p>Is it okay to use this photo?</p>
+                                    </Modal.Description>
+                                </Modal.Content>
+                            </Modal>
                         </div>
                         </Segment>
                     </Grid.Column>
