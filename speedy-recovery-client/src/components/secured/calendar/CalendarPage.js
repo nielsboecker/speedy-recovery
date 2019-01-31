@@ -76,7 +76,7 @@ class CalendarPage extends React.Component {
                             views={allViews}
                         />
 
-                            <Modal open={this.state.isEditModalOpen} toggle={this.toggleEditModal} closeIcon
+                            <Modal open={this.state.isEditModalOpen} onOpen={this.toggleEditModal} closeIcon
                                 onClose={this.toggleEditModal}>
                                 <Modal.Header>Appointment Details - {this.state.appointment.patient}</Modal.Header>
                                 <Modal.Content >
