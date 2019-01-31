@@ -6,6 +6,7 @@
     "moment": "latest",
     "react": "^16.7.0",
     "react-big-calendar": "latest",
+    "react-chat-elements": "^10.2.0",
     "react-dom": "^16.7.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.3",
