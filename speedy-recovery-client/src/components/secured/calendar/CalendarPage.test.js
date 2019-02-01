@@ -1,33 +1,26 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import CalendarPage from "./CalendarPage";
 import AppointmentData from './test_files/smallAppointmentList.json';
-import Enzyme, {mount} from 'enzyme';
+import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<CalendarPage />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
-
-describe ('test fhir json to calendar conversion', () => {
-
-  const wrapper = mount (
-      <CalendarPage />
-  );
+  it('renders without crashing', () => {
+    shallow(<CalendarPage/>);
+  });
 
   it('data and events are empty when no data input', () => {
-
-    // expect(wrapper.state().events).toEqual([]);
-    // expect(wrapper.state().data).toEqual(AppointmentData);
+    const wrapper = shallow(<CalendarPage />);
+    wrapper.setState({events: []});
+    expect(wrapper.state().events).toEqual([]);
+    expect(wrapper.state().data).toEqual(AppointmentData);
 
   });
 
   it('data converted properly from json to calendar format', () => {
 
+    const wrapper = shallow(<CalendarPage />);
     wrapper.setState({data: AppointmentData});
 
     //appointment 1
@@ -62,7 +55,5 @@ describe ('test fhir json to calendar conversion', () => {
 
   });
 
-
-});
 
 

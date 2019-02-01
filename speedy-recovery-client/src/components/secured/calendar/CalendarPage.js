@@ -31,7 +31,8 @@ class CalendarPage extends React.Component {
         * */
 
         for (let key in this.state.data) {
-            var nextEvent = {id: this.state.data[key].id,
+            const nextEvent = {
+                            id: this.state.data[key].id,
                             title: this.state.data[key].text.div.substring(5,this.state.data[key].text.div.length - 6),
                             status: this.state.data[key].status,
                             reason: this.state.data[key].type.coding[0].display,
@@ -111,7 +112,7 @@ class CalendarPage extends React.Component {
                                         </Table>
                                         <Grid>
                                             <Grid.Row centered>
-                                                <Button className="ui button">Request Cancellation</Button>
+                                                <Button>Request Cancellation</Button>
                                             </Grid.Row>
                                         </Grid>
                                     </Modal.Description>
