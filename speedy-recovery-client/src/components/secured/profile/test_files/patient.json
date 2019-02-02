@@ -15,12 +15,8 @@
     {
       "use": "usual",
       "text": "Jason Argonaut",
-      "family": [
-        "Argonaut"
-      ],
-      "given": [
-        "Jason"
-      ]
+      "family": ["Argonaut"],
+      "given": ["Jason"]
     }
   ],
   "identifier": [
@@ -38,9 +34,7 @@
   "address": [
     {
       "use": "home",
-      "line": [
-        "1979 Milky Way Dr."
-      ],
+      "line": ["1979 Milky Way Dr."],
       "city": "Verona",
       "state": "WI",
       "postalCode": "53593",
@@ -48,9 +42,7 @@
     },
     {
       "use": "temp",
-      "line": [
-        "5301 Tokay Blvd"
-      ],
+      "line": ["5301 Tokay Blvd"],
       "city": "MADISON",
       "state": "WI",
       "postalCode": "53711",

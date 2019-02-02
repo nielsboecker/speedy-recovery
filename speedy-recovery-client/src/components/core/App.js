@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import './App.css';
+import "./App.css";
 import ErrorPage from "./ErrorPage";
 import LandingMainPage from "../landing/core/LandingMainPage";
 import SecuredMainPage from "../secured/core/SecuredMainPage";
