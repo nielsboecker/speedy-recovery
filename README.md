@@ -1,3 +1,5 @@
+[![Build status](https://dev.azure.com/ucabnbo/Speedy%20Recovery/_apis/build/status/speedy-recovery-rg%20-%20CI)](https://dev.azure.com/ucabnbo/Speedy%20Recovery/_build/latest?definitionId=1)
+
 # Speedy Recovery
 GOSH (Great Ormond Street Hospital) and its digital unit GOSH DRIVE (Digital Research Informatics and Virtual Environments) are committed to making young patients’ hospital stays as tolerable as possible. Inherently, this goal can only be achieved if parents are assured and confident, and hospital staff is well-informed and approachable. 
 

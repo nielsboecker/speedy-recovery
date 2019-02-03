@@ -1,3 +1,9 @@
+# node
+build
+
+# yarn.lock used, package-lock.json would be redundant
+package-lock.json
+
 # IntelliJ project files
 .idea
 out
@@ -76,3 +82,6 @@ typings/
 
 # Serverless directories
 .serverless
+
+*.iml
+

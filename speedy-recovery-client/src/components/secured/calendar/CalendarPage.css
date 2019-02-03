@@ -1,0 +1,7 @@
+.ui.page.modals.transition.visible {
+  display: flex !important;
+}
+.modals {
+  /*max-width: 850px; !* sample width. adjust this *!*/
+  overflow-x: hidden; /* this provides the horizontal scroll */
+}
