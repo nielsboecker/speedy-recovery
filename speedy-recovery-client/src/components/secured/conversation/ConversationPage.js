@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { MessageList } from "react-chat-elements";
-import { Input } from "react-chat-elements";
-import { Button } from "react-chat-elements";
+import { Container, Form, TextArea, Grid, Button } from "semantic-ui-react";
+import TestMessageData from "./test_files/messages.json";
 
 function handleClick(e) {
   e.preventDefault();
@@ -10,64 +10,51 @@ function handleClick(e) {
 }
 
 class ConversationPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: []
+    };
+  }
+
   render() {
     return (
-      <div>
+      <Container text>
         <h1>Conversation </h1>
         <MessageList
           className="message-list"
           lockable={true}
           toBottomHeight={"100%"}
-          dataSource={[
-            {
-              position: "right",
-              type: "text",
-              text: "Hey, there",
-              date: new Date()
-            },
-            {
-              position: "left",
-              type: "text",
-              text: "Hi",
-              date: new Date()
-            },
-            {
-              position: "right",
-              type: "text",
-              text: "woooooooooooooooooooooooooooooooooooooooooooooooow",
-              date: new Date()
-            },
-            {
-              position: "left",
-              type: "photo",
-              text: "react.svg",
-              data: {
-                uri: "https://facebook.github.io/react/img/logo.svg",
-                status: {
-                  click: false,
-                  loading: 0
-                }
-              }
-            }
-          ]}
+          dataSource={this.state.messages}
         />
 
-        <Input
-          placeholder="Type here..."
-          multiline={true}
-          backgroundColor="black"
-          rightButtons={
-            <Button
-              color="white"
-              style={{ height: 700 }}
-              backgroundColor="black"
-              onClick={handleClick}
-              text="Send"
-            />
-          }
-        />
-      </div>
+        <Grid>
+          <Grid.Row>
+            <Grid.Column width={13}>
+              <Form>
+                <TextArea autoHeight placeholder="Hello Speedy" />
+              </Form>
+            </Grid.Column>
+            <Grid.Column>
+              <Button primary onClick={handleClick}>
+                Send
+              </Button>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Container>
     );
+  }
+
+  componentDidMount() {
+    // TODO: Update state when data from back-end is available instead
+    this.convertAndSetData(TestMessageData);
+  }
+
+  convertAndSetData(messageData) {
+    // TODO: Access actual back-end data, consider missing values for optional fields
+    const messages = messageData;
+    this.setState({ messages });
   }
 }
 
