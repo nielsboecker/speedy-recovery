@@ -1,0 +1,35 @@
+{
+  "role": "Patient",
+  "birthDate": "1985-08-01T00:00:00.000Z",
+  "gender": "male",
+  "name": "Jason Argonaut",
+  "careProvider": "Physician Family Medicine",
+  "language": "English",
+  "phone": [
+    {
+      "system": "phone",
+      "value": "608-271-9000",
+      "use": "home"
+    },
+    {
+      "system": "phone",
+      "value": "608-771-9000",
+      "use": "work"
+    },
+    {
+      "system": "phone",
+      "value": "608-771-9000",
+      "use": "mobile"
+    },
+    {
+      "system": "phone",
+      "value": "608-771-9000",
+      "use": "temp",
+      "period": {
+        "start": "2011-08-04T00:00:00Z",
+        "end": "2014-08-04T00:00:00Z"
+      }
+    }
+  ],
+  "email": "open@epic.com"
+}

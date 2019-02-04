@@ -7,10 +7,10 @@ import CalendarPage from "../calendar/CalendarPage";
 import MessagingPage from "../messaging/MessagingPage";
 import ProfilePage from "../profile/ProfilePage";
 import ConversationPage from "../conversation/ConversationPage";
-import dataFromFhir from "../profile/test_files/patient";
+import fhirExamplePatient from "../../../__tests__/test_input/fhir_r3/FhirExamplePatient.json";
+import { mapPatientToUser } from "../../../dataaccess/FhirDataAdapter";
 
 class SecuredMainPage extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -21,20 +21,7 @@ class SecuredMainPage extends Component {
 
   convertAndSetData() {
     // TODO: Access actual FHIR data, consider missing values for optional fields
-
-    const user = {
-      role: dataFromFhir.resourceType,
-      birthDate: new Date(dataFromFhir.birthDate),
-      gender: dataFromFhir.gender,
-      name: dataFromFhir.name.find(element => element.use === "usual").text,
-      careProvider: dataFromFhir.careProvider[0].display,
-      language: dataFromFhir.communication.find(element => element.preferred)
-          .language.text,
-      phone: dataFromFhir.telecom.filter(element => element.system === "phone"),
-      email: dataFromFhir.telecom.find(element => element.system === "email")
-          .value
-    };
-
+    const user = mapPatientToUser(fhirExamplePatient);
     this.setState({ user });
   }
 
@@ -55,7 +42,15 @@ class SecuredMainPage extends Component {
                 path={`${match.url}/messaging`}
                 component={MessagingPage}
               />
-              <Route path={`${match.url}/profile`}  render={() => <ProfilePage user={this.state.user} onChange={this.convertAndSetData} />}/>
+              <Route
+                path={`${match.url}/profile`}
+                render={() => (
+                  <ProfilePage
+                    user={this.state.user}
+                    onChange={this.convertAndSetData}
+                  />
+                )}
+              />
               <Route
                 path={`${match.url}/conversation`}
                 component={ConversationPage}

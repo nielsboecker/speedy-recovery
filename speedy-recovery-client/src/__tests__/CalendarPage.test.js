@@ -1,6 +1,6 @@
 import React from "react";
-import CalendarPage from "./CalendarPage";
-import AppointmentData from "./test_files/smallAppointmentList.json";
+import CalendarPage from "../components/secured/calendar/CalendarPage";
+import AppointmentData from "./test_input/fhir_r3/FhirExampleAppointments.json";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 

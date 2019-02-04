@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`map FHIR Patient resource to internal user data model 1`] = `
+Object {
+  "birthDate": 1985-08-01T00:00:00.000Z,
+  "careProvider": "Physician Family Medicine",
+  "email": "open@epic.com",
+  "gender": "male",
+  "language": "English",
+  "name": "Jason Argonaut",
+  "phone": Array [
+    Object {
+      "system": "phone",
+      "use": "home",
+      "value": "608-271-9000",
+    },
+    Object {
+      "system": "phone",
+      "use": "work",
+      "value": "608-771-9000",
+    },
+    Object {
+      "system": "phone",
+      "use": "mobile",
+      "value": "608-771-9000",
+    },
+    Object {
+      "period": Object {
+        "end": "2014-08-04T00:00:00Z",
+        "start": "2011-08-04T00:00:00Z",
+      },
+      "system": "phone",
+      "use": "temp",
+      "value": "608-771-9000",
+    },
+  ],
+  "role": "Patient",
+}
+`;
