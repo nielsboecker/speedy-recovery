@@ -17,7 +17,6 @@ class ProfilePage extends Component {
       );
 
     return (
-
       <Grid verticalAlign="middle" columns={3} centered>
         <Grid.Row>
           <Grid.Column width={12}>
@@ -70,7 +69,6 @@ class ProfilePage extends Component {
     // TODO: Update state when data from FHIR is available instead
     this.props.onChange();
   }
-
 }
 
 export default ProfilePage;

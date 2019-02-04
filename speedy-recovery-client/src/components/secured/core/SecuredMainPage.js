@@ -11,7 +11,6 @@ import fhirExamplePatient from "../../../__tests__/test_input/fhir_r3/FhirExampl
 import { mapPatientToUser } from "../../../dataaccess/FhirDataAdapter";
 
 class SecuredMainPage extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -43,7 +42,15 @@ class SecuredMainPage extends Component {
                 path={`${match.url}/messaging`}
                 component={MessagingPage}
               />
-              <Route path={`${match.url}/profile`}  render={() => <ProfilePage user={this.state.user} onChange={this.convertAndSetData} />}/>
+              <Route
+                path={`${match.url}/profile`}
+                render={() => (
+                  <ProfilePage
+                    user={this.state.user}
+                    onChange={this.convertAndSetData}
+                  />
+                )}
+              />
               <Route
                 path={`${match.url}/conversation`}
                 component={ConversationPage}

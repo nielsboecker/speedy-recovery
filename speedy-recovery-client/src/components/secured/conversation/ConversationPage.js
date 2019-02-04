@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { MessageList } from "react-chat-elements";
 import { Container, Form, TextArea, Grid, Button } from "semantic-ui-react";
-import exampleMessages from "../../../__tests__/test_input/internatl/ExampleMessages.json";
+import exampleMessages from "../../../__tests__/test_input/internal/ExampleMessages.json";
 
 function handleClick(e) {
   e.preventDefault();

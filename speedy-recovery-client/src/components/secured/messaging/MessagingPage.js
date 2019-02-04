@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { ChatItem } from "react-chat-elements";
 import { Link } from "react-router-dom";
-import exampleConversations from "../../../__tests__/test_input/internatl/ExampleConversations";
+import exampleConversations from "../../../__tests__/test_input/internal/ExampleConversations";
 
 class MessagingPage extends Component {
   constructor(props) {
@@ -15,7 +15,10 @@ class MessagingPage extends Component {
   render() {
     const chatItems = this.state.conversations.map(conversation => {
       return (
-        <Link to={`/secured/conversation/${conversation.userId}`} key={conversation.userId}>
+        <Link
+          to={`/secured/conversation/${conversation.userId}`}
+          key={conversation.userId}
+        >
           <ChatItem
             avatar={conversation.avatar}
             alt={conversation.alt}
