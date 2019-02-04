@@ -7,7 +7,7 @@ import CalendarPage from "../calendar/CalendarPage";
 import MessagingPage from "../messaging/MessagingPage";
 import ProfilePage from "../profile/ProfilePage";
 import ConversationPage from "../conversation/ConversationPage";
-import fhirExamplePatient from "./test_files/FhirExamplePatient.json";
+import fhirExamplePatient from "../../../__tests__/test_input/fhir_r3/FhirExamplePatient.json";
 import { mapPatientToUser } from "../../../dataaccess/FhirDataAdapter";
 
 class SecuredMainPage extends Component {

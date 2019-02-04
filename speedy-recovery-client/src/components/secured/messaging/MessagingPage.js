@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { ChatItem } from "react-chat-elements";
 import { Link } from "react-router-dom";
-import TestConversationData from "./test_files/conversations";
+import exampleConversations from "../../../__tests__/test_input/internatl/ExampleConversations";
 
 class MessagingPage extends Component {
   constructor(props) {
@@ -39,7 +39,7 @@ class MessagingPage extends Component {
 
   componentDidMount() {
     // TODO: Update state when data from back-end is available instead
-    this.convertAndSetData(TestConversationData);
+    this.convertAndSetData(exampleConversations);
   }
 
   convertAndSetData(conversationData) {

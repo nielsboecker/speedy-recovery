@@ -3,7 +3,7 @@ import BigCalendar from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
 import "./CalendarPage.css";
-import AppointmentData from "./test_files/smallAppointmentList.json";
+import AppointmentData from "../../../__tests__/test_input/fhir_r3/FhirExampleAppointments.json";
 import { Grid, Segment, Modal, Table, Button } from "semantic-ui-react";
 import moment from "moment";
 

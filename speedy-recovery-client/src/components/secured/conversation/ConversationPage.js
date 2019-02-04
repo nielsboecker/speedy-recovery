@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { MessageList } from "react-chat-elements";
 import { Container, Form, TextArea, Grid, Button } from "semantic-ui-react";
-import TestMessageData from "./test_files/messages.json";
+import exampleMessages from "../../../__tests__/test_input/internatl/ExampleMessages.json";
 
 function handleClick(e) {
   e.preventDefault();
@@ -48,7 +48,7 @@ class ConversationPage extends Component {
 
   componentDidMount() {
     // TODO: Update state when data from back-end is available instead
-    this.convertAndSetData(TestMessageData);
+    this.convertAndSetData(exampleMessages);
   }
 
   convertAndSetData(messageData) {
