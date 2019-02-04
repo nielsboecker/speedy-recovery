@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { Grid, Icon, Table } from "semantic-ui-react";
-import TestUserData from "./test_files/patient";
 
 class ProfilePage extends Component {
   constructor(props) {
@@ -25,6 +24,7 @@ class ProfilePage extends Component {
       );
 
     return (
+
       <Grid verticalAlign="middle" columns={3} centered>
         <Grid.Row>
           <Grid.Column width={12}>
@@ -75,27 +75,10 @@ class ProfilePage extends Component {
 
   componentDidMount() {
     // TODO: Update state when data from FHIR is available instead
-    this.convertAndSetData(TestUserData);
+    this.props.onChange();
+    this.setState({user: this.props.user})
   }
 
-  convertAndSetData(dataFromFhir) {
-    // TODO: Access actual FHIR data, consider missing values for optional fields
-
-    const user = {
-      role: dataFromFhir.resourceType,
-      birthDate: new Date(dataFromFhir.birthDate),
-      gender: dataFromFhir.gender,
-      name: dataFromFhir.name.find(element => element.use === "usual").text,
-      careProvider: dataFromFhir.careProvider[0].display,
-      language: dataFromFhir.communication.find(element => element.preferred)
-        .language.text,
-      phone: dataFromFhir.telecom.filter(element => element.system === "phone"),
-      email: dataFromFhir.telecom.find(element => element.system === "email")
-        .value
-    };
-
-    this.setState({ user });
-  }
 }
 
 export default ProfilePage;
