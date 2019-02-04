@@ -16,14 +16,13 @@ class SecuredMainPage extends Component {
     this.state = {
       user: {}
     };
-    this.convertAndSetData = this.convertAndSetData.bind(this);
   }
 
-  convertAndSetData() {
+  updateStateUser = () => {
     // TODO: Access actual FHIR data, consider missing values for optional fields
     const user = mapPatientToUser(fhirExamplePatient);
     this.setState({ user });
-  }
+  };
 
   render() {
     const { match } = this.props;
@@ -32,12 +31,12 @@ class SecuredMainPage extends Component {
       <div>
         <BrowserRouter>
           <Fragment>
-            <Header />
+            <Header/>
 
             <Container>
-              <Route path={`${match.url}`} exact component={HomePage} />
-              <Route path={`${match.url}/home`} component={HomePage} />
-              <Route path={`${match.url}/calendar`} component={CalendarPage} />
+              <Route path={`${match.url}`} exact component={HomePage}/>
+              <Route path={`${match.url}/home`} component={HomePage}/>
+              <Route path={`${match.url}/calendar`} component={CalendarPage}/>
               <Route
                 path={`${match.url}/messaging`}
                 component={MessagingPage}
@@ -47,7 +46,7 @@ class SecuredMainPage extends Component {
                 render={() => (
                   <ProfilePage
                     user={this.state.user}
-                    onChange={this.convertAndSetData}
+                    onChange={this.updateStateUser}
                   />
                 )}
               />
