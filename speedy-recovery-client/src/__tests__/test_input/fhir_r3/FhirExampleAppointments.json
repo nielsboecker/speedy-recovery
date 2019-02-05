@@ -4,22 +4,67 @@
     "id": "example",
     "text": {
       "status": "generated",
-      "div": "<div>Brian MRI results discussion</div>"
+      "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Brian MRI results discussion</div>"
     },
     "status": "booked",
-    "type": {
+    "serviceCategory": [
+      {
+        "coding": [
+          {
+            "system": "http://example.org/service-category",
+            "code": "gp",
+            "display": "General Practice"
+          }
+        ]
+      }
+    ],
+    "serviceType": [
+      {
+        "coding": [
+          {
+            "code": "52",
+            "display": "General Discussion"
+          }
+        ]
+      }
+    ],
+    "specialty": [
+      {
+        "coding": [
+          {
+            "system": "http://example.org/specialty",
+            "code": "gp",
+            "display": "General Practice"
+          }
+        ]
+      }
+    ],
+    "appointmentType": {
       "coding": [
         {
-          "code": "52",
-          "display": "General Discussion"
+          "system": "http://example.org/appointment-type",
+          "code": "follow",
+          "display": "Followup"
         }
       ]
     },
+    "indication": [
+      {
+        "reference": "Condition/example",
+        "display": "Severe burn of left ear"
+      }
+    ],
     "priority": 5,
     "description": "Discussion on the results of your recent MRI",
-    "start": "2019-01-01T09:00:00Z",
-    "end": "2019-01-01T11:00:00Z",
+    "start": "2019-02-10T10:00:00Z",
+    "end": "2019-02-10T11:00:00Z",
+    "created": "2018-10-10",
     "comment": "Further expand on the results of the MRI and determine the next actions that may be appropriate.",
+    "basedOn": [
+      {
+        "reference": "ServiceRequest/myringotomy"
+      }
+    ],
     "participant": [
       {
         "actor": {
@@ -34,7 +79,8 @@
           {
             "coding": [
               {
-                "code": "attending"
+                "system": "http://hl7.org/fhir/v3/ParticipationType",
+                "code": "ATND"
               }
             ]
           }
@@ -61,27 +107,72 @@
     "id": "example2",
     "text": {
       "status": "generated",
-      "div": "<div>CT results discussion</div>"
+      "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">CT results discussion</div>"
     },
     "status": "booked",
-    "type": {
+    "serviceCategory": [
+      {
+        "coding": [
+          {
+            "system": "http://example.org/service-category",
+            "code": "gp",
+            "display": "General Practice"
+          }
+        ]
+      }
+    ],
+    "serviceType": [
+      {
+        "coding": [
+          {
+            "code": "52",
+            "display": "General Discussion"
+          }
+        ]
+      }
+    ],
+    "specialty": [
+      {
+        "coding": [
+          {
+            "system": "http://example.org/specialty",
+            "code": "gp",
+            "display": "General Practice"
+          }
+        ]
+      }
+    ],
+    "appointmentType": {
       "coding": [
         {
-          "code": "52",
-          "display": "General Discussion"
+          "system": "http://example.org/appointment-type",
+          "code": "follow",
+          "display": "Followup"
         }
       ]
     },
+    "indication": [
+      {
+        "reference": "Condition/example",
+        "display": "Severe burn of left leg"
+      }
+    ],
     "priority": 5,
     "description": "Discussion on the results of your recent CT",
-    "start": "2019-01-15T11:00:00Z",
-    "end": "2019-01-15T13:00:00Z",
-    "comment": "Further expand on the results of the CT and determine the next steps that may be appropriate.",
+    "start": "2019-02-23T09:00:00Z",
+    "end": "2019-02-23T11:00:00Z",
+    "created": "2019-01-10",
+    "comment": "Further expand on the results of the CT and determine the next actions that may be appropriate.",
+    "basedOn": [
+      {
+        "reference": "ServiceRequest/myringotomy"
+      }
+    ],
     "participant": [
       {
         "actor": {
           "reference": "Patient/example",
-          "display": "Joe James Bloggs"
+          "display": "Lionel James Davies"
         },
         "required": "required",
         "status": "accepted"
@@ -91,14 +182,15 @@
           {
             "coding": [
               {
-                "code": "attending"
+                "system": "http://hl7.org/fhir/v3/ParticipationType",
+                "code": "ATND"
               }
             ]
           }
         ],
         "actor": {
           "reference": "Practitioner/example",
-          "display": "Dr Adam Doctors"
+          "display": "Dr Adam Danger"
         },
         "required": "required",
         "status": "accepted"
@@ -106,7 +198,7 @@
       {
         "actor": {
           "reference": "Location/1",
-          "display": "North Wing, third floor"
+          "display": "North Wing, second floor"
         },
         "required": "required",
         "status": "accepted"
@@ -118,27 +210,72 @@
     "id": "example3",
     "text": {
       "status": "generated",
-      "div": "<div>Scan of leg and arm</div>"
+      "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Ultrasound results discussion</div>"
     },
     "status": "booked",
-    "type": {
+    "serviceCategory": [
+      {
+        "coding": [
+          {
+            "system": "http://example.org/service-category",
+            "code": "gp",
+            "display": "General Practice"
+          }
+        ]
+      }
+    ],
+    "serviceType": [
+      {
+        "coding": [
+          {
+            "code": "52",
+            "display": "General Discussion"
+          }
+        ]
+      }
+    ],
+    "specialty": [
+      {
+        "coding": [
+          {
+            "system": "http://example.org/specialty",
+            "code": "gp",
+            "display": "General Practice"
+          }
+        ]
+      }
+    ],
+    "appointmentType": {
       "coding": [
         {
-          "code": "52",
-          "display": "General Discussion"
+          "system": "http://example.org/appointment-type",
+          "code": "follow",
+          "display": "Followup"
         }
       ]
     },
+    "indication": [
+      {
+        "reference": "Condition/example",
+        "display": "Stomach pains"
+      }
+    ],
     "priority": 5,
-    "description": "Discussion on the results of your recent scans",
-    "start": "2019-01-19T17:00:00Z",
-    "end": "2019-01-19T18:00:00Z",
-    "comment": "Further expand on the results of the scans and determine the next actions that may be appropriate.",
+    "description": "Discussion on the results of your recent Ultrasound",
+    "start": "2019-02-25T15:00:00Z",
+    "end": "2019-02-25T17:00:00Z",
+    "created": "2019-02-10",
+    "comment": "Further expand on the results of the Ultrasound and determine the actions that may be appropriate.",
+    "basedOn": [
+      {
+        "reference": "ServiceRequest/myringotomy"
+      }
+    ],
     "participant": [
       {
         "actor": {
           "reference": "Patient/example",
-          "display": "Joshua Arnold Chalmers"
+          "display": "John James Smith"
         },
         "required": "required",
         "status": "accepted"
@@ -148,14 +285,15 @@
           {
             "coding": [
               {
-                "code": "attending"
+                "system": "http://hl7.org/fhir/v3/ParticipationType",
+                "code": "ATND"
               }
             ]
           }
         ],
         "actor": {
           "reference": "Practitioner/example",
-          "display": "Dr Derek Shepard"
+          "display": "Dr Adam Doctors"
         },
         "required": "required",
         "status": "accepted"
@@ -175,84 +313,72 @@
     "id": "example4",
     "text": {
       "status": "generated",
-      "div": "<div>Chemo progress report</div>"
+      "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Chemotherapy results discussion</div>"
     },
     "status": "booked",
-    "type": {
-      "coding": [
-        {
-          "code": "52",
-          "display": "General Discussion"
-        }
-      ]
-    },
-    "priority": 5,
-    "description": "Discussion on progress of chemotherapy treatment",
-    "start": "2019-01-24T09:00:00Z",
-    "end": "2019-01-24T11:00:00Z",
-    "comment": "Further expand on whether chemo is working or other options need to be explored",
-    "participant": [
+    "serviceCategory": [
       {
-        "actor": {
-          "reference": "Patient/example",
-          "display": "John Edward Smith"
-        },
-        "required": "required",
-        "status": "accepted"
-      },
-      {
-        "type": [
+        "coding": [
           {
-            "coding": [
-              {
-                "code": "attending"
-              }
-            ]
+            "system": "http://example.org/service-category",
+            "code": "gp",
+            "display": "General Practice"
           }
-        ],
-        "actor": {
-          "reference": "Practitioner/example",
-          "display": "Dr Michelle Doctors"
-        },
-        "required": "required",
-        "status": "accepted"
-      },
-      {
-        "actor": {
-          "reference": "Location/1",
-          "display": "West Wing, first floor"
-        },
-        "required": "required",
-        "status": "accepted"
+        ]
       }
-    ]
-  },
-  {
-    "resourceType": "Appointment",
-    "id": "example5",
-    "text": {
-      "status": "generated",
-      "div": "<div>Ultrasound results</div>"
-    },
-    "status": "booked",
-    "type": {
+    ],
+    "serviceType": [
+      {
+        "coding": [
+          {
+            "code": "52",
+            "display": "General Discussion"
+          }
+        ]
+      }
+    ],
+    "specialty": [
+      {
+        "coding": [
+          {
+            "system": "http://example.org/specialty",
+            "code": "gp",
+            "display": "General Practice"
+          }
+        ]
+      }
+    ],
+    "appointmentType": {
       "coding": [
         {
-          "code": "52",
-          "display": "General Discussion"
+          "system": "http://example.org/appointment-type",
+          "code": "follow",
+          "display": "Followup"
         }
       ]
     },
+    "indication": [
+      {
+        "reference": "Condition/example",
+        "display": "Cancer treatment"
+      }
+    ],
     "priority": 5,
-    "description": "Discussion on the results of your recent ultrasound",
-    "start": "2019-01-27T08:00:00Z",
-    "end": "2019-01-27T09:00:00Z",
-    "comment": "Discuss results of ultrasound to find the cause of lower stomach pains",
+    "description": "Discussion on chemo progress on cancer",
+    "start": "2019-02-15T09:00:00Z",
+    "end": "2019-02-15T11:00:00Z",
+    "created": "2019-01-10",
+    "comment": "Further expand on the results of the Chemo and determine the next actions that may be appropriate.",
+    "basedOn": [
+      {
+        "reference": "ServiceRequest/myringotomy"
+      }
+    ],
     "participant": [
       {
         "actor": {
           "reference": "Patient/example",
-          "display": "John James Temple"
+          "display": "Edward James Peters"
         },
         "required": "required",
         "status": "accepted"
@@ -262,7 +388,8 @@
           {
             "coding": [
               {
-                "code": "attending"
+                "system": "http://hl7.org/fhir/v3/ParticipationType",
+                "code": "ATND"
               }
             ]
           }
@@ -277,64 +404,7 @@
       {
         "actor": {
           "reference": "Location/1",
-          "display": "South Wing, twentieth floor"
-        },
-        "required": "required",
-        "status": "accepted"
-      }
-    ]
-  },
-  {
-    "resourceType": "Appointment",
-    "id": "example6",
-    "text": {
-      "status": "generated",
-      "div": "<div>CT results discussion</div>"
-    },
-    "status": "booked",
-    "type": {
-      "coding": [
-        {
-          "code": "52",
-          "display": "General Discussion"
-        }
-      ]
-    },
-    "priority": 5,
-    "description": "Discussion on the results of your recent CT",
-    "start": "2019-01-30T09:00:00Z",
-    "end": "2019-01-30T11:00:00Z",
-    "comment": "Further expand on the results of the CT and determine the next steps that may be appropriate.",
-    "participant": [
-      {
-        "actor": {
-          "reference": "Patient/example",
-          "display": "James Jacob Solomons"
-        },
-        "required": "required",
-        "status": "accepted"
-      },
-      {
-        "type": [
-          {
-            "coding": [
-              {
-                "code": "attending"
-              }
-            ]
-          }
-        ],
-        "actor": {
-          "reference": "Practitioner/example",
-          "display": "Dr Peter Doctors"
-        },
-        "required": "required",
-        "status": "accepted"
-      },
-      {
-        "actor": {
-          "reference": "Location/1",
-          "display": "North Wing, third floor"
+          "display": "South Wing, first floor"
         },
         "required": "required",
         "status": "accepted"

@@ -8,7 +8,7 @@ import MessagingPage from "../messaging/MessagingPage";
 import ProfilePage from "../profile/ProfilePage";
 import ConversationPage from "../conversation/ConversationPage";
 import fhirExamplePatient from "../../../__tests__/test_input/fhir_r3/FhirExamplePatient.json";
-import { mapPatientToUser, mapAppointmentToCalendar } from "../../../dataaccess/FhirDataAdapter";
+import { mapPatientToUser, mapAppointment } from "../../../dataaccess/FhirDataAdapter";
 import fhirExampleAppointments from "../../../__tests__/test_input/fhir_r3/FhirExampleAppointments.json";
 
 class SecuredMainPage extends Component {
@@ -23,20 +23,12 @@ class SecuredMainPage extends Component {
   updateStateUser = () => {
     // TODO: Access actual FHIR data, consider missing values for optional fields
     const user = mapPatientToUser(fhirExamplePatient);
-    this.setState({
-      user: user,
-    });
+    this.setState({ user });
   };
 
   updateStateAppointments = () => {
-    const events = [];
-    for (const key of fhirExampleAppointments) {
-      const nextEvent = mapAppointmentToCalendar(key);
-      events.push(nextEvent);
-    }
-    this.setState({
-      events: events,
-    });
+    const events = fhirExampleAppointments.map(mapAppointment);
+    this.setState({ events });
   };
 
   render() {

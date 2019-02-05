@@ -9,6 +9,7 @@ Enzyme.configure({ adapter: new Adapter() });
 const emptyFunction = () => {};
 
 it("renders without crashing", () => {
-  shallow(<CalendarPage onChange={emptyFunction} user={exampleAppointment} />);
+  shallow(
+    <CalendarPage onChange={emptyFunction} events={exampleAppointment} />
+  );
 });
-

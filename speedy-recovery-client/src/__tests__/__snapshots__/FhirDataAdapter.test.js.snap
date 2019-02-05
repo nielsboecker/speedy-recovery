@@ -2,18 +2,19 @@
 
 exports[`map FHIR Appointment resource to calendar data model 1`] = `
 Object {
-  "comment": "Further expand on whether chemo is working or other options need to be explored",
-  "description": "Discussion on progress of chemotherapy treatment",
-  "end": 2019-01-24T11:00:00.000Z,
-  "id": "example4",
-  "location": "West Wing, first floor",
-  "patient": "John Edward Smith",
-  "practitioner": "Dr Michelle Doctors",
+  "comment": "Further expand on the results of the MRI and determine the next actions that may be appropriate.",
+  "created": 2013-10-10T00:00:00.000Z,
+  "description": "Discussion on the results of your recent MRI",
+  "end": 2013-12-10T11:00:00.000Z,
+  "id": "example",
+  "location": "South Wing, second floor",
+  "patient": "Peter James Chalmers",
+  "practitioner": "Dr Adam Careful",
   "priority": 5,
-  "reason": "General Discussion",
-  "start": 2019-01-24T09:00:00.000Z,
+  "reason": undefined,
+  "start": 2013-12-10T09:00:00.000Z,
   "status": "booked",
-  "title": "Chemo progress report",
+  "title": "Brian MRI results discussion",
 }
 `;
 
