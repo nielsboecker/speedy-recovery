@@ -20,7 +20,7 @@ const mapAppointment = fhirAppResource => ({
     fhirAppResource.text.div.length - 6
   ),
   status: fhirAppResource.status,
-  reason: fhirAppResource.indication.display,
+  reason: fhirAppResource.indication[0].display,
   priority: fhirAppResource.priority,
   description: fhirAppResource.description,
   start: new Date(fhirAppResource.start),

@@ -11,7 +11,7 @@ Object {
   "patient": "Peter James Chalmers",
   "practitioner": "Dr Adam Careful",
   "priority": 5,
-  "reason": undefined,
+  "reason": "Severe burn of left ear",
   "start": 2013-12-10T09:00:00.000Z,
   "status": "booked",
   "title": "Brian MRI results discussion",
