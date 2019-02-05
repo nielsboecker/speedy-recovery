@@ -8,20 +8,35 @@ import MessagingPage from "../messaging/MessagingPage";
 import ProfilePage from "../profile/ProfilePage";
 import ConversationPage from "../conversation/ConversationPage";
 import fhirExamplePatient from "../../../__tests__/test_input/fhir_r3/FhirExamplePatient.json";
-import { mapPatientToUser } from "../../../dataaccess/FhirDataAdapter";
+import { mapPatientToUser, mapAppointmentToCalendar } from "../../../dataaccess/FhirDataAdapter";
+import fhirExampleAppointments from "../../../__tests__/test_input/fhir_r3/FhirExampleAppointments.json";
 
 class SecuredMainPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {}
+      user: {},
+      events: [],
     };
   }
 
   updateStateUser = () => {
     // TODO: Access actual FHIR data, consider missing values for optional fields
     const user = mapPatientToUser(fhirExamplePatient);
-    this.setState({ user });
+    this.setState({
+      user: user,
+    });
+  };
+
+  updateStateAppointments = () => {
+    const events = [];
+    for (const key of fhirExampleAppointments) {
+      const nextEvent = mapAppointmentToCalendar(key);
+      events.push(nextEvent);
+    }
+    this.setState({
+      events: events,
+    });
   };
 
   render() {
@@ -36,7 +51,14 @@ class SecuredMainPage extends Component {
             <Container>
               <Route path={`${match.url}`} exact component={HomePage}/>
               <Route path={`${match.url}/home`} component={HomePage}/>
-              <Route path={`${match.url}/calendar`} component={CalendarPage}/>
+              <Route path={`${match.url}/calendar`}
+                     render={() => (
+                         <CalendarPage
+                             events={this.state.events}
+                             onChange={this.updateStateAppointments}
+                         />
+                     )}
+              />
               <Route
                 path={`${match.url}/messaging`}
                 component={MessagingPage}

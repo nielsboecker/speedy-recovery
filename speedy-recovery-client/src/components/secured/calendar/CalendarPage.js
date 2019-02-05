@@ -3,7 +3,6 @@ import BigCalendar from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
 import "./CalendarPage.css";
-import AppointmentData from "../../../__tests__/test_input/fhir_r3/FhirExampleAppointments.json";
 import { Grid, Segment, Modal, Table, Button } from "semantic-ui-react";
 import moment from "moment";
 
@@ -16,40 +15,10 @@ class CalendarPage extends React.Component {
   constructor(...args) {
     super(...args);
     this.state = {
-      events: [],
-      data: AppointmentData,
+      //These are needed for modal
       appointment: [],
       isEditModalOpen: false
     };
-    this.convertData();
-  }
-
-  convertData() {
-    /*Data required from JSON:
-     *   id, title of appointment, status of patient, meeting reason, priority, description, start date, end date,
-     *   comments, patient name, practitioner name, location
-     * */
-
-    for (let key in this.state.data) {
-      const nextEvent = {
-        id: this.state.data[key].id,
-        title: this.state.data[key].text.div.substring(
-          5,
-          this.state.data[key].text.div.length - 6
-        ),
-        status: this.state.data[key].status,
-        reason: this.state.data[key].type.coding[0].display,
-        priority: this.state.data[key].priority,
-        description: this.state.data[key].description,
-        start: new Date(this.state.data[key].start),
-        end: new Date(this.state.data[key].end),
-        comment: this.state.data[key].comment,
-        patient: this.state.data[key].participant[0].actor.display,
-        practitioner: this.state.data[key].participant[1].actor.display,
-        location: this.state.data[key].participant[2].actor.display
-      };
-      this.state.events.push(nextEvent);
-    }
   }
 
   toggleEditModal = event => {
@@ -70,7 +39,7 @@ class CalendarPage extends React.Component {
                 onDrilldown
                 selectable
                 localizer={localizer}
-                events={this.state.events}
+                events={this.props.events}
                 onSelectEvent={this.toggleEditModal}
                 defaultView={BigCalendar.Views.MONTH}
                 defaultDate={new Date()}
@@ -141,6 +110,13 @@ class CalendarPage extends React.Component {
       </Grid>
     );
   }
+
+  componentDidMount() {
+    // TODO: Update state when data from FHIR is available instead
+    this.props.onChange();
+  }
 }
+
+
 
 export default CalendarPage;

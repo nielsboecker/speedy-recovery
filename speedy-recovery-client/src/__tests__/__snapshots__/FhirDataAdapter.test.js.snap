@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`map FHIR Appointment resource to calendar data model 1`] = `
+Object {
+  "comment": "Further expand on whether chemo is working or other options need to be explored",
+  "description": "Discussion on progress of chemotherapy treatment",
+  "end": 2019-01-24T11:00:00.000Z,
+  "id": "example4",
+  "location": "West Wing, first floor",
+  "patient": "John Edward Smith",
+  "practitioner": "Dr Michelle Doctors",
+  "priority": 5,
+  "reason": "General Discussion",
+  "start": 2019-01-24T09:00:00.000Z,
+  "status": "booked",
+  "title": "Chemo progress report",
+}
+`;
+
 exports[`map FHIR Patient resource to internal user data model 1`] = `
 Object {
   "birthDate": 1985-08-01T00:00:00.000Z,

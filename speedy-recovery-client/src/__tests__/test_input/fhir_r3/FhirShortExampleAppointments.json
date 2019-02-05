@@ -1,0 +1,57 @@
+{
+    "resourceType": "Appointment",
+    "id": "example4",
+    "text": {
+      "status": "generated",
+      "div": "<div>Chemo progress report</div>"
+    },
+    "status": "booked",
+    "type": {
+      "coding": [
+        {
+          "code": "52",
+          "display": "General Discussion"
+        }
+      ]
+    },
+    "priority": 5,
+    "description": "Discussion on progress of chemotherapy treatment",
+    "start": "2019-01-24T09:00:00Z",
+    "end": "2019-01-24T11:00:00Z",
+    "comment": "Further expand on whether chemo is working or other options need to be explored",
+    "participant": [
+      {
+        "actor": {
+          "reference": "Patient/example",
+          "display": "John Edward Smith"
+        },
+        "required": "required",
+        "status": "accepted"
+      },
+      {
+        "type": [
+          {
+            "coding": [
+              {
+                "code": "attending"
+              }
+            ]
+          }
+        ],
+        "actor": {
+          "reference": "Practitioner/example",
+          "display": "Dr Michelle Doctors"
+        },
+        "required": "required",
+        "status": "accepted"
+      },
+      {
+        "actor": {
+          "reference": "Location/1",
+          "display": "West Wing, first floor"
+        },
+        "required": "required",
+        "status": "accepted"
+      }
+    ]
+  }
