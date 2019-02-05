@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`map FHIR Appointment resource to calendar data model 1`] = `
+Object {
+  "comment": "Further expand on the results of the MRI and determine the next actions that may be appropriate.",
+  "created": 2013-10-10T00:00:00.000Z,
+  "description": "Discussion on the results of your recent MRI",
+  "end": 2013-12-10T11:00:00.000Z,
+  "id": "example",
+  "location": "South Wing, second floor",
+  "patient": "Peter James Chalmers",
+  "practitioner": "Dr Adam Careful",
+  "priority": 5,
+  "reason": "Severe burn of left ear",
+  "start": 2013-12-10T09:00:00.000Z,
+  "status": "booked",
+  "title": "Brian MRI results discussion",
+}
+`;
+
+exports[`map FHIR Patient resource to internal user data model 1`] = `
+Object {
+  "birthDate": 1985-08-01T00:00:00.000Z,
+  "careProvider": "Physician Family Medicine",
+  "email": "open@epic.com",
+  "gender": "male",
+  "language": "English",
+  "name": "Jason Argonaut",
+  "phone": Array [
+    Object {
+      "system": "phone",
+      "use": "home",
+      "value": "608-271-9000",
+    },
+    Object {
+      "system": "phone",
+      "use": "work",
+      "value": "608-771-9000",
+    },
+    Object {
+      "system": "phone",
+      "use": "mobile",
+      "value": "608-771-9000",
+    },
+    Object {
+      "period": Object {
+        "end": "2014-08-04T00:00:00Z",
+        "start": "2011-08-04T00:00:00Z",
+      },
+      "system": "phone",
+      "use": "temp",
+      "value": "608-771-9000",
+    },
+  ],
+  "role": "Patient",
+}
+`;
