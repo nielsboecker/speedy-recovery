@@ -20,38 +20,19 @@ Object {
 
 exports[`map FHIR Patient resource to internal user data model 1`] = `
 Object {
-  "birthDate": 1985-08-01T00:00:00.000Z,
-  "careProvider": "Physician Family Medicine",
-  "email": "open@epic.com",
+  "birthDate": 1974-12-25T00:00:00.000Z,
+  "careProvider": "FIXME",
+  "email": "FIXME",
   "gender": "male",
-  "language": "English",
-  "name": "Jason Argonaut",
+  "language": "FIXME",
+  "name": "Chalmers",
   "phone": Array [
     Object {
       "system": "phone",
-      "use": "home",
-      "value": "608-271-9000",
-    },
-    Object {
-      "system": "phone",
       "use": "work",
-      "value": "608-771-9000",
-    },
-    Object {
-      "system": "phone",
-      "use": "mobile",
-      "value": "608-771-9000",
-    },
-    Object {
-      "period": Object {
-        "end": "2014-08-04T00:00:00Z",
-        "start": "2011-08-04T00:00:00Z",
-      },
-      "system": "phone",
-      "use": "temp",
-      "value": "608-771-9000",
+      "value": "(03) 5555 6473",
     },
   ],
-  "role": "Patient",
+  "role": "Person",
 }
 `;
