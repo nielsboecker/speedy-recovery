@@ -22,7 +22,11 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={LandingMainPage} onLogin={this.handleLogin}/>
+            <Route
+              exact
+              path="/"
+              render={(props) => <LandingMainPage {...props} onLogin={this.handleLogin}/>}
+            />
             <Route
               path="/secured"
               render={(props) => <SecuredMainPage {...props} onLogout={this.handleLogout} user={this.state.user}/>}

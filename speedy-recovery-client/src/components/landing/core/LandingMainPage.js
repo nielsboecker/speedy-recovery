@@ -3,7 +3,7 @@ import StartPage from "../start/StartPage";
 
 class LandingMainPage extends Component {
   render() {
-    return <StartPage />;
+    return <StartPage onLogin={this.props.onLogin}/>;
   }
 
   componentDidMount() {

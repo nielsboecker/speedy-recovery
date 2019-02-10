@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import WelcomeBox from "./WelcomeBox";
 import "./StartPage.css";
-import { Image, Grid } from "semantic-ui-react";
+import { Grid, Image } from "semantic-ui-react";
 
 class StartPage extends Component {
   render() {
@@ -17,7 +17,7 @@ class StartPage extends Component {
         >
           <Grid.Row>
             <Grid.Column>
-              <WelcomeBox />
+              <WelcomeBox onLogin={this.props.onLogin}/>
             </Grid.Column>
           </Grid.Row>
         </Grid>
