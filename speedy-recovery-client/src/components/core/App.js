@@ -6,14 +6,14 @@ import LandingMainPage from "../landing/core/LandingMainPage";
 import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import { mapPatientToUser } from "../../dataaccess/FhirDataAdapter";
-import fhirExamplePatient from "../../__tests__/test_input/fhir_r3/FhirExamplePatient";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      fhirClient: {},
       authenticated: false,
-      user: mapPatientToUser(fhirExamplePatient)
+      user: {}
     };
   }
 
@@ -32,6 +32,33 @@ class App extends Component {
         </BrowserRouter>
       </div>
     );
+  }
+
+  componentWillMount() {
+    SmartAuthService.onSmartAuthenticatedSessionReady(fhirClient => this.onAuthStatusChanged(fhirClient));
+    // TODO: if already authenticated, redirect to SecuredMainPage
+  }
+
+  handleLogin() {
+    SmartAuthService.startSmartAuthenticatedSession();
+  }
+
+  handleLogout() {
+    SmartAuthService.endSmartAuthenticatedSession();
+    // TODO: Redirect to LandingMainPage?
+  }
+
+  onAuthStatusChanged(fhirClient) {
+    console.log("Received FHIR client: ", fhirClient);
+
+    this.setState({ fhirClient });
+    fhirClient.user.read().then(userResource => {
+      console.log("Received user info resource: ", userResource);
+
+      const user = mapPatientToUser(userResource);
+      console.log("Mapped to user: ", user);
+      this.setState({ user });
+    });
   }
 }
 
