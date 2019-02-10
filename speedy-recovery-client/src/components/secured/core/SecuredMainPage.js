@@ -7,24 +7,16 @@ import CalendarPage from "../calendar/CalendarPage";
 import MessagingPage from "../messaging/MessagingPage";
 import ProfilePage from "../profile/ProfilePage";
 import ConversationPage from "../conversation/ConversationPage";
-import fhirExamplePatient from "../../../__tests__/test_input/fhir_r3/FhirExamplePatient.json";
-import { mapPatientToUser, mapAppointment } from "../../../dataaccess/FhirDataAdapter";
+import { mapAppointment } from "../../../dataaccess/FhirDataAdapter";
 import fhirExampleAppointments from "../../../__tests__/test_input/fhir_r3/FhirExampleAppointments.json";
 
 class SecuredMainPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
       events: [],
     };
   }
-
-  updateStateUser = () => {
-    // TODO: Access actual FHIR data, consider missing values for optional fields
-    const user = mapPatientToUser(fhirExamplePatient);
-    this.setState({ user });
-  };
 
   updateStateAppointments = () => {
     const events = fhirExampleAppointments.map(mapAppointment);
@@ -32,6 +24,8 @@ class SecuredMainPage extends Component {
   };
 
   render() {
+    // TODO: Make sure this component does not show up if user not authenticated
+
     const { match } = this.props;
 
     return (
@@ -59,8 +53,7 @@ class SecuredMainPage extends Component {
                 path={`${match.url}/profile`}
                 render={() => (
                   <ProfilePage
-                    user={this.state.user}
-                    onChange={this.updateStateUser}
+                    user={this.props.user}
                   />
                 )}
               />

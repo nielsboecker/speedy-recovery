@@ -64,11 +64,6 @@ class ProfilePage extends Component {
       </Grid>
     );
   }
-
-  componentDidMount() {
-    // TODO: Update state when data from FHIR is available instead
-    this.props.onChange();
-  }
 }
 
 export default ProfilePage;
