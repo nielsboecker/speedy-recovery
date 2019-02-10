@@ -12,6 +12,7 @@ import {
   Card
 } from "semantic-ui-react";
 import "./WelcomeBox.css";
+import SmartAuthService from "../../../service/SmartAuthService"
 
 class WelcomeBox extends Component {
   render() {
@@ -43,8 +44,7 @@ class WelcomeBox extends Component {
                       fluid
                       size="large"
                       className="button"
-                      as={Link}
-                      to="/secured"
+                      onClick={this.handleLoginClick}
                     >
                       Log in
                     </Button>
@@ -72,6 +72,10 @@ class WelcomeBox extends Component {
         </Grid>
       </Container>
     );
+  }
+
+  handleLoginClick() {
+    SmartAuthService.startSmartAuthenticatedSession();
   }
 }
 

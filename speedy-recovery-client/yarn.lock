@@ -3869,6 +3869,11 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
+fhirclient@^0.1.15:
+  version "0.1.15"
+  resolved "https://registry.yarnpkg.com/fhirclient/-/fhirclient-0.1.15.tgz#fcaf90c68fc9e1e23211718d6c2e0bf88ce13d46"
+  integrity sha512-b2RbPNF8ISnpkyLd3axxgS6YSfdU9X12NhRubpX9YEoAwbCrx4s+92SDlAB2WJFijpfi7GTGKAKQAbZM+1/3gA==
+
 figgy-pudding@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/figgy-pudding/-/figgy-pudding-3.5.1.tgz#862470112901c727a0e495a80744bd5baa1d6790"
