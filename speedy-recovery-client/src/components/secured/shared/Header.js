@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import {
-  Container,
-  Dropdown,
-  Image,
-  Menu,
-  Icon,
-  Label
-} from "semantic-ui-react";
+import { Container, Dropdown, Icon, Image, Label, Menu } from "semantic-ui-react";
 import "./Header.css";
 
 class Header extends Component {
@@ -33,7 +26,7 @@ class Header extends Component {
             </Menu.Item>
 
             <Menu.Menu position="right">
-              <Dropdown text="Robert Smith" pointing className="link item">
+              <Dropdown text={this.props.username} pointing className="link item">
                 <Dropdown.Menu>
                   <Dropdown.Item as={Link} to="/secured/profile">
                     <Icon name="user" />

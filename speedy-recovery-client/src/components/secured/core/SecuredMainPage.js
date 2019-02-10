@@ -32,7 +32,7 @@ class SecuredMainPage extends Component {
       <div>
         <BrowserRouter>
           <Fragment>
-            <Header/>
+            <Header username={this.props.user.name}/>
 
             <Container>
               <Route path={`${match.url}`} exact component={HomePage}/>
