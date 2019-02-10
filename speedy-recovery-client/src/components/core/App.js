@@ -12,12 +12,11 @@ class App extends Component {
     super(props);
     this.state = {
       fhirClient: {},
-      authenticated: false,
-      user: {}
+      user: null
     };
   }
 
-  render() {
+  render = () => {
     return (
       <div className="App">
         <BrowserRouter>
@@ -25,7 +24,7 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={(props) => <LandingMainPage {...props} onLogin={this.handleLogin}/>}
+              render={(props) => <LandingMainPage {...props} onLogin={this.handleLogin} user={this.state.user}/>}
             />
             <Route
               path="/secured"
@@ -36,23 +35,22 @@ class App extends Component {
         </BrowserRouter>
       </div>
     );
-  }
+  };
 
-  componentWillMount() {
+  componentWillMount = () => {
     SmartAuthService.onSmartAuthenticatedSessionReady(fhirClient => this.onAuthStatusChanged(fhirClient));
-    // TODO: if already authenticated, redirect to SecuredMainPage
-  }
+  };
 
-  handleLogin() {
+  handleLogin = () => {
     SmartAuthService.startSmartAuthenticatedSession();
-  }
+  };
 
-  handleLogout() {
+  handleLogout = () => {
     SmartAuthService.endSmartAuthenticatedSession();
-    // TODO: Redirect to LandingMainPage?
-  }
+    this.setState({ user: null });
+  };
 
-  onAuthStatusChanged(fhirClient) {
+  onAuthStatusChanged = (fhirClient) => {
     console.log("Received FHIR client: ", fhirClient);
 
     this.setState({ fhirClient });
@@ -63,7 +61,7 @@ class App extends Component {
       console.log("Mapped to user: ", user);
       this.setState({ user });
     });
-  }
+  };
 }
 
 export default App;

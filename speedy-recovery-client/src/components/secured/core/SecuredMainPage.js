@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import Header from "../shared/Header";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Redirect, Route } from "react-router-dom";
 import { Container } from "semantic-ui-react";
 import HomePage from "../home/HomePage";
 import CalendarPage from "../calendar/CalendarPage";
@@ -8,23 +8,19 @@ import MessagingPage from "../messaging/MessagingPage";
 import ProfilePage from "../profile/ProfilePage";
 import ConversationPage from "../conversation/ConversationPage";
 import { mapAppointment } from "../../../dataaccess/FhirDataAdapter";
-import fhirExampleAppointments from "../../../__tests__/test_input/fhir_r3/FhirExampleAppointments.json";
 
 class SecuredMainPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      events: [],
+      appointments: []
     };
   }
 
-  updateStateAppointments = () => {
-    const events = fhirExampleAppointments.map(mapAppointment);
-    this.setState({ events });
-  };
-
   render() {
-    // TODO: Make sure this component does not show up if user not authenticated
+    if (!this.props.user) {
+      return <Redirect to="/"/>;
+    }
 
     const { match } = this.props;
 
@@ -43,7 +39,7 @@ class SecuredMainPage extends Component {
               <Route path={`${match.url}/calendar`}
                      render={() => (
                          <CalendarPage
-                             events={this.state.events}
+                           events={this.state.appointments}
                              onChange={this.updateStateAppointments}
                          />
                      )}
@@ -70,6 +66,16 @@ class SecuredMainPage extends Component {
       </div>
     );
   }
+
+  componentWillMount() {
+    this.updateStateAppointments();
+  }
+
+  updateStateAppointments = () => {
+    // TODO: Query SMART, display appointment data for current user
+    const appointments = [].map(mapAppointment);
+    this.setState({ appointments });
+  };
 }
 
 export default SecuredMainPage;
