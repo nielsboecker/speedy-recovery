@@ -9,9 +9,9 @@ const mapPatientToUser = fhirPatientResource => ({
   name: fhirPatientResource.name[0].family || "Unknown",
   careProvider: "FIXME",
   language: "FIXME",
-  phone: fhirPatientResource.telecom.filter(
-    element => element.system === "phone"
-  ) || [],
+  phone:
+    fhirPatientResource.telecom.filter(element => element.system === "phone") ||
+    [],
   email: "FIXME"
 });
 

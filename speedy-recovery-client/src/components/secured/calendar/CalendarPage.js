@@ -112,11 +112,8 @@ class CalendarPage extends React.Component {
   }
 
   componentDidMount() {
-    // TODO: Update state when data from FHIR is available instead
     this.props.onChange();
   }
 }
-
-
 
 export default CalendarPage;
