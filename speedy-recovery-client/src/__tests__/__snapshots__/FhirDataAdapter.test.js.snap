@@ -2,18 +2,20 @@
 
 exports[`map FHIR Appointment resource to calendar data model 1`] = `
 Object {
+  "appType": "Followup",
   "comment": "Further expand on the results of the MRI and determine the next actions that may be appropriate.",
   "created": 2013-10-10T00:00:00.000Z,
   "description": "Discussion on the results of your recent MRI",
   "end": 2013-12-10T11:00:00.000Z,
   "id": "example",
+  "indication": "Severe burn of left ear",
   "location": "South Wing, second floor",
   "patient": "Peter James Chalmers",
   "practitioner": "Dr Adam Careful",
   "priority": 5,
-  "reason": "Severe burn of left ear",
   "start": 2013-12-10T09:00:00.000Z,
   "status": "booked",
+  "supportingInfo": undefined,
   "title": "Brian MRI results discussion",
 }
 `;
