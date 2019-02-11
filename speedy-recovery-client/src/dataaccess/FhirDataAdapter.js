@@ -1,16 +1,18 @@
+// TODO: Many different versions of fields like name, make more resilient (and be careful to work with V3!)
+// TODO: Add different mappings for different FHIR versions (as a proof of concept)
+
+// FIXME: Update mapping
 const mapPatientToUser = fhirPatientResource => ({
   role: fhirPatientResource.resourceType,
   birthDate: new Date(fhirPatientResource.birthDate),
   gender: fhirPatientResource.gender,
-  name: fhirPatientResource.name.find(element => element.use === "usual").text,
-  careProvider: fhirPatientResource.careProvider[0].display,
-  language: fhirPatientResource.communication.find(element => element.preferred)
-    .language.text,
+  name: fhirPatientResource.name[0].family || "Unknown",
+  careProvider: "FIXME",
+  language: "FIXME",
   phone: fhirPatientResource.telecom.filter(
     element => element.system === "phone"
-  ),
-  email: fhirPatientResource.telecom.find(element => element.system === "email")
-    .value
+  ) || [],
+  email: "FIXME"
 });
 
 const mapAppointment = fhirAppResource => ({

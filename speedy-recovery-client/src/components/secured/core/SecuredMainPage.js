@@ -1,44 +1,37 @@
 import React, { Component, Fragment } from "react";
 import Header from "../shared/Header";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Redirect, Route } from "react-router-dom";
 import { Container } from "semantic-ui-react";
 import HomePage from "../home/HomePage";
 import CalendarPage from "../calendar/CalendarPage";
 import MessagingPage from "../messaging/MessagingPage";
 import ProfilePage from "../profile/ProfilePage";
 import ConversationPage from "../conversation/ConversationPage";
-import fhirExamplePatient from "../../../__tests__/test_input/fhir_r3/FhirExamplePatient.json";
-import { mapPatientToUser, mapAppointment } from "../../../dataaccess/FhirDataAdapter";
-import fhirExampleAppointments from "../../../__tests__/test_input/fhir_r3/FhirExampleAppointments.json";
+import { mapAppointment } from "../../../dataaccess/FhirDataAdapter";
 
 class SecuredMainPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
-      events: [],
+      appointments: []
     };
   }
 
-  updateStateUser = () => {
-    // TODO: Access actual FHIR data, consider missing values for optional fields
-    const user = mapPatientToUser(fhirExamplePatient);
-    this.setState({ user });
-  };
-
-  updateStateAppointments = () => {
-    const events = fhirExampleAppointments.map(mapAppointment);
-    this.setState({ events });
-  };
-
   render() {
+    if (!this.props.user) {
+      return <Redirect to="/"/>;
+    }
+
     const { match } = this.props;
 
     return (
       <div>
         <BrowserRouter>
           <Fragment>
-            <Header/>
+            <Header
+              username={this.props.user.name}
+              onLogout={this.props.onLogout}
+            />
 
             <Container>
               <Route path={`${match.url}`} exact component={HomePage}/>
@@ -46,7 +39,7 @@ class SecuredMainPage extends Component {
               <Route path={`${match.url}/calendar`}
                      render={() => (
                          <CalendarPage
-                             events={this.state.events}
+                           events={this.state.appointments}
                              onChange={this.updateStateAppointments}
                          />
                      )}
@@ -59,8 +52,7 @@ class SecuredMainPage extends Component {
                 path={`${match.url}/profile`}
                 render={() => (
                   <ProfilePage
-                    user={this.state.user}
-                    onChange={this.updateStateUser}
+                    user={this.props.user}
                   />
                 )}
               />
@@ -74,6 +66,16 @@ class SecuredMainPage extends Component {
       </div>
     );
   }
+
+  componentWillMount() {
+    this.updateStateAppointments();
+  }
+
+  updateStateAppointments = () => {
+    // TODO: Query SMART, display appointment data for current user
+    const appointments = [].map(mapAppointment);
+    this.setState({ appointments });
+  };
 }
 
 export default SecuredMainPage;

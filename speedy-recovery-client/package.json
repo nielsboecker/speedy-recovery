@@ -5,6 +5,7 @@
   "dependencies": {
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-prettier": "^3.0.1",
+    "fhirclient": "^0.1.15",
     "moment": "latest",
     "react": "^16.7.0",
     "react-big-calendar": "latest",

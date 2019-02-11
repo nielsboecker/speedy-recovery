@@ -1,16 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Image,
-  Message,
-  Segment,
-  Container,
-  Card
-} from "semantic-ui-react";
+import { Button, Card, Container, Form, Grid, Header, Image, Message, Segment } from "semantic-ui-react";
 import "./WelcomeBox.css";
 
 class WelcomeBox extends Component {
@@ -43,8 +32,7 @@ class WelcomeBox extends Component {
                       fluid
                       size="large"
                       className="button"
-                      as={Link}
-                      to="/secured"
+                      onClick={this.props.onLogin}
                     >
                       Log in
                     </Button>
@@ -53,8 +41,7 @@ class WelcomeBox extends Component {
                       fluid
                       size="large"
                       className="button"
-                      as={Link}
-                      to="/TODO"
+                      onClick={() => alert("This functionality is not supported yet")}
                     >
                       Sign up
                     </Button>
