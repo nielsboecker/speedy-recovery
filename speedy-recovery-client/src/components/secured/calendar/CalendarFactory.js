@@ -4,10 +4,6 @@ import PatientCalendar from "./PatientCalendar";
 
 class CalendarFactory extends React.Component {
 
-    constructor(...args) {
-        super(...args);
-    }
-
    render() {
         switch(this.props.role) {
             case 'Patient':

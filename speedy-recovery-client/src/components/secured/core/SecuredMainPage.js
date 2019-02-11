@@ -15,6 +15,7 @@ class SecuredMainPage extends Component {
     super(props);
     this.state = {
       appointments: [],
+      role: "Patient",
     };
   }
 
@@ -42,7 +43,7 @@ class SecuredMainPage extends Component {
                          <CalendarFactory
                            events={this.state.appointments}
                            onChange={this.updateStateAppointments}
-                           role={"Patient"}
+                           role={this.state.role}
                          />
                      )}
               />
