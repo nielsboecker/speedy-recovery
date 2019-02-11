@@ -15,7 +15,7 @@ class SecuredMainPage extends Component {
     super(props);
     this.state = {
       appointments: [],
-      role: "Patient",
+      role: "Practitioner",
     };
   }
 

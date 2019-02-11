@@ -6,16 +6,15 @@ import "./CalendarPage.css";
 import { Grid, Segment, Modal, Table, Button } from "semantic-ui-react";
 import moment from "moment";
 
-// let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
+let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
 
 moment.locale("en-GB");
 const localizer = BigCalendar.momentLocalizer(moment);
 
-class PatientCalendar extends React.Component {
+class ParentCalendar extends React.Component {
     constructor(...args) {
         super(...args);
         this.state = {
-            //These are needed for modal
             appointment: [],
             isEditModalOpen: false
         };
@@ -33,15 +32,14 @@ class PatientCalendar extends React.Component {
             <Grid divided="vertically">
                 <Grid.Column>
                     <Segment>
-                        <div style={{ height: 450 }}>
+                        <div style={{ height: 550 }}>
                             <BigCalendar
-
                                 localizer={localizer}
                                 events={this.props.events}
                                 onSelectEvent={this.toggleEditModal}
-                                defaultView={BigCalendar.Views.AGENDA}
+                                defaultView={BigCalendar.Views.MONTH}
                                 defaultDate={new Date()}
-                                views={['agenda']}
+                                views={allViews}
                             />
 
                             <Modal
@@ -113,4 +111,4 @@ class PatientCalendar extends React.Component {
     }
 }
 
-export default PatientCalendar;
+export default ParentCalendar;

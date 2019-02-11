@@ -2,7 +2,7 @@ import React from "react";
 import BigCalendar from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
-import "./CalendarPage.css";
+import "../CalendarPage.css";
 import { Grid, Segment, Modal, Table, Button } from "semantic-ui-react";
 import moment from "moment";
 

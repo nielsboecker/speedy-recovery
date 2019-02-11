@@ -22,9 +22,11 @@ const mapAppointment = fhirAppResource => ({
     fhirAppResource.text.div.length - 6
   ),
   status: fhirAppResource.status,
-  reason: fhirAppResource.indication[0].display,
+  appType: fhirAppResource.appointmentType.coding[0].display,
+  indication: fhirAppResource.indication[0].display,
   priority: fhirAppResource.priority,
   description: fhirAppResource.description,
+  supportingInfo: fhirAppResource.supportingInfo,
   start: new Date(fhirAppResource.start),
   end: new Date(fhirAppResource.end),
   created: new Date(fhirAppResource.created),

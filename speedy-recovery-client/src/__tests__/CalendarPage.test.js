@@ -1,5 +1,5 @@
 import React from "react";
-import CalendarPage from "../components/secured/calendar/CalendarPage";
+import CalendarPage from "../components/secured/calendar/old/CalendarPage";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import exampleAppointment from "./test_input/internal/ExampleAppointment";

@@ -56,6 +56,11 @@
     ],
     "priority": 5,
     "description": "Discussion on the results of your recent MRI",
+    "supportingInformation": [
+      {
+        "reference": "DiagnosticReport/ultrasound"
+      }
+    ],
     "start": "2019-02-10T10:00:00Z",
     "end": "2019-02-10T11:00:00Z",
     "created": "2018-10-10",
@@ -159,6 +164,11 @@
     ],
     "priority": 5,
     "description": "Discussion on the results of your recent CT",
+    "supportingInformation": [
+      {
+        "reference": "DiagnosticReport/ultrasound"
+      }
+    ],
     "start": "2019-02-23T09:00:00Z",
     "end": "2019-02-23T11:00:00Z",
     "created": "2019-01-10",
@@ -262,6 +272,11 @@
     ],
     "priority": 5,
     "description": "Discussion on the results of your recent Ultrasound",
+    "supportingInformation": [
+      {
+        "reference": "DiagnosticReport/ultrasound"
+      }
+    ],
     "start": "2019-02-25T15:00:00Z",
     "end": "2019-02-25T17:00:00Z",
     "created": "2019-02-10",
@@ -365,6 +380,11 @@
     ],
     "priority": 5,
     "description": "Discussion on chemo progress on cancer",
+    "supportingInformation": [
+      {
+        "reference": "DiagnosticReport/ultrasound"
+      }
+    ],
     "start": "2019-02-15T09:00:00Z",
     "end": "2019-02-15T11:00:00Z",
     "created": "2019-01-10",

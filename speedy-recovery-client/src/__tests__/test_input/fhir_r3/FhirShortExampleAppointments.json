@@ -55,6 +55,11 @@
   ],
   "priority": 5,
   "description": "Discussion on the results of your recent MRI",
+  "supportingInformation": [
+    {
+      "reference": "DiagnosticReport/ultrasound"
+    }
+  ],
   "start": "2013-12-10T09:00:00Z",
   "end": "2013-12-10T11:00:00Z",
   "created": "2013-10-10",
