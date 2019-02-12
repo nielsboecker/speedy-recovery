@@ -26,7 +26,7 @@ const mapAppointment = fhirAppResource => ({
   indication: fhirAppResource.indication[0].display,
   priority: fhirAppResource.priority,
   description: fhirAppResource.description,
-  supportingInfo: fhirAppResource.supportingInfo,
+  supportingInfo: fhirAppResource.supportingInformation[0].reference, //TODO: Fix for multiple supporting info
   start: new Date(fhirAppResource.start),
   end: new Date(fhirAppResource.end),
   created: new Date(fhirAppResource.created),

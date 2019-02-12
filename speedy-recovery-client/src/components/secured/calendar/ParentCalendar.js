@@ -2,14 +2,10 @@ import React from "react";
 import BigCalendar from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
-import "./CalendarPage.css";
+import "./CalendarPages.css";
 import { Grid, Segment, Modal, Table, Button } from "semantic-ui-react";
-import moment from "moment";
 
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
-
-moment.locale("en-GB");
-const localizer = BigCalendar.momentLocalizer(moment);
 
 class ParentCalendar extends React.Component {
     constructor(...args) {
@@ -34,7 +30,7 @@ class ParentCalendar extends React.Component {
                     <Segment>
                         <div style={{ height: 550 }}>
                             <BigCalendar
-                                localizer={localizer}
+                                localizer={this.props.localizer}
                                 events={this.props.events}
                                 onSelectEvent={this.toggleEditModal}
                                 defaultView={BigCalendar.Views.MONTH}
@@ -53,25 +49,39 @@ class ParentCalendar extends React.Component {
                                 </Modal.Header>
                                 <Modal.Content>
                                     <Modal.Description>
+
                                         <Table padded celled>
                                             <Table.Header>
-                                                <Table.Row>
-                                                    <Table.HeaderCell>Appointment Title</Table.HeaderCell>
-                                                    <Table.HeaderCell>Doctor</Table.HeaderCell>
-                                                    <Table.HeaderCell>Date</Table.HeaderCell>
-                                                    <Table.HeaderCell>Time</Table.HeaderCell>
-                                                    <Table.HeaderCell>Location</Table.HeaderCell>
-                                                    <Table.HeaderCell>Comments</Table.HeaderCell>
+                                                <Table.Row textAlign='center'>
+                                                    <Table.HeaderCell>Indication</Table.HeaderCell>
+                                                    <Table.HeaderCell>Description</Table.HeaderCell>
+                                                    <Table.HeaderCell>Status</Table.HeaderCell>
                                                 </Table.Row>
                                             </Table.Header>
                                             <Table.Body>
-                                                <Table.Row>
-                                                    <Table.Cell data-label="Title">
-                                                        {this.state.appointment.title}
+                                                <Table.Row textAlign='center'>
+                                                    <Table.Cell data-label="Indication">
+                                                        {this.state.appointment.indication}
                                                     </Table.Cell>
-                                                    <Table.Cell data-label="Doctor">
-                                                        {this.state.appointment.practitioner}
+                                                    <Table.Cell data-label="Description">
+                                                        {this.state.appointment.description}
                                                     </Table.Cell>
+                                                    <Table.Cell data-label="Status">
+                                                        {this.state.appointment.status}
+                                                    </Table.Cell>
+                                                </Table.Row>
+                                            </Table.Body>
+                                        </Table>
+                                        <Table padded celled>
+                                            <Table.Header>
+                                                <Table.Row textAlign='center'>
+                                                    <Table.HeaderCell>Date</Table.HeaderCell>
+                                                    <Table.HeaderCell>Time</Table.HeaderCell>
+                                                    <Table.HeaderCell>Created</Table.HeaderCell>
+                                                </Table.Row>
+                                            </Table.Header>
+                                            <Table.Body>
+                                                <Table.Row textAlign='center'>
                                                     <Table.Cell data-label="Date">
                                                         {this.state.appointment.start !== undefined
                                                             ? this.state.appointment.start.toLocaleDateString()
@@ -82,18 +92,43 @@ class ParentCalendar extends React.Component {
                                                             ? this.state.appointment.start.toLocaleTimeString()
                                                             : ""}
                                                     </Table.Cell>
+                                                    <Table.Cell data-label="Created">
+                                                        {this.state.appointment.start !== undefined
+                                                            ? this.state.appointment.start.toLocaleDateString() +
+                                                            " at " + this.state.appointment.start.toLocaleTimeString()
+                                                            : ""}
+                                                    </Table.Cell>
+
+                                                </Table.Row>
+                                            </Table.Body>
+                                        </Table>
+                                        <Table padded celled>
+                                            <Table.Header>
+                                                <Table.Row textAlign='center'>
+                                                    <Table.HeaderCell>Doctor</Table.HeaderCell>
+                                                    <Table.HeaderCell>Patient</Table.HeaderCell>
+                                                    <Table.HeaderCell>Location</Table.HeaderCell>
+
+                                                </Table.Row>
+                                            </Table.Header>
+                                            <Table.Body>
+                                                <Table.Row textAlign='center'>
+                                                    <Table.Cell data-label="Practitioner">
+                                                        {this.state.appointment.practitioner}
+                                                    </Table.Cell>
+                                                    <Table.Cell data-label="Patient">
+                                                        {this.state.appointment.patient}
+                                                    </Table.Cell>
                                                     <Table.Cell data-label="Location">
                                                         {this.state.appointment.location}
                                                     </Table.Cell>
-                                                    <Table.Cell data-label="Comments">
-                                                        {this.state.appointment.comment}
-                                                    </Table.Cell>
+
                                                 </Table.Row>
                                             </Table.Body>
                                         </Table>
                                         <Grid>
                                             <Grid.Row centered>
-                                                <Button>Request Cancellation</Button>
+                                                <Button>Patient Info</Button>
                                             </Grid.Row>
                                         </Grid>
                                     </Modal.Description>

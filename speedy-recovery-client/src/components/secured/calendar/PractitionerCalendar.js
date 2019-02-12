@@ -2,14 +2,10 @@ import React from "react";
 import BigCalendar from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
-import "./CalendarPage.css";
+import "./CalendarPages.css";
 import { Grid, Segment, Modal, Table, Button} from "semantic-ui-react";
-import moment from "moment";
 
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
-
-moment.locale("en-GB");
-const localizer = BigCalendar.momentLocalizer(moment);
 
 class PractitionerCalendar extends React.Component {
 
@@ -36,7 +32,7 @@ class PractitionerCalendar extends React.Component {
                     <Segment>
                         <div style={{ height: 550 }}>
                             <BigCalendar
-                                localizer={localizer}
+                                localizer={this.props.localizer}
                                 events={this.props.events}
                                 onSelectEvent={this.toggleEditModal}
                                 defaultView={BigCalendar.Views.MONTH}
@@ -179,21 +175,6 @@ class PractitionerCalendar extends React.Component {
             </Grid>
         );
     }
-
-    /*
-identifier
-status
-appointmentType
-indication
-priority
-description
-supportingInformation
-start
-end
-created
-comment
-participant (add one for patient, doctor and location)
-    * */
 
     componentDidMount() {
         this.props.onChange();
