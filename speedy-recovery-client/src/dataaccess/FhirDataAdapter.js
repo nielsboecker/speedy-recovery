@@ -3,13 +3,17 @@
 
 // FIXME: Update mapping
 // arrow function with parameter
+
 const mapPatientToUser = fhirPatientResource => ({
   role: fhirPatientResource.resourceType,
-  birthDate: fhirPatientResource.birthDate,
+  birthDate: new Date(fhirPatientResource.birthDate),
   gender: fhirPatientResource.gender,
   name: fhirPatientResource.name[0].family || "Unknown",
   careProvider: "FIXME",
   language: "FIXME",
+  phone: fhirPatientResource.telecom.filter(
+    element => element.system === "phone"
+  ) || [],
   email: "FIXME"
 });
 
