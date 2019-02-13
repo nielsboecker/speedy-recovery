@@ -2,18 +2,17 @@
 // TODO: Add different mappings for different FHIR versions (as a proof of concept)
 
 // FIXME: Update mapping
+// arrow function with parameter
 const mapPatientToUser = fhirPatientResource => ({
   role: fhirPatientResource.resourceType,
-  birthDate: new Date(fhirPatientResource.birthDate),
+  birthDate: fhirPatientResource.birthDate,
   gender: fhirPatientResource.gender,
   name: fhirPatientResource.name[0].family || "Unknown",
   careProvider: "FIXME",
   language: "FIXME",
-  phone: fhirPatientResource.telecom.filter(
-    element => element.system === "phone"
-  ) || [],
   email: "FIXME"
 });
+
 
 const mapAppointment = fhirAppResource => ({
   id: fhirAppResource.id,
@@ -34,4 +33,7 @@ const mapAppointment = fhirAppResource => ({
   location: fhirAppResource.participant[2].actor.display
 });
 
-export { mapPatientToUser, mapAppointment };
+
+
+
+export { mapPatientToUser, mapAppointment};

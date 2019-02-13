@@ -8,6 +8,8 @@ import MessagingPage from "../messaging/MessagingPage";
 import ProfilePage from "../profile/ProfilePage";
 import ConversationPage from "../conversation/ConversationPage";
 import { mapAppointment } from "../../../dataaccess/FhirDataAdapter";
+import InfoFactory from "../patientinformation/InfoFactory";
+
 
 class SecuredMainPage extends Component {
   constructor(props) {
@@ -56,6 +58,18 @@ class SecuredMainPage extends Component {
                   />
                 )}
               />
+
+              <Route
+                path={`${match.url}/patientinformation`}
+                render={() => (
+                  <InfoFactory
+                    user={this.props.user} // sending the user map resources to infoFactory
+                    patResource = {this.props.patResource}
+                  />
+                )}
+                
+              />
+              
               <Route
                 path={`${match.url}/conversation`}
                 component={ConversationPage}
