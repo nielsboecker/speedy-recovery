@@ -17,7 +17,7 @@ it("renders without crashing", () => {
 
 it("can access BigCalendar instance", () => {
   const wrapper = mount(<CalendarPage onChange={emptyFunction} events={exampleAppointments}/>);
-  const { bigcal } = wrapper.instance();
-  console.log(bigcal);
-  // TODO: @Josh
+  const { bigCalendarRef } = wrapper.instance();
+  expect(bigCalendarRef).not.toBeUndefined();
+  // TODO: @Josh Feel free to use this for click tests
 });

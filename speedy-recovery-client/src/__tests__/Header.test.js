@@ -1,17 +1,15 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import Enzyme, { mount } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
 import { MemoryRouter } from "react-router-dom";
 import Header from "../components/secured/shared/Header";
 
-it("renders without crashing", () => {
-  const div = document.createElement("div");
+Enzyme.configure({ adapter: new Adapter() });
 
-  // Note: MemoryRouter needed as there are Link components in Header
-  const component = (
+it("renders without crashing", () => {
+  mount(
     <MemoryRouter>
       <Header />
     </MemoryRouter>
   );
-  ReactDOM.render(component, div);
-  ReactDOM.unmountComponentAtNode(div);
 });

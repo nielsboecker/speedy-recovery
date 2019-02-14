@@ -46,7 +46,7 @@ class CalendarPage extends React.Component {
                 step={60}
                 views={allViews}
                 ref={(node) => {
-                  this.bigcal = node;
+                  this.bigCalendarRef = node;
                 }}
               />
 
