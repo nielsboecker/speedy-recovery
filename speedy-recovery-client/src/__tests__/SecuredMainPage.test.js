@@ -9,7 +9,10 @@ Enzyme.configure({ adapter: new Adapter() });
 it("renders without crashing", () => {
   mount(
     <MemoryRouter>
-      <SecuredMainPage/>
+      <SecuredMainPage
+        user={{}}
+        match={{ url: "foo" }}
+      />
     </MemoryRouter>
   );
 });
