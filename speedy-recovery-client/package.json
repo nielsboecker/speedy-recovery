@@ -43,6 +43,12 @@
       "node": true
     }
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/index.js"
+    ]
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
