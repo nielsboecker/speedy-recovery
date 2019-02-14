@@ -1,11 +1,5 @@
+import "jest-localstorage-mock";
 import SmartAuthService from "../service/SmartAuthService";
-
-
-beforeEach(function() {
-  //global.sessionStorage = jest.genMockFunction();
-  //global.sessionStorage.setItem = jest.genMockFunction();
-  //global.sessionStorage.getItem = jest.genMockFunction();
-});
 
 test("start smart authenticated session", () => {
   // Mock SMART on FHIR auth
@@ -25,8 +19,15 @@ test("on start authetication session callback is registered", () => {
 });
 
 
-// test("end smart authenticated session", () => {
-//   // sessionStorage.accessToken = "foo";
-//   // endSmartAuthenticatedSession();
-//   expect(sessionStorage).toBe({});
-// });
+test("end smart authenticated session", () => {
+  // given
+  sessionStorage.accessToken = "foo";
+  expect(sessionStorage).toHaveProperty("accessToken");
+
+  // when
+  SmartAuthService.endSmartAuthenticatedSession();
+
+  // then
+  expect(sessionStorage.clear).toHaveBeenCalled();
+  expect(sessionStorage).toEqual({});
+});
