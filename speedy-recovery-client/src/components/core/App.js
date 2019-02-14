@@ -59,6 +59,11 @@ class App extends Component {
 
       const user = mapPatientToUser(userResource);
       console.log("Mapped to user: ", user);
+
+      //TODO: find better way to define parent user type
+      if (fhirClient.userId === 'Patient/f0462936-eb4b-4da1-b45a-fbd96ebf8ccb' ) {
+        user.role = 'Parent';
+      }
       this.setState({ user });
     });
   };

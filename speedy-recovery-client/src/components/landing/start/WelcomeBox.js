@@ -31,12 +31,13 @@ class WelcomeBox extends Component {
                   <Segment>
 
 
-                    <Modal trigger={<Button color="teal"
+                    <Modal size='mini' trigger={<Button color="teal"
                                             fluid
                                             size="large"
                                             className="button">Log in</Button>}>
                       <Modal.Header>Select user type</Modal.Header>
                       <Modal.Content>
+                        <Grid centered>
                           <Button.Group>
                             <Button color="teal"
                                     onClick={() => {this.props.onLogin('Practitioner');}}
@@ -48,7 +49,7 @@ class WelcomeBox extends Component {
                                     onClick={() => {this.props.onLogin('Patient');}}
                                     >Patient</Button>
                           </Button.Group>
-
+                        </Grid>
                       </Modal.Content>
                     </Modal>
 

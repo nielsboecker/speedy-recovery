@@ -2,6 +2,7 @@
 import "fhirclient/fhir-client";
 import smartProviderConfig from "../config/smartProviderConfig";
 import smartPatientConfig from "../config/smartPatientConfig";
+import smartParentConfig from "../config/smartParentConfig";
 
 const startSmartAuthenticatedSession = user => {
   console.log("Starting SmartAuthenticatedSession");
@@ -11,7 +12,7 @@ const startSmartAuthenticatedSession = user => {
   } else if (user === "Patient") {
     FHIR.oauth2.authorize(smartPatientConfig);
   } else if (user === "Parent") {
-    console.log("Parent");
+    FHIR.oauth2.authorize(smartParentConfig);
   } else {
     console.log("Authentication Error");
   }
