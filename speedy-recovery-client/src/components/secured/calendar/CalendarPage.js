@@ -3,7 +3,7 @@ import BigCalendar from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
 import "./CalendarPage.css";
-import { Grid, Segment, Modal, Table, Button } from "semantic-ui-react";
+import { Button, Grid, Modal, Segment, Table } from "semantic-ui-react";
 import moment from "moment";
 
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
@@ -45,6 +45,9 @@ class CalendarPage extends React.Component {
                 defaultDate={new Date()}
                 step={60}
                 views={allViews}
+                ref={(node) => {
+                  this.bigcal = node;
+                }}
               />
 
               <Modal
@@ -116,7 +119,6 @@ class CalendarPage extends React.Component {
     this.props.onChange();
   }
 }
-
 
 
 export default CalendarPage;
