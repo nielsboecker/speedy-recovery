@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
-import ErrorPage from "./ErrorPage";
+import ErrorPage from "../error/ErrorPage";
 import LandingMainPage from "../landing/core/LandingMainPage";
 import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
@@ -12,11 +12,25 @@ class App extends Component {
     super(props);
     this.state = {
       fhirClient: {},
-      user: null
+      user: null,
+      authRequestStarted: false,
+      error: null
     };
   }
 
   render = () => {
+    if (this.state.error) {
+      return (
+        <BrowserRouter>
+          <Switch>
+            <Route path="/error"
+              render={(props) => <ErrorPage {...props} error={this.state.error} resetError={this.resetError}/>}/>
+            <Redirect to="/error"/>
+          </Switch>
+        </BrowserRouter>
+      );
+    }
+
     return (
       <div className="App">
         <BrowserRouter>
@@ -24,13 +38,20 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={(props) => <LandingMainPage {...props} onLogin={this.handleLogin} user={this.state.user}/>}
+              render={(props) => <LandingMainPage {...props} onLogin={this.handleLoginRequest} user={this.state.user}/>}
             />
             <Route
               path="/secured"
-              render={(props) => <SecuredMainPage {...props} onLogout={this.handleLogout} user={this.state.user}/>}
+              render={(props) => <SecuredMainPage {...props} onLogout={this.handleLogoutRequest}
+                user={this.state.user}/>}
             />
-            <Route component={ErrorPage}/>
+            <Route
+              render={(props) => <ErrorPage {...props} error={{
+                rootCause: "NOT_FOUND",
+                message: "We couldn't find the page you are looking for. Apologies for the inconvenience.",
+                resolvable: true
+              }}/>}
+            />
           </Switch>
         </BrowserRouter>
       </div>
@@ -39,20 +60,21 @@ class App extends Component {
 
   componentWillMount = () => {
     SmartAuthService.onSmartAuthenticatedSessionReady()
-      .then(fhirClient => this.onAuthStatusChanged(fhirClient))
-      .catch(error => console.error(error));
+      .then(fhirClient => this.handleLoginSuccess(fhirClient))
+      .catch(errorMessage => this.handleLoginError(errorMessage));
   };
 
-  handleLogin = () => {
+  handleLoginRequest = () => {
+    this.setState({ authRequestStarted: true });
     SmartAuthService.startSmartAuthenticatedSession();
   };
 
-  handleLogout = () => {
+  handleLogoutRequest = () => {
     SmartAuthService.endSmartAuthenticatedSession();
     this.setState({ user: null });
   };
 
-  onAuthStatusChanged = (fhirClient) => {
+  handleLoginSuccess = fhirClient => {
     console.log("Received FHIR client: ", fhirClient);
 
     this.setState({ fhirClient });
@@ -64,6 +86,24 @@ class App extends Component {
       this.setState({ user });
     });
   };
+
+  handleLoginError = errorMessage => {
+    if (errorMessage === "No 'state' parameter found in authorization response." && !this.state.authRequestStarted) {
+      // SMART JS library will always try to login based on last stored token, which leads to this error at initial page load
+      console.info("Ignoring initial SMART auth error");
+      return;
+    }
+
+    this.setState({
+      error: {
+        rootCause: "SMART_AUTH",
+        message: errorMessage,
+        resolvable: true
+      }
+    });
+  };
+
+  resetError = () => this.setState({ error: null });
 }
 
 export default App;
