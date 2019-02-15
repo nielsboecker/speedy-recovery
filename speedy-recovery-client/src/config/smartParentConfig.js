@@ -1,5 +1,4 @@
 const smartSandboxConfigs = {
-  // Provider launch (provider is Joseph P Nichols, sees three patients including Shelby Von)
   parentSandbox_1:
     "https://launch.smarthealthit.org/v/r3/sim/eyJrIjoiMSIsImoiOiIxIiwiYiI6ImYwNDYyOTM2LWViNGItNGRhMS1iNDVhLWZiZD" +
     "k2ZWJmOGNjYiwxYzVjYzZmZC02NzlhLTRmYTctOGNjNS0wZTY2NzcwNzEwMmQifQ/fhir"

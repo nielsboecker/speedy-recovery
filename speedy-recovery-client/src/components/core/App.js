@@ -5,7 +5,7 @@ import ErrorPage from "./ErrorPage";
 import LandingMainPage from "../landing/core/LandingMainPage";
 import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
-import { mapPatientToUser } from "../../dataaccess/FhirDataAdapter";
+import { mapPatientToUser} from "../../dataaccess/FhirDataAdapter";
 
 class App extends Component {
   constructor(props) {
@@ -13,30 +13,33 @@ class App extends Component {
     this.state = {
       fhirClient: {},
       user: null,
+      patResource:{},
     };
   }
 
   render = () => {
+    
     return (
-        <div className="App">
-          <BrowserRouter>
-            <Switch>
-              <Route
-                  exact
-                  path="/"
-                  render={(props) => <LandingMainPage {...props} onLogin={this.handleLogin} user={this.state.user}/>}
-              />
-              <Route
-                  path="/secured"
-                  render={(props) => <SecuredMainPage {...props} onLogout={this.handleLogout} user={this.state.user}/>}
-              />
-              <Route component={ErrorPage}/>
-            </Switch>
-          </BrowserRouter>
-        </div>
+      <div className="App">
+        <BrowserRouter>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={(props) => <LandingMainPage {...props} onLogin={this.handleLogin} user={this.state.user} />}
+            />
+            <Route
+              path="/secured"
+              render={(props) => <SecuredMainPage {...props} onLogout={this.handleLogout} user={this.state.user}
+                                                  patResource={this.state.patResource}/>}
+            />
+            <Route component={ErrorPage}/>
+          </Switch>
+        </BrowserRouter>
+      </div>
     );
   };
-
+  // called before component is inserted into dom
   componentWillMount = () => {
     SmartAuthService.onSmartAuthenticatedSessionReady(fhirClient => this.onAuthStatusChanged(fhirClient));
   };
@@ -51,22 +54,43 @@ class App extends Component {
   };
 
   onAuthStatusChanged = (fhirClient) => {
-    console.log("Received FHIR client: ", fhirClient);
-
     this.setState({ fhirClient });
-    fhirClient.user.read().then(userResource => {
-      console.log("Received user info resource: ", userResource);
+    console.log("Received FHIR client: ", fhirClient);
+    
+    fhirClient.user.read()
+      .then(currentUserResource => {
+        console.log("Received currentUser info resource: ", currentUserResource);
+        const userType = currentUserResource.resourceType;
+        console.log("Received currentUser info resourceType: ", userType);
+        const user = mapPatientToUser(currentUserResource);
+        if(userType === "Practitioner"){
+          // also get patient info
+          fhirClient.patient.read()
+            .then(patientResource => {
+              console.log("patientResource for dr: ", patientResource);
+              // so this is patient mapped resources that we need for practitioner
+              const patResource = mapPatientToUser(patientResource);
+              console.log("patientResource after mapping: ", patResource);
+              this.setState({ patResource });
+            }).catch(err=>{
+              console.log("The error is  ", err  );
+            });
+        }
+        // else if(userType === "Parent"){
+        //      user.role = "Parent";
+        //      TODO
+        // }
 
-      const user = mapPatientToUser(userResource);
-      console.log("Mapped to user: ", user);
+        if (fhirClient.userId === 'Patient/f0462936-eb4b-4da1-b45a-fbd96ebf8ccb' ) {
+          user.role = 'Parent';
+        }
 
-      //TODO: find better way to define parent user type
-      if (fhirClient.userId === 'Patient/f0462936-eb4b-4da1-b45a-fbd96ebf8ccb' ) {
-        user.role = 'Parent';
-      }
-      this.setState({ user });
-    });
-  };
-}
+        this.setState({ user });
+        
+      }).catch(err=>{
+        console.log("The error is  ", err  );
+      });
+    }   
+  }
 
 export default App;

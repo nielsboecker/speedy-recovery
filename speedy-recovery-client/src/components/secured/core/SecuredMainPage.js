@@ -7,6 +7,7 @@ import MessagingPage from "../messaging/MessagingPage";
 import ProfilePage from "../profile/ProfilePage";
 import ConversationPage from "../conversation/ConversationPage";
 import { mapAppointment } from "../../../dataaccess/FhirDataAdapter";
+import InfoFactory from "../patientinformation/InfoFactory";
 import CalendarFactory from "../calendar/CalendarFactory";
 import fhirExampleApp from "../../../__tests__/test_input/fhir_r3/FhirExampleAppointments.json";
 
@@ -58,6 +59,18 @@ class SecuredMainPage extends Component {
                   />
                 )}
               />
+
+              <Route
+                path={`${match.url}/patientinformation`}
+                render={() => (
+                  <InfoFactory
+                    user={this.props.user} // sending the user map resources to infoFactory
+                    patResource = {this.props.patResource}
+                  />
+                )}
+                
+              />
+              
               <Route
                 path={`${match.url}/conversation`}
                 component={ConversationPage}

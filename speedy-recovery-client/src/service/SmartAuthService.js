@@ -20,6 +20,7 @@ const startSmartAuthenticatedSession = user => {
 
 const onSmartAuthenticatedSessionReady = FHIR.oauth2.ready;
 
+// arrow functions with no parameters
 const endSmartAuthenticatedSession = () => {
   console.log("Ending SmartAuthenticatedSession");
   sessionStorage.clear();
