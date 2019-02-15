@@ -20,6 +20,9 @@ class PatientCalendar extends React.Component {
                                 defaultView={BigCalendar.Views.AGENDA}
                                 defaultDate={new Date()}
                                 views={['agenda']}
+                                ref={(node) => {
+                                    this.bigCalendarRef = node;
+                                }}
                             />
                         </div>
                     </Segment>

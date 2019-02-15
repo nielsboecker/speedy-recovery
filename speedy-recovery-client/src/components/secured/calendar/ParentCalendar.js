@@ -36,6 +36,9 @@ class ParentCalendar extends React.Component {
                                 defaultView={BigCalendar.Views.MONTH}
                                 defaultDate={new Date()}
                                 views={allViews}
+                                ref={(node) => {
+                                    this.bigCalendarRef = node;
+                                }}
                             />
 
                             <Modal

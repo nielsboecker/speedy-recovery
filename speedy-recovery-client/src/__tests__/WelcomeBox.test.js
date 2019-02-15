@@ -9,4 +9,5 @@ const emptyFunction = () => {};
 
 it("welcome box renders", () => {
   shallow(<WelcomeBox onClick={emptyFunction} />);
+
 });
