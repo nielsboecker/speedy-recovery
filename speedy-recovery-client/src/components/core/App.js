@@ -54,51 +54,40 @@ class App extends Component {
 
   onAuthStatusChanged = (fhirClient) => {
     this.setState({ fhirClient });
-      
     console.log("Received FHIR client: ", fhirClient);
-    const currentUserId = fhirClient.userId;
-    console.log("FHIR client currentUserID: ", currentUserId);
-    const userType = (currentUserId.split("/"))[0];
-    console.log("Type of user: ", userType);
     
-    if(userType === "Practitioner" ){
-     
-      // get the resources for the currentUser which is a practitioner
-      fhirClient.user.read()
+    fhirClient.user.read()
       .then(currentUserResource => {
-       console.log("Received currentUser info resource: ", currentUserResource);
-       const user = mapPatientToUser(currentUserResource);
-       console.log("Mapped resources of Currentuser: ", user);
-       this.setState({ user });
-      }).catch(err=>{
-        console.log("the error is  ", err  );
-      });
-     
-      // the practitioner also needs to see the patient resource
-      fhirClient.patient.read().then(patientResource => {
-        console.log("patientResource for dr: ", patientResource);
-        const patResource = mapPatientToUser(patientResource);
-        console.log("patientResource after mapping: ", patResource);
-        // so this is patient mapped resources that we need for practitioner
-        this.setState({ patResource });
-      });  
-       
-    }
-    else if (userType === "Patient"){
-      fhirClient.user.read().then(currentUserResource => {
         console.log("Received currentUser info resource: ", currentUserResource);
+        const userType = currentUserResource.resourceType
+        console.log("Received currentUser info resourceType: ", userType);
         const user = mapPatientToUser(currentUserResource);
-        console.log("Mapped resources of Currentuser: ", user);
-        // so this is patients mapped resources
+        if(userType === "Practitioner"){
+          // also get patient info
+          fhirClient.patient.read()
+            .then(patientResource => {
+              console.log("patientResource for dr: ", patientResource);
+              // so this is patient mapped resources that we need for practitioner
+              const patResource = mapPatientToUser(patientResource);
+              console.log("patientResource after mapping: ", patResource);
+              this.setState({ patResource });
+            }).catch(err=>{
+              console.log("The error is  ", err  );
+            });
+        }
+        // else if(userType === "Parent"){
+        //      user.role = "Parent";
+        //      TODO
+        // }
         this.setState({ user });
         
+      }).catch(err=>{
+        console.log("The error is  ", err  );
       });
-    }
-   // else{
-         //TODO role = "Parent"
-    //}
-    
-  };
-}
+    }   
+  }
+
+     
+
 
 export default App;

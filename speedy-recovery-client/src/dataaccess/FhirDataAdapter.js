@@ -10,7 +10,7 @@ const mapPatientToUser = fhirPatientResource => ({
   gender: fhirPatientResource.gender,
   name: fhirPatientResource.name[0].family || "Unknown",
   careProvider: fhirPatientResource.careprovider || "Unknown",
-  //languagePreferred: fhirPatientResource.communication[0].language.coding[0].display || "Unknown",
+  //languagePreferred:"Unknown" || fhirPatientResource.communication[0].language.coding[0].display,
   address: fhirPatientResource.address[0].line[0] + ", " + fhirPatientResource.address[0].city + ", " + fhirPatientResource.address[0].state + ", " + fhirPatientResource.address[0].postalCode + ", " + fhirPatientResource.address[0].country,
   phone: fhirPatientResource.telecom.filter(
     element => element.system === "phone"

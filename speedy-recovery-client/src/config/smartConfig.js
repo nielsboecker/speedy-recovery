@@ -3,7 +3,11 @@ const smartSandboxConfigs = {
   patientSandbox_1: "https://launch.smarthealthit.org/v/r3/sim/eyJrIjoiMSIsImIiOiJkMGQwY2RlMC00YjIxLTQyZjYtOWMxZS1iZmE0NDdkNzIwNTkifQ/fhir",
 
   // Provider launch (provider is Joseph P Nichols, sees three patients including Shelby Von)
-  providerSandbox_1: "https://launch.smarthealthit.org/v/r3/sim/eyJoIjoiMSIsImIiOiJkMGQwY2RlMC00YjIxLTQyZjYtOWMxZS1iZmE0NDdkNzIwNTksc21hcnQtNzc3NzcwMSwyMmE5YmMyYi0wYTE1LTRkZGItODUxOC0xYTZmMGQ4MWEyODYiLCJlIjoic21hcnQtUHJhY3RpdGlvbmVyLTcyMDgwNDE2In0/fhir"
+  providerSandbox_1: "https://launch.smarthealthit.org/v/r3/sim/eyJoIjoiMSIsImIiOiJkMGQwY2RlMC00YjIxLTQyZjYtOWMxZS1iZmE0NDdkNzIwNTksc21hcnQtNzc3NzcwMSwyMmE5YmMyYi0wYTE1LTRkZGItODUxOC0xYTZmMGQ4MWEyODYiLCJlIjoic21hcnQtUHJhY3RpdGlvbmVyLTcyMDgwNDE2In0/fhir",
+ 
+  // Parent launch (Calvin Beatty, ID = da188ef4-09be-4648-acf1-5d077bf668d1)
+  parentSandbox_1: "https://launch.smarthealthit.org/v/r3/sim/eyJrIjoiMSIsImoiOiIxIiwiYiI6ImRhMTg4ZWY0LTA5YmUtNDY0OC1hY2YxLTVkMDc3YmY2NjhkMSJ9/fhir"
+
 };
 
 // objects

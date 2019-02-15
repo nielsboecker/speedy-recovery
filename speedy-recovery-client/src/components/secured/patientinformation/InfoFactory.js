@@ -8,7 +8,7 @@ class InfoFactory extends Component {
    
    render() { 
         const userResources = this.props.user;
-        console.log(" Mapped Resources for dr from info fatory", userResources);
+        console.log(" Mapped Resources for user from info fatory", userResources);
         const patResource = this.props.patResource;
         console.log(" Mapped Resources for patient from info fatory", patResource);
         const role = userResources.role;
