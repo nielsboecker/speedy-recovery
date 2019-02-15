@@ -59,7 +59,7 @@ class App extends Component {
     fhirClient.user.read()
       .then(currentUserResource => {
         console.log("Received currentUser info resource: ", currentUserResource);
-        const userType = currentUserResource.resourceType
+        const userType = currentUserResource.resourceType;
         console.log("Received currentUser info resourceType: ", userType);
         const user = mapPatientToUser(currentUserResource);
         if(userType === "Practitioner"){
