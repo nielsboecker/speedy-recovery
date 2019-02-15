@@ -10,20 +10,20 @@ import fhirExamplePatient from "./test_input/fhir_r3/FhirExamplePatient.json";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-it("renders without crashing", () => {
-  shallow(<InfoFactory user={exampleUser} patResource={fhirExamplePatient} />);
+it("InfoFactory renders without crashing", () => {
+  shallow(<InfoFactory user={exampleUser} patient={fhirExamplePatient} />);
 });
 
-it("renders without crashing", () => {
+it("PractitionerInfo renders without crashing", () => {
   shallow(
-    <PractitionerInfo user={exampleUser} extraInfo={fhirExamplePatient} />
+    <PractitionerInfo user={exampleUser} patient={fhirExamplePatient} />
   );
 });
 
-it("renders without crashing", () => {
+it("PatientInfo renders without crashing", () => {
   shallow(<PatientInfo user={exampleUser} />);
 });
 
-it("renders without crashing", () => {
+it("ParentInfo renders without crashing", () => {
   shallow(<ParentInfo user={exampleUser} />);
 });

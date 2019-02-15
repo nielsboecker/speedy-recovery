@@ -4,14 +4,14 @@ import React, { Component } from "react";
 class ParentInfo extends Component {
   
   render() {
-    const userResources = this.props.user;
-    console.log("Mapped Resources from ParentInfo ",  userResources);
+    const {user} = this.props;
+    console.log("Resources for Parent ", user);
     return (
       <div>
-          <h1>PATIENT INFORMATION FOR PARENT VIEW</h1>
-          <h4>Name: {userResources.name}</h4>
-          <h4>Gender: {userResources.gender}</h4>
-          <h4>Address: {userResources.address}</h4>
+          <h1>Patient Information For Parent View</h1>
+          <h4>Name: {user.name}</h4>
+          <h4>Gender: {user.gender}</h4>
+          <h4>Address: {user.address}</h4>
       </div>
     );
   }

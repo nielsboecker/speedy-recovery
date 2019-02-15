@@ -13,7 +13,7 @@ class App extends Component {
     this.state = {
       fhirClient: {},
       user: null,
-      patResource:{},
+      patient:{},
     };
   }
 
@@ -31,7 +31,7 @@ class App extends Component {
             <Route
               path="/secured"
               render={(props) => <SecuredMainPage {...props} onLogout={this.handleLogout} user={this.state.user}
-                                                  patResource={this.state.patResource}/>}
+                                                  patient={this.state.patient}/>}
             />
             <Route component={ErrorPage}/>
           </Switch>
@@ -39,7 +39,7 @@ class App extends Component {
       </div>
     );
   };
-  // called before component is inserted into dom
+  
   componentWillMount = () => {
     SmartAuthService.onSmartAuthenticatedSessionReady(fhirClient => this.onAuthStatusChanged(fhirClient));
   };
@@ -59,19 +59,18 @@ class App extends Component {
     
     fhirClient.user.read()
       .then(currentUserResource => {
-        console.log("Received currentUser info resource: ", currentUserResource);
-        const userType = currentUserResource.resourceType;
-        console.log("Received currentUser info resourceType: ", userType);
+        console.log("Received currentUser resource: ", currentUserResource);
         const user = mapPatientToUser(currentUserResource);
-        if(userType === "Practitioner"){
+        console.log("Mapped userresourceType: ", user.role);
+        if(user.role === "Practitioner"){
           // also get patient info
           fhirClient.patient.read()
             .then(patientResource => {
-              console.log("patientResource for dr: ", patientResource);
+              console.log("Patient Resource for practitioner: ", patientResource);
               // so this is patient mapped resources that we need for practitioner
-              const patResource = mapPatientToUser(patientResource);
-              console.log("patientResource after mapping: ", patResource);
-              this.setState({ patResource });
+              const patient = mapPatientToUser(patientResource);
+              console.log("Patient Resource after mapping: ", patient);
+              this.setState({patient});
             }).catch(err=>{
               console.log("The error is  ", err  );
             });
@@ -85,7 +84,7 @@ class App extends Component {
           user.role = 'Parent';
         }
 
-        this.setState({ user });
+        this.setState({user});
         
       }).catch(err=>{
         console.log("The error is  ", err  );

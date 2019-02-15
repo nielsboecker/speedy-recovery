@@ -2,17 +2,17 @@ import React, { Component } from "react";
 
 class PractitionerInfo extends Component {
   render() {
-    const userResources = this.props.user;
-    const patResource = this.props.extraInfo;
-    console.log("Extra Resources from PractionerInfo ",  patResource);
-    console.log("Mapped Resources from PractionerInfo ",  userResources);
+    const {user, patient} = this.props;
+    console.log("Resources of Practitioner ",  user);
+    console.log("Patient Resources for Practioner ",  patient);
+    
     return (
       <div>
-        <h1>PATIENT INFORMATION FOR PRACTITIONER VIEW</h1>
-        <h4>Name: {patResource.name}</h4>
-        <h4>Gender: {patResource.gender}</h4>
-        <h4>Address: {patResource.address}</h4>
-        <h4>Email: {patResource.email}</h4>   
+        <h1>Patient Information For Practitioner View</h1>
+        <h4>Name: {patient.name}</h4>
+        <h4>Gender: {patient.gender}</h4>
+        <h4>Address: {patient.address}</h4>
+        <h4>Email: {patient.email}</h4>   
       </div>
     );
   }

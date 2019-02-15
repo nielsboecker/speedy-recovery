@@ -64,8 +64,8 @@ class SecuredMainPage extends Component {
                 path={`${match.url}/patientinformation`}
                 render={() => (
                   <InfoFactory
-                    user={this.props.user} // sending the user map resources to infoFactory
-                    patResource = {this.props.patResource}
+                    user={this.props.user} 
+                    patient = {this.props.patient}
                   />
                 )}
                 

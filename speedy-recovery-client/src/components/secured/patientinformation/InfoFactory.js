@@ -7,21 +7,17 @@ import ParentInfo from "./ParentInfo";
 class InfoFactory extends Component {
    
    render() { 
-        const userResources = this.props.user;
-        console.log(" Mapped Resources for user from info fatory", userResources);
-        const patResource = this.props.patResource;
-        console.log(" Mapped Resources for patient from info fatory", patResource);
-        const role = userResources.role;
-        
-        console.log(role);
-        // conditional rendering
-        switch(role) {
+        const {user, patient} = this.props;
+        console.log("Resources for current user ", user);
+        console.log("PatientResourcesNew for practitioner ", patient);
+    
+        switch(user.role) {
             case 'Patient':
-                return <PatientInfo user = {userResources}/>;
+                return <PatientInfo user = {user}/>;
             case 'Parent':
-                return <ParentInfo user = {userResources}/>;
+                return <ParentInfo user = {user}/>;
             case 'Practitioner':
-                return <PractitionerInfo user = {userResources}  extraInfo = {patResource}/>;
+                return <PractitionerInfo user = {user}  patient = {patient}/>;
             default:
                 return undefined;
         }
