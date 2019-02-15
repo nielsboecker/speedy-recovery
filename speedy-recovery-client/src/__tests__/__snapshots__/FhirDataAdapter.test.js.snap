@@ -20,11 +20,11 @@ Object {
 
 exports[`map FHIR Patient resource to internal user data model 1`] = `
 Object {
-  "birthDate": 1974-12-25T00:00:00.000Z,
-  "careProvider": "FIXME",
-  "email": "FIXME",
+  "address": "534 Erewhon St, PleasantVille, Vic, 3999, US",
+  "birthDate": "1974-12-25",
+  "careProvider": "Dr Example",
+  "email": "peter@live.com",
   "gender": "male",
-  "language": "FIXME",
   "name": "Chalmers",
   "phone": Array [
     Object {
@@ -33,6 +33,6 @@ Object {
       "value": "(03) 5555 6473",
     },
   ],
-  "role": "Person",
+  "role": "Patient",
 }
 `;

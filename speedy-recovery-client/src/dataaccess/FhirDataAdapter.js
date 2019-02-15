@@ -6,17 +6,17 @@
 
 const mapPatientToUser = fhirPatientResource => ({
   role: fhirPatientResource.resourceType,
-  birthDate: new Date(fhirPatientResource.birthDate),
+  birthDate: fhirPatientResource.birthDate,
   gender: fhirPatientResource.gender,
   name: fhirPatientResource.name[0].family || "Unknown",
-  careProvider: "FIXME",
-  language: "FIXME",
+  careProvider: fhirPatientResource.careprovider || "Unknown",
+  //languagePreferred: fhirPatientResource.communication[0].language.coding[0].display || "Unknown",
+  address: fhirPatientResource.address[0].line[0] + ", " + fhirPatientResource.address[0].city + ", " + fhirPatientResource.address[0].state + ", " + fhirPatientResource.address[0].postalCode + ", " + fhirPatientResource.address[0].country,
   phone: fhirPatientResource.telecom.filter(
     element => element.system === "phone"
   ) || [],
-  email: "FIXME"
+  email: fhirPatientResource.email || "Unknown"
 });
-
 
 const mapAppointment = fhirAppResource => ({
   id: fhirAppResource.id,

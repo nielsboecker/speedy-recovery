@@ -11,7 +11,8 @@ class PractitionerInfo extends Component {
         <h1>PATIENT INFORMATION FOR PRACTITIONER VIEW</h1>
         <h4>Name: {patResource.name}</h4>
         <h4>Gender: {patResource.gender}</h4>
-        
+        <h4>Address: {patResource.address}</h4>
+        <h4>Email: {patResource.email}</h4>   
       </div>
     );
   }

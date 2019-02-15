@@ -11,9 +11,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fhirClient: {}, //empty object literal
+      fhirClient: {}, 
       user: null,
-      patResource:{}
+      patResource:{},
     };
   }
 
@@ -64,35 +64,40 @@ class App extends Component {
     if(userType === "Practitioner" ){
      
       // get the resources for the currentUser which is a practitioner
-      fhirClient.user.read().then(currentUserResource => {
-        console.log("Received currentUser info resource: ", currentUserResource);
-        const user = mapPatientToUser(currentUserResource);
-        console.log("Mapped resources of Currentuser: ", user);
-        // so this is practitioner mapped resources
-        this.setState({ user });
+      fhirClient.user.read()
+      .then(currentUserResource => {
+       console.log("Received currentUser info resource: ", currentUserResource);
+       const user = mapPatientToUser(currentUserResource);
+       console.log("Mapped resources of Currentuser: ", user);
+       this.setState({ user });
+      }).catch(err=>{
+        console.log("the error is  ", err  );
       });
-      
+     
       // the practitioner also needs to see the patient resource
       fhirClient.patient.read().then(patientResource => {
         console.log("patientResource for dr: ", patientResource);
-        const resourceOfP = patientResource;
-        const patResource = mapPatientToUser(resourceOfP);
+        const patResource = mapPatientToUser(patientResource);
         console.log("patientResource after mapping: ", patResource);
         // so this is patient mapped resources that we need for practitioner
         this.setState({ patResource });
-        });
-  
+      });  
+       
     }
-    else{
+    else if (userType === "Patient"){
       fhirClient.user.read().then(currentUserResource => {
         console.log("Received currentUser info resource: ", currentUserResource);
         const user = mapPatientToUser(currentUserResource);
         console.log("Mapped resources of Currentuser: ", user);
         // so this is patients mapped resources
         this.setState({ user });
+        
       });
     }
-  
+   // else{
+         //TODO role = "Parent"
+    //}
+    
   };
 }
 
