@@ -31,15 +31,16 @@ class WelcomeBox extends Component {
                   <Segment>
 
 
-                    <Modal size='mini' trigger={<Button color="teal"
+                    <Modal name="modal" size='mini' trigger={<Button color="teal"
                                             fluid
                                             size="large"
+                                                        name="login"
                                             className="button">Log in</Button>}>
                       <Modal.Header>Select user type</Modal.Header>
                       <Modal.Content>
                         <Grid centered>
                           <Button.Group>
-                            <Button color="teal"
+                            <Button name="button1" color="teal"
                                     onClick={() => {this.props.onLogin('Practitioner');}}
                                     >Practitioner</Button>
                             <Button color="teal"
@@ -58,6 +59,7 @@ class WelcomeBox extends Component {
                       color="teal"
                       fluid
                       size="large"
+                      name="button2"
                       className="button"
                       onClick={() => alert("This functionality is not supported yet")}
                     >

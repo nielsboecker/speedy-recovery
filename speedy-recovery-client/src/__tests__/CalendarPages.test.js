@@ -37,3 +37,9 @@ it("practitionerCalendar renders without crashing", () => {
     />
   );
 });
+
+it("test modals on calendar", () => {
+  shallow(
+    <ParentCalendar onChange={emptyFunction} events={exampleAppointment} />
+  );
+});
