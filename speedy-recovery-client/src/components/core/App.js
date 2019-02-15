@@ -38,7 +38,9 @@ class App extends Component {
   };
 
   componentWillMount = () => {
-    SmartAuthService.onSmartAuthenticatedSessionReady(fhirClient => this.onAuthStatusChanged(fhirClient));
+    SmartAuthService.onSmartAuthenticatedSessionReady()
+      .then(fhirClient => this.onAuthStatusChanged(fhirClient))
+      .catch(error => console.error(error));
   };
 
   handleLogin = () => {

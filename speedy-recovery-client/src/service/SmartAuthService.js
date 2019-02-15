@@ -7,7 +7,13 @@ const startSmartAuthenticatedSession = () => {
   FHIR.oauth2.authorize(smartConfig);
 };
 
-const onSmartAuthenticatedSessionReady = FHIR.oauth2.ready;
+const onSmartAuthenticatedSessionReady = () =>
+  new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      response => resolve(response),
+      error => reject(error)
+    );
+  });
 
 const endSmartAuthenticatedSession = () => {
   console.log("Ending SmartAuthenticatedSession");
