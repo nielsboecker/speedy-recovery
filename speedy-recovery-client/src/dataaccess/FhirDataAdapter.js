@@ -11,10 +11,19 @@ const mapPatientToUser = fhirPatientResource => ({
   name: fhirPatientResource.name[0].family || "Unknown",
   careProvider: fhirPatientResource.careprovider || "Unknown",
   //languagePreferred:"Unknown" || fhirPatientResource.communication[0].language.coding[0].display,
-  address: fhirPatientResource.address[0].line[0] + ", " + fhirPatientResource.address[0].city + ", " + fhirPatientResource.address[0].state + ", " + fhirPatientResource.address[0].postalCode + ", " + fhirPatientResource.address[0].country,
-  phone: fhirPatientResource.telecom.filter(
-    element => element.system === "phone"
-  ) || [],
+  address:
+    fhirPatientResource.address[0].line[0] +
+    ", " +
+    fhirPatientResource.address[0].city +
+    ", " +
+    fhirPatientResource.address[0].state +
+    ", " +
+    fhirPatientResource.address[0].postalCode +
+    ", " +
+    fhirPatientResource.address[0].country,
+  phone:
+    fhirPatientResource.telecom.filter(element => element.system === "phone") ||
+    [],
   email: fhirPatientResource.email || "Unknown"
 });
 
@@ -25,9 +34,11 @@ const mapAppointment = fhirAppResource => ({
     fhirAppResource.text.div.length - 6
   ),
   status: fhirAppResource.status,
-  reason: fhirAppResource.indication[0].display,
+  appType: fhirAppResource.appointmentType.coding[0].display,
+  indication: fhirAppResource.indication[0].display,
   priority: fhirAppResource.priority,
   description: fhirAppResource.description,
+  supportingInfo: fhirAppResource.supportingInformation[0].reference, //TODO: Fix for multiple supporting info
   start: new Date(fhirAppResource.start),
   end: new Date(fhirAppResource.end),
   created: new Date(fhirAppResource.created),
@@ -37,7 +48,4 @@ const mapAppointment = fhirAppResource => ({
   location: fhirAppResource.participant[2].actor.display
 });
 
-
-
-
-export { mapPatientToUser, mapAppointment};
+export { mapPatientToUser, mapAppointment };

@@ -32,16 +32,11 @@
     {
       "use": "official",
       "family": "Chalmers",
-      "given": [
-        "Peter",
-        "James"
-      ]
+      "given": ["Peter", "James"]
     },
     {
       "use": "usual",
-      "given": [
-        "Jim"
-      ]
+      "given": ["Jim"]
     }
   ],
   "telecom": [
@@ -64,9 +59,7 @@
   "address": [
     {
       "use": "home",
-      "line": [
-        "534 Erewhon St"
-      ],
+      "line": ["534 Erewhon St"],
       "city": "PleasantVille",
       "state": "Vic",
       "postalCode": "3999",

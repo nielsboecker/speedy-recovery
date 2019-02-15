@@ -11,19 +11,19 @@ import fhirExamplePatient from "./test_input/fhir_r3/FhirExamplePatient.json";
 Enzyme.configure({ adapter: new Adapter() });
 
 it("renders without crashing", () => {
-  shallow(<InfoFactory user= {exampleUser}  patResource={fhirExamplePatient}/>);
+  shallow(<InfoFactory user={exampleUser} patResource={fhirExamplePatient} />);
 });
 
 it("renders without crashing", () => {
-    shallow(<PractitionerInfo user= {exampleUser} extraInfo={fhirExamplePatient}/>);
+  shallow(
+    <PractitionerInfo user={exampleUser} extraInfo={fhirExamplePatient} />
+  );
 });
 
 it("renders without crashing", () => {
-    shallow(<PatientInfo user= {exampleUser}/>);
+  shallow(<PatientInfo user={exampleUser} />);
 });
 
 it("renders without crashing", () => {
-    shallow(<ParentInfo user= {exampleUser}/>);
+  shallow(<ParentInfo user={exampleUser} />);
 });
-
-

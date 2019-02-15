@@ -11,7 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fhirClient: {}, 
+      fhirClient: {},
       user: null,
       patResource:{},
     };
@@ -30,7 +30,8 @@ class App extends Component {
             />
             <Route
               path="/secured"
-              render={(props) => <SecuredMainPage {...props} onLogout={this.handleLogout} user={this.state.user} patResource={this.state.patResource}/>}
+              render={(props) => <SecuredMainPage {...props} onLogout={this.handleLogout} user={this.state.user}
+                                                  patResource={this.state.patResource}/>}
             />
             <Route component={ErrorPage}/>
           </Switch>
@@ -43,8 +44,8 @@ class App extends Component {
     SmartAuthService.onSmartAuthenticatedSessionReady(fhirClient => this.onAuthStatusChanged(fhirClient));
   };
 
-  handleLogin = () => {
-    SmartAuthService.startSmartAuthenticatedSession();
+  handleLogin = (user) => {
+    SmartAuthService.startSmartAuthenticatedSession(user);
   };
 
   handleLogout = () => {
@@ -79,6 +80,11 @@ class App extends Component {
         //      user.role = "Parent";
         //      TODO
         // }
+
+        if (fhirClient.userId === 'Patient/f0462936-eb4b-4da1-b45a-fbd96ebf8ccb' ) {
+          user.role = 'Parent';
+        }
+
         this.setState({ user });
         
       }).catch(err=>{
@@ -86,8 +92,5 @@ class App extends Component {
       });
     }   
   }
-
-     
-
 
 export default App;
