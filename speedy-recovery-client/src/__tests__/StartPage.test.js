@@ -6,5 +6,5 @@ import StartPage from "../components/landing/start/StartPage";
 Enzyme.configure({ adapter: new Adapter() });
 
 it("renders without crashing", () => {
-  shallow(<StartPage/>);
+  shallow(<StartPage />);
 });

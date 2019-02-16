@@ -6,5 +6,5 @@ import ConversationPage from "../components/secured/conversation/ConversationPag
 Enzyme.configure({ adapter: new Adapter() });
 
 it("renders without crashing", () => {
-  shallow(<ConversationPage/>);
+  shallow(<ConversationPage />);
 });

@@ -6,8 +6,6 @@ import exampleUser from "./test_input/internal/ExampleUser.json";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const emptyFunction = () => {};
-
 it("renders without crashing", () => {
-  shallow(<ProfilePage onChange={emptyFunction} user={exampleUser} />);
+  shallow(<ProfilePage onChange={jest.fn()} user={exampleUser} />);
 });

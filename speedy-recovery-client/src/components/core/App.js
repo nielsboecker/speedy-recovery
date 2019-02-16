@@ -5,18 +5,20 @@ import ErrorPage from "./ErrorPage";
 import LandingMainPage from "../landing/core/LandingMainPage";
 import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
-import { mapPatientToUser } from "../../dataaccess/FhirDataAdapter";
+import { mapPatientToUser} from "../../dataaccess/FhirDataAdapter";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       fhirClient: {},
-      user: null
+      user: null,
+      patient:{},
     };
   }
 
   render = () => {
+    
     return (
       <div className="App">
         <BrowserRouter>
@@ -24,11 +26,12 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={(props) => <LandingMainPage {...props} onLogin={this.handleLogin} user={this.state.user}/>}
+              render={(props) => <LandingMainPage {...props} onLogin={this.handleLogin} user={this.state.user} />}
             />
             <Route
               path="/secured"
-              render={(props) => <SecuredMainPage {...props} onLogout={this.handleLogout} user={this.state.user}/>}
+              render={(props) => <SecuredMainPage {...props} onLogout={this.handleLogout} user={this.state.user}
+                                                  patient={this.state.patient}/>}
             />
             <Route component={ErrorPage}/>
           </Switch>
@@ -36,13 +39,13 @@ class App extends Component {
       </div>
     );
   };
-
+  
   componentWillMount = () => {
     SmartAuthService.onSmartAuthenticatedSessionReady(fhirClient => this.onAuthStatusChanged(fhirClient));
   };
 
-  handleLogin = () => {
-    SmartAuthService.startSmartAuthenticatedSession();
+  handleLogin = (user) => {
+    SmartAuthService.startSmartAuthenticatedSession(user);
   };
 
   handleLogout = () => {
@@ -51,17 +54,38 @@ class App extends Component {
   };
 
   onAuthStatusChanged = (fhirClient) => {
-    console.log("Received FHIR client: ", fhirClient);
-
     this.setState({ fhirClient });
-    fhirClient.user.read().then(userResource => {
-      console.log("Received user info resource: ", userResource);
+    console.log("Received FHIR client: ", fhirClient);
+    
+    fhirClient.user.read()
+      .then(currentUserResource => {
+        console.log("Received current user resources: ", currentUserResource);
+        const user = mapPatientToUser(currentUserResource);
+        console.log("Mapped user ResourceType: ", user.role);
+        if(user.role === "Practitioner"){
+          // also get patient info
+          fhirClient.patient.read()
+            .then(patientResource => {
+              console.log("Patient Resource for practitioner: ", patientResource);
+              // so this is patient mapped resources that we need for practitioner
+              const patient = mapPatientToUser(patientResource);
+              console.log("Patient Resource after mapping: ", patient);
+              this.setState({patient});
+            }).catch(err=>{
+              console.log("The error is  ", err);
+            });
+        }
+        // else if(userType === "Parent"){
+        //      user.role = "Parent";
+        //      TODO
+        // }
 
-      const user = mapPatientToUser(userResource);
-      console.log("Mapped to user: ", user);
-      this.setState({ user });
-    });
-  };
-}
+        this.setState({user});
+        
+      }).catch(err=>{
+        console.log("The error is  ", err);
+      });
+    }   
+  }
 
 export default App;

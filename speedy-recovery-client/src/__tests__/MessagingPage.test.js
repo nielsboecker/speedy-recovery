@@ -6,7 +6,5 @@ import MessagingPage from "../components/secured/messaging/MessagingPage";
 Enzyme.configure({ adapter: new Adapter() });
 
 it("renders without crashing", () => {
-  shallow(
-    <MessagingPage/>
-  );
+  shallow(<MessagingPage />);
 });
