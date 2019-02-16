@@ -79,10 +79,6 @@ class App extends Component {
         //      user.role = "Parent";
         //      TODO
         // }
-      
-        if (fhirClient.userId === 'Patient/f0462936-eb4b-4da1-b45a-fbd96ebf8ccb') {
-          user.role = 'Parent';
-        }
 
         this.setState({user});
         

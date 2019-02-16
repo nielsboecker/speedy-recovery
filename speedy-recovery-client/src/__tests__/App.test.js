@@ -14,19 +14,15 @@ jest.mock("../service/SmartAuthService", () => ({
 }));
 
 // Mock mapPatientToUser
-jest.mock("../dataaccess/FhirDataAdapter", (user) => ({
+jest.mock("../dataaccess/FhirDataAdapter", user => ({
   mapPatientToUser: user => user
 }));
 
-const wrapper = shallow(
-  <App/>
-);
+const wrapper = shallow(<App />);
 const underTest = wrapper.instance();
 
 test("render without crashing", () => {
-  shallow(
-    <App/>
-  );
+  shallow(<App />);
 
   // Make sure auth callback was registered
   expect(SmartAuthService.onSmartAuthenticatedSessionReady).toHaveBeenCalled();

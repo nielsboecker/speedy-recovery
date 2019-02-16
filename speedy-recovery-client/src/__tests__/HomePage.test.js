@@ -6,7 +6,5 @@ import HomePage from "../components/secured/home/HomePage";
 Enzyme.configure({ adapter: new Adapter() });
 
 it("renders without crashing", () => {
-  shallow(
-    <HomePage/>
-  );
+  shallow(<HomePage />);
 });

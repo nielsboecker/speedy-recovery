@@ -7,15 +7,22 @@ import smartParentConfig from "../config/smartParentConfig";
 const startSmartAuthenticatedSession = user => {
   console.log("Starting SmartAuthenticatedSession");
 
-  if (user === "Practitioner") {
-    FHIR.oauth2.authorize(smartProviderConfig);
-  } else if (user === "Patient") {
-    FHIR.oauth2.authorize(smartPatientConfig);
-  } else if (user === "Parent") {
-    FHIR.oauth2.authorize(smartParentConfig);
-  } else {
-    console.log("Authentication Error");
+  var config = undefined;
+
+  switch (user) {
+    case "Practitioner":
+      config = smartProviderConfig;
+      break;
+    case "Patient":
+      config = smartPatientConfig;
+      break;
+    case "Parent":
+      config = smartParentConfig;
+      break;
+    default:
+      console.log("Authentication Error");
   }
+  FHIR.oauth2.authorize(config);
 };
 
 const onSmartAuthenticatedSessionReady = FHIR.oauth2.ready;

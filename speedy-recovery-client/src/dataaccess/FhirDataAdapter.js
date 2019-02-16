@@ -5,7 +5,11 @@
 // arrow function with parameter
 
 const mapPatientToUser = fhirPatientResource => ({
-  role: fhirPatientResource.resourceType,
+  //This is a temporary hard-code fix as we have not implemented the searching for a patients' parent
+  role:
+    fhirPatientResource.id === "f0462936-eb4b-4da1-b45a-fbd96ebf8ccb"
+      ? "Parent"
+      : fhirPatientResource.resourceType,
   birthDate: fhirPatientResource.birthDate,
   gender: fhirPatientResource.gender,
   name: fhirPatientResource.name[0].family || "Unknown",

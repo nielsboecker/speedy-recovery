@@ -12,23 +12,29 @@ Enzyme.configure({ adapter: new Adapter() });
 // interesting things happen in the child components
 
 test("CalendarFactory renders without crashing", () => {
-  mount(<CalendarFactory onChange={jest.fn()} events={[]} role="Patient"/>);
+  mount(<CalendarFactory onChange={jest.fn()} events={[]} role="Patient" />);
 });
 
 test("CalendarFactory renders patient calendar for patient users", () => {
-  const wrapper = mount(<CalendarFactory onChange={jest.fn()} events={[]} role="Patient"/>);
+  const wrapper = mount(
+    <CalendarFactory onChange={jest.fn()} events={[]} role="Patient" />
+  );
   expect(wrapper.children().length).toBe(1);
   expect(wrapper.children().type().name).toEqual("PatientCalendar");
 });
 
 test("CalendarFactory renders parent calendar for parent users", () => {
-  const wrapper = mount(<CalendarFactory onChange={jest.fn()} events={[]} role="Parent"/>);
+  const wrapper = mount(
+    <CalendarFactory onChange={jest.fn()} events={[]} role="Parent" />
+  );
   expect(wrapper.children().length).toBe(1);
   expect(wrapper.children().type().name).toEqual("ParentCalendar");
 });
 
 test("CalendarFactory renders practitioner calendar for practitioner users", () => {
-  const wrapper = mount(<CalendarFactory onChange={jest.fn()} events={[]} role="Practitioner"/>);
+  const wrapper = mount(
+    <CalendarFactory onChange={jest.fn()} events={[]} role="Practitioner" />
+  );
   expect(wrapper.children().length).toBe(1);
   expect(wrapper.children().type().name).toEqual("PractitionerCalendar");
 });
