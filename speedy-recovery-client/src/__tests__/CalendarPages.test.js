@@ -1,8 +1,7 @@
 import React from "react";
-import Enzyme, {mount, shallow} from "enzyme";
+import Enzyme, { mount, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import exampleAppointment from "./test_input/internal/ExampleAppointment";
-import CalendarFactory from "../components/secured/calendar/CalendarFactory";
 import ParentCalendar from "../components/secured/calendar/ParentCalendar";
 import PatientCalendar from "../components/secured/calendar/PatientCalendar";
 import PractitionerCalendar from "../components/secured/calendar/PractitionerCalendar";
@@ -15,12 +14,6 @@ Enzyme.configure({ adapter: new Adapter() });
 const emptyFunction = () => {};
 moment.locale("en-GB");
 const localizer = BigCalendar.momentLocalizer(moment);
-
-it("calendarFactory renders without crashing", () => {
-  shallow(
-    <CalendarFactory onChange={emptyFunction} events={exampleAppointment} />
-  );
-});
 
 it("parentCalendar renders without crashing", () => {
   shallow(
