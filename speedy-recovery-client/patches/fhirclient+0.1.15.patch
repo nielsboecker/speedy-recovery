@@ -1,0 +1,40 @@
+diff --git a/node_modules/fhirclient/fhir-client-angularjs.js b/node_modules/fhirclient/fhir-client-angularjs.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/fhirclient/fhir-client-angularjs.min.js b/node_modules/fhirclient/fhir-client-angularjs.min.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/fhirclient/fhir-client-jquery.js b/node_modules/fhirclient/fhir-client-jquery.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/fhirclient/fhir-client-jquery.min.js b/node_modules/fhirclient/fhir-client-jquery.min.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/fhirclient/fhir-client.js b/node_modules/fhirclient/fhir-client.js
+old mode 100644
+new mode 100755
+index 3e9ad38..a9c17ad
+--- a/node_modules/fhirclient/fhir-client.js
++++ b/node_modules/fhirclient/fhir-client.js
+@@ -38303,6 +38303,15 @@ BBClient.ready = function(input, callback, errback){
+   // decide between token flow (implicit grant) and code flow (authorization code grant)
+   var isCode = urlParam('code') || (args.input && args.input.code);
+ 
++  // The original fhir-client.js does not correctly detect errors of SMART authentication,
++  // therefore this invocation of the error callback function was added
++  var error = urlParam('error')
++  if (error && error !== []) {
++    var errorDescription = urlParam('error_description')
++    args.errback(`${errorDescription} [${error}]`)
++    return;
++  }
++
+   var accessTokenResolver = null;
+ 
+   if (isFakeOAuthToken()) {
+diff --git a/node_modules/fhirclient/fhir-client.min.js b/node_modules/fhirclient/fhir-client.min.js
+old mode 100644
+new mode 100755
+diff --git a/node_modules/fhirclient/test.html b/node_modules/fhirclient/test.html
+old mode 100644
+new mode 100755
