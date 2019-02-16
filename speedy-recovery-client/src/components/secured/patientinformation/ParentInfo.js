@@ -19,7 +19,4 @@ class ParentInfo extends Component {
   
 }
 
-
-
-
 export default ParentInfo ;

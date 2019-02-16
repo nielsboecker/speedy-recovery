@@ -20,7 +20,4 @@ class PractitionerInfo extends Component {
   
 }
 
-
-
-
 export default PractitionerInfo;

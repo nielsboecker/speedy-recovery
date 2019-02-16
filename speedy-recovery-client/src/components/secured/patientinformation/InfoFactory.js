@@ -9,7 +9,7 @@ class InfoFactory extends Component {
    render() { 
         const {user, patient} = this.props;
         console.log("Resources for current user ", user);
-        console.log("PatientResourcesNew for practitioner ", patient);
+        console.log("Patient Resources for practitioner ", patient);
     
         switch(user.role) {
             case 'Patient':

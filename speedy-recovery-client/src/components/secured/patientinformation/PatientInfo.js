@@ -5,7 +5,7 @@ class PatientInfo extends Component {
   
   render() {
     const {user} = this.props;
-    console.log(" Resources of Patient ",  user);
+    console.log("Resources of Patient ",  user);
     return (
       <div>
           <h1>Patient Information For Patient View</h1>
@@ -18,8 +18,5 @@ class PatientInfo extends Component {
 
   
 }
-
-
-
 
 export default PatientInfo ;

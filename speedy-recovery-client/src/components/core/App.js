@@ -59,9 +59,9 @@ class App extends Component {
     
     fhirClient.user.read()
       .then(currentUserResource => {
-        console.log("Received currentUser resource: ", currentUserResource);
+        console.log("Received current user resources: ", currentUserResource);
         const user = mapPatientToUser(currentUserResource);
-        console.log("Mapped userresourceType: ", user.role);
+        console.log("Mapped user ResourceType: ", user.role);
         if(user.role === "Practitioner"){
           // also get patient info
           fhirClient.patient.read()
@@ -72,22 +72,22 @@ class App extends Component {
               console.log("Patient Resource after mapping: ", patient);
               this.setState({patient});
             }).catch(err=>{
-              console.log("The error is  ", err  );
+              console.log("The error is  ", err);
             });
         }
         // else if(userType === "Parent"){
         //      user.role = "Parent";
         //      TODO
         // }
-
-        if (fhirClient.userId === 'Patient/f0462936-eb4b-4da1-b45a-fbd96ebf8ccb' ) {
+      
+        if (fhirClient.userId === 'Patient/f0462936-eb4b-4da1-b45a-fbd96ebf8ccb') {
           user.role = 'Parent';
         }
 
         this.setState({user});
         
       }).catch(err=>{
-        console.log("The error is  ", err  );
+        console.log("The error is  ", err);
       });
     }   
   }
