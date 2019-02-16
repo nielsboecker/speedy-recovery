@@ -11,26 +11,25 @@ import moment from "moment";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const emptyFunction = () => {};
 moment.locale("en-GB");
 const localizer = BigCalendar.momentLocalizer(moment);
 
 it("parentCalendar renders without crashing", () => {
   shallow(
-    <ParentCalendar onChange={emptyFunction} events={exampleAppointment} />
+    <ParentCalendar onChange={jest.fn()} events={exampleAppointment}/>
   );
 });
 
 it("patientCalendar renders without crashing", () => {
   shallow(
-    <PatientCalendar onChange={emptyFunction} events={exampleAppointment} />
+    <PatientCalendar onChange={jest.fn()} events={exampleAppointment}/>
   );
 });
 
 it("practitionerCalendar renders without crashing", () => {
   shallow(
     <PractitionerCalendar
-      onChange={emptyFunction}
+      onChange={jest.fn()}
       events={exampleAppointment}
     />
   );
@@ -38,26 +37,27 @@ it("practitionerCalendar renders without crashing", () => {
 
 it("test modals on calendar", () => {
   shallow(
-    <ParentCalendar onChange={emptyFunction} events={exampleAppointment} />
+    <ParentCalendar onChange={jest.fn()} events={exampleAppointment}/>
   );
 });
 
 it("can access BigCalendar instance for patient", () => {
 
-  const wrapper = mount(<PatientCalendar onChange={emptyFunction} events={exampleAppointments} localizer={localizer}/>);
+  const wrapper = mount(<PatientCalendar onChange={jest.fn()} events={exampleAppointments} localizer={localizer}/>);
   const { bigCalendarRef } = wrapper.instance();
   expect(bigCalendarRef).not.toBeUndefined();
   // TODO: @Josh Feel free to use this for click tests
 });
 
 it("can access BigCalendar instance for practitioner", () => {
-  const wrapper = mount(<PractitionerCalendar onChange={emptyFunction} events={exampleAppointments} localizer={localizer}/>);
+  const wrapper = mount(<PractitionerCalendar onChange={jest.fn()} events={exampleAppointments}
+    localizer={localizer}/>);
   const { bigCalendarRef } = wrapper.instance();
   expect(bigCalendarRef).not.toBeUndefined();
 });
 
 it("can access BigCalendar instance for parent", () => {
-  const wrapper = mount(<ParentCalendar onChange={emptyFunction} events={exampleAppointments} localizer={localizer}/>);
+  const wrapper = mount(<ParentCalendar onChange={jest.fn()} events={exampleAppointments} localizer={localizer}/>);
   const { bigCalendarRef } = wrapper.instance();
   expect(bigCalendarRef).not.toBeUndefined();
 });
