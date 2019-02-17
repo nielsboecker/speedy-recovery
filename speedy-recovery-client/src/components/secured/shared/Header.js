@@ -24,6 +24,9 @@ class Header extends Component {
                 2
               </Label>
             </Menu.Item>
+            <Menu.Item as={Link} to="/secured/patientinformation">
+              Patient Information
+            </Menu.Item>
 
             <Menu.Menu position="right">
               <Dropdown text={this.props.username} pointing className="link item">

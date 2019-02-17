@@ -1,11 +1,29 @@
 /*global FHIR */
 import "fhirclient/fhir-client";
-import smartConfig from "../config/smartConfig";
+import smartProviderConfig from "../config/smartProviderConfig";
+import smartPatientConfig from "../config/smartPatientConfig";
+import smartParentConfig from "../config/smartParentConfig";
 
-const startSmartAuthenticatedSession = () => {
+const startSmartAuthenticatedSession = user => {
   console.log("Starting SmartAuthenticatedSession");
+
+  var config = undefined;
   const errorCallback = error => console.error(error);
-  FHIR.oauth2.authorize(smartConfig, errorCallback);
+
+  switch (user) {
+    case "Practitioner":
+      config = smartProviderConfig;
+      break;
+    case "Patient":
+      config = smartPatientConfig;
+      break;
+    case "Parent":
+      config = smartParentConfig;
+      break;
+    default:
+      console.log("Authentication Error");
+  }
+  FHIR.oauth2.authorize(config, errorCallback);
 };
 
 const onSmartAuthenticatedSessionReady = () => {

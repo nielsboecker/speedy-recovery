@@ -6,7 +6,5 @@ import LandingMainPage from "../components/landing/core/LandingMainPage";
 Enzyme.configure({ adapter: new Adapter() });
 
 it("renders without crashing", () => {
-  shallow(
-    <LandingMainPage/>
-  );
+  shallow(<LandingMainPage />);
 });
