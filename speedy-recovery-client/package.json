@@ -19,7 +19,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "prepare": "patch-package --use-yarn",
+    "prepare": "patch-package",
     "eject": "react-scripts eject",
     "lint": "eslint \"src/**/*.js\"",
     "format": "prettier --write src/**/*.{js,json,css}",
@@ -60,7 +60,7 @@
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.8.0",
     "jest-localstorage-mock": "^2.4.0",
-    "patch-package": "^6.0.2",
+    "patch-package": "6.0.0-9",
     "postinstall-prepare": "^1.0.1",
     "prettier": "^1.16.3"
   }
