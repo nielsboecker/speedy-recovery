@@ -1,0 +1,54 @@
+{
+  "resourceType": "Patient",
+  "id":"219749",
+   "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Nick Levis</div>"
+  },
+  "active": true,
+  "name": [
+    {
+      "use": "official",
+      "family": "Levis",
+      "given": [
+        "Nick"
+      ]
+    }
+  ],
+  "telecom": [
+    {
+      "system": "phone",
+      "value": "800-613-179",
+      "use": "mobile"
+    },
+    {
+      "system": "email",
+      "value": "Nick_Levis@example.com"
+    }
+  ],
+  "gender": "male",
+  "birthDate": "1965-09-21",
+  "address": [
+   {
+      "use": "home",
+      "line": [
+        "53 Sunset Ave"
+      ],
+      "city": "Tulsa",
+      "state": "OK",
+      "postalCode": "74126",
+      "country": "USA"
+    }
+  ],
+
+  "link": [
+    {
+      "other": {
+        "reference": "Patient/219748"
+		"display": "child"
+      },
+
+    }
+  ]
+
+}

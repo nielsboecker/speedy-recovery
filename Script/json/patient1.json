@@ -1,0 +1,48 @@
+{
+  "resourceType": "Patient",
+  "id":"219742",
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Allen Yao</div>"
+  },
+  "active": true,
+  "name": [
+    {
+      "use": "official",
+      "family": "Yao",
+      "given": [
+        "Allen"
+      ]
+    }
+  ],
+  "telecom": [
+    {
+      "system": "phone",
+      "value": "800-834-9386",
+      "use": "home"
+    },
+    {
+      "system": "email",
+      "value": "allen.yao@example.com"
+    }
+  ],
+  "gender": "male",
+  "birthDate": "2004-10-15",
+  "address": [
+    {
+     "use": "home",
+      "line": [
+        "67 Meadow St"
+      ],
+      "city": "Sapulpa",
+      "state": "OK",
+      "postalCode": "74066",
+      "country": "USA"
+    }
+  ],
+  "generalPractitioner": [
+    {
+      "reference": "Practitioner/smart-Practitioner-71081332"
+    }
+  ]
+}

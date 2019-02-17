@@ -1,0 +1,48 @@
+{
+  "resourceType": "Patient",
+  "id":"219744"
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Joseph Richey</div>"
+  },
+  "active": true,
+  "name": [
+    {
+      "use": "official",
+      "family": "Richey",
+      "given": [
+        "Joseph"
+      ]
+    }
+  ],
+  "telecom": [
+    {
+      "system": "phone",
+      "value": "800-834-8916",
+      "use": "home"
+    },
+    {
+      "system": "email",
+      "value": "joseph@example.com"
+    }
+  ],
+  "gender": "male",
+  "birthDate": "2018-12-13",
+"address": [
+    {
+      "use": "home",
+      "line": [
+        "80 Mill St"
+      ],
+      "city": "Sand Springs",
+      "state": "OK",
+      "postalCode": "74063",
+      "country": "USA"
+    }
+  ],
+  "generalPractitioner": [
+    {
+      "reference": "Practitioner/smart-Practitioner-71081332"
+    }
+  ]
+}

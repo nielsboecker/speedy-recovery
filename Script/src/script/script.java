@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,7 +20,9 @@ import java.util.stream.Stream;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpPatch;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -39,6 +42,7 @@ public class script {
 			  
 			pathList=paths.filter(Files::isRegularFile).collect(Collectors.toList());
 		}
+		//write in to the log file
 		BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt",true));
 		writer.newLine();
 		writer.write("POST");
@@ -70,7 +74,7 @@ public class script {
 					    HttpResponse response=httpClient.execute(post);
 					    
 					    //get the response message...
-					       BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+					       BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent(),StandardCharsets.UTF_8));
 					    //write it in to log
 					       BufferedWriter writer2 = new BufferedWriter(new FileWriter("log.txt",true));
 					       String line;
@@ -113,6 +117,7 @@ public class script {
 		//delete the appointment...
 		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 		BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt",true));
+		
 
 		try {
 			//delete the data according to the resource type and id
@@ -146,9 +151,67 @@ public class script {
 		    httpClient.close();
 		}
 	}
+	
+	public static void putMethod(String resourceType,String id, String path) throws IOException, ParseException{
+		HttpPut put= new HttpPut("https://r3.smarthealthit.org/"+resourceType+"/"+id);
+		
+		BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt",true));
+		writer.newLine();
+		writer.write("PUT");
+		writer.newLine();
+		writer.close();
+		JSONParser parser = new JSONParser();
+		JSONObject json;
+		String FileExtension;
+		
+		FileExtension=path.substring(path.length()-4, path.length());
+		
+		//check the file is json file
+	     if(FileExtension.equals("json")){
+	    	 
+	    	 System.out.println("Put: "+path);
+	    	 //covert the file to json object
+	    	 json = (JSONObject) parser.parse(new FileReader(path));
+	    	 json.put("id", id);
+	    	 //creat http request
+			 CloseableHttpClient httpClient1 = HttpClientBuilder.create().build();
+			 
+	    	 try{
+	 			put.setEntity(new StringEntity(json.toString(), ContentType.APPLICATION_JSON));
+	 			put.addHeader("Accept","application/json");
+	 			HttpResponse response=httpClient1.execute(put);
+	 			
+	 			BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent(),StandardCharsets.UTF_8));
+	 			String line;
+	 			System.out.println("PUT :");
+	 			
+	 			 while(null !=(line=rd.readLine())){
+			    	   System.out.println(line);
+			    	   if(line.contains("Successfully")){
+			    			writer.newLine();
+			    			writer.write("PUT");
+			    			writer.newLine();
+			    			writer.write("ID:"+ id+"  ");
+			    			writer.write("resourceType:"+resourceType+"  ");
+				    		Date date = new Date();
+				    	    SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
+				    	    writer.write("Date: "+ft.format(date).toString()+"  ");
+			    			writer.newLine();
+			    			writer.close();
+			    	   }
+			    	   System.out.println();
+			       }
+	 			}catch (Exception ex) {
+	 			    // handle exception here
+	 			} finally {
+	 			    httpClient1.close();
+	 			}
+	     }
+	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
-		postMethod("json");
-		deleteMethod("Appointment","219705");
+		//deleteMethod("Patient","219746");
+		//putMethod("Appointment","219607","json/appointment1.json");
+		//putMethod("Patient","219742","json/patient1.json");
 	}
 }
