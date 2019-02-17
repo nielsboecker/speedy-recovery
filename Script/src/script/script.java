@@ -214,6 +214,6 @@ public class script {
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
 		//deleteMethod("Patient","219746");
 		//putMethod("Appointment","219607","json/appointment1.json");
-		//putMethod("Patient","219742","json/patient1.json");
+		putMethod("Patient","219742","json/patient1.json");
 	}
 }
