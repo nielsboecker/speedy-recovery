@@ -188,16 +188,18 @@ public class script {
 	 			 while(null !=(line=rd.readLine())){
 			    	   System.out.println(line);
 			    	   if(line.contains("Successfully")){
-			    			writer.newLine();
-			    			writer.write("PUT");
-			    			writer.newLine();
-			    			writer.write("ID:"+ id+"  ");
-			    			writer.write("resourceType:"+resourceType+"  ");
+			    		   BufferedWriter writer1 = new BufferedWriter(new FileWriter("log.txt",true));
+			    			writer1.newLine();
+			    			writer1.write("PUT");
+			    			writer1.newLine();
+			    			writer1.write("ID:"+ id+"  ");
+			    			writer1.write("resourceType: "+resourceType+"  ");
 				    		Date date = new Date();
 				    	    SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
-				    	    writer.write("Date: "+ft.format(date).toString()+"  ");
-			    			writer.newLine();
-			    			writer.close();
+				    	    writer1.write("Date: "+ft.format(date).toString()+"  ");
+				    	    writer1.write("File: "+path);
+			    			writer1.newLine();
+			    			writer1.close();
 			    	   }
 			    	   System.out.println();
 			       }

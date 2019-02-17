@@ -11,6 +11,8 @@ Script needs external jar file to run, all the external jar files is under th ja
 
 <code>deleteMethod(resourceType, id) </code>  delete method allows you to delete the resource in the server but you need to clarify the resource type you would like to delete and the id of that resource.
 
+<code>putMethod(resourceType, id, file path)</code>  put method, is a update method, when you want to modify the resource already exist in the server, you can use this method to replace the piece of resource in the server.  in this function you need to provide the id of the resource you would like to replace and it's resource type, also the path of the new file which use to replace the resource in the server.
+
 ### Example for post
 Appointment.json
 ````
@@ -52,3 +54,5 @@ DELETE
 ID:219705  resourceType:Appointment
 
 
+
+````
