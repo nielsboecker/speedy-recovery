@@ -19,7 +19,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "prepare": "patch-package",
+    "prepare": "patch-package --use-yarn",
     "eject": "react-scripts eject",
     "lint": "eslint \"src/**/*.js\"",
     "format": "prettier --write src/**/*.{js,json,css}",
