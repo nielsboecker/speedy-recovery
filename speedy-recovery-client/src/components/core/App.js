@@ -32,29 +32,27 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-        <BrowserRouter>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={(props) => <LandingMainPage {...props} onLogin={this.handleLoginRequest} user={this.state.user}/>}
-            />
-            <Route
-              path="/secured"
-              render={(props) => <SecuredMainPage {...props} onLogout={this.handleLogoutRequest}
-                user={this.state.user}/>}
-            />
-            <Route
-              render={(props) => <ErrorPage {...props} error={{
-                rootCause: "NOT_FOUND",
-                message: "We couldn't find the page you are looking for. Apologies for the inconvenience.",
-                resolvable: true
-              }}/>}
-            />
-          </Switch>
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={(props) => <LandingMainPage {...props} onLogin={this.handleLoginRequest} user={this.state.user}/>}
+          />
+          <Route
+            path="/secured"
+            render={(props) => <SecuredMainPage {...props} onLogout={this.handleLogoutRequest}
+              user={this.state.user}/>}
+          />
+          <Route
+            render={(props) => <ErrorPage {...props} error={{
+              rootCause: "NOT_FOUND",
+              message: "We couldn't find the page you are looking for. Apologies for the inconvenience.",
+              resolvable: true
+            }}/>}
+          />
+        </Switch>
+      </BrowserRouter>
     );
   };
 

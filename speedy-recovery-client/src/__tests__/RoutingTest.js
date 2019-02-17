@@ -26,3 +26,5 @@ test("show error page for invalid URL", () => {
   expect(wrapper.find(LandingMainPage)).toHaveLength(0);
   expect(wrapper.find(SecuredMainPage)).toHaveLength(0);
 });
+
+// TODO: Could add more, like e.g. /conversations/2 actually shows conversation #2

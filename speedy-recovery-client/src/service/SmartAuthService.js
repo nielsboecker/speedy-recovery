@@ -4,16 +4,24 @@ import smartConfig from "../config/smartConfig";
 
 const startSmartAuthenticatedSession = () => {
   console.log("Starting SmartAuthenticatedSession");
-  FHIR.oauth2.authorize(smartConfig);
+  const errorCallback = error => console.error(error);
+  FHIR.oauth2.authorize(smartConfig, errorCallback);
 };
 
-const onSmartAuthenticatedSessionReady = () =>
-  new Promise((resolve, reject) => {
+const onSmartAuthenticatedSessionReady = () => {
+  return new Promise((resolve, reject) => {
     FHIR.oauth2.ready(
-      response => resolve(response),
-      error => reject(error)
+      response => {
+        console.log("Smart auth response: ", response);
+        return resolve(response);
+      },
+      error => {
+        console.error("Smart auth error: ", error);
+        return reject(error);
+      }
     );
   });
+};
 
 const endSmartAuthenticatedSession = () => {
   console.log("Ending SmartAuthenticatedSession");
