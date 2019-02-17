@@ -5,7 +5,7 @@ import ErrorPage from "../error/ErrorPage";
 import LandingMainPage from "../landing/core/LandingMainPage";
 import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
-import { mapPatientToUser} from "../../dataaccess/FhirDataAdapter";
+import { mapPatientToUser } from "../../dataaccess/FhirDataAdapter";
 
 class App extends Component {
   constructor(props) {
@@ -39,11 +39,11 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={(props) => <LandingMainPage {...props} onLogin={this.handleLogin} user={this.state.user} />}
+            render={(props) => <LandingMainPage {...props} onLogin={this.handleLoginRequest} user={this.state.user}/>}
           />
           <Route
             path="/secured"
-            render={(props) => <SecuredMainPage {...props} onLogout={this.handleLogout} user={this.state.user}
+            render={(props) => <SecuredMainPage {...props} onLogout={this.handleLogoutRequest} user={this.state.user}
                                                 patient={this.state.patient}/>}
           />
           <Route
@@ -64,7 +64,7 @@ class App extends Component {
       .catch(errorMessage => this.handleLoginError(errorMessage));
   };
 
-  handleLoginRequest = () => {
+  handleLoginRequest = (user) => {
     this.setState({ authRequestStarted: true });
     SmartAuthService.startSmartAuthenticatedSession(user);
   };
@@ -103,9 +103,9 @@ class App extends Component {
 
         this.setState({user});
       })
-      .catch(error => console.error(error);
+      .catch(error => console.error(error)
       );
-  }
+  };
 
   handleLoginError = errorMessage => {
     if (errorMessage === "No 'state' parameter found in authorization response." && !this.state.authRequestStarted) {

@@ -6,5 +6,5 @@ import ErrorPage from "../components/error/ErrorPage";
 Enzyme.configure({ adapter: new Adapter() });
 
 it("renders without crashing", () => {
-  shallow(<ErrorPage />);
+  shallow(<ErrorPage error={{ rootCause: "", message: "" }}/>);
 });
