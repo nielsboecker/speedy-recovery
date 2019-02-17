@@ -21,8 +21,8 @@ test("on start authetication session callback is registered", () => {
 
 test("end smart authenticated session", () => {
   // given
-  sessionStorage.accessToken = "foo";
-  expect(sessionStorage).toHaveProperty("accessToken");
+  sessionStorage.tokenResponse = "foo";
+  expect(sessionStorage).toHaveProperty("tokenResponse");
 
   // when
   SmartAuthService.endSmartAuthenticatedSession();
