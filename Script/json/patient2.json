@@ -1,0 +1,48 @@
+{
+  "resourceType": "Patient",
+  "id": "219748"
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Kevin Levis</div>"
+  },
+  "active": true,
+  "name": [
+    {
+      "use": "official",
+      "family": "Levis",
+      "given": [
+        "Kevin"
+      ]
+    }
+  ],
+  "telecom": [
+    {
+      "system": "phone",
+      "value": "800-834-9806",
+      "use": "home"
+    },
+    {
+      "system": "email",
+      "value": "kevin.Levis@example.com"
+    }
+  ],
+  "gender": "male",
+  "birthDate": "2010-12-13",
+"address": [
+    {
+      "use": "home",
+      "line": [
+        "53 Sunset Ave"
+      ],
+      "city": "Tulsa",
+      "state": "OK",
+      "postalCode": "74126",
+      "country": "USA"
+    }
+  ],
+  "generalPractitioner": [
+    {
+      "reference": "Practitioner/smart-Practitioner-71081332"
+    }
+  ]
+}

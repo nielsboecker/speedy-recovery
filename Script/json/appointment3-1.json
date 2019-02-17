@@ -1,0 +1,35 @@
+{
+    "resourceType": "Appointment",
+    "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2019-02-26T04:13:00+01:00",
+         "participant": [
+    {
+      "actor": {
+        "reference": "Patient/219744",
+		"display": "parent"
+      },
+      "required": "required",
+      "status": "accepted"
+    },
+	{
+      "actor": {
+        "reference": "Practitioner/smart-Practitioner-71081332",
+		"display": "Practitioner"
+      },
+	  "required": "required",
+      "status": "accepted"
+      
+    }
+  ]
+}

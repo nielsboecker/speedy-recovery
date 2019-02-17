@@ -1,0 +1,25 @@
+{
+    "resourceType": "Appointment",
+    "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+         "participant": [
+    {
+      "actor": {
+        "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+      },
+      "required": "required",
+      "status": "accepted"
+    }
+  ]
+}
