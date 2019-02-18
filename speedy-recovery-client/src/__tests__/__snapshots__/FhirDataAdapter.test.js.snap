@@ -20,6 +20,30 @@ Object {
 }
 `;
 
+exports[`map FHIR Condition resource to internal data model 1`] = `
+Object {
+  "bodySite": "Left Ear",
+  "clinicalStatus": "active",
+  "onsetDateTime": 2012-05-24T00:00:00.000Z,
+  "severity": "Severe",
+  "summary": "Burnt Ear",
+  "verificationStatus": "confirmed",
+}
+`;
+
+exports[`map FHIR Medication resource to internal data model 1`] = `
+Object {
+  "content": "Vancomycin 500mg powder for infusion solution vial (product)",
+  "form": "Injection Solution (qualifier value)",
+  "id": "med0301",
+  "imageURL": "Vancomycin Image",
+  "isBrand": true,
+  "isOverTheCounter": false,
+  "name": "Vancomycin Hydrochloride (VANCOMYCIN HYDROCHLORIDE)",
+  "producer": "Pfizer Laboratories Div Pfizer Inc",
+}
+`;
+
 exports[`map FHIR Patient resource to internal user data model 1`] = `
 Object {
   "address": "534 Erewhon St, PleasantVille, Vic, 3999, US",
