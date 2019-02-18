@@ -5,6 +5,7 @@ import ErrorPage from "../error/ErrorPage";
 import LandingMainPage from "../landing/core/LandingMainPage";
 import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
+import FhirServerService from "../../service/FhirServerService";
 import { mapPatientToUser } from "../../dataaccess/FhirDataAdapter";
 
 class App extends Component {
@@ -59,6 +60,12 @@ class App extends Component {
   };
 
   componentWillMount = () => {
+    // Check FHIR server capability
+    FhirServerService.checkFhirCapabilityStatement()
+      .then(result => console.log("FHIR capability check successful", result))
+      .catch(() => this.handleFhirServerError());
+
+    // Register SMART auth callback
     SmartAuthService.onSmartAuthenticatedSessionReady()
       .then(fhirClient => this.handleLoginSuccess(fhirClient))
       .catch(errorMessage => this.handleLoginError(errorMessage));
@@ -119,6 +126,16 @@ class App extends Component {
         rootCause: "SMART_AUTH",
         message: errorMessage,
         resolvable: true
+      }
+    });
+  };
+
+  handleFhirServerError = () => {
+    this.setState({
+      error: {
+        rootCause: "FHIR_SERVER",
+        message: "The EHR's FHIR server does not provide the required functionality.",
+        resolvable: false
       }
     });
   };
