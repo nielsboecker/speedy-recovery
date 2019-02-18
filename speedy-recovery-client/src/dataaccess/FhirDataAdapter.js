@@ -52,4 +52,25 @@ const mapAppointment = fhirAppResource => ({
   location: fhirAppResource.participant[2].actor.display
 });
 
-export { mapPatientToUser, mapAppointment };
+const mapCondition = fhirCondResource => ({
+  clinicalStatus: fhirCondResource.clinicalStatus,
+  verificationStatus: fhirCondResource.verificationStatus,
+  severity: fhirCondResource.severity.coding[0].display,
+  summary: fhirCondResource.code.text,
+  bodySite: fhirCondResource.bodySite[0].text,
+  onsetDateTime: new Date(fhirCondResource.onsetDateTime)
+});
+
+const mapMedication = fhirMedResource => ({
+  id: fhirMedResource.id,
+  producer: fhirMedResource.contained[0].name,
+  name: fhirMedResource.code.coding[0].display,
+  isBrand: fhirMedResource.isBrand,
+  isOverTheCounter: fhirMedResource.isOverTheCounter,
+  form: fhirMedResource.form.coding[0].display,
+  content:
+    fhirMedResource.package.content[0].itemCodeableConcept.coding[0].display,
+  imageURL: fhirMedResource.image[0].title
+});
+
+export { mapPatientToUser, mapAppointment, mapCondition, mapMedication };
