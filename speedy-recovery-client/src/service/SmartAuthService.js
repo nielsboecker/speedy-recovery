@@ -8,6 +8,7 @@ const startSmartAuthenticatedSession = user => {
   console.log("Starting SmartAuthenticatedSession");
 
   var config = undefined;
+  const errorCallback = error => console.error(error);
 
   switch (user) {
     case "Practitioner":
@@ -22,12 +23,24 @@ const startSmartAuthenticatedSession = user => {
     default:
       console.log("Authentication Error");
   }
-  FHIR.oauth2.authorize(config);
+  FHIR.oauth2.authorize(config, errorCallback);
 };
 
-const onSmartAuthenticatedSessionReady = FHIR.oauth2.ready;
+const onSmartAuthenticatedSessionReady = () => {
+  return new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      response => {
+        console.log("Smart auth response: ", response);
+        return resolve(response);
+      },
+      error => {
+        console.error("Smart auth error: ", error);
+        return reject(error);
+      }
+    );
+  });
+};
 
-// arrow functions with no parameters
 const endSmartAuthenticatedSession = () => {
   console.log("Ending SmartAuthenticatedSession");
   sessionStorage.clear();

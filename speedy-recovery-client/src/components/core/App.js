@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
-import ErrorPage from "./ErrorPage";
+import ErrorPage from "../error/ErrorPage";
 import LandingMainPage from "../landing/core/LandingMainPage";
 import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
-import { mapPatientToUser} from "../../dataaccess/FhirDataAdapter";
+import { mapPatientToUser } from "../../dataaccess/FhirDataAdapter";
 
 class App extends Component {
   constructor(props) {
@@ -14,49 +14,70 @@ class App extends Component {
       fhirClient: {},
       user: null,
       patient:{},
+      authRequestStarted: false,
+      error: null
     };
   }
 
   render = () => {
-    
-    return (
-      <div className="App">
+
+    if (this.state.error) {
+      return (
         <BrowserRouter>
           <Switch>
-            <Route
-              exact
-              path="/"
-              render={(props) => <LandingMainPage {...props} onLogin={this.handleLogin} user={this.state.user} />}
-            />
-            <Route
-              path="/secured"
-              render={(props) => <SecuredMainPage {...props} onLogout={this.handleLogout} user={this.state.user}
-                                                  patient={this.state.patient}/>}
-            />
-            <Route component={ErrorPage}/>
+            <Route path="/error"
+              render={(props) => <ErrorPage {...props} error={this.state.error} resetError={this.resetError}/>}/>
+            <Redirect to="/error"/>
           </Switch>
         </BrowserRouter>
-      </div>
+      );
+    }
+
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={(props) => <LandingMainPage {...props} onLogin={this.handleLoginRequest} user={this.state.user}/>}
+          />
+          <Route
+            path="/secured"
+            render={(props) => <SecuredMainPage {...props} onLogout={this.handleLogoutRequest} user={this.state.user}
+                                                patient={this.state.patient}/>}
+          />
+          <Route
+            render={(props) => <ErrorPage {...props} error={{
+              rootCause: "NOT_FOUND",
+              message: "We couldn't find the page you are looking for. Apologies for the inconvenience.",
+              resolvable: true
+            }}/>}
+          />
+        </Switch>
+      </BrowserRouter>
     );
   };
-  
+
   componentWillMount = () => {
-    SmartAuthService.onSmartAuthenticatedSessionReady(fhirClient => this.onAuthStatusChanged(fhirClient));
+    SmartAuthService.onSmartAuthenticatedSessionReady()
+      .then(fhirClient => this.handleLoginSuccess(fhirClient))
+      .catch(errorMessage => this.handleLoginError(errorMessage));
   };
 
-  handleLogin = (user) => {
+  handleLoginRequest = (user) => {
+    this.setState({ authRequestStarted: true });
     SmartAuthService.startSmartAuthenticatedSession(user);
   };
 
-  handleLogout = () => {
+  handleLogoutRequest = () => {
     SmartAuthService.endSmartAuthenticatedSession();
     this.setState({ user: null });
   };
 
-  onAuthStatusChanged = (fhirClient) => {
+  handleLoginSuccess = fhirClient => {
     this.setState({ fhirClient });
     console.log("Received FHIR client: ", fhirClient);
-    
+
     fhirClient.user.read()
       .then(currentUserResource => {
         console.log("Received current user resources: ", currentUserResource);
@@ -81,11 +102,29 @@ class App extends Component {
         // }
 
         this.setState({user});
-        
-      }).catch(err=>{
-        console.log("The error is  ", err);
-      });
-    }   
-  }
+      })
+      .catch(error => console.error(error)
+      );
+  };
+
+  handleLoginError = errorMessage => {
+    if (errorMessage === "No 'state' parameter found in authorization response." && !this.state.authRequestStarted) {
+      // SMART JS library will always try to login based on last stored token, which leads to this error at initial page load
+      console.info("Ignoring initial SMART auth error");
+      return;
+    }
+
+    this.setState({
+      error: {
+        rootCause: "SMART_AUTH",
+        message: errorMessage,
+        resolvable: true
+      }
+    });
+  };
+
+  resetError = () => this.setState({ error: null });
+
+}
 
 export default App;

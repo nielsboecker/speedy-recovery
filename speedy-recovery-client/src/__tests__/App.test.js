@@ -9,7 +9,7 @@ Enzyme.configure({ adapter: new Adapter() });
 // Mock SmartAuthService
 jest.mock("../service/SmartAuthService", () => ({
   startSmartAuthenticatedSession: jest.fn(),
-  onSmartAuthenticatedSessionReady: jest.fn(),
+  onSmartAuthenticatedSessionReady: jest.fn().mockImplementation(() => Promise.resolve()),
   endSmartAuthenticatedSession: jest.fn()
 }));
 
@@ -28,17 +28,17 @@ test("render without crashing", () => {
   expect(SmartAuthService.onSmartAuthenticatedSessionReady).toHaveBeenCalled();
 });
 
-test("handleLogin() calls SmartAuthService", () => {
-  underTest.handleLogin();
+test("handleLoginRequest() calls SmartAuthService", () => {
+  underTest.handleLoginRequest();
   expect(SmartAuthService.startSmartAuthenticatedSession).toHaveBeenCalled();
 });
 
-test("handleLogout() calls SmartAuthService", () => {
-  underTest.handleLogout();
+test("handleLogoutRequest() calls SmartAuthService", () => {
+  underTest.handleLogoutRequest();
   expect(SmartAuthService.endSmartAuthenticatedSession).toHaveBeenCalled();
 });
 
-test("onAuthStatusChanged() sets state appropriately", () => {
+test("handleLoginSuccess() sets state appropriately", () => {
   // given
   const mockUser = { name: "foo" };
   const mockFhirClient = {
@@ -48,7 +48,7 @@ test("onAuthStatusChanged() sets state appropriately", () => {
   };
 
   // when
-  underTest.onAuthStatusChanged(mockFhirClient);
+  underTest.handleLoginSuccess(mockFhirClient);
 
   // then
   expect(wrapper.state().fhirClient).toEqual(mockFhirClient);
