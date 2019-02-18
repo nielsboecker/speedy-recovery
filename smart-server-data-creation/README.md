@@ -1,9 +1,10 @@
 # Tutorial for Script
 
-Script is written by java code. it includes two methods POST and DELETE.
+This Java program allows creating, modifying and deleting data on the SMART sandbox's FHIR server 
+by generating HTTP POST, PUT and DELETE requests.
 
 ## Set up
-Script needs external jar file to run, all the external jar files is under th jar file. you need to import it before you run the code.
+The program needs external jar files to run. You need to import them from the `jar` directory before you run the code.
 
 
 ## How to use the methods?

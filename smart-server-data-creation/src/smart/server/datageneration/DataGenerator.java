@@ -1,4 +1,4 @@
-package script;
+package smart.server.datageneration;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -31,7 +31,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class script {
+public class DataGenerator {
 	
 	public static void postMethod(String path) throws FileNotFoundException,IOException, ParseException{
 		//get the path for each json file...
