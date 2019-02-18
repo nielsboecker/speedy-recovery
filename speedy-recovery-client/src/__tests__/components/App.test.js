@@ -16,7 +16,7 @@ jest.mock("../../service/SmartAuthService", () => ({
 }));
 
 // Mock mapPatientToUser
-jest.mock("../../dataaccess/FhirDataAdapter", () => ({
+jest.mock("../../service/FhirDataMappingService", () => ({
   mapPatientToUser: user => user
 }));
 

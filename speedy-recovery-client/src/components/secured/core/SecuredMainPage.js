@@ -6,7 +6,7 @@ import HomePage from "../home/HomePage";
 import MessagingPage from "../messaging/MessagingPage";
 import ProfilePage from "../profile/ProfilePage";
 import ConversationPage from "../conversation/ConversationPage";
-import { mapAppointment } from "../../../dataaccess/FhirDataAdapter";
+import { mapAppointment } from "../../../service/FhirDataMappingService";
 import InfoFactory from "../patientinformation/InfoFactory";
 import CalendarFactory from "../calendar/CalendarFactory";
 import fhirExampleApp from "../../../__tests__/test_input/fhir_resources_stu3/FhirExampleAppointments.json";
