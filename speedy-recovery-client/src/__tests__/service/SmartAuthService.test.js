@@ -1,5 +1,5 @@
 import "jest-localstorage-mock";
-import SmartAuthService from "../service/SmartAuthService";
+import SmartAuthService from "../../service/SmartAuthService";
 
 test("start smart authenticated session", () => {
   // Mock SMART on FHIR auth

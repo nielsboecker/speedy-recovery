@@ -1,13 +1,13 @@
 import React from "react";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import App from "../components/core/App";
-import SmartAuthService from "../service/SmartAuthService";
+import App from "../../components/core/App";
+import SmartAuthService from "../../service/SmartAuthService";
 
 Enzyme.configure({ adapter: new Adapter() });
 
 // Mock SmartAuthService
-jest.mock("../service/SmartAuthService", () => ({
+jest.mock("../../service/SmartAuthService", () => ({
   startSmartAuthenticatedSession: jest.fn(),
   onSmartAuthenticatedSessionReady: jest
     .fn()
@@ -16,7 +16,7 @@ jest.mock("../service/SmartAuthService", () => ({
 }));
 
 // Mock mapPatientToUser
-jest.mock("../dataaccess/FhirDataAdapter", user => ({
+jest.mock("../../service/FhirDataMappingService", () => ({
   mapPatientToUser: user => user
 }));
 
