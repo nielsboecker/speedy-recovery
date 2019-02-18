@@ -22,8 +22,9 @@ const checkFhirCapabilityStatement = async () => {
           resolve(capabilityStatement);
         } else
         // If we run into trouble, we can add more detailed error logs, to find out what went wrong
-          reject();
-      });
+          reject("FHIR server requirements not met");
+      })
+      .catch(() => reject("FHIR server not responding"));
   });
 };
 
