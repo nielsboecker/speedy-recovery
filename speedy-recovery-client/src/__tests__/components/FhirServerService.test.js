@@ -1,10 +1,10 @@
 import FetchMock from "jest-fetch-mock";
-import FhirServerService from "../service/FhirServerService";
+import FhirServerService from "../../service/FhirServerService";
 import CapabilityStatement_STU3_allResourcesAvailable
-  from "./test_input/fhir_server/FhirExampleCapabilityStatement_STU3_allResourcesAvailable.json";
+  from "../test_input/fhir_server/FhirExampleCapabilityStatement_STU3_allResourcesAvailable.json";
 import CapabilityStatement_STU3_PatientResourceMissing
-  from "./test_input/fhir_server/FhirExampleCapabilityStatement_STU3_PatientResourceMissing.json";
-import CapabilityStatement_STU2 from "./test_input/fhir_server/FhirExampleCapabilityStatement_STU2.json";
+  from "../test_input/fhir_server/FhirExampleCapabilityStatement_STU3_PatientResourceMissing.json";
+import CapabilityStatement_STU2 from "../test_input/fhir_server/FhirExampleCapabilityStatement_STU2.json";
 
 // Mock fetch()
 global.fetch = FetchMock;
@@ -41,7 +41,7 @@ test("failure when FHIR server doesn't reply with a valid CapabilityStatement", 
   expect(fetch.mock.calls.length).toEqual(1);
 });
 
-test("failure when FHIR server dxxxxxxxxxxxxxxx", async () => {
+test("failure when FHIR server does not respond (fetch CapabilityStatement fails)", async () => {
   fetch.mockReject(new Error("Fake error message"));
 
   await expect(FhirServerService.checkFhirCapabilityStatement()).rejects.toEqual("FHIR server not responding");

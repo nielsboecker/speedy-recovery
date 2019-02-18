@@ -9,7 +9,7 @@ import ConversationPage from "../conversation/ConversationPage";
 import { mapAppointment } from "../../../dataaccess/FhirDataAdapter";
 import InfoFactory from "../patientinformation/InfoFactory";
 import CalendarFactory from "../calendar/CalendarFactory";
-import fhirExampleApp from "../../../__tests__/test_input/fhir_r3/FhirExampleAppointments.json";
+import fhirExampleApp from "../../../__tests__/test_input/fhir_resources_stu3/FhirExampleAppointments.json";
 
 class SecuredMainPage extends Component {
   constructor(props) {

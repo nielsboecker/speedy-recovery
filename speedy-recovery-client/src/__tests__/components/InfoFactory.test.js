@@ -1,10 +1,10 @@
 import React from "react";
 import Enzyme, { mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import InfoFactory from "../components/secured/patientInformation/InfoFactory";
-import PatientInfo from "../components/secured/patientInformation/PatientInfo";
-import ParentInfo from "../components/secured/patientInformation/ParentInfo";
-import PractitionerInfo from "../components/secured/patientInformation/PractitionerInfo";
+import InfoFactory from "../../components/secured/patientinformation/InfoFactory";
+import PatientInfo from "../../components/secured/patientinformation/PatientInfo";
+import ParentInfo from "../../components/secured/patientinformation/ParentInfo";
+import PractitionerInfo from "../../components/secured/patientinformation/PractitionerInfo";
 
 Enzyme.configure({ adapter: new Adapter() });
 

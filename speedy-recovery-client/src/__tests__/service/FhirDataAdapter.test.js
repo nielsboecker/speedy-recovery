@@ -1,13 +1,8 @@
-import {
-  mapAppointment,
-  mapCondition,
-  mapMedication,
-  mapPatientToUser
-} from "../dataaccess/FhirDataAdapter";
-import fhirExamplePatient from "./test_input/fhir_r3/FhirExamplePatient.json";
-import fhirShortApp from "./test_input/fhir_r3/FhirShortExampleAppointments.json";
-import fhirExampleCondition from "./test_input/fhir_r3/FhirExampleCondition.json";
-import fhirExampleMedication from "./test_input/fhir_r3/FhirExampleMedication.json";
+import { mapAppointment, mapCondition, mapMedication, mapPatientToUser } from "../../dataaccess/FhirDataAdapter";
+import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatient.json";
+import fhirShortApp from "../test_input/fhir_resources_stu3/FhirShortExampleAppointments.json";
+import fhirExampleCondition from "../test_input/fhir_resources_stu3/FhirExampleCondition.json";
+import fhirExampleMedication from "../test_input/fhir_resources_stu3/FhirExampleMedication.json";
 
 test("map FHIR Patient resource to internal user data model", () => {
   const user = mapPatientToUser(fhirExamplePatient);

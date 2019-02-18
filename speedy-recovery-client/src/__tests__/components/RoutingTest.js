@@ -1,12 +1,12 @@
 import React from "react";
 import "jest-localstorage-mock";
-import App from "../components/core/App";
-import ErrorPage from "../components/error/ErrorPage";
-import SecuredMainPage from "../components/secured/core/SecuredMainPage";
+import App from "../../components/core/App";
+import ErrorPage from "../../components/error/ErrorPage";
+import SecuredMainPage from "../../components/secured/core/SecuredMainPage";
 import Enzyme, { mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { MemoryRouter } from "react-router-dom";
-import LandingMainPage from "../components/landing/core/LandingMainPage";
+import LandingMainPage from "../../components/landing/core/LandingMainPage";
 
 Enzyme.configure({ adapter: new Adapter() });
 
