@@ -9,7 +9,9 @@ Enzyme.configure({ adapter: new Adapter() });
 // Mock SmartAuthService
 jest.mock("../service/SmartAuthService", () => ({
   startSmartAuthenticatedSession: jest.fn(),
-  onSmartAuthenticatedSessionReady: jest.fn().mockImplementation(() => Promise.resolve()),
+  onSmartAuthenticatedSessionReady: jest
+    .fn()
+    .mockImplementation(() => Promise.resolve()),
   endSmartAuthenticatedSession: jest.fn()
 }));
 

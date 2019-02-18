@@ -18,7 +18,7 @@ jest.mock("react-router-dom/BrowserRouter", () => {
 test("show error page for invalid URL", () => {
   const wrapper = mount(
     <MemoryRouter initialEntries={["/foobar"]}>
-      <App/>
+      <App />
     </MemoryRouter>
   );
   // console.log(wrapper.debug());
