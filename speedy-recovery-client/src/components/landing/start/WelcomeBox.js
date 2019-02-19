@@ -4,7 +4,6 @@ import "./WelcomeBox.css";
 import UserModal from "./UserModal";
 
 class WelcomeBox extends Component {
-
   render() {
     return (
       <Container text>
@@ -36,7 +35,9 @@ class WelcomeBox extends Component {
                       size="large"
                       name="button2"
                       className="button"
-                      onClick={() => alert("This functionality is not supported yet")}
+                      onClick={() =>
+                        alert("This functionality is not supported yet")
+                      }
                     >
                       Sign up
                     </Button>

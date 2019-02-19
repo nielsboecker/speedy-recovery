@@ -29,7 +29,11 @@ class Header extends Component {
             </Menu.Item>
 
             <Menu.Menu position="right">
-              <Dropdown text={this.props.username} pointing className="link item">
+              <Dropdown
+                text={this.props.username}
+                pointing
+                className="link item"
+              >
                 <Dropdown.Menu>
                   <Dropdown.Item as={Link} to="/secured/profile">
                     <Icon name="user"/>

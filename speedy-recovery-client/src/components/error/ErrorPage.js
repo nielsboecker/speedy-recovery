@@ -24,7 +24,7 @@ class ErrorPage extends Component {
       <div>
         <h1>Something went wrong</h1>
 
-        <Message negative size='massive'>
+        <Message negative size="massive">
           <Message.Header>{error.rootCause}</Message.Header>
           <p>{error.message}</p>
         </Message>

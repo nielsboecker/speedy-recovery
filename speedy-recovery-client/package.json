@@ -22,8 +22,8 @@
     "prepare": "patch-package",
     "eject": "react-scripts eject",
     "lint": "eslint \"src/**/*.js\"",
-    "format": "prettier --write src/**/*.{js,json,css}",
-    "format:check": "prettier --list-different src/**/*.{js,json,css}"
+    "format": "prettier --write src/**/*.{js,css}",
+    "format:check": "prettier --list-different src/**/*.{js,css}"
   },
   "eslintConfig": {
     "extends": [
