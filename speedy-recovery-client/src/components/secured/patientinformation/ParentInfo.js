@@ -5,7 +5,7 @@ class ParentInfo extends Component {
   
   render() {
     const {user} = this.props;
-    console.log("Resources for Parent ", user);
+
     return (
       <div>
           <h1>Patient Information For Parent View</h1>
