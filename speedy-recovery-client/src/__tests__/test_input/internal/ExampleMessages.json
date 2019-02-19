@@ -1,0 +1,32 @@
+[
+  {
+    "position": "right",
+    "type": "text",
+    "text": "Hey, there",
+    "date": "2014-08-04T00:00:00Z"
+  },
+  {
+    "position": "left",
+    "type": "text",
+    "text": "Hi",
+    "date": "2014-08-04T00:00:00Z"
+  },
+  {
+    "position": "right",
+    "type": "text",
+    "text": "woooooooooooooooooooooooooooooooooooooooooooooooow",
+    "date": "2014-08-04T00:00:00Z"
+  },
+  {
+    "position": "left",
+    "type": "photo",
+    "text": "react.svg",
+    "data": {
+      "uri": "https://facebook.github.io/react/img/logo.svg",
+      "status": {
+        "click": false,
+        "loading": 0
+      }
+    }
+  }
+]

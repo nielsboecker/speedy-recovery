@@ -1,0 +1,13 @@
+#start-page {
+  background-color: #0098db;
+}
+
+.full-height {
+  height: 100%;
+}
+
+#gosh-logo {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+}

@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`map FHIR Appointment resource to calendar data model 1`] = `
+Object {
+  "appType": "Followup",
+  "comment": "Further expand on the results of the MRI and determine the next actions that may be appropriate.",
+  "created": 2013-10-10T00:00:00.000Z,
+  "description": "Discussion on the results of your recent MRI",
+  "end": 2013-12-10T11:00:00.000Z,
+  "id": "example",
+  "indication": "Severe burn of left ear",
+  "location": "South Wing, second floor",
+  "patient": "Peter James Chalmers",
+  "practitioner": "Dr Adam Careful",
+  "priority": 5,
+  "start": 2013-12-10T09:00:00.000Z,
+  "status": "booked",
+  "supportingInfo": "DiagnosticReport/ultrasound",
+  "title": "Brian MRI results discussion",
+}
+`;
+
+exports[`map FHIR Condition resource to internal data model 1`] = `
+Object {
+  "bodySite": "Left Ear",
+  "clinicalStatus": "active",
+  "onsetDateTime": 2012-05-24T00:00:00.000Z,
+  "severity": "Severe",
+  "summary": "Burnt Ear",
+  "verificationStatus": "confirmed",
+}
+`;
+
+exports[`map FHIR Medication resource to internal data model 1`] = `
+Object {
+  "content": "Vancomycin 500mg powder for infusion solution vial (product)",
+  "form": "Injection Solution (qualifier value)",
+  "id": "med0301",
+  "imageURL": "Vancomycin Image",
+  "isBrand": true,
+  "isOverTheCounter": false,
+  "name": "Vancomycin Hydrochloride (VANCOMYCIN HYDROCHLORIDE)",
+  "producer": "Pfizer Laboratories Div Pfizer Inc",
+}
+`;
+
+exports[`map FHIR Patient resource to internal user data model 1`] = `
+Object {
+  "address": "534 Erewhon St, PleasantVille, Vic, 3999, US",
+  "birthDate": "1974-12-25",
+  "careProvider": "Dr Example",
+  "email": "peter@live.com",
+  "gender": "male",
+  "name": "Chalmers",
+  "phone": Array [
+    Object {
+      "system": "phone",
+      "use": "work",
+      "value": "(03) 5555 6473",
+    },
+  ],
+  "role": "Patient",
+}
+`;
