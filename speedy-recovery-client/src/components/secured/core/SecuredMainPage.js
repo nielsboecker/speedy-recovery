@@ -15,7 +15,7 @@ class SecuredMainPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      appointments: [],
+      appointments: []
     };
   }
 
@@ -38,14 +38,15 @@ class SecuredMainPage extends Component {
             <Container>
               <Route path={`${match.url}`} exact component={HomePage}/>
               <Route path={`${match.url}/home`} component={HomePage}/>
-              <Route path={`${match.url}/calendar`}
-                     render={() => (
-                         <CalendarFactory
-                           events={this.state.appointments}
-                           onChange={this.updateStateAppointments}
-                           role={this.props.user.role}
-                         />
-                     )}
+              <Route
+                path={`${match.url}/calendar`}
+                render={() => (
+                  <CalendarFactory
+                    events={this.state.appointments}
+                    onChange={this.updateStateAppointments}
+                    role={this.props.user.role}
+                  />
+                )}
               />
               <Route
                 path={`${match.url}/messaging`}
@@ -53,24 +54,19 @@ class SecuredMainPage extends Component {
               />
               <Route
                 path={`${match.url}/profile`}
-                render={() => (
-                  <ProfilePage
-                    user={this.props.user}
-                  />
-                )}
+                render={() => <ProfilePage user={this.props.user}/>}
               />
 
               <Route
                 path={`${match.url}/patientinformation`}
                 render={() => (
                   <InfoFactory
-                    user={this.props.user} 
-                    patient = {this.props.patient}
+                    user={this.props.user}
+                    patient={this.props.patient}
                   />
                 )}
-                
               />
-              
+
               <Route
                 path={`${match.url}/conversation`}
                 component={ConversationPage}

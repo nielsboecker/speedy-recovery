@@ -13,4 +13,3 @@ class LandingMainPage extends Component {
 }
 
 export default LandingMainPage;
-

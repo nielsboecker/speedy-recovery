@@ -14,8 +14,6 @@ class PractitionerInfo extends Component {
       </div>
     );
   }
-
-
 }
 
 export default PractitionerInfo;
