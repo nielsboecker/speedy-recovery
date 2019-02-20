@@ -6,7 +6,7 @@ import LandingMainPage from "../landing/core/LandingMainPage";
 import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
-import { mapPatientToUser } from "../../service/FhirDataMappingService";
+import {filterPatientResource} from "../../service/FhirDataFilteringService";
 
 class App extends Component {
   constructor(props) {
@@ -114,7 +114,7 @@ class App extends Component {
       .read()
       .then(currentUserResource => {
         console.log("Received current user resources: ", currentUserResource);
-        const user = mapPatientToUser(currentUserResource);
+        const user = filterPatientResource(currentUserResource);
         console.log("Mapped user ResourceType: ", user.role);
         if (user.role === "Practitioner") {
           // also get patient info
@@ -126,7 +126,7 @@ class App extends Component {
                 patientResource
               );
               // so this is patient mapped resources that we need for practitioner
-              const patient = mapPatientToUser(patientResource);
+              const patient = filterPatientResource(patientResource);
               console.log("Patient Resource after mapping: ", patient);
               this.setState({ patient });
             })
