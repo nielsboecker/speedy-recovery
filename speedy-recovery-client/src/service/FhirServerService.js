@@ -1,18 +1,8 @@
-import { fhirServer_smartSandboxStu3 } from "../config/serverConfig";
-
-const fhirVersion = "3.0.1";
-const requiredResources = [
-  "Patient",
-  "Practitioner",
-  "RelatedPerson",
-  "Appointment",
-  "Condition",
-  "Medication"
-];
+import { minimumSupportedVersion, requiredResources, serverMetadataEndpoint } from "../config/fhirServerConfig";
 
 const checkFhirCapabilityStatement = async () => {
   return new Promise((resolve, reject) => {
-    fetch(fhirServer_smartSandboxStu3)
+    fetch(serverMetadataEndpoint)
       .then(response => response.json())
       .then(capabilityStatement => {
         if (
@@ -41,7 +31,7 @@ const isValidCapabilityStatement = response => {
 
 // For now, we only support the exact version currently running in the sandbox
 const fhirVersionRecentEnough = capabilityStatement =>
-  capabilityStatement.fhirVersion === fhirVersion;
+  capabilityStatement.fhirVersion === minimumSupportedVersion;
 
 // For now, we only require READ access for selected resources
 const allRequiredResourcesAvailable = capabilityStatement => {
