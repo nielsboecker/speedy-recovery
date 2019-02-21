@@ -12,7 +12,7 @@ const mapPatientToUser = fhirPatientResource => ({
       : fhirPatientResource.resourceType,
   birthDate: fhirPatientResource.birthDate,
   gender: fhirPatientResource.gender,
-  name: fhirPatientResource.name[0].family || "Unknown",
+  name: getName(fhirPatientResource.name) || "Unknown",
   careProvider: fhirPatientResource.careprovider || "Unknown",
   //languagePreferred:"Unknown" || fhirPatientResource.communication[0].language.coding[0].display,
   address:
@@ -30,6 +30,19 @@ const mapPatientToUser = fhirPatientResource => ({
     [],
   email: fhirPatientResource.email || "Unknown"
 });
+
+const getName = name => {
+  const familyName = name[0].family;
+  console.log("Family name is " + familyName);
+  let firstName = name[0].given;
+  console.log("First name is " + firstName);
+  if(firstName.length>1){
+    firstName = firstName.join(" "); 
+  }
+  const fullName = firstName + " " + familyName;
+  console.log("FULLNAME " + fullName);
+  return fullName;
+};
 
 const mapAppointment = fhirAppResource => ({
   id: fhirAppResource.id,
