@@ -7,6 +7,7 @@ import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
 import {filterPatientResource} from "../../service/FhirDataFilteringService";
+import {mapPatientToUser} from "../../service/FhirDataMappingService";
 
 class App extends Component {
   constructor(props) {
@@ -114,7 +115,16 @@ class App extends Component {
       .read()
       .then(currentUserResource => {
         console.log("Received current user resources: ", currentUserResource);
-        const user = filterPatientResource(currentUserResource);
+
+        var user = undefined;
+        const filteredPatient = filterPatientResource(currentUserResource);
+        if (filteredPatient) {
+            user = mapPatientToUser(filteredPatient);
+            console.log("Patient Resource after mapping: ", filteredPatient);
+        } else {
+            console.log("Crucial information missing from resource: ", filteredPatient);
+        }
+
         console.log("Mapped user ResourceType: ", user.role);
         if (user.role === "Practitioner") {
           // also get patient info
@@ -126,9 +136,16 @@ class App extends Component {
                 patientResource
               );
               // so this is patient mapped resources that we need for practitioner
-              const patient = filterPatientResource(patientResource);
-              console.log("Patient Resource after mapping: ", patient);
-              this.setState({ patient });
+              const filteredPatientResource = filterPatientResource(patientResource);
+              if (filteredPatientResource) {
+                  const patient = mapPatientToUser(filteredPatientResource);
+                  console.log("Patient Resource after mapping: ", patient);
+                  this.setState({ patient });
+              } else {
+                  console.log("Crucial information missing from resource: ", patientResource);
+              }
+
+
             })
             .catch(err => {
               console.log("The error is  ", err);

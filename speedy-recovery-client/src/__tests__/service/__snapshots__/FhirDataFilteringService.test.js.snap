@@ -2,63 +2,413 @@
 
 exports[`filter out appointment resource with missing info only 1`] = `
 Object {
-  "appType": "Followup",
+  "appointmentType": Object {
+    "coding": Array [
+      Object {
+        "code": "follow",
+        "display": "Followup",
+        "system": "http://example.org/appointment-type",
+      },
+    ],
+  },
+  "basedOn": Array [
+    Object {
+      "reference": "ServiceRequest/myringotomy",
+    },
+  ],
   "comment": "Further expand on the results of the MRI and determine the next actions that may be appropriate.",
-  "created": 2013-10-10T00:00:00.000Z,
+  "created": "2013-10-10",
   "description": "Discussion on the results of your recent MRI",
-  "end": 2013-12-10T11:00:00.000Z,
+  "end": "2013-12-10T11:00:00Z",
   "id": "example",
-  "indication": "Severe burn of left ear",
-  "location": "South Wing, second floor",
-  "patient": "Peter James Chalmers",
-  "practitioner": "Dr Adam Careful",
+  "indication": Array [
+    Object {
+      "display": "Severe burn of left ear",
+      "reference": "Condition/example",
+    },
+  ],
+  "participant": Array [
+    Object {
+      "actor": Object {
+        "display": "Peter James Chalmers",
+        "reference": "Patient/example",
+      },
+      "required": "required",
+      "status": "accepted",
+    },
+    Object {
+      "actor": Object {
+        "display": "Dr Adam Careful",
+        "reference": "Practitioner/example",
+      },
+      "required": "required",
+      "status": "accepted",
+      "type": Array [
+        Object {
+          "coding": Array [
+            Object {
+              "code": "ATND",
+              "system": "http://hl7.org/fhir/v3/ParticipationType",
+            },
+          ],
+        },
+      ],
+    },
+    Object {
+      "actor": Object {
+        "display": "South Wing, second floor",
+        "reference": "Location/1",
+      },
+      "required": "required",
+      "status": "accepted",
+    },
+  ],
   "priority": 5,
-  "start": 2013-12-10T09:00:00.000Z,
+  "resourceType": "Appointment",
+  "serviceCategory": Array [
+    Object {
+      "coding": Array [
+        Object {
+          "code": "gp",
+          "display": "General Practice",
+          "system": "http://example.org/service-category",
+        },
+      ],
+    },
+  ],
+  "serviceType": Array [
+    Object {
+      "coding": Array [
+        Object {
+          "code": "52",
+          "display": "General Discussion",
+        },
+      ],
+    },
+  ],
+  "specialty": Array [
+    Object {
+      "coding": Array [
+        Object {
+          "code": "gp",
+          "display": "General Practice",
+          "system": "http://example.org/specialty",
+        },
+      ],
+    },
+  ],
+  "start": "2013-12-10T09:00:00Z",
   "status": "booked",
-  "supportingInfo": "DiagnosticReport/ultrasound",
-  "title": "Brian MRI results discussion",
+  "supportingInformation": Array [
+    Object {
+      "reference": "DiagnosticReport/ultrasound",
+    },
+  ],
+  "text": Object {
+    "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\">Brian MRI results discussion</div>",
+    "status": "generated",
+  },
 }
 `;
 
 exports[`filter out condition resource with missing info only 1`] = `
 Object {
-  "bodySite": "Left Ear",
+  "bodySite": Array [
+    Object {
+      "coding": Array [
+        Object {
+          "code": "49521004",
+          "display": "Left external ear structure",
+          "system": "http://snomed.info/sct",
+        },
+      ],
+      "text": "Left Ear",
+    },
+  ],
+  "category": Array [
+    Object {
+      "coding": Array [
+        Object {
+          "code": "encounter-diagnosis",
+          "display": "Encounter Diagnosis",
+          "system": "http://hl7.org/fhir/condition-category",
+        },
+        Object {
+          "code": "439401001",
+          "display": "Diagnosis",
+          "system": "http://snomed.info/sct",
+        },
+      ],
+    },
+  ],
   "clinicalStatus": "active",
-  "onsetDateTime": 2012-05-24T00:00:00.000Z,
-  "severity": "Severe",
-  "summary": "Burnt Ear",
+  "code": Object {
+    "coding": Array [
+      Object {
+        "code": "39065001",
+        "display": "Burn of ear",
+        "system": "http://snomed.info/sct",
+      },
+    ],
+    "text": "Burnt Ear",
+  },
+  "id": "example",
+  "onsetDateTime": "2012-05-24",
+  "resourceType": "Condition",
+  "severity": Object {
+    "coding": Array [
+      Object {
+        "code": "24484000",
+        "display": "Severe",
+        "system": "http://snomed.info/sct",
+      },
+    ],
+  },
+  "subject": Object {
+    "reference": "Patient/example",
+  },
+  "text": Object {
+    "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\">Severe burn of left ear (Date: 24-May 2012)</div>",
+    "status": "generated",
+  },
   "verificationStatus": "confirmed",
 }
 `;
 
 exports[`filter out medication resource with missing info only 1`] = `
 Object {
-  "content": "Vancomycin 500mg powder for infusion solution vial (product)",
-  "form": "Injection Solution (qualifier value)",
+  "code": Object {
+    "coding": Array [
+      Object {
+        "code": "0069-2587-10",
+        "display": "Vancomycin Hydrochloride (VANCOMYCIN HYDROCHLORIDE)",
+        "system": "http://hl7.org/fhir/sid/ndc",
+      },
+    ],
+  },
+  "contained": Array [
+    Object {
+      "id": "org4",
+      "name": "Pfizer Laboratories Div Pfizer Inc",
+      "resourceType": "Organization",
+    },
+  ],
+  "form": Object {
+    "coding": Array [
+      Object {
+        "code": "385219001",
+        "display": "Injection Solution (qualifier value)",
+        "system": "http://snomed.info/sct",
+      },
+    ],
+  },
   "id": "med0301",
-  "imageURL": "Vancomycin Image",
+  "image": Array [
+    Object {
+      "contentType": "application/pdf",
+      "title": "Vancomycin Image",
+      "url": "https://www.drugs.com/images/pills/fio/AKN07410.JPG",
+    },
+  ],
+  "ingredient": Array [
+    Object {
+      "amount": Object {
+        "denominator": Object {
+          "code": "mL",
+          "system": "http://unitsofmeasure.org",
+          "value": 10,
+        },
+        "numerator": Object {
+          "code": "mg",
+          "system": "http://unitsofmeasure.org",
+          "value": 500,
+        },
+      },
+      "isActive": true,
+      "itemCodeableConcept": Object {
+        "coding": Array [
+          Object {
+            "code": "66955",
+            "display": "Vancomycin Hydrochloride",
+            "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+          },
+        ],
+      },
+    },
+  ],
   "isBrand": true,
   "isOverTheCounter": false,
-  "name": "Vancomycin Hydrochloride (VANCOMYCIN HYDROCHLORIDE)",
-  "producer": "Pfizer Laboratories Div Pfizer Inc",
+  "manufacturer": Object {
+    "reference": "#org4",
+  },
+  "package": Object {
+    "batch": Array [
+      Object {
+        "expirationDate": "2017-05-22",
+        "lotNumber": "9494788",
+      },
+    ],
+    "container": Object {
+      "coding": Array [
+        Object {
+          "code": "415818006",
+          "display": "Vial",
+          "system": "http://snomed.info/sct",
+        },
+      ],
+    },
+    "content": Array [
+      Object {
+        "amount": Object {
+          "code": "mL",
+          "system": "http://unitsofmeasure.org",
+          "value": 10,
+        },
+        "itemCodeableConcept": Object {
+          "coding": Array [
+            Object {
+              "code": "324337001",
+              "display": "Vancomycin 500mg powder for infusion solution vial (product)",
+              "system": "http://snomed.info/sct",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  "resourceType": "Medication",
+  "status": "active",
+  "text": Object {
+    "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\"><p><b>Generated Narrative with Details</b></p><p><b>id</b>: med0301</p><p><b>contained</b>: </p><p><b>code</b>: Vancomycin Hydrochloride (VANCOMYCIN HYDROCHLORIDE) <span>(Details : {http://hl7.org/fhir/sid/ndc code '0069-2587-10' = '0069-2587-10', given as 'Vancomycin Hydrochloride (VANCOMYCIN HYDROCHLORIDE)'})</span></p><p><b>status</b>: active</p><p><b>isBrand</b>: true</p><p><b>isOverTheCounter</b>: false</p><p><b>manufacturer</b>: id: org4; name: Pfizer Laboratories Div Pfizer Inc</p><p><b>form</b>: Injection Solution (qualifier value) <span>(Details : {SNOMED CT code '385219001' = 'Injection solution', given as 'Injection Solution (qualifier value)'})</span></p><h3>Ingredients</h3><table><tr><td>-</td><td><b>Item[x]</b></td><td><b>IsActive</b></td><td><b>Amount</b></td></tr><tr><td>*</td><td>Vancomycin Hydrochloride <span>(Details : {RxNorm code '66955' = '66955', given as 'Vancomycin Hydrochloride'})</span></td><td>true</td><td>500 mg<span> (Details: UCUM code mg = 'mg')</span>/10 mL<span> (Details: UCUM code mL = 'mL')</span></td></tr></table><blockquote><p><b>package</b></p><p><b>container</b>: Vial <span>(Details : {SNOMED CT code '415818006' = 'Vial', given as 'Vial'})</span></p><h3>Contents</h3><table><tr><td>-</td><td><b>Item[x]</b></td><td><b>Amount</b></td></tr><tr><td>*</td><td>Vancomycin 500mg powder for infusion solution vial (product) <span>(Details : {SNOMED CT code '324337001' = 'Vancomycin 500mg injection (pdr for recon)', given as 'Vancomycin 500mg powder for infusion solution vial (product)'})</span></td><td>10 mL<span> (Details: UCUM code mL = 'mL')</span></td></tr></table><h3>Batches</h3><table><tr><td>-</td><td><b>LotNumber</b></td><td><b>ExpirationDate</b></td></tr><tr><td>*</td><td>9494788</td><td>22/05/2017</td></tr></table></blockquote><p><b>image</b>: </p></div>",
+    "status": "generated",
+  },
 }
 `;
 
 exports[`filter out patient resource with missing info only 1`] = `
 Object {
-  "address": "534 Erewhon St, PleasantVille, Vic, 3999, US",
+  "active": true,
+  "address": Array [
+    Object {
+      "city": "PleasantVille",
+      "country": "US",
+      "line": Array [
+        "534 Erewhon St",
+      ],
+      "postalCode": "3999",
+      "state": "Vic",
+      "use": "home",
+    },
+  ],
   "birthDate": "1974-12-25",
-  "careProvider": "Dr Example",
+  "careprovider": "Dr Example",
+  "communication": Array [
+    Object {
+      "language": Object {
+        "coding": Array [
+          Object {
+            "code": "en-US",
+            "display": "English (United States)",
+            "system": "http://hl7.org/fhir/ValueSet/languages",
+          },
+        ],
+      },
+    },
+  ],
   "email": "peter@live.com",
   "gender": "male",
-  "name": "Chalmers",
-  "phone": Array [
+  "id": "example",
+  "identifier": Array [
+    Object {
+      "assigner": Object {
+        "display": "Acme Healthcare",
+      },
+      "period": Object {
+        "start": "2001-05-06",
+      },
+      "system": "urn:oid:1.2.36.146.595.217.0.1",
+      "type": Object {
+        "coding": Array [
+          Object {
+            "code": "MR",
+            "system": "http://hl7.org/fhir/v2/0203",
+          },
+        ],
+      },
+      "use": "usual",
+      "value": "12345",
+    },
+  ],
+  "link": Array [
+    Object {
+      "target": Object {
+        "display": "Peter Chalmers",
+        "reference": "RelatedPerson/peter",
+      },
+    },
+    Object {
+      "target": Object {
+        "display": "Peter Chalmers",
+        "reference": "Patient/example",
+      },
+    },
+  ],
+  "name": Array [
+    Object {
+      "family": "Chalmers",
+      "given": Array [
+        "Peter",
+        "James",
+      ],
+      "use": "official",
+    },
+    Object {
+      "given": Array [
+        "Jim",
+      ],
+      "use": "usual",
+    },
+  ],
+  "resourceType": "Patient",
+  "telecom": Array [
+    Object {
+      "use": "home",
+    },
     Object {
       "system": "phone",
       "use": "work",
       "value": "(03) 5555 6473",
     },
+    Object {
+      "system": "email",
+      "use": "home",
+      "value": "Jim@example.org",
+    },
   ],
-  "role": "Patient",
+  "text": Object {
+    "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\">
+      <table>
+        <tbody>
+          <tr>
+            <td>Name</td>
+            <td>Peter James <b>Chalmers</b> (&quot;Jim&quot;)</td>
+          </tr>
+          <tr>
+            <td>Address</td>
+            <td>534 Erewhon, Pleasantville, Vic, 3999</td>
+          </tr>
+          <tr>
+            <td>Contacts</td>
+            <td>Home: unknown. Work: (03) 5555 6473</td>
+          </tr>
+          <tr>
+            <td>Id</td>
+            <td>MRN: 12345 (Acme Healthcare)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>",
+    "status": "generated",
+  },
 }
 `;

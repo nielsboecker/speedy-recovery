@@ -1,12 +1,7 @@
-import {mapAppointment, mapCondition, mapMedication, mapPatientToUser} from "./FhirDataMappingService";
-
 const filterPatientResource = resource => {
   // resourceType, surname, careprovider
-  const fields = [
-    resource.resourceType,
-    resource.name[0].family,
-  ];
-  return fields.includes(undefined) ? undefined : mapPatientToUser(resource);
+  const fields = [resource.resourceType, resource.name[0].family];
+  return fields.includes(undefined) ? undefined : resource;
 };
 
 const filterAppointmentResource = resource => {
@@ -17,19 +12,19 @@ const filterAppointmentResource = resource => {
     resource.end,
     resource.participant[2].actor.display
   ];
-  return fields.includes(undefined) ? undefined : mapAppointment(resource);
+  return fields.includes(undefined) ? undefined : resource;
 };
 
 const filterConditionResource = resource => {
   // severity, summary
   const fields = [resource.severity.coding[0].display, resource.code.text];
-  return fields.includes(undefined) ? undefined : mapCondition(resource);
+  return fields.includes(undefined) ? undefined : resource;
 };
 
 const filterMedicationResource = resource => {
   // name, isOverTheCounter
   const fields = [resource.code.coding[0].display, resource.isOverTheCounter];
-  return fields.includes(undefined) ? undefined : mapMedication(resource);
+  return fields.includes(undefined) ? undefined : resource;
 };
 
 export {
