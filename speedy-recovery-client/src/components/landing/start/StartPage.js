@@ -23,9 +23,8 @@ class StartPage extends Component {
           </Grid.Row>
         </Grid>
 
-      <Footer />
+        <Footer />
       </div>
-
     );
   }
 }
