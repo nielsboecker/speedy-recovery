@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import Header from "../shared/Header";
+import Footer from "../shared/Footer";
 import { BrowserRouter, Redirect, Route } from "react-router-dom";
 import { Container } from "semantic-ui-react";
 import HomePage from "../home/HomePage";
@@ -72,6 +73,7 @@ class SecuredMainPage extends Component {
                 component={ConversationPage}
               />
             </Container>
+              <Footer/>
           </Fragment>
         </BrowserRouter>
       </div>
