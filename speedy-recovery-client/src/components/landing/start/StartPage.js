@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import WelcomeBox from "./WelcomeBox";
 import "./StartPage.css";
 import { Grid, Image } from "semantic-ui-react";
+import Footer from "./Footer";
 
 class StartPage extends Component {
   render() {
@@ -21,7 +22,10 @@ class StartPage extends Component {
             </Grid.Column>
           </Grid.Row>
         </Grid>
+
+      <Footer />
       </div>
+
     );
   }
 }
