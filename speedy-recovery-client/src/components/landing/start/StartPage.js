@@ -17,7 +17,7 @@ class StartPage extends Component {
         >
           <Grid.Row>
             <Grid.Column>
-              <WelcomeBox onLogin={this.props.onLogin}/>
+              <WelcomeBox onLogin={this.props.onLogin} />
             </Grid.Column>
           </Grid.Row>
         </Grid>

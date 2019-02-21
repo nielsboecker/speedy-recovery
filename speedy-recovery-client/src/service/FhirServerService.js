@@ -1,4 +1,8 @@
-import { minimumSupportedVersion, requiredResources, serverMetadataEndpoint } from "../config/fhirServerConfig";
+import {
+  minimumSupportedVersion,
+  requiredResources,
+  serverMetadataEndpoint
+} from "../config/fhirServerConfig";
 
 const checkFhirCapabilityStatement = async () => {
   return new Promise((resolve, reject) => {

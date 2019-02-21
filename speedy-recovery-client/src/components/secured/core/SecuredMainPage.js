@@ -22,7 +22,7 @@ class SecuredMainPage extends Component {
 
   render() {
     if (!this.props.user) {
-      return <Redirect to="/"/>;
+      return <Redirect to="/" />;
     }
 
     const { match } = this.props;
@@ -37,8 +37,8 @@ class SecuredMainPage extends Component {
             />
 
             <Container>
-              <Route path={`${match.url}`} exact component={HomePage}/>
-              <Route path={`${match.url}/home`} component={HomePage}/>
+              <Route path={`${match.url}`} exact component={HomePage} />
+              <Route path={`${match.url}/home`} component={HomePage} />
               <Route
                 path={`${match.url}/calendar`}
                 render={() => (
@@ -55,7 +55,7 @@ class SecuredMainPage extends Component {
               />
               <Route
                 path={`${match.url}/profile`}
-                render={() => <ProfilePage user={this.props.user}/>}
+                render={() => <ProfilePage user={this.props.user} />}
               />
 
               <Route
@@ -73,7 +73,7 @@ class SecuredMainPage extends Component {
                 component={ConversationPage}
               />
             </Container>
-              <Footer/>
+            <Footer />
           </Fragment>
         </BrowserRouter>
       </div>

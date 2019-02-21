@@ -1,4 +1,9 @@
-import { mapAppointment, mapCondition, mapMedication, mapPatientToUser } from "../../service/FhirDataMappingService";
+import {
+  mapAppointment,
+  mapCondition,
+  mapMedication,
+  mapPatientToUser
+} from "../../service/FhirDataMappingService";
 import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatient.json";
 import fhirShortApp from "../test_input/fhir_resources_stu3/FhirShortExampleAppointments.json";
 import fhirExampleCondition from "../test_input/fhir_resources_stu3/FhirExampleCondition.json";

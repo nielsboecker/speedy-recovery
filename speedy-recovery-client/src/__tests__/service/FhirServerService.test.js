@@ -1,9 +1,7 @@
 import FetchMock from "jest-fetch-mock";
 import FhirServerService from "../../service/FhirServerService";
-import CapabilityStatement_STU3_allResourcesAvailable
-  from "../test_input/fhir_server/FhirExampleCapabilityStatement_STU3_allResourcesAvailable.json";
-import CapabilityStatement_STU3_PatientResourceMissing
-  from "../test_input/fhir_server/FhirExampleCapabilityStatement_STU3_PatientResourceMissing.json";
+import CapabilityStatement_STU3_allResourcesAvailable from "../test_input/fhir_server/FhirExampleCapabilityStatement_STU3_allResourcesAvailable.json";
+import CapabilityStatement_STU3_PatientResourceMissing from "../test_input/fhir_server/FhirExampleCapabilityStatement_STU3_PatientResourceMissing.json";
 import CapabilityStatement_STU2 from "../test_input/fhir_server/FhirExampleCapabilityStatement_STU2.json";
 
 // Mock fetch()
