@@ -9,11 +9,11 @@ class InfoFactory extends Component {
 
     switch (user.role) {
       case "Patient":
-        return <PatientInfo user={user}/>;
+        return <PatientInfo user={user} />;
       case "Parent":
-        return <ParentInfo user={user}/>;
+        return <ParentInfo user={user} />;
       case "Practitioner":
-        return <PractitionerInfo user={user} patient={patient}/>;
+        return <PractitionerInfo user={user} patient={patient} />;
       default:
         return undefined;
     }

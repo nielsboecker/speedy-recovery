@@ -1,5 +1,15 @@
 import React, { Component } from "react";
-import { Button, Card, Container, Form, Grid, Header, Image, Message, Segment } from "semantic-ui-react";
+import {
+  Button,
+  Card,
+  Container,
+  Form,
+  Grid,
+  Header,
+  Image,
+  Message,
+  Segment
+} from "semantic-ui-react";
 import "./WelcomeBox.css";
 import UserModal from "./UserModal";
 
@@ -28,7 +38,7 @@ class WelcomeBox extends Component {
               <Card.Content>
                 <Form size="large">
                   <Segment>
-                    <UserModal onLogin={this.props.onLogin}/>
+                    <UserModal onLogin={this.props.onLogin} />
                     <Button
                       color="teal"
                       fluid

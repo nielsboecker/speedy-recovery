@@ -1,0 +1,9 @@
+footer {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  margin-bottom: 1em;
+  margin-top: 4em;
+  transition: box-shadow 0.5s ease, padding 0.5s ease;
+  text-align: center;
+}
