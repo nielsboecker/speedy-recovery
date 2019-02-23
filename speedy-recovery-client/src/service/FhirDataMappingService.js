@@ -69,7 +69,7 @@ const getEmail = telecom => {
 
 const mapAppointment = fhirAppResource => ({
   id: fhirAppResource.id ? fhirAppResource.id : "Unknown",
-  title: fhirAppResource.text.div.substring(42,fhirAppResource.text.div.length - 6),
+  title: getTitle(fhirAppResource.text),
   status: fhirAppResource.status ? fhirAppResource.status : "Unknown",
   appType: getAppType(fhirAppResource.appointmentType),
   indication: getIndication(fhirAppResource.indication),
@@ -84,6 +84,13 @@ const mapAppointment = fhirAppResource => ({
   practitioner: getPractitioner(fhirAppResource.participant),
   location: getLocation(fhirAppResource.participant)
 });
+
+const getTitle = text => {
+   if(text && text.div){
+     return text.div.substring(42,text.div.length - 6);
+   }
+   return "Unknown";
+};
 
 const getAppType = appointmentType => {
    if(appointmentType && appointmentType.coding && appointmentType.coding[0] && appointmentType.coding[0].display){
