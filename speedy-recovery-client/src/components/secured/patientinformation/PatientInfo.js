@@ -3,6 +3,8 @@ import React, { Component } from "react";
 class PatientInfo extends Component {
   render() {
     const { user } = this.props;
+
+    //TODO: fix the getDate call below
     //let birthday = user.birthDate;
     //console.log(birthday);
     // const bDate = birthday.getDate();
