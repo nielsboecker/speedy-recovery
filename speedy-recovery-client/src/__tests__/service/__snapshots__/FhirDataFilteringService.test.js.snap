@@ -47,18 +47,12 @@ Object {
 exports[`filter out patient resource with missing info only 1`] = `
 Object {
   "address": "534 Erewhon St, PleasantVille, Vic, 3999, US",
-  "birthDate": "1974-12-25",
-  "careProvider": "Dr Example",
-  "email": "peter@live.com",
+  "birthDate": 1963-12-14T00:00:00.000Z,
+  "careProvider": "Practitioner/smart-Practitioner-71081332",
+  "email": "Jim@example.org",
   "gender": "male",
   "name": "Peter James Chalmers",
-  "phone": Array [
-    Object {
-      "system": "phone",
-      "use": "work",
-      "value": "(03) 5555 6473",
-    },
-  ],
+  "phone": "(03) 5555 6473",
   "role": "Patient",
 }
 `;

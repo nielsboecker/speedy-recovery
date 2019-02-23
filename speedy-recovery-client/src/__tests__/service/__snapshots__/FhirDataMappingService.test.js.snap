@@ -47,18 +47,25 @@ Object {
 exports[`map FHIR Patient resource to internal user data model 1`] = `
 Object {
   "address": "534 Erewhon St, PleasantVille, Vic, 3999, US",
-  "birthDate": "1974-12-25",
-  "careProvider": "Dr Example",
-  "email": "peter@live.com",
+  "birthDate": 1963-12-14T00:00:00.000Z,
+  "careProvider": "Practitioner/smart-Practitioner-71081332",
+  "email": "Jim@example.org",
   "gender": "male",
   "name": "Peter James Chalmers",
-  "phone": Array [
-    Object {
-      "system": "phone",
-      "use": "work",
-      "value": "(03) 5555 6473",
-    },
-  ],
+  "phone": "(03) 5555 6473",
+  "role": "Patient",
+}
+`;
+
+exports[`map FHIR Patient resource(Steve Richey) to internal user data model 1`] = `
+Object {
+  "address": "Unknown",
+  "birthDate": 2011-09-16T00:00:00.000Z,
+  "careProvider": "Practitioner/smart-Practitioner-71081332",
+  "email": "Unknown",
+  "gender": "male",
+  "name": "Steve Richey",
+  "phone": "Unknown",
   "role": "Patient",
 }
 `;
