@@ -54,7 +54,6 @@ Object {
   "name": "Peter James Chalmers",
   "phone": "(03) 5555 6473",
   "role": "Patient",
-  "id": "123456",
 }
 `;
 
@@ -68,6 +67,5 @@ Object {
   "name": "Steve Richey",
   "phone": "Unknown",
   "role": "Patient",
-  "id": "654321",
 }
 `;
