@@ -7,7 +7,7 @@ import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
 import {filterPatientResource} from "../../service/FhirDataFilteringService";
-import {mapPatientToUser} from "../../service/FhirDataMappingService";
+import {fhirMapPatient} from "../../service/FhirDataMappingService";
 
 class App extends Component {
   constructor(props) {
@@ -17,7 +17,8 @@ class App extends Component {
       user: null,
       patient: {},
       authRequestStarted: false,
-      error: null
+      error: null,
+        fhirVersion: null
     };
   }
 
@@ -88,6 +89,7 @@ class App extends Component {
   componentWillMount = () => {
     // Check FHIR server capability
     FhirServerService.checkFhirCapabilityStatement()
+        .then(result => this.setState({fhirVersion: result.fhirVersion}))
       .then(result => console.log("FHIR capability check successful", result))
       .catch(() => this.handleFhirServerError());
 
@@ -119,7 +121,7 @@ class App extends Component {
         var user = undefined;
         const filteredPatient = filterPatientResource(currentUserResource);
         if (filteredPatient) {
-            user = mapPatientToUser(filteredPatient);
+            user = fhirMapPatient(filteredPatient, this.state.fhirVersion);
             console.log("Patient Resource after mapping: ", filteredPatient);
         } else {
             console.log("Crucial information missing from resource: ", filteredPatient);
@@ -138,7 +140,7 @@ class App extends Component {
               // so this is patient mapped resources that we need for practitioner
               const filteredPatientResource = filterPatientResource(patientResource);
               if (filteredPatientResource) {
-                  const patient = mapPatientToUser(filteredPatientResource);
+                  const patient = fhirMapPatient(filteredPatientResource, this.state.fhirVersion);
                   console.log("Patient Resource after mapping: ", patient);
                   this.setState({ patient });
               } else {

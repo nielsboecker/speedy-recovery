@@ -2,10 +2,10 @@ import fhirBrokenPatient from "../test_input/fhir_resources_stu3/broken_resource
 import fhirBrokenApp from "../test_input/fhir_resources_stu3/broken_resources/FhirSingleExampleAppointmentBroken";
 import fhirBrokenCondition from "../test_input/fhir_resources_stu3/broken_resources/FhirExampleConditionBroken";
 import fhirBrokenMedication from "../test_input/fhir_resources_stu3/broken_resources/FhirExampleMedicationBroken";
-import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatient.json";
-import fhirSingleApp from "../test_input/fhir_resources_stu3/FhirSingleExampleAppointment.json";
-import fhirExampleCondition from "../test_input/fhir_resources_stu3/FhirExampleCondition.json";
-import fhirExampleMedication from "../test_input/fhir_resources_stu3/FhirExampleMedication.json";
+import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatientSTU3.json";
+import fhirSingleApp from "../test_input/fhir_resources_stu3/FhirSingleExampleAppointmentSTU3.json";
+import fhirExampleCondition from "../test_input/fhir_resources_stu3/FhirExampleConditionSTU3.json";
+import fhirExampleMedication from "../test_input/fhir_resources_stu3/FhirExampleMedicationSTU3.json";
 
 import {
     filterAppointmentResource,
@@ -30,6 +30,6 @@ test("filter out condition resource with missing info only", () => {
 });
 
 test("filter out medication resource with missing info only", () => {
-    expect(filterMedicationResource(fhirBrokenMedication)).toBe(undefined)
+    expect(filterMedicationResource(fhirBrokenMedication)).toBe(undefined);
     expect(filterMedicationResource(fhirExampleMedication)).toMatchSnapshot();
 });
