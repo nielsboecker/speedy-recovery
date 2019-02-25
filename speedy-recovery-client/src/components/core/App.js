@@ -18,7 +18,7 @@ class App extends Component {
       patient: {},
       authRequestStarted: false,
       error: null,
-        fhirVersion: null
+      fhirVersion: null
     };
   }
 
@@ -65,6 +65,7 @@ class App extends Component {
                 onLogout={this.handleLogoutRequest}
                 user={this.state.user}
                 patient={this.state.patient}
+                fhirVersion={this.state.fhirVersion}
               />
             )}
           />
@@ -89,8 +90,10 @@ class App extends Component {
   componentWillMount = () => {
     // Check FHIR server capability
     FhirServerService.checkFhirCapabilityStatement()
-        .then(result => this.setState({fhirVersion: result.fhirVersion}))
-      .then(result => console.log("FHIR capability check successful", result))
+        .then(result => {
+            console.log("FHIR capability check successful", result);
+            this.setState({ fhirVersion: result.fhirVersion });
+        })
       .catch(() => this.handleFhirServerError());
 
     // Register SMART auth callback
@@ -118,36 +121,14 @@ class App extends Component {
       .then(currentUserResource => {
         console.log("Received current user resources: ", currentUserResource);
 
-        var user = undefined;
-        const filteredPatient = filterPatientResource(currentUserResource);
-        if (filteredPatient) {
-            user = fhirMapPatient(filteredPatient, this.state.fhirVersion);
-            console.log("Patient Resource after mapping: ", filteredPatient);
-        } else {
-            console.log("Crucial information missing from resource: ", filteredPatient);
-        }
-
-        console.log("Mapped user ResourceType: ", user.role);
-        if (user.role === "Practitioner") {
+          var user = this.updateStateUser(currentUserResource);
+          if (user.role === "Practitioner") {
           // also get patient info
           fhirClient.patient
             .read()
             .then(patientResource => {
-              console.log(
-                "Patient Resource for practitioner: ",
-                patientResource
-              );
-              // so this is patient mapped resources that we need for practitioner
-              const filteredPatientResource = filterPatientResource(patientResource);
-              if (filteredPatientResource) {
-                  const patient = fhirMapPatient(filteredPatientResource, this.state.fhirVersion);
-                  console.log("Patient Resource after mapping: ", patient);
-                  this.setState({ patient });
-              } else {
-                  console.log("Crucial information missing from resource: ", patientResource);
-              }
-
-
+              console.log("Patient Resource for practitioner: ", patientResource);
+                this.updateStatePatient(patientResource);
             })
             .catch(err => {
               console.log("The error is  ", err);
@@ -162,6 +143,30 @@ class App extends Component {
       })
       .catch(error => console.error(error));
   };
+
+  updateStatePatient(patientResource) {
+        const filteredPatientResource = filterPatientResource(patientResource);
+        if (filteredPatientResource) {
+            const patient = fhirMapPatient(filteredPatientResource, this.state.fhirVersion);
+            console.log("Patient Resource after mapping: ", patient);
+            this.setState({patient});
+        } else {
+            console.log("Crucial information missing from resource: ", patientResource);
+        }
+  }
+
+  updateStateUser(currentUserResource) {
+        var user = undefined;
+        const filteredPatient = filterPatientResource(currentUserResource);
+        if (filteredPatient) {
+            user = fhirMapPatient(filteredPatient, this.state.fhirVersion);
+            console.log("User Resource after mapping: ", user);
+        } else {
+            console.log("Crucial information missing from resource: ", filteredPatient);
+        }
+        return user;
+  }
+
 
   handleLoginError = errorMessage => {
     if (
@@ -182,6 +187,8 @@ class App extends Component {
       }
     });
   };
+
+
 
   handleFhirServerError = () => {
     this.setState({

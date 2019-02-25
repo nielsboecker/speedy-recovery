@@ -15,21 +15,21 @@ import {
 } from "../../service/FhirDataFilteringService";
 
 test("filter out patient resource with missing info only", () => {
-    expect(filterPatientResource(fhirBrokenPatient)).toBe(undefined);
-    expect(filterPatientResource(fhirExamplePatient)).toMatchSnapshot();
+    expect(filterPatientResource(fhirBrokenPatient)).toBeFalsy();
+    expect(filterPatientResource(fhirExamplePatient)).toEqual(fhirExamplePatient);
 });
 
 test("filter out appointment resource with missing info only", () => {
-    expect(filterAppointmentResource(fhirBrokenApp)).toBe(undefined);
-    expect(filterAppointmentResource(fhirSingleApp)).toMatchSnapshot();
+    expect(filterAppointmentResource(fhirBrokenApp)).toBeFalsy();
+    expect(filterAppointmentResource(fhirSingleApp)).toEqual(fhirSingleApp);
 });
 
 test("filter out condition resource with missing info only", () => {
-    expect(filterConditionResource(fhirBrokenCondition)).toBe(undefined);
-    expect(filterConditionResource(fhirExampleCondition)).toMatchSnapshot();
+    expect(filterConditionResource(fhirBrokenCondition)).toBeFalsy();
+    expect(filterConditionResource(fhirExampleCondition)).toEqual(fhirExampleCondition);
 });
 
 test("filter out medication resource with missing info only", () => {
-    expect(filterMedicationResource(fhirBrokenMedication)).toBe(undefined);
-    expect(filterMedicationResource(fhirExampleMedication)).toMatchSnapshot();
+    expect(filterMedicationResource(fhirBrokenMedication)).toBeFalsy();
+    expect(filterMedicationResource(fhirExampleMedication)).toEqual(fhirExampleMedication);
 });

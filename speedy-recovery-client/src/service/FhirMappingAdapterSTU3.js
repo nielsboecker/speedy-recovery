@@ -9,8 +9,9 @@ import {
   getPractitioner,
   getSeverity,
   getSummary
-} from "./FhirJsonCommonExtractionTools";
+} from "./FhirDataMappingExtractionUtils";
 
+const missingField = "Unknown";
 const mapPatientToUserSTU3 = fhirPatientResource => ({
   //This is a temporary hard-code fix as we have not implemented the searching for a patients' parent
   role:
@@ -20,9 +21,11 @@ const mapPatientToUserSTU3 = fhirPatientResource => ({
 
   name: getName(fhirPatientResource.name),
   birthDate: fhirPatientResource.birthDate
-    ? new Date(fhirPatientResource.birthDate)
-    : "Unknown",
-  gender: fhirPatientResource.gender ? fhirPatientResource.gender : "Unknown",
+    ? fhirPatientResource.birthDate
+    : missingField,
+  gender: fhirPatientResource.gender
+    ? fhirPatientResource.gender
+    : missingField,
   careProvider: getGP(fhirPatientResource.generalPractitioner),
   address: getAddress(fhirPatientResource.address),
   phone: getPhone(fhirPatientResource.telecom),
@@ -30,22 +33,22 @@ const mapPatientToUserSTU3 = fhirPatientResource => ({
 });
 
 const mapAppointmentSTU3 = fhirAppResource => ({
-  id: fhirAppResource.id ? fhirAppResource.id : "Unknown",
+  id: fhirAppResource.id ? fhirAppResource.id : missingField,
   title: getTitle(fhirAppResource.text),
-  status: fhirAppResource.status ? fhirAppResource.status : "Unknown",
+  status: fhirAppResource.status ? fhirAppResource.status : missingField,
   appType: getAppType(fhirAppResource.appointmentType),
   indication: getIndication(fhirAppResource.indication),
-  priority: fhirAppResource.priority ? fhirAppResource.priority : "Unknown",
+  priority: fhirAppResource.priority ? fhirAppResource.priority : missingField,
   description: fhirAppResource.description
     ? fhirAppResource.description
-    : "Unknown",
+    : missingField,
   supportingInfo: getSupportingInfo(fhirAppResource.supportingInformation),
-  start: fhirAppResource.start ? new Date(fhirAppResource.start) : "Unknown",
-  end: fhirAppResource.end ? new Date(fhirAppResource.end) : "Unknown",
+  start: fhirAppResource.start ? new Date(fhirAppResource.start) : missingField,
+  end: fhirAppResource.end ? new Date(fhirAppResource.end) : missingField,
   created: fhirAppResource.created
     ? new Date(fhirAppResource.created)
-    : "Unknown",
-  comment: fhirAppResource.comment ? fhirAppResource.comment : "Unknown",
+    : missingField,
+  comment: fhirAppResource.comment ? fhirAppResource.comment : missingField,
   patient: getPatient(fhirAppResource.participant),
   practitioner: getPractitioner(fhirAppResource.participant),
   location: getLocation(fhirAppResource.participant)
@@ -54,30 +57,30 @@ const mapAppointmentSTU3 = fhirAppResource => ({
 const mapConditionSTU3 = fhirCondResource => ({
   clinicalStatus: fhirCondResource.clinicalStatus
     ? fhirCondResource.clinicalStatus
-    : "Unknown",
+    : missingField,
   verificationStatus: fhirCondResource.verificationStatus
     ? fhirCondResource.verificationStatus
-    : "Unknown",
+    : missingField,
   severity: getSeverity(fhirCondResource.severity),
   summary: getSummary(fhirCondResource.code),
   bodySite: getbodySite(fhirCondResource.bodySite),
   onsetDateTime: fhirCondResource.onsetDateTime
     ? new Date(fhirCondResource.onsetDateTime)
-    : "Unknown"
+    : missingField
 });
 
 const mapMedicationSTU3 = fhirMedResource => ({
-  id: fhirMedResource.id ? fhirMedResource.id : "Unknown",
+  id: fhirMedResource.id ? fhirMedResource.id : missingField,
   producer: getProducer(fhirMedResource.contained),
   name: getMedName(fhirMedResource.code),
   isBrand:
-    typeof fhirMedResource.isBrand !== "undefined"
+    fhirMedResource.isBrand !== "undefined"
       ? fhirMedResource.isBrand
-      : "Unknown",
+      : missingField,
   isOverTheCounter:
-    typeof fhirMedResource.isOverTheCounter !== "undefined"
+    fhirMedResource.isOverTheCounter !== "undefined"
       ? fhirMedResource.isOverTheCounter
-      : "Unknown",
+      : missingField,
   form: getForm(fhirMedResource.form),
   content: getContent(fhirMedResource.package),
   imageURL: getImageURL(fhirMedResource.image)
@@ -91,7 +94,7 @@ const getGP = generalPractitioner => {
   ) {
     return generalPractitioner[0].reference;
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getAddress = address => {
@@ -116,7 +119,7 @@ const getAddress = address => {
       address[0].country
     );
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getEmail = telecom => {
@@ -126,14 +129,14 @@ const getEmail = telecom => {
       return result[0].value;
     }
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getTitle = text => {
   if (text && text.div) {
     return text.div.substring(42, text.div.length - 6);
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getAppType = appointmentType => {
@@ -145,13 +148,13 @@ const getAppType = appointmentType => {
   ) {
     return appointmentType.coding[0].display;
   }
-  return "Unknown";
+  return missingField;
 };
 const getIndication = indication => {
   if (indication && indication[0] && indication[0].display) {
     return indication[0].display;
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getSupportingInfo = supportingInformation => {
@@ -162,14 +165,14 @@ const getSupportingInfo = supportingInformation => {
   ) {
     return supportingInformation[0].reference;
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getProducer = contained => {
   if (contained && contained[0] && contained[0].name) {
     return contained[0].name;
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getContent = packageC => {
@@ -184,14 +187,14 @@ const getContent = packageC => {
   ) {
     return packageC.content[0].itemCodeableConcept.coding[0].display;
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getImageURL = image => {
   if (image && image[0] && image[0].title) {
     return image[0].title;
   }
-  return "Unknown";
+  return missingField;
 };
 
 export {

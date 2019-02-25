@@ -1,3 +1,5 @@
+const missingField = "Unknown";
+
 const getName = name => {
   if (name && name[0] && name[0].family && name[0].given) {
     let firstName = name[0].given;
@@ -6,7 +8,7 @@ const getName = name => {
     }
     return firstName + " " + name[0].family;
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getPhone = telecom => {
@@ -16,7 +18,7 @@ const getPhone = telecom => {
       return result[0].value;
     }
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getPatient = participant => {
@@ -28,7 +30,7 @@ const getPatient = participant => {
   ) {
     return participant[0].actor.display;
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getPractitioner = participant => {
@@ -40,7 +42,7 @@ const getPractitioner = participant => {
   ) {
     return participant[1].actor.display;
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getLocation = participant => {
@@ -52,7 +54,7 @@ const getLocation = participant => {
   ) {
     return participant[2].actor.display;
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getSeverity = severity => {
@@ -64,35 +66,35 @@ const getSeverity = severity => {
   ) {
     return severity.coding[0].display;
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getSummary = summary => {
   if (summary && summary.text) {
     return summary.text;
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getbodySite = bodySite => {
   if (bodySite && bodySite[0] && bodySite[0].text) {
     return bodySite[0].text;
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getMedName = code => {
   if (code && code.coding && code.coding[0] && code.coding[0].display) {
     return code.coding[0].display;
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getForm = form => {
   if (form && form.coding && form.coding[0] && form.coding[0].display) {
     return form.coding[0].display;
   }
-  return "Unknown";
+  return missingField;
 };
 
 export {
