@@ -6,8 +6,8 @@ import LandingMainPage from "../landing/core/LandingMainPage";
 import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
-import {filterPatientResource} from "../../service/FhirDataFilteringService";
-import {fhirMapPatient} from "../../service/FhirDataMappingService";
+import { filterPatientResource } from "../../service/FhirDataFilteringService";
+import { fhirMapPatient } from "../../service/FhirDataMappingService";
 
 class App extends Component {
   constructor(props) {
