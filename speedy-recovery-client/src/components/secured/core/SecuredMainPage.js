@@ -7,10 +7,10 @@ import HomePage from "../home/HomePage";
 import MessagingPage from "../messaging/MessagingPage";
 import ProfilePage from "../profile/ProfilePage";
 import ConversationPage from "../conversation/ConversationPage";
-import { mapAppointment } from "../../../service/FhirDataMappingService";
+import {fhirMapAppointment} from "../../../service/FhirDataMappingService";
 import InfoFactory from "../patientinformation/InfoFactory";
 import CalendarFactory from "../calendar/CalendarFactory";
-import fhirExampleApp from "../../../__tests__/test_input/fhir_resources_stu3/FhirExampleAppointments.json";
+import fhirExampleApp from "../../../__tests__/test_input/fhir_resources_stu3/FhirMultipleExampleAppointmentsSTU3.json";
 
 class SecuredMainPage extends Component {
   constructor(props) {
@@ -86,7 +86,8 @@ class SecuredMainPage extends Component {
 
   updateStateAppointments = () => {
     // TODO: Query SMART, display appointment data for current user
-    const appointments = fhirExampleApp.map(mapAppointment);
+    const appointments = fhirExampleApp.map((app) => fhirMapAppointment(app, this.props.fhirVersion));
+
     this.setState({ appointments });
   };
 }

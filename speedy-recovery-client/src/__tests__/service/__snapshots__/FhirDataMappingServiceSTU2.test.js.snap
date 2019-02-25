@@ -2,20 +2,20 @@
 
 exports[`map FHIR Appointment resource to calendar data model 1`] = `
 Object {
-  "appType": "Followup",
+  "appType": "Undefined in STU2",
   "comment": "Further expand on the results of the MRI and determine the next actions that may be appropriate.",
-  "created": 2013-10-10T00:00:00.000Z,
+  "created": "Undefined in STU2",
   "description": "Discussion on the results of your recent MRI",
   "end": 2013-12-10T11:00:00.000Z,
   "id": "example",
-  "indication": "Severe burn of left ear",
+  "indication": "Undefined in STU2",
   "location": "South Wing, second floor",
   "patient": "Peter James Chalmers",
   "practitioner": "Dr Adam Careful",
   "priority": 5,
   "start": 2013-12-10T09:00:00.000Z,
   "status": "booked",
-  "supportingInfo": "DiagnosticReport/ultrasound",
+  "supportingInfo": "Undefined in STU2",
   "title": "Brian MRI results discussion",
 }
 `;
@@ -23,7 +23,7 @@ Object {
 exports[`map FHIR Condition resource to internal data model 1`] = `
 Object {
   "bodySite": "Left Ear",
-  "clinicalStatus": "active",
+  "clinicalStatus": "Undefined in STU2",
   "onsetDateTime": 2012-05-24T00:00:00.000Z,
   "severity": "Severe",
   "summary": "Burnt Ear",
@@ -33,32 +33,26 @@ Object {
 
 exports[`map FHIR Medication resource to internal data model 1`] = `
 Object {
-  "content": "Vancomycin 500mg powder for infusion solution vial (product)",
-  "form": "Injection Solution (qualifier value)",
-  "id": "med0301",
-  "imageURL": "Vancomycin Image",
+  "content": "Undefined in STU2",
+  "form": "Capsule",
+  "id": "medexample006",
+  "imageURL": "Undefined in STU2",
   "isBrand": true,
-  "isOverTheCounter": false,
-  "name": "Vancomycin Hydrochloride (VANCOMYCIN HYDROCHLORIDE)",
-  "producer": "Pfizer Laboratories Div Pfizer Inc",
+  "isOverTheCounter": "Undefined in STU2",
+  "name": "Apo-Amoxi Cap 250mg",
+  "producer": "Undefined in STU2",
 }
 `;
 
 exports[`map FHIR Patient resource to internal user data model 1`] = `
 Object {
-  "address": "534 Erewhon St, PleasantVille, Vic, 3999, US",
+  "address": "534 Erewhon St, PleasantVille, Rainbow, Vic, 3999",
   "birthDate": "1974-12-25",
-  "careProvider": "Dr Example",
-  "email": "peter@live.com",
+  "careProvider": "Undefined in STU2",
+  "email": "Undefined in STU2",
   "gender": "male",
-  "name": "Chalmers",
-  "phone": Array [
-    Object {
-      "system": "phone",
-      "use": "work",
-      "value": "(03) 5555 6473",
-    },
-  ],
+  "name": "Peter James Chalmers",
+  "phone": "(03) 5555 6473",
   "role": "Patient",
 }
 `;
