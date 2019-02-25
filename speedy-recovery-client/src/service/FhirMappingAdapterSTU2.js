@@ -70,7 +70,7 @@ const mapMedicationSTU2 = fhirMedResource => ({
   producer: "Undefined in STU2",
   name: getMedName(fhirMedResource.code),
   isBrand:
-    fhirMedResource.isBrand !== "undefined"
+    fhirMedResource.isBrand !== undefined
       ? fhirMedResource.isBrand
       : missingField,
   isOverTheCounter: "Undefined in STU2",

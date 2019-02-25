@@ -74,11 +74,11 @@ const mapMedicationSTU3 = fhirMedResource => ({
   producer: getProducer(fhirMedResource.contained),
   name: getMedName(fhirMedResource.code),
   isBrand:
-    fhirMedResource.isBrand !== "undefined"
+    fhirMedResource.isBrand !== undefined
       ? fhirMedResource.isBrand
       : missingField,
   isOverTheCounter:
-    fhirMedResource.isOverTheCounter !== "undefined"
+    fhirMedResource.isOverTheCounter !== undefined
       ? fhirMedResource.isOverTheCounter
       : missingField,
   form: getForm(fhirMedResource.form),
