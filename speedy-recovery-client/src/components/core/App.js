@@ -160,12 +160,10 @@ class App extends Component {
         const filteredPatient = filterPatientResource(currentUserResource);
         if (filteredPatient) {
             user = fhirMapPatient(filteredPatient, this.state.fhirVersion);
-            console.log("Patient Resource after mapping: ", filteredPatient);
+            console.log("User Resource after mapping: ", user);
         } else {
             console.log("Crucial information missing from resource: ", filteredPatient);
         }
-
-        console.log("Mapped user ResourceType: ", user.role);
         return user;
   }
 

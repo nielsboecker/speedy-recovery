@@ -54,7 +54,7 @@ class ProfilePage extends Component {
                   <Table.Cell>Phone</Table.Cell>
                   <Table.Cell>
                     <Icon name="phone" />
-                    {this.props.user.phone && this.props.user.phone[0].value}
+                    {this.props.user.phone}
                   </Table.Cell>
                 </Table.Row>
               </Table.Body>
