@@ -5,7 +5,7 @@ import exampleUser from "../test_input/internal/ExampleUser.json";
 import PatientInfo from "../../components/secured/patientinformation/PatientInfo";
 import ParentInfo from "../../components/secured/patientinformation/ParentInfo";
 import PractitionerInfo from "../../components/secured/patientinformation/PractitionerInfo";
-import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatient.json";
+import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatientSTU3.json";
 
 Enzyme.configure({ adapter: new Adapter() });
 

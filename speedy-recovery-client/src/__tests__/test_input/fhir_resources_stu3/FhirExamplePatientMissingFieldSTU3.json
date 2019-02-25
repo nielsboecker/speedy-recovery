@@ -1,0 +1,52 @@
+{
+    "resourceType": "Patient",
+    "id": "smart-7777701",
+    "meta": {
+      "versionId": "2",
+      "lastUpdated": "2018-04-25T02:41:23.008-04:00",
+      "tag": [
+        {
+          "system": "https://smarthealthit.org/tags",
+          "code": "smart-7-2017"
+        }
+      ]
+    },
+    "text": {
+      "status": "generated",
+      "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Steve Richey</div>"
+    },
+    "identifier": [
+      {
+        "use": "official",
+        "type": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/v2/0203",
+              "code": "MR",
+              "display": "Medical Record Number"
+            }
+          ],
+          "text": "Medical Record Number"
+        },
+        "system": "http://hospital.smarthealthit.org",
+        "value": "smart-7777701"
+      }
+    ],
+    "active": true,
+    "name": [
+      {
+        "use": "official",
+        "family": "Richey",
+        "given": [
+          "Steve"
+        ]
+      }
+    ],
+    "gender": "male",
+    "birthDate": "2011-09-16",
+    "generalPractitioner": [
+      {
+        "reference": "Practitioner/smart-Practitioner-71081332"
+      }
+    ]
+  }
