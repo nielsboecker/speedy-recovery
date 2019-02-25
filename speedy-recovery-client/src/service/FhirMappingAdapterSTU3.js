@@ -9,7 +9,7 @@ import {
   getPractitioner,
   getSeverity,
   getSummary
-} from "./FhirJsonCommonExtractionTools";
+} from "./FhirDataMappingExtractionUtils";
 
 const mapPatientToUserSTU3 = fhirPatientResource => ({
   //This is a temporary hard-code fix as we have not implemented the searching for a patients' parent

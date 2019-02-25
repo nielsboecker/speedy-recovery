@@ -38,24 +38,28 @@ const fhirMapAppointment = (resource, version) => {
 };
 
 const fhirMapCondition = (resource, version) => {
-  switch (version[0]) {
-    case "2":
-      return mapConditionSTU2(resource);
-    case "3":
-      return mapConditionSTU3(resource);
-    default:
-      console.log("Invalid version of FHIR resource provided: ", version);
+  if (version) {
+    switch (version[0]) {
+      case "2":
+        return mapConditionSTU2(resource);
+      case "3":
+        return mapConditionSTU3(resource);
+      default:
+        console.log("Invalid version of FHIR resource provided: ", version);
+    }
   }
 };
 
 const fhirMapMedication = (resource, version) => {
-  switch (version[0]) {
-    case "2":
-      return mapMedicationSTU2(resource);
-    case "3":
-      return mapMedicationSTU3(resource);
-    default:
-      console.log("Invalid version of FHIR resource provided: ", version);
+  if (version) {
+    switch (version[0]) {
+      case "2":
+        return mapMedicationSTU2(resource);
+      case "3":
+        return mapMedicationSTU3(resource);
+      default:
+        console.log("Invalid version of FHIR resource provided: ", version);
+    }
   }
 };
 

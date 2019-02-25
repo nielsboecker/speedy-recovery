@@ -84,7 +84,7 @@ class SecuredMainPage extends Component {
 
   updateStateAppointments = () => {
     // TODO: Query SMART, display appointment data for current user
-    const appointments = fhirExampleApp.map((app) => fhirMapAppointment(app, "3"));
+    const appointments = fhirExampleApp.map((app) => fhirMapAppointment(app, this.props.fhirVersion));
 
     this.setState({ appointments });
   };
