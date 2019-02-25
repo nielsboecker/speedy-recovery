@@ -4,10 +4,10 @@ const filterPatientResource = resource => {
     resource &&
     resource.name &&
     resource.name[0] &&
-    resource.name[0].family
+    resource.name[0].family &&
+    resource.resourceType
   ) {
-    const requiredFields = [resource.resourceType, resource.name[0].family];
-    return requiredFields.every(element => element) ? resource : null;
+    return resource;
   }
   return null;
 };
@@ -17,33 +17,27 @@ const filterAppointmentResource = resource => {
     resource &&
     resource.participant[2] &&
     resource.participant[2].actor &&
-    resource.participant[2].actor.display
+    resource.participant[2].actor.display &&
+    resource.text &&
+    resource.text.div &&
+    resource.start &&
+    resource.end
   ) {
-    // title, start, end, location
-    const requiredFields = [
-      resource.text.div,
-      resource.start,
-      resource.end,
-      resource.participant[2].actor.display
-    ];
-    return requiredFields.every(element => element) ? resource : null;
+    return resource;
   }
   return null;
 };
 
 const filterConditionResource = resource => {
-  // severity, summary
   if (
     resource &&
     resource.severity &&
     resource.severity.coding[0] &&
-    resource.severity.coding[0].display
+    resource.severity.coding[0].display &&
+    resource.code &&
+    resource.code.text
   ) {
-    const requiredFields = [
-      resource.severity.coding[0].display,
-      resource.code.text
-    ];
-    return requiredFields.every(element => element) ? resource : null;
+    return resource;
   }
   return null;
 };
@@ -53,14 +47,10 @@ const filterMedicationResource = resource => {
     resource &&
     resource.code &&
     resource.code.coding[0] &&
-    resource.code.coding[0].display
+    resource.code.coding[0].display &&
+    resource.isOverTheCounter + ""
   ) {
-    // name, isOverTheCounter
-    const requiredFields = [
-      resource.code.coding[0].display,
-      resource.isOverTheCounter + ""
-    ];
-    return requiredFields.every(element => element) ? resource : null;
+    return resource;
   }
   return null;
 };
