@@ -18,7 +18,7 @@ class App extends Component {
       patient: {},
       authRequestStarted: false,
       error: null,
-        fhirVersion: null
+      fhirVersion: null
     };
   }
 
