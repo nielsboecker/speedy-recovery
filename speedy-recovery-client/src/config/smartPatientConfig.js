@@ -3,7 +3,8 @@ const smartSandboxConfigs = {
   patientSandbox_stu3_1:
     "https://launch.smarthealthit.org/v/r3/sim/eyJrIjoiMSIsImIiOiJkMGQwY2RlMC00YjIxLTQyZjYtOWMxZS1iZmE0NDdkNzIw" +
     "NTkifQ/fhir",
-  patientSandbox_stu2_1: "https://launch.smarthealthit.org/v/r2/sim/eyJrIjoiMSIsImoiOiIxIiwiYiI6ImMxYmM2Y2NiLWM" +
+  patientSandbox_stu2_1:
+    "https://launch.smarthealthit.org/v/r2/sim/eyJrIjoiMSIsImoiOiIxIiwiYiI6ImMxYmM2Y2NiLWM" +
     "1MzEtNGQ2Ny1iYjVlLWRkMWZhMjEwY2QxOCJ9/fhir"
 };
 
