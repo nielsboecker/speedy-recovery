@@ -113,21 +113,6 @@ class App extends Component {
     this.setState({ fhirClient });
     console.log("Received FHIR client: ", fhirClient);
 
-    // TODO @Josh/Fabiha: This is just a dirty hack to show what went wrong here.
-    // When the page loads (also, after the redirect from the sandbox) it
-    // is possible that the SMART on FHIR callback is faster than the AJAX
-    // call to the FHIR server endpoint. Therefore, this.state.fhirVersion
-    // was undefined in the fhirMapPatient method call.
-    //
-    // Please note that this will now also crash when you try to run it and combine
-    // it with a FHIR STU3 sandbox config (as this code enforces STU2 mappings etc).
-    //
-    // Please think of an elegant way to solve this.
-    if (!this.state.fhirVersion) {
-      console.error("Auth callback was quicker than server info!");
-      this.setState({ fhirVersion: "1.0.2" });
-    }
-
     fhirClient.user
       .read()
       .then(currentUserResource => {
