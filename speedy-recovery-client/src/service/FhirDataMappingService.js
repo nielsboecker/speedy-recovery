@@ -13,6 +13,7 @@ import {
 
 const fhirMapPatient = (resource, version) => {
   switch (version[0]) {
+    case "1":
     case "2":
       return mapPatientToUserSTU2(resource);
     case "3":
@@ -24,6 +25,7 @@ const fhirMapPatient = (resource, version) => {
 
 const fhirMapAppointment = (resource, version) => {
   switch (version[0]) {
+    case "1":
     case "2":
       return mapAppointmentSTU2(resource);
     case "3":
@@ -35,6 +37,7 @@ const fhirMapAppointment = (resource, version) => {
 
 const fhirMapCondition = (resource, version) => {
   switch (version[0]) {
+    case "1":
     case "2":
       return mapConditionSTU2(resource);
     case "3":
@@ -46,6 +49,7 @@ const fhirMapCondition = (resource, version) => {
 
 const fhirMapMedication = (resource, version) => {
   switch (version[0]) {
+    case "1":
     case "2":
       return mapMedicationSTU2(resource);
     case "3":
