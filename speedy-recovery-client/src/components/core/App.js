@@ -115,11 +115,11 @@ class App extends Component {
 
     // TODO @Josh/Fabiha: This is just a dirty hack to show what went wrong here.
     // When the page loads (also, after the redirect from the sandbox) it
-    // is possible that the SMART on FHpIR callback is faster than the AJAX
+    // is possible that the SMART on FHIR callback is faster than the AJAX
     // call to the FHIR server endpoint. Therefore, this.state.fhirVersion
     // was undefined in the fhirMapPatient method call.
     //
-    // Please not that this will now also crash when you try to run it and combine
+    // Please note that this will now also crash when you try to run it and combine
     // it with a FHIR STU3 sandbox config (as this code enforces STU2 mappings etc).
     //
     // Please think of an elegant way to solve this.
