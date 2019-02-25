@@ -4,7 +4,10 @@ import CapabilityStatement_STU3_allResourcesAvailable
   from "../test_input/fhir_server/FhirExampleCapabilityStatement_STU3_allResourcesAvailable.json";
 import CapabilityStatement_STU3_PatientResourceMissing
   from "../test_input/fhir_server/FhirExampleCapabilityStatement_STU3_PatientResourceMissing.json";
-import CapabilityStatement_STU2 from "../test_input/fhir_server/FhirExampleCapabilityStatement_STU2.json";
+import CapabilityStatement_STU2_allResourcesAvailable
+  from "../test_input/fhir_server/FhirExampleCapabilityStatement_STU2_allResourcesAvailable.json";
+import CapabilityStatement_wrongFhirVersion
+  from "../test_input/fhir_server/FhirExampleCapabilityStatement_wrongFhirVersion";
 
 // Mock fetch()
 global.fetch = FetchMock;
@@ -13,7 +16,7 @@ beforeEach(() => {
   fetch.resetMocks();
 });
 
-test("success when FHIR server is valid", async () => {
+test("success when FHIR server is STU3 (3.0.1)", async () => {
   fetch.mockResponseOnce(
     JSON.stringify(CapabilityStatement_STU3_allResourcesAvailable)
   );
@@ -21,6 +24,17 @@ test("success when FHIR server is valid", async () => {
   await expect(
     FhirServerService.checkFhirCapabilityStatement()
   ).resolves.toEqual(CapabilityStatement_STU3_allResourcesAvailable);
+  expect(fetch.mock.calls.length).toEqual(1);
+});
+
+test("success when FHIR server is DSTU2 (1.0.2)", async () => {
+  fetch.mockResponseOnce(
+    JSON.stringify(CapabilityStatement_STU2_allResourcesAvailable)
+  );
+
+  await expect(
+    FhirServerService.checkFhirCapabilityStatement()
+  ).resolves.toEqual(CapabilityStatement_STU2_allResourcesAvailable);
   expect(fetch.mock.calls.length).toEqual(1);
 });
 
@@ -36,7 +50,7 @@ test("failure when FHIR server lacks support for required resources", async () =
 });
 
 test("failure when FHIR server supports wrong version of FHIR standard", async () => {
-  fetch.mockResponseOnce(JSON.stringify(CapabilityStatement_STU2));
+  fetch.mockResponseOnce(JSON.stringify(CapabilityStatement_wrongFhirVersion));
 
   await expect(
     FhirServerService.checkFhirCapabilityStatement()
