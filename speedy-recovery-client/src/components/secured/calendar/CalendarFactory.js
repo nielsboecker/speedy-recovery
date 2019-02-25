@@ -36,7 +36,9 @@ class CalendarFactory extends React.Component {
           />
         );
       default:
-        console.error(`Cannot render calendar for user role "${this.props.role}"`);
+        console.error(
+          `Cannot render calendar for user role "${this.props.role}"`
+        );
         return null;
     }
   }

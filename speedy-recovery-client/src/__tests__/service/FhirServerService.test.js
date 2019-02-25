@@ -9,6 +9,7 @@ import CapabilityStatement_STU2_allResourcesAvailable
 import CapabilityStatement_wrongFhirVersion
   from "../test_input/fhir_server/FhirExampleCapabilityStatement_wrongFhirVersion";
 
+
 // Mock fetch()
 global.fetch = FetchMock;
 

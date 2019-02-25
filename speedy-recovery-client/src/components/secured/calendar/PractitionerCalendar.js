@@ -128,8 +128,8 @@ class PractitionerCalendar extends React.Component {
                           <Table.Cell data-label="Created">
                             {this.state.appointment.start !== undefined
                               ? this.state.appointment.start.toLocaleDateString() +
-                              " at " +
-                              this.state.appointment.start.toLocaleTimeString()
+                                " at " +
+                                this.state.appointment.start.toLocaleTimeString()
                               : ""}
                           </Table.Cell>
                         </Table.Row>

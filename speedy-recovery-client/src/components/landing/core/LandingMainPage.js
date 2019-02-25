@@ -5,10 +5,10 @@ import { Redirect } from "react-router-dom";
 class LandingMainPage extends Component {
   render() {
     if (this.props.user) {
-      return <Redirect to="/secured"/>;
+      return <Redirect to="/secured" />;
     }
 
-    return <StartPage onLogin={this.props.onLogin}/>;
+    return <StartPage onLogin={this.props.onLogin} />;
   }
 }
 

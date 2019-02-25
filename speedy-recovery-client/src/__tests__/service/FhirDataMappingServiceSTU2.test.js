@@ -6,6 +6,7 @@ import fhirShortApp from "../test_input/fhir_resources_stu2/FhirExampleAppointme
 import fhirExampleCondition from "../test_input/fhir_resources_stu2/FhirExampleConditionSTU2.json";
 import fhirExampleMedication from "../test_input/fhir_resources_stu2/FhirExampleMedicationSTU2.json";
 
+
 test("map FHIR Patient resource to internal user data model", () => {
   const user = fhirMapPatient(fhirExamplePatient, "2");
   expect(user).toMatchSnapshot();

@@ -37,7 +37,7 @@ class App extends Component {
                 />
               )}
             />
-            <Redirect to="/error"/>
+            <Redirect to="/error" />
           </Switch>
         </BrowserRouter>
       );
@@ -171,7 +171,7 @@ class App extends Component {
   handleLoginError = errorMessage => {
     if (
       errorMessage ===
-      "No 'state' parameter found in authorization response." &&
+        "No 'state' parameter found in authorization response." &&
       !this.state.authRequestStarted
     ) {
       // SMART JS library will always try to login based on last stored token, which leads to this error at initial page load
