@@ -47,7 +47,7 @@ Object {
 exports[`map FHIR Patient resource to internal user data model 1`] = `
 Object {
   "address": "534 Erewhon St, PleasantVille, Rainbow, Vic, 3999",
-  "birthDate": 1974-12-25T00:00:00.000Z,
+  "birthDate": "1974-12-25",
   "careProvider": "Undefined in STU2",
   "email": "Undefined in STU2",
   "gender": "male",

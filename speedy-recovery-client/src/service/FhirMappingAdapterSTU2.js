@@ -11,6 +11,7 @@ import {
   getSummary
 } from "./FhirDataMappingExtractionUtils";
 
+const missingField = "Unknown";
 const mapPatientToUserSTU2 = fhirPatientResource => ({
   //This is a temporary hard-code fix as we have not implemented the searching for a patients' parent
   role:
@@ -20,9 +21,11 @@ const mapPatientToUserSTU2 = fhirPatientResource => ({
 
   name: getName(fhirPatientResource.name),
   birthDate: fhirPatientResource.birthDate
-    ? new Date(fhirPatientResource.birthDate)
-    : "Unknown",
-  gender: fhirPatientResource.gender ? fhirPatientResource.gender : "Unknown",
+    ? fhirPatientResource.birthDate
+    : missingField,
+  gender: fhirPatientResource.gender
+    ? fhirPatientResource.gender
+    : missingField,
   careProvider: "Undefined in STU2",
   address: getAddress(fhirPatientResource.address),
   phone: getPhone(fhirPatientResource.telecom),
@@ -30,20 +33,20 @@ const mapPatientToUserSTU2 = fhirPatientResource => ({
 });
 
 const mapAppointmentSTU2 = fhirAppResource => ({
-  id: fhirAppResource.id ? fhirAppResource.id : "Unknown",
+  id: fhirAppResource.id ? fhirAppResource.id : missingField,
   title: getTitle(fhirAppResource.text),
-  status: fhirAppResource.status ? fhirAppResource.status : "Unknown",
+  status: fhirAppResource.status ? fhirAppResource.status : missingField,
   appType: "Undefined in STU2",
   indication: "Undefined in STU2",
-  priority: fhirAppResource.priority ? fhirAppResource.priority : "Unknown",
+  priority: fhirAppResource.priority ? fhirAppResource.priority : missingField,
   description: fhirAppResource.description
     ? fhirAppResource.description
-    : "Unknown",
+    : missingField,
   supportingInfo: "Undefined in STU2",
-  start: fhirAppResource.start ? new Date(fhirAppResource.start) : "Unknown",
-  end: fhirAppResource.end ? new Date(fhirAppResource.end) : "Unknown",
+  start: fhirAppResource.start ? new Date(fhirAppResource.start) : missingField,
+  end: fhirAppResource.end ? new Date(fhirAppResource.end) : missingField,
   created: "Undefined in STU2",
-  comment: fhirAppResource.comment ? fhirAppResource.comment : "Unknown",
+  comment: fhirAppResource.comment ? fhirAppResource.comment : missingField,
   patient: getPatient(fhirAppResource.participant),
   practitioner: getPractitioner(fhirAppResource.participant),
   location: getLocation(fhirAppResource.participant)
@@ -53,23 +56,23 @@ const mapConditionSTU2 = fhirCondResource => ({
   clinicalStatus: "Undefined in STU2",
   verificationStatus: fhirCondResource.verificationStatus
     ? fhirCondResource.verificationStatus
-    : "Unknown",
+    : missingField,
   severity: getSeverity(fhirCondResource.severity),
   summary: getSummary(fhirCondResource.code),
   bodySite: getbodySite(fhirCondResource.bodySite),
   onsetDateTime: fhirCondResource.onsetDateTime
     ? new Date(fhirCondResource.onsetDateTime)
-    : "Unknown"
+    : missingField
 });
 
 const mapMedicationSTU2 = fhirMedResource => ({
-  id: fhirMedResource.id ? fhirMedResource.id : "Unknown",
+  id: fhirMedResource.id ? fhirMedResource.id : missingField,
   producer: "Undefined in STU2",
   name: getMedName(fhirMedResource.code),
   isBrand:
-    typeof fhirMedResource.isBrand !== "undefined"
+    fhirMedResource.isBrand !== "undefined"
       ? fhirMedResource.isBrand
-      : "Unknown",
+      : missingField,
   isOverTheCounter: "Undefined in STU2",
   form: getForm(fhirMedResource.product.form),
   content: "Undefined in STU2",
@@ -98,14 +101,14 @@ const getAddress = address => {
       address[0].postalCode
     );
   }
-  return "Unknown";
+  return missingField;
 };
 
 const getTitle = text => {
   if (text && text.div) {
     return text.div.substring(5, text.div.length - 6);
   }
-  return "Unknown";
+  return missingField;
 };
 
 export {

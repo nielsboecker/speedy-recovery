@@ -3,21 +3,16 @@ import React, { Component } from "react";
 class PatientInfo extends Component {
   render() {
     const { user } = this.props;
-
-    //TODO: fix the getDate call below
-    //let birthday = user.birthDate;
-    //console.log(birthday);
-    // const bDate = birthday.getDate();
-    // const bMonth = birthday.getMonth() + 1; // january starts from 0
-    // const bYear = birthday.getFullYear();
-    // birthday = bDate + '/' + bMonth + '/' + bYear;
+    let birthday = new Date(user.birthDate);
+    const bMonth = birthday.getMonth() + 1; // january starts from 0
+    birthday = birthday.getDate() + '/' + bMonth + '/' + birthday.getFullYear();
 
     return (
       <div>
         <h1>Patient Information For Patient View</h1>
         <h4>Name: {user.name}</h4>
         <h4>Gender: {user.gender}</h4>
-        
+        <h4>Birthday: {birthday}</h4> 
       </div>
     );
   }
