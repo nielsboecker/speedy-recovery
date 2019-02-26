@@ -81,20 +81,21 @@ class SecuredMainPage extends Component {
   }
 
   componentWillMount() {
-    clearTimeout(this.updateStateAppointments);
+    this.updateStateAppointments();
   }
 
   updateStateAppointments = () => {
-    FhirDataQueryingService.getUserAppointment(this.props.user.id)
-      .then(appointment => {
-        const appointments = this.handleAppointment(appointment);
-        this.setState({ appointments });
-      }).catch(errorMessage=>{this.setState([])});
+    if(this.props.user !== null){
+      FhirDataQueryingService.getUserAppointment(this.props.user.id)
+        .then(appointment => {
+          const appointments = this.handleAppointment(appointment);
+          this.setState({ appointments });
+        }).catch(errorMessage=>{this.setState([])});
+    }
   };
 
   handleAppointment = appointment => {
-    const appointments = appointment.data.entry.map((app) => (fhirMapAppointment(app.resource, this.props.fhirVersion)));
-    return appointments;
+    return appointment.data.entry.map((app) => (fhirMapAppointment(app.resource, this.props.fhirVersion)));
   };
 }
 
