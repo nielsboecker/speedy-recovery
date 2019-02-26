@@ -51,6 +51,7 @@ Object {
   "careProvider": "Undefined in STU2",
   "email": "Undefined in STU2",
   "gender": "male",
+  "id": "example",
   "name": "Peter James Chalmers",
   "phone": "(03) 5555 6473",
   "role": "Patient",

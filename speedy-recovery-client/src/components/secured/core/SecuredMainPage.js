@@ -10,7 +10,7 @@ import ConversationPage from "../conversation/ConversationPage";
 import {fhirMapAppointment} from "../../../service/FhirDataMappingService";
 import InfoFactory from "../patientinformation/InfoFactory";
 import CalendarFactory from "../calendar/CalendarFactory";
-import fhirExampleApp from "../../../__tests__/test_input/fhir_resources_stu3/FhirMultipleExampleAppointmentsSTU3.json";
+import FhirDataQueryingService from "../../../service/FhirDataQueryingService";
 
 class SecuredMainPage extends Component {
   constructor(props) {
@@ -85,10 +85,23 @@ class SecuredMainPage extends Component {
   }
 
   updateStateAppointments = () => {
-    // TODO: Query SMART, display appointment data for current user
-    const appointments = fhirExampleApp.map((app) => fhirMapAppointment(app, this.props.fhirVersion));
+    FhirDataQueryingService.getUserAppointment(this.props.user.id)
+      .then(appointment => {
+        const appointments = this.handleAppointment(appointment);
+        this.setState({ appointments });
+      }).catch(errorMessage=>{this.setState([])});
+  };
 
-    this.setState({ appointments });
+  handleAppointment = appointment => {
+    const appointments = [];
+    if(appointment.data.total !== 0){
+      for (var i = 0; i < appointment.data.entry.length; i++){
+        const fhirAppointment = appointment.data.entry[i].resource;
+        const mappedAppointment = fhirMapAppointment(fhirAppointment, this.props.fhirVersion);
+        appointments.push(mappedAppointment);
+      }
+    }
+    return appointments;
   };
 }
 

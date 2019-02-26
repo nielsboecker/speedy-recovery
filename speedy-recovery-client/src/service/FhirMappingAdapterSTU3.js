@@ -14,6 +14,7 @@ import {
 const missingField = "Unknown";
 const mapPatientToUserSTU3 = fhirPatientResource => ({
   //This is a temporary hard-code fix as we have not implemented the searching for a patients' parent
+  id: fhirPatientResource.id ? fhirPatientResource.id : "Unknown",
   role:
     fhirPatientResource.id === "f0462936-eb4b-4da1-b45a-fbd96ebf8ccb"
       ? "Parent"
