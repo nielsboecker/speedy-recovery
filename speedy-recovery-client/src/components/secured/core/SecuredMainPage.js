@@ -81,7 +81,7 @@ class SecuredMainPage extends Component {
   }
 
   componentWillMount() {
-    this.updateStateAppointments();
+    clearTimeout(this.updateStateAppointments);
   }
 
   updateStateAppointments = () => {
@@ -93,14 +93,7 @@ class SecuredMainPage extends Component {
   };
 
   handleAppointment = appointment => {
-    const appointments = [];
-    if(appointment.data.total !== 0){
-      for (var i = 0; i < appointment.data.entry.length; i++){
-        const fhirAppointment = appointment.data.entry[i].resource;
-        const mappedAppointment = fhirMapAppointment(fhirAppointment, this.props.fhirVersion);
-        appointments.push(mappedAppointment);
-      }
-    }
+    const appointments = appointment.data.entry.map((app) => (fhirMapAppointment(app.resource, this.props.fhirVersion)));
     return appointments;
   };
 }
