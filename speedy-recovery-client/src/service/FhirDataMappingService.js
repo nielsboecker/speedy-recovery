@@ -3,7 +3,7 @@ import {
   mapConditionSTU2,
   mapMedicationSTU2,
   mapPatientToUserSTU2
-} from "./FhirMappingAdapterSTU2";
+} from "./FhirMappingAdapterDSTU2";
 import {
   mapAppointmentSTU3,
   mapConditionSTU3,
