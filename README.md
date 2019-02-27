@@ -1,4 +1,20 @@
-[![Build status](https://dev.azure.com/ucabnbo/Speedy%20Recovery/_apis/build/status/speedy-recovery-rg%20-%20CI)](https://dev.azure.com/ucabnbo/Speedy%20Recovery/_build/latest?definitionId=1)
+<p align="center">
+  <a href="https://dev.azure.com/ucabnbo/Speedy%20Recovery/_build/latest?definitionId=1" alt="Build Status">
+    <img src="https://dev.azure.com/ucabnbo/Speedy%20Recovery/_apis/build/status/speedy-recovery-rg%20-%20CI" />
+  </a>
+  
+  <a href="https://github.com/nbckr/speedy-recovery/pulls" alt="Pull Requests Welcome">
+    <img src="https://camo.githubusercontent.com/7509b1327eb1be79c73071b83001358349629e81/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5052732d77656c636f6d652d6666363962342e737667" />
+  </a>
+  
+  <a href="https://donate.gosh.org/" alt="Donate to Charity">
+    <img src="https://camo.githubusercontent.com/ff07592344dc21c343e4180648b2155a6a899ad7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446f6e6174652d436861726974792d6f72616e67652e737667" />
+  </a>
+</p>
+
+<p align="center">
+    <img src="./speedy-recovery-client/public/images/logo_with_title.png" height="120">
+</p>
 
 # Speedy Recovery
 GOSH (Great Ormond Street Hospital) and its digital unit GOSH DRIVE (Digital Research Informatics and Virtual Environments) are committed to making young patients’ hospital stays as tolerable as possible. Inherently, this goal can only be achieved if parents are assured and confident, and hospital staff is well-informed and approachable. 
@@ -14,6 +30,8 @@ The client can be found in the `/speedy-recovery-client` folder.
 
 ## Back-end
 The back-end will be implemented in a later iteration.
+
+-----
 
 # Licence
 Speedy Recovery -- A SMART on FHIR enabled web-app providing clinical information,
