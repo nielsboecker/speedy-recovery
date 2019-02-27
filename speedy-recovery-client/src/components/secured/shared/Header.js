@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import {
-  Container,
-  Dropdown,
-  Icon,
-  Image,
-  Label,
-  Menu
-} from "semantic-ui-react";
+import { Container, Dropdown, Icon, Image, Label, Menu } from "semantic-ui-react";
 import "./Header.css";
 
 class Header extends Component {
@@ -17,15 +10,15 @@ class Header extends Component {
         <Menu borderless>
           <Container text>
             <Menu.Item header as={Link} to="/secured/home">
-              <Image size="mini" src="https://react.semantic-ui.com/logo.png" />
+              <Image src="images/logo_square.png" size="mini" spaced="right"/>
               Speedy Recovery
             </Menu.Item>
             <Menu.Item as={Link} to="/secured/calendar">
-              <Icon name="calendar alternate" />
+              <Icon name="calendar alternate"/>
               Calendar
             </Menu.Item>
             <Menu.Item as={Link} to="/secured/messaging">
-              <Icon name="mail" />
+              <Icon name="mail"/>
               Messages
               <Label color="teal" circular floating>
                 2
@@ -43,11 +36,11 @@ class Header extends Component {
               >
                 <Dropdown.Menu>
                   <Dropdown.Item as={Link} to="/secured/profile">
-                    <Icon name="user" />
+                    <Icon name="user"/>
                     My Profile
                   </Dropdown.Item>
                   <Dropdown.Item onClick={this.props.onLogout}>
-                    <Icon name="log out" />
+                    <Icon name="log out"/>
                     Log Out
                   </Dropdown.Item>
                 </Dropdown.Menu>
