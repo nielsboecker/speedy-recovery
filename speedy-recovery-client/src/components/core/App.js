@@ -157,7 +157,6 @@ class App extends Component {
         const appointments = appointmentResource.map(appointment =>
           fhirMapAppointment(appointment, this.state.fhirVersion)
         );
-        console.log("Appointments Resource after mapping: ", appointments);
         this.setState({ appointments });
       })
       .catch(error => {
