@@ -13,6 +13,7 @@ import {
 
 const missingField = "Unknown";
 const mapPatientToUserSTU3 = fhirPatientResource => ({
+  id: fhirPatientResource.id ? fhirPatientResource.id : missingField,
   //This is a temporary hard-code fix as we have not implemented the searching for a patients' parent
   role:
     fhirPatientResource.id === "f0462936-eb4b-4da1-b45a-fbd96ebf8ccb"
@@ -21,7 +22,7 @@ const mapPatientToUserSTU3 = fhirPatientResource => ({
 
   name: getName(fhirPatientResource.name),
   birthDate: fhirPatientResource.birthDate
-    ? fhirPatientResource.birthDate
+    ? formatBirthDate(fhirPatientResource.birthDate)
     : missingField,
   gender: fhirPatientResource.gender
     ? fhirPatientResource.gender
@@ -193,6 +194,13 @@ const getContent = packageC => {
 const getImageURL = image => {
   if (image && image[0] && image[0].title) {
     return image[0].title;
+  }
+  return missingField;
+};
+
+const formatBirthDate = birthDate => {
+  if (birthDate) {
+    return new Date(birthDate).toLocaleDateString("en-uk");
   }
   return missingField;
 };

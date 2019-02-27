@@ -13,25 +13,16 @@ class CalendarFactory extends React.Component {
     switch (this.props.role) {
       case "Patient":
         return (
-          <PatientCalendar
-            events={this.props.events}
-            onChange={this.props.onChange}
-            localizer={localizer}
-          />
+          <PatientCalendar events={this.props.events} localizer={localizer} />
         );
       case "Parent":
         return (
-          <ParentCalendar
-            events={this.props.events}
-            onChange={this.props.onChange}
-            localizer={localizer}
-          />
+          <ParentCalendar events={this.props.events} localizer={localizer} />
         );
       case "Practitioner":
         return (
           <PractitionerCalendar
             events={this.props.events}
-            onChange={this.props.onChange}
             localizer={localizer}
           />
         );

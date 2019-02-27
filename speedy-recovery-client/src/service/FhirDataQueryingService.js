@@ -1,0 +1,33 @@
+/*global FHIR */
+import "fhirclient/fhir-client";
+
+// Note: Currently, this service can be used for FHIR DSTU2 as well as STU3, as they are equal in terms of
+// the relevant fields for given queries. This might change if there are breaking changes in the standard
+// or more specific queries will be added.
+
+const getUserAppointments = userID => {
+  return new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      smart => {
+        smart.api
+          .search({ type: "Appointment", query: { actor: userID } })
+          .done(appointmentsBundle => {
+            console.log("User appointment response: ", appointmentsBundle);
+            const appointments = extractResourcesFromBundle(appointmentsBundle);
+            console.log("Appointments Resource after mapping: ", appointments);
+            return resolve(appointments);
+          });
+      },
+      error => {
+        console.error("Appointment fetching error: ", error);
+        return reject(error);
+      }
+    );
+  });
+};
+
+const extractResourcesFromBundle = appointments => appointments.data.entry.map(app => app.resource);
+
+export default {
+  getUserAppointments
+};

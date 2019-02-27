@@ -29,10 +29,6 @@ class PatientCalendar extends React.Component {
       </Grid>
     );
   }
-
-  componentDidMount() {
-    this.props.onChange();
-  }
 }
 
 export default PatientCalendar;
