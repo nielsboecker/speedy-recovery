@@ -7,10 +7,7 @@ import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
 import { filterPatientResource } from "../../service/FhirDataFilteringService";
-import {
-  fhirMapAppointment,
-  fhirMapPatient
-} from "../../service/FhirDataMappingService";
+import { fhirMapAppointment, fhirMapPatient } from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
 
 class App extends Component {
@@ -139,8 +136,8 @@ class App extends Component {
               );
               this.updateStatePatient(patientResource);
             })
-            .catch(err => {
-              console.log("The error is  ", err);
+            .catch(error => {
+              console.error(error);
             });
         }
         // else if(userType === "Parent"){
@@ -163,8 +160,8 @@ class App extends Component {
         console.log("Appointments Resource after mapping: ", appointments);
         this.setState({ appointments });
       })
-      .catch(errorMessage => {
-        console.log("The error is ", errorMessage);
+      .catch(error => {
+        console.error(error);
       });
   }
 
@@ -178,7 +175,7 @@ class App extends Component {
       console.log("Patient Resource after mapping: ", patient);
       this.setState({ patient });
     } else {
-      console.log(
+      console.error(
         "Crucial information missing from resource: ",
         patientResource
       );
@@ -192,7 +189,7 @@ class App extends Component {
       user = fhirMapPatient(filteredPatient, this.state.fhirVersion);
       console.log("User Resource after mapping: ", user);
     } else {
-      console.log(
+      console.error(
         "Crucial information missing from resource: ",
         filteredPatient
       );

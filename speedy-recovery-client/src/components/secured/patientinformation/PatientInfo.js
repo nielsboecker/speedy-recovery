@@ -3,9 +3,7 @@ import React, { Component } from "react";
 class PatientInfo extends Component {
   render() {
     const { user } = this.props;
-    let birthday = new Date(user.birthDate);
-    const bMonth = birthday.getMonth() + 1; // january starts from 0
-    birthday = birthday.getDate() + "/" + bMonth + "/" + birthday.getFullYear();
+    const birthday = new Date(user.birthDate).toLocaleDateString("en-uk");
 
     return (
       <div>
