@@ -7,7 +7,8 @@ import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
 import { filterPatientResource } from "../../service/FhirDataFilteringService";
-import { fhirMapPatient } from "../../service/FhirDataMappingService";
+import { fhirMapAppointment, fhirMapPatient } from "../../service/FhirDataMappingService";
+import FhirDataQueryingService from "../../service/FhirDataQueryingService";
 
 class App extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class App extends Component {
       fhirClient: {},
       user: null,
       patient: {},
+      appointments: [],
       authRequestStarted: false,
       error: null,
       fhirVersion: null
@@ -65,6 +67,7 @@ class App extends Component {
                 onLogout={this.handleLogoutRequest}
                 user={this.state.user}
                 patient={this.state.patient}
+                appointments = {this.state.appointments}
                 fhirVersion={this.state.fhirVersion}
               />
             )}
@@ -138,10 +141,20 @@ class App extends Component {
         //      user.role = "Parent";
         //      TODO
         // }
+        this.updateStateAppointment(user.id);
 
         this.setState({ user });
       })
       .catch(error => console.error(error));
+  };
+
+  updateStateAppointment (userId) {
+    FhirDataQueryingService.getUserAppointment(userId)
+      .then(appointmentResource => {
+        const appointments = appointmentResource.data.entry.map((app) => (fhirMapAppointment(app.resource, this.state.fhirVersion)));
+        console.log("Appointments Resource after mapping: ", appointments);
+        this.setState({appointments});})
+      .catch(errorMessage=>{console.log("The error is  ", errorMessage)});
   };
 
   updateStatePatient(patientResource) {
@@ -187,8 +200,6 @@ class App extends Component {
       }
     });
   };
-
-
 
   handleFhirServerError = () => {
     this.setState({

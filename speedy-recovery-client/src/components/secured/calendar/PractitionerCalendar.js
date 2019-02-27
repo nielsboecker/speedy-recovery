@@ -171,10 +171,6 @@ class PractitionerCalendar extends React.Component {
       </Grid>
     );
   }
-
-  componentDidMount() {
-    this.props.onChange();
-  }
 }
 
 export default PractitionerCalendar;

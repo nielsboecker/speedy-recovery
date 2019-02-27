@@ -15,7 +15,6 @@ class CalendarFactory extends React.Component {
         return (
           <PatientCalendar
             events={this.props.events}
-            onChange={this.props.onChange}
             localizer={localizer}
           />
         );
@@ -23,7 +22,6 @@ class CalendarFactory extends React.Component {
         return (
           <ParentCalendar
             events={this.props.events}
-            onChange={this.props.onChange}
             localizer={localizer}
           />
         );
@@ -31,7 +29,6 @@ class CalendarFactory extends React.Component {
         return (
           <PractitionerCalendar
             events={this.props.events}
-            onChange={this.props.onChange}
             localizer={localizer}
           />
         );

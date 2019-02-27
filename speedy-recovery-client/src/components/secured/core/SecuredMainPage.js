@@ -7,10 +7,8 @@ import HomePage from "../home/HomePage";
 import MessagingPage from "../messaging/MessagingPage";
 import ProfilePage from "../profile/ProfilePage";
 import ConversationPage from "../conversation/ConversationPage";
-import {fhirMapAppointment} from "../../../service/FhirDataMappingService";
 import InfoFactory from "../patientinformation/InfoFactory";
 import CalendarFactory from "../calendar/CalendarFactory";
-import FhirDataQueryingService from "../../../service/FhirDataQueryingService";
 
 class SecuredMainPage extends Component {
   constructor(props) {
@@ -43,8 +41,7 @@ class SecuredMainPage extends Component {
                 path={`${match.url}/calendar`}
                 render={() => (
                   <CalendarFactory
-                    events={this.state.appointments}
-                    onChange={this.updateStateAppointments}
+                    events={this.props.appointments}
                     role={this.props.user.role}
                   />
                 )}
@@ -79,24 +76,6 @@ class SecuredMainPage extends Component {
       </div>
     );
   }
-
-  componentWillMount() {
-    this.updateStateAppointments();
-  }
-
-  updateStateAppointments = () => {
-    if(this.props.user !== null){
-      FhirDataQueryingService.getUserAppointment(this.props.user.id)
-        .then(appointment => {
-          const appointments = this.handleAppointment(appointment);
-          this.setState({ appointments });
-        }).catch(errorMessage=>{this.setState([])});
-    }
-  };
-
-  handleAppointment = appointment => {
-    return appointment.data.entry.map((app) => (fhirMapAppointment(app.resource, this.props.fhirVersion)));
-  };
 }
 
 export default SecuredMainPage;
