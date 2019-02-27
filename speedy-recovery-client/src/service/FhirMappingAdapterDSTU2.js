@@ -22,7 +22,7 @@ const mapPatientToUserSTU2 = fhirPatientResource => ({
 
   name: getName(fhirPatientResource.name),
   birthDate: fhirPatientResource.birthDate
-    ? fhirPatientResource.birthDate
+    ? formatBirthDate(fhirPatientResource.birthDate)
     : missingField,
   gender: fhirPatientResource.gender
     ? fhirPatientResource.gender
@@ -108,6 +108,13 @@ const getAddress = address => {
 const getTitle = text => {
   if (text && text.div) {
     return text.div.substring(5, text.div.length - 6);
+  }
+  return missingField;
+};
+
+const formatBirthDate = birthDate => {
+  if (birthDate) {
+    return new Date(birthDate).toLocaleDateString("en-uk");
   }
   return missingField;
 };
