@@ -12,7 +12,7 @@ test("extracting data from bundle works for valid data", () => {
   const result = FhirDataQueryingService.extractResourcesFromBundle(appointmentsBundle);
 
   // then
-  // TODO @Fanbo Add assertions
+  expect(result).toMatchSnapshot();
 });
 
 test("extracting data from bundle works for empty data", () => {
@@ -25,5 +25,5 @@ test("extracting data from bundle works for empty data", () => {
   const result = FhirDataQueryingService.extractResourcesFromBundle(appointmentsBundle);
 
   // then
-  // TODO @Fanbo Add assertions
+  expect(result).toEqual([]);
 });
