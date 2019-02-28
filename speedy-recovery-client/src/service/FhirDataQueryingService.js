@@ -26,7 +26,8 @@ const getUserAppointments = userID => {
   });
 };
 
-const extractResourcesFromBundle = appointments => appointments.data.entry.map(app => app.resource);
+const extractResourcesFromBundle = appointments => 
+    appointments.data.total !== 0 ? appointments.data.entry.map(app => app.resource) : [];
 
 export default {
   getUserAppointments
