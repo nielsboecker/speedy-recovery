@@ -20,7 +20,8 @@ class App extends Component {
       appointments: [],
       authRequestStarted: false,
       error: null,
-      fhirVersion: null
+      fhirVersion: null,
+      id: "user1"
     };
   }
 
@@ -69,6 +70,7 @@ class App extends Component {
                 patient={this.state.patient}
                 appointments={this.state.appointments}
                 fhirVersion={this.state.fhirVersion}
+                id = {this.state.id}
               />
             )}
           />

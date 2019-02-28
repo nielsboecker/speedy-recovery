@@ -48,7 +48,11 @@ class SecuredMainPage extends Component {
               />
               <Route
                 path={`${match.url}/messaging`}
-                component={MessagingPage}
+                render={() => (
+                    <MessagingPage
+                        id = {this.props.id}
+                    />
+                )}
               />
               <Route
                 path={`${match.url}/profile`}
