@@ -1,4 +1,4 @@
-{
+[{
   "id": "example4",
   "title": "Chemo progress report",
   "status": "booked",
@@ -11,4 +11,4 @@
   "patient": "test",
   "practitioner": "test",
   "location": "test"
-}
+}]
