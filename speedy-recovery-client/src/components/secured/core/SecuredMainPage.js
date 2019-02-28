@@ -9,6 +9,7 @@ import ProfilePage from "../profile/ProfilePage";
 import ConversationPage from "../conversation/ConversationPage";
 import InfoFactory from "../patientinformation/InfoFactory";
 import CalendarFactory from "../calendar/CalendarFactory";
+import HomePageFactory from "../home/HomePageFactory";
 
 class SecuredMainPage extends Component {
   constructor(props) {
@@ -35,8 +36,16 @@ class SecuredMainPage extends Component {
             />
 
             <Container>
-              <Route path={`${match.url}`} exact component={HomePage} />
-              <Route path={`${match.url}/home`} component={HomePage} />
+              <Route path={`${match.url}`} exact
+                     render={() => <HomePageFactory
+                       user={this.props.user}
+                       patient={this.props.patient}
+                       event={this.props.appointments} />} />
+              <Route path={`${match.url}/home`}
+                     render={() => <HomePageFactory
+                       user={this.props.user}
+                       patient={this.props.patient}
+                       event={this.props.appointments} />} />
               <Route
                 path={`${match.url}/calendar`}
                 render={() => (
