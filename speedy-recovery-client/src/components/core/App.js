@@ -7,7 +7,10 @@ import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
 import { filterPatientResource } from "../../service/FhirDataFilteringService";
-import { fhirMapAppointment, fhirMapPatient } from "../../service/FhirDataMappingService";
+import {
+  fhirMapAppointment,
+  fhirMapPatient
+} from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
 
 class App extends Component {

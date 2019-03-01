@@ -8,28 +8,32 @@ import fhirExampleCondition from "../test_input/fhir_resources_stu3/FhirExampleC
 import fhirExampleMedication from "../test_input/fhir_resources_stu3/FhirExampleMedicationSTU3.json";
 
 import {
-    filterAppointmentResource,
-    filterConditionResource,
-    filterMedicationResource,
-    filterPatientResource
+  filterAppointmentResource,
+  filterConditionResource,
+  filterMedicationResource,
+  filterPatientResource
 } from "../../service/FhirDataFilteringService";
 
 test("filter out patient resource with missing info only", () => {
-    expect(filterPatientResource(fhirBrokenPatient)).toBeFalsy();
-    expect(filterPatientResource(fhirExamplePatient)).toEqual(fhirExamplePatient);
+  expect(filterPatientResource(fhirBrokenPatient)).toBeFalsy();
+  expect(filterPatientResource(fhirExamplePatient)).toEqual(fhirExamplePatient);
 });
 
 test("filter out appointment resource with missing info only", () => {
-    expect(filterAppointmentResource(fhirBrokenApp)).toBeFalsy();
-    expect(filterAppointmentResource(fhirSingleApp)).toEqual(fhirSingleApp);
+  expect(filterAppointmentResource(fhirBrokenApp)).toBeFalsy();
+  expect(filterAppointmentResource(fhirSingleApp)).toEqual(fhirSingleApp);
 });
 
 test("filter out condition resource with missing info only", () => {
-    expect(filterConditionResource(fhirBrokenCondition)).toBeFalsy();
-    expect(filterConditionResource(fhirExampleCondition)).toEqual(fhirExampleCondition);
+  expect(filterConditionResource(fhirBrokenCondition)).toBeFalsy();
+  expect(filterConditionResource(fhirExampleCondition)).toEqual(
+    fhirExampleCondition
+  );
 });
 
 test("filter out medication resource with missing info only", () => {
-    expect(filterMedicationResource(fhirBrokenMedication)).toBeFalsy();
-    expect(filterMedicationResource(fhirExampleMedication)).toEqual(fhirExampleMedication);
+  expect(filterMedicationResource(fhirBrokenMedication)).toBeFalsy();
+  expect(filterMedicationResource(fhirExampleMedication)).toEqual(
+    fhirExampleMedication
+  );
 });
