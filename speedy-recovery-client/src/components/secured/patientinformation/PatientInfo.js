@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Tab } from "semantic-ui-react";
+import { Tab,Icon,Menu} from "semantic-ui-react";
 
 class PatientInfo extends Component {
   render() {
     const { user } = this.props;
     const panes = [
       {
-        menuItem: "Basic",
+        menuItem: <Menu.Item><Icon fitted name="id card outline"/>Basic</Menu.Item>,
         render: () => (
           <Tab.Pane>
             <h4>Name: {user.name}</h4>
@@ -16,15 +16,15 @@ class PatientInfo extends Component {
         )
       },
       {
-        menuItem: "Medication",
+        menuItem: <Menu.Item><Icon fitted name="pills"/>Medication</Menu.Item>,
         render: () => <Tab.Pane>Medication Content</Tab.Pane>
       },
       {
-        menuItem: "Condition",
+          menuItem: <Menu.Item><Icon fitted name="heartbeat"/>Conditon</Menu.Item>,
         render: () => <Tab.Pane>Condition Content</Tab.Pane>
       },
       {
-        menuItem: "CarePlan",
+        menuItem: <Menu.Item><Icon fitted name="unordered list"/>Care Plan</Menu.Item>,
         render: () => <Tab.Pane>Care Plan Content</Tab.Pane>
       }
     ];
