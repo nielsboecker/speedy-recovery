@@ -40,12 +40,12 @@ class SecuredMainPage extends Component {
                      render={() => <HomePageFactory
                        user={this.props.user}
                        patient={this.props.patient}
-                       event={this.props.appointments} />} />
+                       events={this.props.appointments} />} />
               <Route path={`${match.url}/home`}
                      render={() => <HomePageFactory
                        user={this.props.user}
                        patient={this.props.patient}
-                       event={this.props.appointments} />} />
+                       events={this.props.appointments} />} />
               <Route
                 path={`${match.url}/calendar`}
                 render={() => (

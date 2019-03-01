@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class HomePageForParent extends Component {
   render() {
-    const { user } = this.props;
+    const { user , events} = this.props;
 
     return (
       <div>
