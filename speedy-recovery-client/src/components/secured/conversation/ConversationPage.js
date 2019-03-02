@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { MessageList } from "react-chat-elements";
 import { Container, Form, TextArea, Grid, Button } from "semantic-ui-react";
-import exampleMessages from "../../../__tests__/test_input/internal/ExampleMessages.json";
+import { getMessages, mapMessages} from "../../../service/BackendService";
 
 function handleClick(e) {
   e.preventDefault();
@@ -47,14 +47,16 @@ class ConversationPage extends Component {
   }
 
   componentDidMount() {
-    // TODO: Update state when data from back-end is available instead
-    this.convertAndSetData(exampleMessages);
-  }
-
-  convertAndSetData(messageData) {
-    // TODO: Access actual back-end data, consider missing values for optional fields
-    const messages = messageData;
-    this.setState({ messages });
+    getMessages( this.props.location.state.id)
+        .then(messagesResource => {
+          console.log("Checking : ", messagesResource);
+          const messages = messagesResource.map(message => mapMessages(message, this.props.location.state.id))
+          console.log("Checking : ", messages);
+          this.setState({ messages });
+        })
+        .catch(error => {
+          console.error(error);
+        });
   }
 }
 
