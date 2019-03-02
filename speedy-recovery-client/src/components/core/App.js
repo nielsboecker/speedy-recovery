@@ -21,7 +21,7 @@ class App extends Component {
       authRequestStarted: false,
       error: null,
       fhirVersion: null,
-      id: "user1"
+      //id: "user1"
     };
   }
 
@@ -70,7 +70,7 @@ class App extends Component {
                 patient={this.state.patient}
                 appointments={this.state.appointments}
                 fhirVersion={this.state.fhirVersion}
-                id = {this.state.id}
+                //id = {this.state.id}
               />
             )}
           />
@@ -125,6 +125,7 @@ class App extends Component {
       .read()
       .then(currentUserResource => {
         console.log("Received current user resources: ", currentUserResource);
+        console.log("Current user id: ", currentUserResource.id);
 
         var user = this.updateStateUser(currentUserResource);
         if (user.role === "Practitioner") {

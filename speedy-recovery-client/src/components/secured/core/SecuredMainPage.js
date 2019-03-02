@@ -50,7 +50,7 @@ class SecuredMainPage extends Component {
                 path={`${match.url}/messaging`}
                 render={() => (
                     <MessagingPage
-                        id = {this.props.id}
+                        id = {this.props.user.id}
                     />
                 )}
               />

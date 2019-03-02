@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { ChatItem } from "react-chat-elements";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import {getConversation} from "../../../service/BackendService";
 
 class MessagingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       conversations: [],
-      data_from_request: ""
     };
   }
 
@@ -18,7 +17,7 @@ class MessagingPage extends Component {
       return (
           <Link
               to={`/secured/conversation/${conversation.userId}`}
-              key={conversation.userId}
+              key={this.props.id}
           >
             <ChatItem
                 avatar={conversation.avatar}
@@ -41,15 +40,15 @@ class MessagingPage extends Component {
   }
 
   componentDidMount() {
-    this.convertAndSetData();
-  }
-
-  async convertAndSetData() {
-    console.log(this.props.id);
-    var url = 'https://speedy-recovery-server.azurewebsites.net/conversations?userid=' + this.props.id;
-    const res = await axios.get(url);
-    console.log(res);
-    this.setState({ conversations: res.data });
+    getConversation(this.props.id)
+      .then(conversations => {
+        console.log("Checking : ", conversations);
+        this.setState({ conversations });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    
   }
 }
 
