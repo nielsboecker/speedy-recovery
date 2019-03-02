@@ -9,7 +9,11 @@ class HomePageFactory extends Component {
 
     switch (user.role) {
       case "Patient":
-        return <HomePageForPatient user={user} events={events.find(result=>result.id=="219850")} />;
+        return <HomePageForPatient
+                user={user}
+                events={events.filter(event => new Date(event.start) - new Date("2019","01", "8")>0)
+                              .sort(function (a,b){return new Date(a.start) - new Date(b.start)})[0]}
+               />;
       case "Parent":
         return <HomePageForParent user={user} events={events} />;
       case "Practitioner":
@@ -21,3 +25,5 @@ class HomePageFactory extends Component {
 }
 
 export default HomePageFactory;
+
+{/*events={(events.filter(event => new Date(event.start)-new Date()>0)).sort(function(a,b){return  new Date(b.date) - new Date(a.date)[0];})} */}

@@ -1,39 +1,40 @@
 import React, { Component } from "react";
+import {NavLink} from "react-router-dom";
 
 
 
 class HomePageForPatient extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
-            appointmentDate: {},
-            user : {},
+            appointmentTime: {},
+            user: {},
 
 
         }
     }
+
     componentWillMount() {
-        setTimeout(()=>{this.setState({appointmentDate: this.props.events, user: this.props.user});},500);
+        setTimeout(() => {
+            this.setState({appointmentTime: this.props.events.start, user: this.props.user});
+        }, 1000);
     }
 
     render() {
-        var test=new Date(this.state.appointmentDate.start).toLocaleDateString("en-uk");
+        return (
+            <div>
+                <h1>Hello</h1>
+                <h4>Welcome {this.state.user.name}</h4>
+                <h4>This is patient's Homepage </h4>
+                <h4>Here is your next appointment:<NavLink to={`secured/calender`}> {new Date(this.state.appointmentTime).toLocaleString("en-uk")}</NavLink></h4>
 
 
-    return (
-      <div>
-        <h1>Hello</h1>
-        <h4>Welcome {this.state.user.name}</h4>
-        <h4>This is patient's Homepage </h4>
-        <h4>Here is you next appointment</h4>
-          <h4>{test}</h4>
+            </div>
+        );
+    }
 
-      </div>
-    );
-  }
 }
-
 
 export default HomePageForPatient;
