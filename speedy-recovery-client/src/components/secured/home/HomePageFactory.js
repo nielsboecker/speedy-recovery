@@ -9,26 +9,58 @@ class HomePageFactory extends Component {
 
     switch (user.role) {
       case "Patient":
-        return <HomePageForPatient
-                user={user}
-                events={events.filter(event => new Date(event.start) - new Date("2019","01", "8")>0)
-                              .sort(function (a,b){return new Date(a.start) - new Date(b.start)})[0]}
-                match={match}
-               />;
+        return (
+          <HomePageForPatient
+            user={user}
+            events={
+              events
+                .filter(
+                  event =>
+                    new Date(event.start) - new Date("2019", "01", "8") > 0
+                )
+                .sort(function(a, b) {
+                  return new Date(a.start) - new Date(b.start);
+                })[0]
+            }
+            match={match}
+          />
+        );
       case "Parent":
-        return <HomePageForParent
-                user={user}
-                events={events.filter(event => new Date(event.start) - new Date("2019","01", "8")>0)
-                              .sort(function (a,b){return new Date(a.start) - new Date(b.start)})[0]}
-                patient={patient}
-                match={match}/>;
+        return (
+          <HomePageForParent
+            user={user}
+            events={
+              events
+                .filter(
+                  event =>
+                    new Date(event.start) - new Date("2019", "01", "8") > 0
+                )
+                .sort(function(a, b) {
+                  return new Date(a.start) - new Date(b.start);
+                })[0]
+            }
+            patient={patient}
+            match={match}
+          />
+        );
       case "Practitioner":
-        return <HomePageForPractitioner
-                user={user}
-                events={events.filter(event => new Date(event.start) - new Date("2019","01", "8")>0)
-                              .sort(function (a,b){return new Date(a.start) - new Date(b.start)})[0]}
-                match={match}
-                patient={patient}/>;
+        return (
+          <HomePageForPractitioner
+            user={user}
+            events={
+              events
+                .filter(
+                  event =>
+                    new Date(event.start) - new Date("2019", "01", "8") > 0
+                )
+                .sort(function(a, b) {
+                  return new Date(a.start) - new Date(b.start);
+                })[0]
+            }
+            match={match}
+            patient={patient}
+          />
+        );
       default:
         return undefined;
     }
@@ -37,4 +69,6 @@ class HomePageFactory extends Component {
 
 export default HomePageFactory;
 
-{/*events={(events.filter(event => new Date(event.start)-new Date()>0)).sort(function(a,b){return  new Date(b.date) - new Date(a.date)[0];})} */}
+{
+  /*events={(events.filter(event => new Date(event.start)-new Date()>0)).sort(function(a,b){return  new Date(b.date) - new Date(a.date)[0];})} */
+}

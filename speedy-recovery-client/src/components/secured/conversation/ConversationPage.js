@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { MessageList } from "react-chat-elements";
 import { Container, Form, TextArea, Grid, Button } from "semantic-ui-react";
-import { getMessages, mapMessages} from "../../../service/BackendService";
+import { getMessages, mapMessages } from "../../../service/BackendService";
 
 function handleClick(e) {
   e.preventDefault();
@@ -29,7 +29,7 @@ class ConversationPage extends Component {
         />
 
         <Grid>
-          <Grid.Row/>
+          <Grid.Row />
           <Grid.Row>
             <Grid.Column width={15}>
               <Form>
@@ -48,15 +48,17 @@ class ConversationPage extends Component {
   }
 
   componentDidMount() {
-    if(this.props.location){
-      getMessages( this.props.location.state.id, this.props.location.state.id2)
-          .then(messagesResource => {
-            const messages = messagesResource.map(message => mapMessages(message, this.props.location.state.id))
-            this.setState({ messages });
-          })
-          .catch(error => {
-            console.error(error);
-          });
+    if (this.props.location) {
+      getMessages(this.props.location.state.id, this.props.location.state.id2)
+        .then(messagesResource => {
+          const messages = messagesResource.map(message =>
+            mapMessages(message, this.props.location.state.id)
+          );
+          this.setState({ messages });
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
   }
 }

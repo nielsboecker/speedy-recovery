@@ -37,19 +37,28 @@ class SecuredMainPage extends Component {
             />
 
             <Container>
-              <Route path={`${match.url}`} exact
-                     render={() => <HomePageFactory
-                       user={this.props.user}
-                       patient={this.props.patient}
-                       events={this.props.appointments}
-                       match={match}
-                       />} />
-              <Route path={`${match.url}/home`}
-                     render={() => <HomePageFactory
-                       user={this.props.user}
-                       patient={this.props.patient}
-                       events={this.props.appointments}
-                     />} />
+              <Route
+                path={`${match.url}`}
+                exact
+                render={() => (
+                  <HomePageFactory
+                    user={this.props.user}
+                    patient={this.props.patient}
+                    events={this.props.appointments}
+                    match={match}
+                  />
+                )}
+              />
+              <Route
+                path={`${match.url}/home`}
+                render={() => (
+                  <HomePageFactory
+                    user={this.props.user}
+                    patient={this.props.patient}
+                    events={this.props.appointments}
+                  />
+                )}
+              />
               <Route
                 path={`${match.url}/calendar`}
                 render={() => (
@@ -61,11 +70,7 @@ class SecuredMainPage extends Component {
               />
               <Route
                 path={`${match.url}/messaging`}
-                render={() => (
-                    <MessagingPage
-                        id = {this.props.user.id}
-                    />
-                )}
+                render={() => <MessagingPage id={this.props.user.id} />}
               />
               <Route
                 path={`${match.url}/profile`}

@@ -53,7 +53,7 @@ const mapAppointmentSTU3 = fhirAppResource => ({
     : missingField,
   comment: fhirAppResource.comment ? fhirAppResource.comment : missingField,
   patient: getPatient(fhirAppResource.participant),
-  patientId:getPatientId(fhirAppResource.participant),
+  patientId: getPatientId(fhirAppResource.participant),
   practitioner: getPractitioner(fhirAppResource.participant),
   practitionerId: getPractitionerId(fhirAppResource.participant),
   location: getLocation(fhirAppResource.participant)

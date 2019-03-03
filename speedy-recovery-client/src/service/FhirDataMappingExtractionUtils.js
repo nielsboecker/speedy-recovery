@@ -47,12 +47,12 @@ const getPractitioner = participant => {
 
 const getPatientId = participant => {
   if (
-      participant &&
-      participant[0] &&
-      participant[0].actor &&
-      participant[0].actor.reference
+    participant &&
+    participant[0] &&
+    participant[0].actor &&
+    participant[0].actor.reference
   ) {
-    const arr=participant[0].actor.reference.split("/");
+    const arr = participant[0].actor.reference.split("/");
     return arr[1];
   }
   return missingField;
@@ -60,12 +60,12 @@ const getPatientId = participant => {
 
 const getPractitionerId = participant => {
   if (
-      participant &&
-      participant[1] &&
-      participant[1].actor &&
-      participant[1].actor.reference
+    participant &&
+    participant[1] &&
+    participant[1].actor &&
+    participant[1].actor.reference
   ) {
-    const arr=participant[1].actor.reference.split("/");
+    const arr = participant[1].actor.reference.split("/");
     return arr[1];
   }
   return missingField;

@@ -1,5 +1,8 @@
 import {
-  fhirMapAppointment, fhirMapCondition, fhirMapMedication, fhirMapPatient
+  fhirMapAppointment,
+  fhirMapCondition,
+  fhirMapMedication,
+  fhirMapPatient
 } from "../../service/FhirDataMappingService";
 import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatientSTU3.json";
 import fhirExamplePatientMissingField from "../test_input/fhir_resources_stu3/FhirExamplePatientMissingFieldSTU3.json";

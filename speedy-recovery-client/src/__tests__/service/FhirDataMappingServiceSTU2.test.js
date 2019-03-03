@@ -1,11 +1,13 @@
 import {
-  fhirMapAppointment, fhirMapCondition, fhirMapMedication, fhirMapPatient
+  fhirMapAppointment,
+  fhirMapCondition,
+  fhirMapMedication,
+  fhirMapPatient
 } from "../../service/FhirDataMappingService";
 import fhirExamplePatient from "../test_input/fhir_resources_stu2/FhirExamplePatientSTU2.json";
 import fhirShortApp from "../test_input/fhir_resources_stu2/FhirExampleAppointmentSTU2.json";
 import fhirExampleCondition from "../test_input/fhir_resources_stu2/FhirExampleConditionSTU2.json";
 import fhirExampleMedication from "../test_input/fhir_resources_stu2/FhirExampleMedicationSTU2.json";
-
 
 test("map FHIR Patient resource to internal user data model", () => {
   const user = fhirMapPatient(fhirExamplePatient, "2");
