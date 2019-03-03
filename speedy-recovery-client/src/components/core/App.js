@@ -7,7 +7,7 @@ import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
 import { filterPatientResource } from "../../service/FhirDataFilteringService";
-import { fhirMapAppointment, fhirMapPatient } from "../../service/FhirDataMappingService";
+import { fhirMapAppointment, fhirMapPatient, getChild } from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
 
 class App extends Component {
@@ -17,10 +17,13 @@ class App extends Component {
       fhirClient: {},
       user: null,
       patient: {},
+      patientId: [],
+      practitionerId: [],
       appointments: [],
       authRequestStarted: false,
       error: null,
-      fhirVersion: null
+      fhirVersion: null,
+      child: null
     };
   }
 
@@ -123,8 +126,20 @@ class App extends Component {
       .read()
       .then(currentUserResource => {
         console.log("Received current user resources: ", currentUserResource);
+        console.log("Current user id: ", currentUserResource.id);
 
         var user = this.updateStateUser(currentUserResource);
+
+        if(user.role === "Parent"){
+          this.updateStateChild(currentUserResource);
+        }
+
+        if(user.role === "Parent" && this.state.child){
+          this.updateStateAppointment(this.state.child)
+        }else{
+          this.updateStateAppointment(user.id)
+        }
+
         if (user.role === "Practitioner") {
           // also get patient info
           fhirClient.patient
@@ -194,6 +209,11 @@ class App extends Component {
       );
     }
     return user;
+  }
+
+  updateStateChild(currentUserResource) {
+    const child = getChild(currentUserResource);
+    this.setState({ child });
   }
 
   handleLoginError = errorMessage => {
