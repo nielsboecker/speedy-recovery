@@ -1,4 +1,5 @@
-import axios from 'axios';
+const axios = require('axios');
+//import axios from 'axios';
 
 const baseUrl = 'https://speedy-recovery-server.azurewebsites.net';
 const getConversation = async (id)  => {
@@ -52,3 +53,4 @@ const getDate = messageResource => {
 };
 
 export { getConversation, getMessages, postMessages, getPractitionerInfo, mapMessages };
+//module.exports = { getConversation, getMessages, getPractitionerInfo, mapMessages };
