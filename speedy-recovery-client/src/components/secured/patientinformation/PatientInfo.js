@@ -12,6 +12,7 @@ class PatientInfo extends Component {
           <Table.Row>
             <Table.HeaderCell>Order</Table.HeaderCell>
             <Table.HeaderCell>Summary</Table.HeaderCell>
+            <Table.HeaderCell>Time</Table.HeaderCell>
           </Table.Row>
         ];
         table.push(<Table.Header>{header}</Table.Header>);
@@ -26,6 +27,11 @@ class PatientInfo extends Component {
         );
         children.push(
           <Table.Cell>{<h4>{conditions[i].summary}</h4>}</Table.Cell>
+        );
+        children.push(
+          <Table.Cell>
+            {<h4>{conditions[i].onsetDateTime.toString()}</h4>}
+          </Table.Cell>
         );
         body.push(<Table.Row>{children}</Table.Row>);
       }

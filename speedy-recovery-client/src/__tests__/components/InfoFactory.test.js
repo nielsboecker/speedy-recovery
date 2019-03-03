@@ -12,26 +12,28 @@ Enzyme.configure({ adapter: new Adapter() });
 // interesting things happen in the child components
 
 test("InfoFactory renders without crashing", () => {
-  mount(<InfoFactory user={{ role: "Patient" }} patient={{}} conditions={[]}/>);
+  mount(
+    <InfoFactory user={{ role: "Patient" }} patient={{}} conditions={[]} />
+  );
 });
 
 test("InfoFactory renders patient info for patient users", () => {
   const wrapper = mount(
-    <InfoFactory user={{ role: "Patient" }} patient={{}} conditions={[]}/>
+    <InfoFactory user={{ role: "Patient" }} patient={{}} conditions={[]} />
   );
   expect(wrapper.children().length).toBe(1);
   expect(wrapper.children().type().name).toEqual("PatientInfo");
 });
 
 test("InfoFactory renders parent info for parent users", () => {
-  const wrapper = mount(<InfoFactory user={{ role: "Parent" }} patient={{}}/>);
+  const wrapper = mount(<InfoFactory user={{ role: "Parent" }} patient={{}} />);
   expect(wrapper.children().length).toBe(1);
   expect(wrapper.children().type().name).toEqual("ParentInfo");
 });
 
 test("InfoFactory renders practitioner info for practitioner users", () => {
   const wrapper = mount(
-    <InfoFactory user={{ role: "Practitioner" }} patient={{}}/>
+    <InfoFactory user={{ role: "Practitioner" }} patient={{}} />
   );
   expect(wrapper.children().length).toBe(1);
   expect(wrapper.children().type().name).toEqual("PractitionerInfo");
