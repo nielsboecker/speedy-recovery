@@ -7,6 +7,7 @@ import {
   getPatient,
   getPhone,
   getPractitioner,
+  getPractitionerId,
   getSeverity,
   getSummary
 } from "./FhirDataMappingExtractionUtils";
@@ -52,6 +53,7 @@ const mapAppointmentSTU3 = fhirAppResource => ({
   comment: fhirAppResource.comment ? fhirAppResource.comment : missingField,
   patient: getPatient(fhirAppResource.participant),
   practitioner: getPractitioner(fhirAppResource.participant),
+  practitionerId: getPractitionerId(fhirAppResource.participant),
   location: getLocation(fhirAppResource.participant)
 });
 

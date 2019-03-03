@@ -45,6 +45,18 @@ const getPractitioner = participant => {
   return missingField;
 };
 
+const getPractitionerId = participant => {
+  if (
+    participant &&
+    participant[1] &&
+    participant[1].actor &&
+    participant[1].actor.reference
+  ) {
+    return participant[1].actor.reference;
+  }
+  return missingField;
+};
+
 const getLocation = participant => {
   if (
     participant &&
@@ -107,5 +119,6 @@ export {
   getSummary,
   getbodySite,
   getMedName,
-  getForm
+  getForm,
+  getPractitionerId
 };

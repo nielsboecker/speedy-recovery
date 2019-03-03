@@ -3,7 +3,8 @@ import BigCalendar from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
 import "./CalendarPages.css";
-import { Grid, Segment, Card, Image, Icon, Dropdown } from "semantic-ui-react";
+import axios from 'axios';
+import { Grid, Segment, Card, Image, Dropdown } from "semantic-ui-react";
 
 class PatientCalendar extends React.Component {
 
@@ -11,40 +12,61 @@ class PatientCalendar extends React.Component {
         super(...args);
         this.state = {
             doctorList: [],
-            selected: "Doctor Name"
+            selectedDoctor: "",
+            extraInfo: undefined
         };
     }
 
     getDoctorsInfo = () => {
         this.setState({doctorList:
-            this.removeDuplicates(this.props.events.map(event => this.extractPractitioner(event))
-                .filter(doctor => doctor.text !== "Unknown"))});
+            this.removeDuplicates(this.props.events.map(event => {
+                                                        return this.extractPractitioner(event)
+            }))});
     };
 
-    onChange = (e, data) => {
-        console.log(data.value);
-        this.setState({ selected: data.value });
-    };
 
-    removeDuplicates = array => array.reduce((prev, curr) =>
-        prev.find(a => a["text"] === curr["text"]) ? prev : prev.push(curr) && prev, []);
+
+    getExtraInfo =  (practitionerID) => {
+        const id = practitionerID.substring(13, practitionerID.length);
+         axios.get('https://speedy-recovery-server.azurewebsites.net/practitioners?userid=' + id)
+             .then(response => this.setState({extraInfo: response.data[0]}))
+             .catch(error => console.log("No extra info: " + error ));
+
+    };
 
     extractPractitioner = event => ({
       text: event.practitioner,
-      value: event.practitioner
+      value: event.practitionerId
     });
-
-
 
     componentWillMount = () => {
         this.getDoctorsInfo();
     };
 
-  render() {
-    return (
+    styled = {
+        agenda:{
+            backgroundColor: '#4285F4',
+            color: 'white',
+            font: "bold"
+}
+
+    };
+
+    onChange = (e, data) => {
+        this.getExtraInfo(data.value);
+        this.setState({ selectedDoctor: data });
+    };
+
+    removeDuplicates = array => array.reduce((prev, curr) =>
+        prev.find(a => a["text"] === curr["text"]) ? prev : prev.push(curr) && prev, []);
+
+    render() {
+
+        return (
       <Grid columns={2} divided>
           <Grid.Row>
-        <Grid.Column>
+        <Grid.Column color={'green'}>
+            <h2 align="center">My Appointments</h2>
           <Segment>
             <div style={{ height: 450 }}>
               <BigCalendar
@@ -57,48 +79,28 @@ class PatientCalendar extends React.Component {
                 ref={node => {
                   this.bigCalendarRef = node;
                 }}
-                eventPropGetter={
-                    (event, start, end, isSelected) => {
-                        let newStyle = {
-                            backgroundColor: "blue",
-                            color: 'white',
-                            borderRadius: "1px",
-                            border: "yes"
-                        };
-
-                        if (event.isMine){
-                            newStyle.backgroundColor = "lightgreen"
-                        }
-
-                        return {
-                            className: "",
-                            style: newStyle
-                        };
-                    }
-                }
+                style={this.styled.agenda}
               />
             </div>
           </Segment>
         </Grid.Column>
-              <Grid.Column>
-                  <h2>My Doctors</h2>
+              <Grid.Column color={'yellow'}>
+                  <h2 align="center">My Doctors</h2>
                   <Dropdown placeholder='Select Doctor' fluid selection
                             options={this.state.doctorList}
                             onChange={this.onChange}/>
-                  <Card>
-                      <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' />
+                  <Card centered>
+                      <Image src={require('../../../tempImages/maleDoctor.png')} />
                       <Card.Content>
-                          <Card.Header>{this.state.selected}</Card.Header>
+                          <Card.Header>{this.state.selectedDoctor !== undefined ? this.state.selectedDoctor.text : ""}</Card.Header>
                           <Card.Meta>
-                              <span className='Age'>55 years old</span>
+                              <span className='Hometown'>{this.filterUndefined().Hometown}</span>
                           </Card.Meta>
-                          <Card.Description>Matthew supports Arsenal and has a dog named Pickles</Card.Description>
-                      </Card.Content>
-                      <Card.Content extra>
-                          <button>
-                              <Icon name='user' />
-                              22 Friends
-                          </button>
+                          <Card.Description>
+                              Supports: <b>{this.filterUndefined().FavouriteFootballTeam}</b><br />
+                              Favourite Food: <b>{this.filterUndefined().FavouriteFood} </b><br />
+                              Favourite Animal: <b>{this.filterUndefined().FavouriteAnimal}</b>
+                          </Card.Description>
                       </Card.Content>
                   </Card>
               </Grid.Column>
@@ -106,6 +108,11 @@ class PatientCalendar extends React.Component {
       </Grid>
     );
   }
+
+  filterUndefined = () => {
+      return this.state.extraInfo !== undefined ?  this.state.extraInfo :  "";
+  }
 }
+
 
 export default PatientCalendar;

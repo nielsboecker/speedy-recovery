@@ -12,6 +12,7 @@ Object {
   "location": "South Wing, second floor",
   "patient": "Peter James Chalmers",
   "practitioner": "Dr Adam Careful",
+  "practitionerId": "Practitioner/example",
   "priority": 5,
   "start": 2013-12-10T09:00:00.000Z,
   "status": "booked",
