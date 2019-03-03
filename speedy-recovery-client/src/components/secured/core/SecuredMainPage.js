@@ -10,6 +10,7 @@ import ConversationPage from "../conversation/ConversationPage";
 import InfoFactory from "../patientinformation/InfoFactory";
 import CalendarFactory from "../calendar/CalendarFactory";
 import HomePageFactory from "../home/HomePageFactory";
+import HomePageForPatient from "../home/HomePageForPatient";
 
 class SecuredMainPage extends Component {
   constructor(props) {
@@ -40,12 +41,15 @@ class SecuredMainPage extends Component {
                      render={() => <HomePageFactory
                        user={this.props.user}
                        patient={this.props.patient}
-                       events={this.props.appointments} />} />
+                       events={this.props.appointments}
+                       match={match}
+                       />} />
               <Route path={`${match.url}/home`}
                      render={() => <HomePageFactory
                        user={this.props.user}
                        patient={this.props.patient}
-                       events={this.props.appointments} />} />
+                       events={this.props.appointments}
+                     />} />
               <Route
                 path={`${match.url}/calendar`}
                 render={() => (

@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-import {NavLink} from "react-router-dom";
-
-
+import { Link } from "react-router-dom";
 
 class HomePageForPatient extends Component {
-
     constructor(props) {
         super(props);
 
@@ -13,23 +10,37 @@ class HomePageForPatient extends Component {
             user: {},
 
 
+
         }
     }
 
     componentWillMount() {
         setTimeout(() => {
-            this.setState({appointmentTime: this.props.events.start, user: this.props.user});
+            this.setState({
+                appointmentTime: this.props.events.start,
+                user: this.props.user,
+            });
         }, 1000);
     }
 
     render() {
         return (
             <div>
-                <h1>Hello</h1>
-                <h4>Welcome {this.state.user.name}</h4>
-                <h4>This is patient's Homepage </h4>
-                <h4>Here is your next appointment:<NavLink to={`secured/calender`}> {new Date(this.state.appointmentTime).toLocaleString("en-uk")}</NavLink></h4>
+                <h3>Hello {this.state.user.name}</h3>
+                {new Date(this.state.appointmentTime).toLocaleString("en-uk")!=="Invalid Date"
+                    ?
+                    <h4>Here is the time for your next appointment: <
+                        Link to={"/secured/calendar"}>
+                            {new Date(this.state.appointmentTime).toLocaleString("en-uk")}
+                        </Link>
+                    </h4>
+                    :
+                    <h4>
+                        You dont't have any appointment
+                    </h4>
 
+
+                }
 
             </div>
         );

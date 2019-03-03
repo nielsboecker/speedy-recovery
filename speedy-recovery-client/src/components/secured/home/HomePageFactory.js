@@ -5,7 +5,7 @@ import HomePageForPractitioner from "../home/HomePageForPractitioner";
 
 class HomePageFactory extends Component {
   render() {
-    const { user, patient, events } = this.props;
+    const { user, patient, events, match } = this.props;
 
     switch (user.role) {
       case "Patient":
@@ -13,11 +13,22 @@ class HomePageFactory extends Component {
                 user={user}
                 events={events.filter(event => new Date(event.start) - new Date("2019","01", "8")>0)
                               .sort(function (a,b){return new Date(a.start) - new Date(b.start)})[0]}
+                match={match}
                />;
       case "Parent":
-        return <HomePageForParent user={user} events={events} />;
+        return <HomePageForParent
+                user={user}
+                events={events.filter(event => new Date(event.start) - new Date("2019","01", "8")>0)
+                              .sort(function (a,b){return new Date(a.start) - new Date(b.start)})[0]}
+                patient={patient}
+                match={match}/>;
       case "Practitioner":
-        return <HomePageForPractitioner user={user} patient={patient} events={events} />;
+        return <HomePageForPractitioner
+                user={user}
+                events={events.filter(event => new Date(event.start) - new Date("2019","01", "8")>0)
+                              .sort(function (a,b){return new Date(a.start) - new Date(b.start)})[0]}
+                match={match}
+                patient={patient}/>;
       default:
         return undefined;
     }
