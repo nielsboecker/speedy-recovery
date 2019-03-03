@@ -14,7 +14,7 @@ class HomePageForPatient extends Component {
   componentWillMount() {
     setTimeout(() => {
       this.setState({
-        appointmentTime: this.props.events.start,
+        appointmentTime: this.props.event.start,
         user: this.props.user
       });
     }, 1000);

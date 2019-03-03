@@ -15,9 +15,9 @@ class HomePageForParent extends Component {
   componentWillMount() {
     setTimeout(() => {
       this.setState({
-        appointmentTime: this.props.events.start,
+        appointmentTime: this.props.event.start,
         user: this.props.user,
-        patient: this.props.patient
+        patient: this.props.event.patient
       });
     }, 1000);
   }
@@ -28,7 +28,7 @@ class HomePageForParent extends Component {
         {new Date(this.state.appointmentTime).toLocaleString("en-uk") !==
         "Invalid Date" ? (
           <h4>
-            Here is the time for your child's next appointment:{" "}
+            Here is the time for your child {this.state.patient}'s next appointment:{" "}
             <Link to={"/secured/calendar"}>
               {new Date(this.state.appointmentTime).toLocaleString("en-uk")}
             </Link>

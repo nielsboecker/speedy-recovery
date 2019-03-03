@@ -45,7 +45,6 @@ class SecuredMainPage extends Component {
                     user={this.props.user}
                     patient={this.props.patient}
                     events={this.props.appointments}
-                    match={match}
                   />
                 )}
               />

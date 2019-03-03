@@ -5,14 +5,14 @@ import HomePageForPractitioner from "../home/HomePageForPractitioner";
 
 class HomePageFactory extends Component {
   render() {
-    const { user, patient, events, match } = this.props;
+    const { user, patient, events, } = this.props;
 
     switch (user.role) {
       case "Patient":
         return (
           <HomePageForPatient
             user={user}
-            events={
+            event={
               events
                 .filter(
                   event =>
@@ -22,14 +22,13 @@ class HomePageFactory extends Component {
                   return new Date(a.start) - new Date(b.start);
                 })[0]
             }
-            match={match}
           />
         );
       case "Parent":
         return (
           <HomePageForParent
             user={user}
-            events={
+            event={
               events
                 .filter(
                   event =>
@@ -40,14 +39,13 @@ class HomePageFactory extends Component {
                 })[0]
             }
             patient={patient}
-            match={match}
           />
         );
       case "Practitioner":
         return (
           <HomePageForPractitioner
             user={user}
-            events={
+            event={
               events
                 .filter(
                   event =>
@@ -57,8 +55,6 @@ class HomePageFactory extends Component {
                   return new Date(a.start) - new Date(b.start);
                 })[0]
             }
-            match={match}
-            patient={patient}
           />
         );
       default:
