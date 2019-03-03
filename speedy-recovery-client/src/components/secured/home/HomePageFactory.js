@@ -5,7 +5,7 @@ import HomePageForPractitioner from "../home/HomePageForPractitioner";
 
 class HomePageFactory extends Component {
   render() {
-    const { user, patient, events, } = this.props;
+    const { user, patient, events } = this.props;
 
     switch (user.role) {
       case "Patient":

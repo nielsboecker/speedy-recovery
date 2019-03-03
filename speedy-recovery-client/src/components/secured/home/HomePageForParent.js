@@ -28,7 +28,8 @@ class HomePageForParent extends Component {
         {new Date(this.state.appointmentTime).toLocaleString("en-uk") !==
         "Invalid Date" ? (
           <h4>
-            Here is the time for your child {this.state.patient}'s next appointment:{" "}
+            Here is the time for your child {this.state.patient}'s next
+            appointment:{" "}
             <Link to={"/secured/calendar"}>
               {new Date(this.state.appointmentTime).toLocaleString("en-uk")}
             </Link>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class HomePageForPractitioner extends Component {
   constructor(props) {
@@ -26,20 +26,21 @@ class HomePageForPractitioner extends Component {
     const { user, patient } = this.props;
 
     return (
-        <div>
-          <h3>Hello {this.state.user.name}</h3>
-          {new Date(this.state.appointmentTime).toLocaleString("en-uk") !==
-          "Invalid Date" ? (
-              <h4>
-                Here is the time for your patient {this.state.patient}'s next appointment:{" "}
-                <Link to={"/secured/calendar"}>
-                  {new Date(this.state.appointmentTime).toLocaleString("en-uk")}
-                </Link>
-              </h4>
-          ) : (
-              <h4>You dont't have any appointment</h4>
-          )}
-        </div>
+      <div>
+        <h3>Hello {this.state.user.name}</h3>
+        {new Date(this.state.appointmentTime).toLocaleString("en-uk") !==
+        "Invalid Date" ? (
+          <h4>
+            Here is the time for your patient {this.state.patient}'s next
+            appointment:{" "}
+            <Link to={"/secured/calendar"}>
+              {new Date(this.state.appointmentTime).toLocaleString("en-uk")}
+            </Link>
+          </h4>
+        ) : (
+          <h4>You dont't have any appointment</h4>
+        )}
+      </div>
     );
   }
 }
