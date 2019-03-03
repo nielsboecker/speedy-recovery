@@ -20,13 +20,23 @@ class PatientInfo extends Component {
       let body = [];
       for (let i = 0; i < conditionsNum; i++) {
         let children = [];
+        let summary = conditions[i].summary;
+        let searchQuery = "https://www.google.com/search?q=" + summary;
+
         children.push(
           <Table.Cell>
             <Label ribbon>{`${i + 1}`} </Label>
           </Table.Cell>
         );
         children.push(
-          <Table.Cell>{<h4>{conditions[i].summary}</h4>}</Table.Cell>
+          <Table.Cell>
+            {
+              <h4>
+                {summary}
+                <a href={searchQuery}>Explore</a>
+              </h4>
+            }
+          </Table.Cell>
         );
         children.push(
           <Table.Cell>
