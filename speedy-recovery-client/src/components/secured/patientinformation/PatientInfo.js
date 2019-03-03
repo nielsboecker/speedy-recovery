@@ -4,7 +4,7 @@ import { Tab, Icon, Menu, Table, Label } from "semantic-ui-react";
 class PatientInfo extends Component {
   render() {
     const { user, conditions } = this.props;
-    const conditionsNum = conditions.length;
+    const conditionsNum = this.props.conditions.length;
     const createConditionTable = () => {
       let table = [];
       if (conditionsNum) {
