@@ -32,7 +32,29 @@ const extractResourcesFromBundle = appointments =>
     ? appointments.data.entry.map(app => app.resource)
     : [];
 
+const getUserConditions = userID => {
+  return new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      smart => {
+        smart.api
+          .search({ type: "Condition", query: { subject: userID } })
+          .done(conditionBundle => {
+            console.log("User condition response: ", conditionBundle);
+            const conditions = extractResourcesFromBundle(conditionBundle);
+            console.log("Conditions Resource after mapping: ", conditions);
+            return resolve(conditions);
+          });
+      },
+      error => {
+        console.error("Condition fetching error: ", error);
+        return reject(error);
+      }
+    );
+  });
+};
+
 export default {
   getUserAppointments,
+  getUserConditions,
   extractResourcesFromBundle
 };

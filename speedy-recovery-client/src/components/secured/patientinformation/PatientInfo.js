@@ -3,7 +3,7 @@ import { Tab, Icon, Menu } from "semantic-ui-react";
 
 class PatientInfo extends Component {
   render() {
-    const { user } = this.props;
+    const { user, conditions } = this.props;
     const panes = [
       {
         menuItem: (
@@ -33,10 +33,11 @@ class PatientInfo extends Component {
         menuItem: (
           <Menu.Item>
             <Icon fitted name="heartbeat" />
-            Conditon
+            Condition
           </Menu.Item>
         ),
-        render: () => <Tab.Pane>Condition Content</Tab.Pane>
+
+        render: () => <Tab.Pane>{conditions[0].summary}</Tab.Pane>
       },
       {
         menuItem: (

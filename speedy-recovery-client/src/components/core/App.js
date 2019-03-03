@@ -9,6 +9,7 @@ import FhirServerService from "../../service/FhirServerService";
 import { filterPatientResource } from "../../service/FhirDataFilteringService";
 import {
   fhirMapAppointment,
+  fhirMapCondition,
   fhirMapPatient
 } from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
@@ -21,6 +22,7 @@ class App extends Component {
       user: null,
       patient: {},
       appointments: [],
+      conditions: [],
       authRequestStarted: false,
       error: null,
       fhirVersion: null
@@ -71,6 +73,7 @@ class App extends Component {
                 user={this.state.user}
                 patient={this.state.patient}
                 appointments={this.state.appointments}
+                conditions={this.state.conditions}
                 fhirVersion={this.state.fhirVersion}
               />
             )}
@@ -148,6 +151,7 @@ class App extends Component {
         //      TODO
         // }
         this.updateStateAppointment(user.id);
+        this.updateStateCondition(user.id);
 
         this.setState({ user });
       })
@@ -161,6 +165,18 @@ class App extends Component {
           fhirMapAppointment(appointment, this.state.fhirVersion)
         );
         this.setState({ appointments });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+  updateStateCondition(userId) {
+    FhirDataQueryingService.getUserConditions(userId)
+      .then(conditionResource => {
+        const conditions = conditionResource.map(condition =>
+          fhirMapCondition(condition, this.state.fhirVersion)
+        );
+        this.setState({ conditions });
       })
       .catch(error => {
         console.error(error);

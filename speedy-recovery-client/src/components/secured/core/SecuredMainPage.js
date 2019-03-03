@@ -61,6 +61,7 @@ class SecuredMainPage extends Component {
                   <InfoFactory
                     user={this.props.user}
                     patient={this.props.patient}
+                    conditions={this.props.conditions}
                   />
                 )}
               />
