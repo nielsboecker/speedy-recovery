@@ -49,7 +49,7 @@ class ConversationPage extends Component {
 
   componentDidMount() {
     if(this.props.location){
-      getMessages( this.props.location.state.id)
+      getMessages( this.props.location.state.id, this.props.location.state.id2)
           .then(messagesResource => {
             const messages = messagesResource.map(message => mapMessages(message, this.props.location.state.id))
             this.setState({ messages });

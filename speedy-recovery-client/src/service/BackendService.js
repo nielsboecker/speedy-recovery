@@ -1,15 +1,26 @@
+import {
+    getPosition,
+    getText,
+    getDate,
+    getTime,
+    getTitle,
+    getId,
+    getAvatar,
+    getAlt,
+    getSubtitle,
+    getUnread
+} from "./BackendMappingExtractionUtils";
 const axios = require('axios');
-//import axios from 'axios';
 
 const baseUrl = 'https://speedy-recovery-server.azurewebsites.net';
 const getConversation = async (id)  => {
-     const url = baseUrl + '/conversations?userid=' + id;
-     const response = await axios.get(url);
-     return (response.data);
+    const url = baseUrl + '/conversations?userid=' + id;
+    const response = await axios.get(url);
+    return (response.data);
 };
 
-const getMessages = async (id)  => {
-    const url = baseUrl + '/conversation?userid1='+ id +'&userid2=d0d0cde0-4b21-42f6-9c1e-bfa447d72059';
+const getMessages = async (id, id2)  => {
+    const url = baseUrl + '/conversation?userid1=' + id +'&userid2=' + id2;
     const response = await axios.get(url);
     return (response.data);
 };
@@ -24,33 +35,22 @@ const getPractitionerInfo = async (id)  => {
     return (response.data);
 };
 
+const mapConversations = (conversationResource, id) => ({
+    id: getId(conversationResource),
+    avatar: getAvatar(conversationResource),
+    alt: getAlt(conversationResource),
+    title: getTitle(conversationResource, id),
+    subtitle: getSubtitle(conversationResource),
+    unread: getUnread(conversationResource),
+    date: getDate(conversationResource)
+});
+
 const mapMessages = (messageResource, id) => ({
     position: getPosition(messageResource,id),
     type: "text",
     text : getText(messageResource),
-    date: getDate(messageResource)
+    date: getTime(messageResource)
 });
 
-const getPosition = (messageResource, id) => {
-    if(messageResource && messageResource.Recipient && messageResource.Recipient === id){
-        return "left";
-    }
-    return "right";
-};
-
-const getText = messageResource => {
-    if (messageResource && messageResource.Message) {
-        return messageResource.Message;
-    }
-    return null;
-};
-
-const getDate = messageResource => {
-    if (messageResource && messageResource.time) {
-        return new Date(messageResource.time);
-    }
-    return null;
-};
-
-export { getConversation, getMessages, postMessages, getPractitionerInfo, mapMessages };
+export { getConversation, getMessages, postMessages, getPractitionerInfo, mapConversations, mapMessages };
 //module.exports = { getConversation, getMessages, getPractitionerInfo, mapMessages };
