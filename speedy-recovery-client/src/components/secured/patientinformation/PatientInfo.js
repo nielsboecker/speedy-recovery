@@ -1,9 +1,38 @@
 import React, { Component } from "react";
-import { Tab, Icon, Menu } from "semantic-ui-react";
+import { Tab, Icon, Menu, Table, Label } from "semantic-ui-react";
 
 class PatientInfo extends Component {
   render() {
     const { user, conditions } = this.props;
+    const conditionsNum = conditions.length;
+    const createTable = () => {
+      let table = [];
+      if (conditionsNum) {
+        let header = [
+          <Table.Row>
+            <Table.HeaderCell>Order</Table.HeaderCell>
+            <Table.HeaderCell>Summary</Table.HeaderCell>
+          </Table.Row>
+        ];
+        table.push(<Table.Header>{header}</Table.Header>);
+      }
+      let body = [];
+      for (let i = 0; i < conditionsNum; i++) {
+        let children = [];
+        children.push(
+          <Table.Cell>
+            <Label ribbon>{`${i + 1}`} </Label>
+          </Table.Cell>
+        );
+        children.push(
+          <Table.Cell>{<h4>{conditions[i].summary}</h4>}</Table.Cell>
+        );
+        body.push(<Table.Row>{children}</Table.Row>);
+      }
+      table.push(<Table.Body>{body}</Table.Body>);
+      return table;
+    };
+
     const panes = [
       {
         menuItem: (
@@ -36,8 +65,13 @@ class PatientInfo extends Component {
             Condition
           </Menu.Item>
         ),
-
-        render: () => <Tab.Pane>{conditions[0].summary}</Tab.Pane>
+        render: () => (
+          <Tab.Pane>
+            <h4>How many recorded conditions? {conditionsNum}</h4>
+            {createTable()}
+            <h4>{conditions[0].summary}</h4>
+          </Tab.Pane>
+        )
       },
       {
         menuItem: (
