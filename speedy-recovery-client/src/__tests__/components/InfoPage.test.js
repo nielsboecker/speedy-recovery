@@ -10,13 +10,13 @@ import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePat
 Enzyme.configure({ adapter: new Adapter() });
 
 it("PractitionerInfo renders without crashing", () => {
-  shallow(<PractitionerInfo user={exampleUser} patient={fhirExamplePatient} />);
+  shallow(<PractitionerInfo user={exampleUser} patient={fhirExamplePatient}/>);
 });
 
 it("PatientInfo renders without crashing", () => {
-  shallow(<PatientInfo user={exampleUser} />);
+  shallow(<PatientInfo user={exampleUser} conditions={[]}/>);
 });
 
 it("ParentInfo renders without crashing", () => {
-  shallow(<ParentInfo user={exampleUser} />);
+  shallow(<ParentInfo user={exampleUser}/>);
 });
