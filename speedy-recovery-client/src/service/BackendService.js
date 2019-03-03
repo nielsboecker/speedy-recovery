@@ -2,26 +2,24 @@ import axios from 'axios';
 
 const baseUrl = 'https://speedy-recovery-server.azurewebsites.net';
 const getConversation = async (id)  => {
-     console.log(id);
      const url = baseUrl + '/conversations?userid=' + id;
      const response = await axios.get(url);
-     console.log('Response from backend service :' , response);
      return (response.data);
 };
 
 const getMessages = async (id)  => {
-    console.log(id);
     const url = baseUrl + '/conversation?userid1='+ id +'&userid2=d0d0cde0-4b21-42f6-9c1e-bfa447d72059';
     const response = await axios.get(url);
-    console.log('Response from backend service :' , response);
     return (response.data);
 };
 
+const postMessages = async (id)  => {
+
+};
+
 const getPractitionerInfo = async (id)  => {
-    console.log(id);
     const url = baseUrl + '/practitioners?userid=' + id;
     const response = await axios.get(url);
-    console.log('Response from backend service :', response);
     return (response.data);
 };
 
@@ -48,12 +46,9 @@ const getText = messageResource => {
 
 const getDate = messageResource => {
     if (messageResource && messageResource.time) {
-        return messageResource.time;
+        return new Date(messageResource.time);
     }
     return null;
 };
 
-export { getConversation, getMessages, getPractitionerInfo, mapMessages };
-
-
-  
+export { getConversation, getMessages, postMessages, getPractitionerInfo, mapMessages };

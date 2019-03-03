@@ -71,9 +71,24 @@ const fhirMapMedication = (resource, version) => {
   console.log("No FHIR version has been supplied");
 };
 
+const getChild = (currentUserResource) => {
+  if (
+      currentUserResource &&
+      currentUserResource.link &&
+      currentUserResource.link[0].other &&
+      currentUserResource.link[0].other.reference
+  ) {
+    const patient = currentUserResource.link[0].other.reference;
+    const child=patient.split("/")[1];
+    return child;
+  }
+  return null;
+};
+
 export {
   fhirMapPatient,
   fhirMapAppointment,
   fhirMapCondition,
-  fhirMapMedication
+  fhirMapMedication,
+  getChild
 };

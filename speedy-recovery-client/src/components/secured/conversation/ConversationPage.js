@@ -29,10 +29,11 @@ class ConversationPage extends Component {
         />
 
         <Grid>
+          <Grid.Row/>
           <Grid.Row>
-            <Grid.Column width={13}>
+            <Grid.Column width={15}>
               <Form>
-                <TextArea autoHeight placeholder="Hello Speedy" />
+                <TextArea autoHeight placeholder="Text messages here" />
               </Form>
             </Grid.Column>
             <Grid.Column>
@@ -50,9 +51,7 @@ class ConversationPage extends Component {
     if(this.props.location){
       getMessages( this.props.location.state.id)
           .then(messagesResource => {
-            console.log("Checking : ", messagesResource);
             const messages = messagesResource.map(message => mapMessages(message, this.props.location.state.id))
-            console.log("Checking : ", messages);
             this.setState({ messages });
           })
           .catch(error => {

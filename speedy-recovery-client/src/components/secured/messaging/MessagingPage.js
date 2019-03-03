@@ -16,10 +16,9 @@ class MessagingPage extends Component {
     const chatItems = this.state.conversations.map(conversation => {
       return (
           <Link
-              to={{pathname:`/secured/conversation/${conversation.userId}`,
+              to={{pathname:`/secured/conversation/${conversation.Conversation_Id}`,
                   state:{id: this.props.id}}}
-              key={conversation.userId}
-             // state={this.props.id}
+              key={conversation.Conversation_Id}
           >
             <ChatItem
                 avatar={conversation.avatar}
@@ -44,7 +43,7 @@ class MessagingPage extends Component {
   componentDidMount() {
     getConversation(this.props.id)
       .then(conversations => {
-        console.log("Checking : ", conversations);
+          //console.log(conversations);
         this.setState({ conversations });
       })
       .catch(error => {
