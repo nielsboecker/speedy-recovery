@@ -5,7 +5,7 @@ class PatientInfo extends Component {
   render() {
     const { user, conditions } = this.props;
     const conditionsNum = conditions.length;
-    const createTable = () => {
+    const createConditionTable = () => {
       let table = [];
       if (conditionsNum) {
         let header = [
@@ -68,8 +68,7 @@ class PatientInfo extends Component {
         render: () => (
           <Tab.Pane>
             <h4>How many recorded conditions? {conditionsNum}</h4>
-            {createTable()}
-            <h4>{conditions[0].summary}</h4>
+            {createConditionTable()}
           </Tab.Pane>
         )
       },
