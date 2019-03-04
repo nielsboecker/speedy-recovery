@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Icon, Label, Menu, Tab, Table } from "semantic-ui-react";
-
+import "./PatientInfo.css";
 class PatientInfo extends Component {
   render() {
     const { user, conditions, medicationDispenses } = this.props;
@@ -25,17 +25,13 @@ class PatientInfo extends Component {
         let searchQuery = "https://www.google.com/search?q=" + summary;
 
         children.push(
-          <Table.Cell style={{ textAlign: "center" }}>
+          <Table.Cell>
             <Label ribbon>{`${i + 1}`} </Label>
           </Table.Cell>
         );
+        children.push(<Table.Cell>{<h4>{summary}</h4>}</Table.Cell>);
         children.push(
-          <Table.Cell style={{ textAlign: "center" }}>
-            {<h4>{summary}</h4>}
-          </Table.Cell>
-        );
-        children.push(
-          <Table.Cell style={{ textAlign: "center" }}>
+          <Table.Cell>
             {
               <h4>
                 <a href={searchQuery}>
@@ -46,7 +42,7 @@ class PatientInfo extends Component {
           </Table.Cell>
         );
         children.push(
-          <Table.Cell style={{ textAlign: "center" }}>
+          <Table.Cell>
             {<h4>{conditions[i].onsetDateTime.toString()}</h4>}
           </Table.Cell>
         );
@@ -78,17 +74,13 @@ class PatientInfo extends Component {
         let searchQuery = "https://www.google.com/search?q=" + name;
 
         children.push(
-          <Table.Cell style={{ textAlign: "center" }}>
+          <Table.Cell>
             <Label ribbon>{`${i + 1}`} </Label>
           </Table.Cell>
         );
+        children.push(<Table.Cell>{<h4>{name}</h4>}</Table.Cell>);
         children.push(
-          <Table.Cell style={{ textAlign: "center" }}>
-            {<h4>{name}</h4>}
-          </Table.Cell>
-        );
-        children.push(
-          <Table.Cell style={{ textAlign: "left" }}>
+          <Table.Cell>
             {
               <h4>
                 <a href={searchQuery}>
@@ -99,12 +91,10 @@ class PatientInfo extends Component {
           </Table.Cell>
         );
         children.push(
-          <Table.Cell style={{ textAlign: "center" }}>
-            {<h4>{medicationDispenses[i].quantity}</h4>}
-          </Table.Cell>
+          <Table.Cell>{<h4>{medicationDispenses[i].quantity}</h4>}</Table.Cell>
         );
         children.push(
-          <Table.Cell style={{ textAlign: "center", padding: "0 50px 0 50px" }}>
+          <Table.Cell>
             {<h4>{medicationDispenses[i].daysSupply}</h4>}
           </Table.Cell>
         );
