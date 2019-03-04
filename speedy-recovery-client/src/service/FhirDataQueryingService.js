@@ -60,9 +60,15 @@ const getUserMedicationDispense = userID => {
         smart.api
           .search({ type: "MedicationDispense", query: { subject: userID } })
           .done(medicationBundle => {
-            console.log("User medication response: ", medicationBundle);
+            console.log(
+              "User medication dispense response: ",
+              medicationBundle
+            );
             const medications = extractResourcesFromBundle(medicationBundle);
-            console.log("Medications Resource after mapping: ", medications);
+            console.log(
+              "MedicationDispenses Resource after mapping: ",
+              medications
+            );
             return resolve(medications);
           });
       },
