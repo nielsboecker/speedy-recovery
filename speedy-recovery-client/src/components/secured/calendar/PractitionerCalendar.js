@@ -4,6 +4,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
 import "./CalendarPages.css";
 import { Button, Grid, Modal, Segment, Table } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
 
@@ -159,7 +160,23 @@ class PractitionerCalendar extends React.Component {
                     </Table>
                     <Grid>
                       <Grid.Row centered>
-                        <Button>Patient Info</Button>
+                        <Button>
+                          <Link
+                            to={{
+                              pathname: `/secured/conversation/${
+                                this.state.appointment.patientId
+                              }`,
+                              state: {
+                                id: this.props.id,
+                                id2: this.state.appointment.patientId,
+                                title: ""
+                              }
+                            }}
+                            key={this.state.appointment.patientId}
+                          >
+                            Chat with this patient
+                          </Link>
+                        </Button>
                       </Grid.Row>
                     </Grid>
                   </Modal.Description>

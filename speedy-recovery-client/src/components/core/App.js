@@ -7,7 +7,7 @@ import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
 import { filterPatientResource } from "../../service/FhirDataFilteringService";
-import { fhirMapAppointment, fhirMapPatient, getChild } from "../../service/FhirDataMappingService";
+import {fhirMapAppointment, fhirMapPatient, getChild} from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
 
 class App extends Component {
@@ -17,8 +17,8 @@ class App extends Component {
       fhirClient: {},
       user: null,
       patient: {},
-      patientId: [],
-      practitionerId: [],
+      patients: [],
+      practitioners: [],
       appointments: [],
       authRequestStarted: false,
       error: null,
@@ -71,7 +71,10 @@ class App extends Component {
                 user={this.state.user}
                 patient={this.state.patient}
                 appointments={this.state.appointments}
+                patients={this.state.patients}
+                practitioners={this.state.practitioners}
                 fhirVersion={this.state.fhirVersion}
+                child={this.state.child}
               />
             )}
           />
@@ -130,14 +133,14 @@ class App extends Component {
 
         var user = this.updateStateUser(currentUserResource);
 
-        if(user.role === "Parent"){
+        if (user.role === "Parent") {
           this.updateStateChild(currentUserResource);
         }
 
-        if(user.role === "Parent" && this.state.child){
-          this.updateStateAppointment(this.state.child)
-        }else{
-          this.updateStateAppointment(user.id)
+        if (user.role === "Parent" && this.state.child) {
+          this.updateStateAppointment(this.state.child);
+        } else {
+          this.updateStateAppointment(user.id);
         }
 
         if (user.role === "Practitioner") {
@@ -159,7 +162,6 @@ class App extends Component {
         //      user.role = "Parent";
         //      TODO
         // }
-        this.updateStateAppointment(user.id);
 
         this.setState({ user });
       })
@@ -172,7 +174,19 @@ class App extends Component {
         const appointments = appointmentResource.map(appointment =>
           fhirMapAppointment(appointment, this.state.fhirVersion)
         );
-        this.setState({ appointments });
+        const patients = this.deleteRepeatingElement(
+          appointments.map(appointment => ({
+            name: appointment.patient,
+            id: appointment.patientId
+          }))
+        );
+        const practitioners = this.deleteRepeatingElement(
+          appointments.map(appointment => ({
+            name: appointment.practitioner,
+            id: appointment.practitionerId
+          }))
+        );
+        this.setState({ appointments, patients, practitioners });
       })
       .catch(error => {
         console.error(error);
@@ -248,6 +262,24 @@ class App extends Component {
   };
 
   resetError = () => this.setState({ error: null });
+
+  deleteRepeatingElement = resource => {
+    var handledResource = [resource[0]];
+    for (var i = 1; i < resource.length; i++) {
+      var element = resource[i];
+      var repeat = false;
+      for (var j = 0; j < handledResource.length; j++) {
+        if (element.id === handledResource[j].id) {
+          repeat = true;
+          break;
+        }
+      }
+      if (!repeat) {
+        handledResource.push(element);
+      }
+    }
+    return handledResource;
+  };
 }
 
 export default App;

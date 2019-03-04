@@ -18,7 +18,7 @@ const mapPatientToUserSTU3 = fhirPatientResource => ({
   id: fhirPatientResource.id ? fhirPatientResource.id : missingField,
   //This is a temporary hard-code fix as we have not implemented the searching for a patients' parent
   role:
-    fhirPatientResource.id === "219893"
+    fhirPatientResource.id === "219918"
       ? "Parent"
       : fhirPatientResource.resourceType,
 
@@ -53,7 +53,7 @@ const mapAppointmentSTU3 = fhirAppResource => ({
     : missingField,
   comment: fhirAppResource.comment ? fhirAppResource.comment : missingField,
   patient: getPatient(fhirAppResource.participant),
-  patientId:getPatientId(fhirAppResource.participant),
+  patientId: getPatientId(fhirAppResource.participant),
   practitioner: getPractitioner(fhirAppResource.participant),
   practitionerId: getPractitionerId(fhirAppResource.participant),
   location: getLocation(fhirAppResource.participant)

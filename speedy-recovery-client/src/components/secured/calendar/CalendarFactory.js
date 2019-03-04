@@ -17,12 +17,17 @@ class CalendarFactory extends React.Component {
         );
       case "Parent":
         return (
-          <ParentCalendar events={this.props.events} localizer={localizer} />
+          <ParentCalendar
+            events={this.props.events}
+            id={this.props.child}
+            localizer={localizer}
+          />
         );
       case "Practitioner":
         return (
           <PractitionerCalendar
             events={this.props.events}
+            id={this.props.id}
             localizer={localizer}
           />
         );
