@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { MessageList } from "react-chat-elements";
 import { Container, Form, Grid, Button } from "semantic-ui-react";
-import {getMessages, mapMessages, postMessages, setupMessages} from "../../../service/BackendService";
+import { getMessages, mapMessages, postMessages, setupMessages, getSenderMessageNum } from "../../../service/BackendService";
 
 class ConversationPage extends Component {
   constructor(props) {
@@ -84,7 +84,9 @@ class ConversationPage extends Component {
           const messages = messagesResource.map(message =>
             mapMessages(message, this.props.location.state.id)
           );
-          this.setState({ messages });
+          if(getSenderMessageNum(messages) >= getSenderMessageNum(this.state.messages)){
+            this.setState({ messages });
+          }
         })
         .catch(error => {
           console.error(error);

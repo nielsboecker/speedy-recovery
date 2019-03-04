@@ -74,6 +74,16 @@ const setupMessages = messageResource => ({
   date: new Date()
 });
 
+const getSenderMessageNum = (messageResource)=>{
+    var num = 0;
+    for (var i = 0; i < messageResource.length; i++) {
+        if (messageResource[i].position === "right") {
+            num ++;
+        }
+    }
+    return num;
+};
+
 export {
   getConversation,
   getMessages,
@@ -81,6 +91,7 @@ export {
   getPractitionerInfo,
   mapConversations,
   mapMessages,
-  setupMessages
+  setupMessages,
+    getSenderMessageNum
 };
 //module.exports = { getConversation, getMessages, getPractitionerInfo, mapMessages };
