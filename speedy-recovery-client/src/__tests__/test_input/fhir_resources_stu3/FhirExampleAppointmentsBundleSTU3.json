@@ -1,0 +1,1787 @@
+{
+  "resourceType": "Bundle",
+  "id": "ea2f8426-b98e-4713-a5e2-0032d0be1258",
+  "meta": {
+    "lastUpdated": "2019-02-28T16:45:03.130-05:00"
+  },
+  "type": "searchset",
+  "total": 38,
+  "link": [
+    {
+      "relation": "self",
+      "url": "https://launch.smarthealthit.org/v/r3/fhir/Appointment?actor=d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+    }
+  ],
+  "entry": [
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219850",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219850",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-24T20:47:54.108-05:00"
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Brian MRI results discussion</div>"
+        },
+        "status": "booked",
+        "serviceCategory": {
+          "coding": [
+            {
+              "system": "http://example.org/service-category",
+              "code": "gp",
+              "display": "General Practice"
+            }
+          ]
+        },
+        "serviceType": [
+          {
+            "coding": [
+              {
+                "code": "52",
+                "display": "General Discussion"
+              }
+            ]
+          }
+        ],
+        "specialty": [
+          {
+            "coding": [
+              {
+                "system": "http://example.org/specialty",
+                "code": "gp",
+                "display": "General Practice"
+              }
+            ]
+          }
+        ],
+        "appointmentType": {
+          "coding": [
+            {
+              "system": "http://example.org/appointment-type",
+              "code": "follow",
+              "display": "Followup"
+            }
+          ]
+        },
+        "indication": [
+          {
+            "reference": "Condition/example",
+            "display": "Severe burn of left ear"
+          }
+        ],
+        "priority": 5,
+        "description": "Discussion on the results of your recent MRI",
+        "supportingInformation": [
+          {
+            "reference": "DiagnosticReport/ultrasound"
+          }
+        ],
+        "start": "2019-02-01T10:00:00Z",
+        "end": "2019-02-01T11:00:00Z",
+        "created": "2018-10-10",
+        "comment": "Further expand on the results of the MRI and determine the next actions that may be appropriate.",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+              "display": "Steve Richey"
+            },
+            "required": "required",
+            "status": "accepted"
+          },
+          {
+            "type": [
+              {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/v3/ParticipationType",
+                    "code": "ATND"
+                  }
+                ]
+              }
+            ],
+            "actor": {
+              "reference": "Practitioner/smart-Practitioner-71482713",
+              "display": "Dr Susan A Clark"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219739",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219739",
+        "meta": {
+          "versionId": "3",
+          "lastUpdated": "2019-02-23T16:03:37.027-05:00"
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Brian MRI results discussion</div>"
+        },
+        "status": "booked",
+        "serviceCategory": {
+          "coding": [
+            {
+              "system": "http://example.org/service-category",
+              "code": "gp",
+              "display": "General Practice"
+            }
+          ]
+        },
+        "serviceType": [
+          {
+            "coding": [
+              {
+                "code": "52",
+                "display": "General Discussion"
+              }
+            ]
+          }
+        ],
+        "specialty": [
+          {
+            "coding": [
+              {
+                "system": "http://example.org/specialty",
+                "code": "gp",
+                "display": "General Practice"
+              }
+            ]
+          }
+        ],
+        "appointmentType": {
+          "coding": [
+            {
+              "system": "http://example.org/appointment-type",
+              "code": "follow",
+              "display": "Followup"
+            }
+          ]
+        },
+        "indication": [
+          {
+            "reference": "Condition/example",
+            "display": "Severe burn of left ear"
+          }
+        ],
+        "priority": 5,
+        "description": "Discussion on the results of your recent MRI",
+        "supportingInformation": [
+          {
+            "reference": "DiagnosticReport/ultrasound"
+          }
+        ],
+        "start": "2019-02-10T10:00:00Z",
+        "end": "2019-02-10T11:00:00Z",
+        "created": "2018-10-10",
+        "comment": "Further expand on the results of the MRI and determine the next actions that may be appropriate.",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+              "display": "Shelby Von"
+            },
+            "required": "required",
+            "status": "accepted"
+          },
+          {
+            "type": [
+              {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/v3/ParticipationType",
+                    "code": "ATND"
+                  }
+                ]
+              }
+            ],
+            "actor": {
+              "reference": "Practitioner/smart-Practitioner-72080416",
+              "display": "Dr Joseph P Nichols"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219737",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219737",
+        "meta": {
+          "versionId": "2",
+          "lastUpdated": "2019-02-23T16:04:46.275-05:00"
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">CT results discussion</div>"
+        },
+        "status": "booked",
+        "serviceCategory": {
+          "coding": [
+            {
+              "system": "http://example.org/service-category",
+              "code": "gp",
+              "display": "General Practice"
+            }
+          ]
+        },
+        "serviceType": [
+          {
+            "coding": [
+              {
+                "code": "52",
+                "display": "General Discussion"
+              }
+            ]
+          }
+        ],
+        "specialty": [
+          {
+            "coding": [
+              {
+                "system": "http://example.org/specialty",
+                "code": "gp",
+                "display": "General Practice"
+              }
+            ]
+          }
+        ],
+        "appointmentType": {
+          "coding": [
+            {
+              "system": "http://example.org/appointment-type",
+              "code": "follow",
+              "display": "Followup"
+            }
+          ]
+        },
+        "indication": [
+          {
+            "reference": "Condition/example",
+            "display": "Severe burn of left leg"
+          }
+        ],
+        "priority": 5,
+        "description": "Discussion on the results of your recent CT",
+        "supportingInformation": [
+          {
+            "reference": "DiagnosticReport/ultrasound"
+          }
+        ],
+        "start": "2019-02-23T09:00:00Z",
+        "end": "2019-02-23T11:00:00Z",
+        "created": "2019-01-10",
+        "comment": "Further expand on the results of the CT and determine the next actions that may be appropriate.",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+              "display": "Shelby Von"
+            },
+            "required": "required",
+            "status": "accepted"
+          },
+          {
+            "type": [
+              {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/v3/ParticipationType",
+                    "code": "ATND"
+                  }
+                ]
+              }
+            ],
+            "actor": {
+              "reference": "Practitioner/smart-Practitioner-72080416",
+              "display": "Dr Joseph P Nichols"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219736",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219736",
+        "meta": {
+          "versionId": "2",
+          "lastUpdated": "2019-02-23T16:05:08.332-05:00"
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Ultrasound results discussion</div>"
+        },
+        "status": "booked",
+        "serviceCategory": {
+          "coding": [
+            {
+              "system": "http://example.org/service-category",
+              "code": "gp",
+              "display": "General Practice"
+            }
+          ]
+        },
+        "serviceType": [
+          {
+            "coding": [
+              {
+                "code": "52",
+                "display": "General Discussion"
+              }
+            ]
+          }
+        ],
+        "specialty": [
+          {
+            "coding": [
+              {
+                "system": "http://example.org/specialty",
+                "code": "gp",
+                "display": "General Practice"
+              }
+            ]
+          }
+        ],
+        "appointmentType": {
+          "coding": [
+            {
+              "system": "http://example.org/appointment-type",
+              "code": "follow",
+              "display": "Followup"
+            }
+          ]
+        },
+        "indication": [
+          {
+            "reference": "Condition/example",
+            "display": "Stomach pains"
+          }
+        ],
+        "priority": 5,
+        "description": "Discussion on the results of your recent Ultrasound",
+        "supportingInformation": [
+          {
+            "reference": "DiagnosticReport/ultrasound"
+          }
+        ],
+        "start": "2019-02-25T15:00:00Z",
+        "end": "2019-02-25T17:00:00Z",
+        "created": "2019-02-10",
+        "comment": "Further expand on the results of the Ultrasound and determine the actions that may be appropriate.",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+              "display": "Shelby Von"
+            },
+            "required": "required",
+            "status": "accepted"
+          },
+          {
+            "type": [
+              {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/v3/ParticipationType",
+                    "code": "ATND"
+                  }
+                ]
+              }
+            ],
+            "actor": {
+              "reference": "Practitioner/smart-Practitioner-72080416",
+              "display": "Dr Joseph P Nichols"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219734",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219734",
+        "meta": {
+          "versionId": "2",
+          "lastUpdated": "2019-02-23T16:05:44.149-05:00"
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Chemotherapy results discussion</div>"
+        },
+        "status": "booked",
+        "serviceCategory": {
+          "coding": [
+            {
+              "system": "http://example.org/service-category",
+              "code": "gp",
+              "display": "General Practice"
+            }
+          ]
+        },
+        "serviceType": [
+          {
+            "coding": [
+              {
+                "code": "52",
+                "display": "General Discussion"
+              }
+            ]
+          }
+        ],
+        "specialty": [
+          {
+            "coding": [
+              {
+                "system": "http://example.org/specialty",
+                "code": "gp",
+                "display": "General Practice"
+              }
+            ]
+          }
+        ],
+        "appointmentType": {
+          "coding": [
+            {
+              "system": "http://example.org/appointment-type",
+              "code": "follow",
+              "display": "Followup"
+            }
+          ]
+        },
+        "indication": [
+          {
+            "reference": "Condition/example",
+            "display": "Cancer treatment"
+          }
+        ],
+        "priority": 5,
+        "description": "Discussion on chemo progress on cancer",
+        "supportingInformation": [
+          {
+            "reference": "DiagnosticReport/ultrasound"
+          }
+        ],
+        "start": "2019-02-15T09:00:00Z",
+        "end": "2019-02-15T11:00:00Z",
+        "created": "2019-01-10",
+        "comment": "Further expand on the results of the Chemo and determine the next actions that may be appropriate.",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+              "display": "Shelby Von"
+            },
+            "required": "required",
+            "status": "accepted"
+          },
+          {
+            "type": [
+              {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/v3/ParticipationType",
+                    "code": "ATND"
+                  }
+                ]
+              }
+            ],
+            "actor": {
+              "reference": "Practitioner/smart-Practitioner-72080416",
+              "display": "Dr Joseph P Nichols"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219728",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219728",
+        "meta": {
+          "versionId": "2",
+          "lastUpdated": "2019-02-23T16:10:43.383-05:00"
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Normal Test</div>"
+        },
+        "status": "booked",
+        "serviceCategory": {
+          "coding": [
+            {
+              "system": "http://example.org/service-category",
+              "code": "gp",
+              "display": "General Practice"
+            }
+          ]
+        },
+        "serviceType": [
+          {
+            "coding": [
+              {
+                "code": "52",
+                "display": "General Discussion"
+              }
+            ]
+          }
+        ],
+        "specialty": [
+          {
+            "coding": [
+              {
+                "system": "http://example.org/specialty",
+                "code": "gp",
+                "display": "General Practice"
+              }
+            ]
+          }
+        ],
+        "appointmentType": {
+          "coding": [
+            {
+              "system": "http://example.org/appointment-type",
+              "code": "follow",
+              "display": "Followup"
+            }
+          ]
+        },
+        "indication": [
+          {
+            "reference": "Condition/example",
+            "display": "Testing"
+          }
+        ],
+        "priority": 5,
+        "description": "Normal test for the patient",
+        "supportingInformation": [
+          {
+            "reference": "DiagnosticReport/ultrasound"
+          }
+        ],
+        "start": "2019-02-07T09:00:00Z",
+        "end": "2019-02-07T11:00:00Z",
+        "created": "2019-01-10",
+        "comment": "Normal test for the patient.",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+              "display": "Shelby Von"
+            },
+            "required": "required",
+            "status": "accepted"
+          },
+          {
+            "type": [
+              {
+                "coding": [
+                  {
+                    "system": "http://hl7.org/fhir/v3/ParticipationType",
+                    "code": "ATND"
+                  }
+                ]
+              }
+            ],
+            "actor": {
+              "reference": "Practitioner/smart-Practitioner-72080416",
+              "display": "Dr Joseph P Nichols"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219709",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219709",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-13T05:40:18.399-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219708",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219708",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-13T03:12:56.845-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219707",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219707",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-13T03:06:15.965-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219706",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219706",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-13T03:06:01.662-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219703",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219703",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-13T00:53:18.115-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219702",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219702",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-13T00:52:13.916-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219694",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219694",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-12T16:09:34.046-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219693",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219693",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-12T16:08:26.617-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219692",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219692",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-12T16:07:43.821-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219691",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219691",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-12T15:59:25.556-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219690",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219690",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-12T15:58:40.906-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219689",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219689",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-12T15:55:31.156-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219688",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219688",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-12T15:53:41.540-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219687",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219687",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-12T15:53:05.352-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219686",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219686",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-12T15:52:45.878-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219685",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219685",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-12T15:51:56.915-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219678",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219678",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-11T14:09:11.140-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219655",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219655",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-11T02:19:52.905-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219654",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219654",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-11T02:17:07.623-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219653",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219653",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-11T02:16:39.164-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219652",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219652",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-11T02:14:41.047-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219651",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219651",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-11T02:13:49.862-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219650",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219650",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-11T02:13:26.556-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219649",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219649",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-11T02:11:56.787-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219648",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219648",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-11T02:11:24.704-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219647",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219647",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-11T02:10:43.906-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219644",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219644",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-10T13:53:27.443-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219643",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219643",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-10T13:25:37.524-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219642",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219642",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-10T13:25:36.922-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219608",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219608",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-08T10:07:42.544-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219607",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219607",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-02-08T09:57:20.234-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    },
+    {
+      "fullUrl": "https://launch.smarthealthit.org/v/r3/fhir/Appointment/219515",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "219515",
+        "meta": {
+          "versionId": "1",
+          "lastUpdated": "2019-01-31T20:36:50.804-05:00"
+        },
+        "status": "booked",
+        "reason": [
+          {
+            "coding": [
+              {
+                "system": "snomed",
+                "code": "1",
+                "display": "Check-up"
+              }
+            ]
+          }
+        ],
+        "start": "2017-01-02T03:04:05+01:00",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059"
+            },
+            "required": "required",
+            "status": "accepted"
+          }
+        ]
+      },
+      "search": {
+        "mode": "match"
+      }
+    }
+  ]
+}
