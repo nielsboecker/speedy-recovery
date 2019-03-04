@@ -10,8 +10,9 @@ class PatientInfo extends Component {
       if (conditionsNum) {
         let header = [
           <Table.Row>
-            <Table.HeaderCell>Order</Table.HeaderCell>
+            <Table.HeaderCell>#</Table.HeaderCell>
             <Table.HeaderCell>Summary</Table.HeaderCell>
+            <Table.HeaderCell />
             <Table.HeaderCell>Time</Table.HeaderCell>
           </Table.Row>
         ];
@@ -28,12 +29,14 @@ class PatientInfo extends Component {
             <Label ribbon>{`${i + 1}`} </Label>
           </Table.Cell>
         );
+        children.push(<Table.Cell>{<h4>{summary}</h4>}</Table.Cell>);
         children.push(
           <Table.Cell>
             {
               <h4>
-                {summary}
-                <a href={searchQuery}>Explore</a>
+                <a href={searchQuery}>
+                  <Icon fitted name="search" />
+                </a>
               </h4>
             }
           </Table.Cell>
