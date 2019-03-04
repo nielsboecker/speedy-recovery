@@ -3,7 +3,7 @@ import { Icon, Label, Menu, Tab, Table } from "semantic-ui-react";
 
 class PatientInfo extends Component {
   render() {
-    const { user, conditions } = this.props;
+    const { user, conditions, medicationDispenses } = this.props;
     const conditionsNum = conditions.length;
     const createConditionTable = () => {
       let table = [];
@@ -52,6 +52,52 @@ class PatientInfo extends Component {
       return table;
     };
 
+    const medicationDispensesNum = medicationDispenses.length;
+    const createMedicationDispenseTable = () => {
+      let table = [];
+      if (medicationDispensesNum) {
+        let header = [
+          <Table.Row>
+            <Table.HeaderCell>#</Table.HeaderCell>
+            <Table.HeaderCell>Name</Table.HeaderCell>
+            <Table.HeaderCell />
+            <Table.HeaderCell>Quantity</Table.HeaderCell>
+          </Table.Row>
+        ];
+        table.push(<Table.Header>{header}</Table.Header>);
+      }
+      let body = [];
+      for (let i = 0; i < medicationDispensesNum; i++) {
+        let children = [];
+        let name = medicationDispenses[i].name;
+        let searchQuery = "https://www.google.com/search?q=" + name;
+
+        children.push(
+          <Table.Cell>
+            <Label ribbon>{`${i + 1}`} </Label>
+          </Table.Cell>
+        );
+        children.push(<Table.Cell>{<h4>{name}</h4>}</Table.Cell>);
+        children.push(
+          <Table.Cell>
+            {
+              <h4>
+                <a href={searchQuery}>
+                  <Icon fitted name="search" />
+                </a>
+              </h4>
+            }
+          </Table.Cell>
+        );
+        children.push(
+          <Table.Cell>{<h4>{medicationDispenses[i].quantity}</h4>}</Table.Cell>
+        );
+        body.push(<Table.Row>{children}</Table.Row>);
+      }
+      table.push(<Table.Body>{body}</Table.Body>);
+      return table;
+    };
+
     const panes = [
       {
         menuItem: (
@@ -72,10 +118,18 @@ class PatientInfo extends Component {
         menuItem: (
           <Menu.Item>
             <Icon fitted name="pills" />
-            Medication
+            Dispensed Medication
           </Menu.Item>
         ),
-        render: () => <Tab.Pane>Medication Content</Tab.Pane>
+        render: () => (
+          <Tab.Pane>
+            <h4>
+              How many dispensed medication in the records?{" "}
+              {medicationDispensesNum}
+            </h4>
+            {createMedicationDispenseTable()}
+          </Tab.Pane>
+        )
       },
       {
         menuItem: (

@@ -87,6 +87,35 @@ const mapMedicationSTU3 = fhirMedResource => ({
   imageURL: getImageURL(fhirMedResource.image)
 });
 
+const mapMedicationDispenseSTU3 = fhirMedResource => ({
+  id: fhirMedResource.id ? fhirMedResource.id : missingField,
+  status:
+    fhirMedResource.status !== undefined
+      ? fhirMedResource.status
+      : missingField,
+  name: getMedDispenseName(fhirMedResource.medicationCodeableConcept),
+  quantity: getMedDispenseQuantity(fhirMedResource.quantity),
+  daysSupply: getMedDispenseDaysSupply(fhirMedResource.daysSupply),
+  whenHandedOver:
+    fhirMedResource.whenHandedOver !== undefined
+      ? fhirMedResource.whenHandedOver
+      : missingField
+});
+
+const getMedDispenseDaysSupply = daysSupply => {
+  if (daysSupply && daysSupply.value && daysSupply.unit) {
+    return daysSupply.value + " " + daysSupply.unit;
+  }
+  return missingField;
+};
+
+const getMedDispenseQuantity = quantity => {
+  if (quantity && quantity.value && quantity.unit) {
+    return quantity.value + " " + quantity.unit;
+  }
+  return missingField;
+};
+
 const getGP = generalPractitioner => {
   if (
     generalPractitioner &&
@@ -176,6 +205,13 @@ const getProducer = contained => {
   return missingField;
 };
 
+const getMedDispenseName = medicationCodeableConcept => {
+  if (medicationCodeableConcept && medicationCodeableConcept.text) {
+    return medicationCodeableConcept.text;
+  }
+  return missingField;
+};
+
 const getContent = packageC => {
   if (
     packageC &&
@@ -209,5 +245,6 @@ export {
   mapPatientToUserSTU3,
   mapAppointmentSTU3,
   mapConditionSTU3,
-  mapMedicationSTU3
+  mapMedicationSTU3,
+  mapMedicationDispenseSTU3
 };

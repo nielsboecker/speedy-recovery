@@ -9,7 +9,13 @@ class InfoFactory extends Component {
 
     switch (user.role) {
       case "Patient":
-        return <PatientInfo user={user} conditions={this.props.conditions} />;
+        return (
+          <PatientInfo
+            user={user}
+            conditions={this.props.conditions}
+            medicationDispenses={this.props.medicationDispenses}
+          />
+        );
       case "Parent":
         return <ParentInfo user={user} />;
       case "Practitioner":

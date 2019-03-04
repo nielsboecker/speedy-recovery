@@ -53,8 +53,30 @@ const getUserConditions = userID => {
   });
 };
 
+const getUserMedicationDispense = userID => {
+  return new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      smart => {
+        smart.api
+          .search({ type: "MedicationDispense", query: { subject: userID } })
+          .done(medicationBundle => {
+            console.log("User medication response: ", medicationBundle);
+            const medications = extractResourcesFromBundle(medicationBundle);
+            console.log("Medications Resource after mapping: ", medications);
+            return resolve(medications);
+          });
+      },
+      error => {
+        console.error("MedicationDispense fetching error: ", error);
+        return reject(error);
+      }
+    );
+  });
+};
+
 export default {
   getUserAppointments,
   getUserConditions,
+  getUserMedicationDispense,
   extractResourcesFromBundle
 };

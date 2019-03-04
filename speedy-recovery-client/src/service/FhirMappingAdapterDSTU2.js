@@ -80,6 +80,42 @@ const mapMedicationSTU2 = fhirMedResource => ({
   imageURL: "Undefined in STU2"
 });
 
+const mapMedicationDispenseSTU2 = fhirMedResource => ({
+  id: fhirMedResource.id ? fhirMedResource.id : missingField,
+  status:
+    fhirMedResource.status !== undefined
+      ? fhirMedResource.status
+      : missingField,
+  name: getMedDispenseName(fhirMedResource.medicationCodeableConcept),
+  quantity: getMedDispenseQuantity(fhirMedResource.quantity),
+  daysSupply: getMedDispenseDaysSupply(fhirMedResource.daysSupply),
+  whenHandedOver:
+    fhirMedResource.whenHandedOver !== undefined
+      ? fhirMedResource.whenHandedOver
+      : missingField
+});
+
+const getMedDispenseDaysSupply = daysSupply => {
+  if (daysSupply && daysSupply.value && daysSupply.unit) {
+    return daysSupply.value + " " + daysSupply.unit;
+  }
+  return missingField;
+};
+
+const getMedDispenseQuantity = quantity => {
+  if (quantity && quantity.value && quantity.unit) {
+    return quantity.value + " " + quantity.unit;
+  }
+  return missingField;
+};
+
+const getMedDispenseName = medicationCodeableConcept => {
+  if (medicationCodeableConcept && medicationCodeableConcept.text) {
+    return medicationCodeableConcept.text;
+  }
+  return missingField;
+};
+
 const getAddress = address => {
   if (
     address &&
@@ -123,5 +159,6 @@ export {
   mapPatientToUserSTU2,
   mapAppointmentSTU2,
   mapConditionSTU2,
-  mapMedicationSTU2
+  mapMedicationSTU2,
+  mapMedicationDispenseSTU2
 };
