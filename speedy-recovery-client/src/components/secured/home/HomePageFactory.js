@@ -64,4 +64,3 @@ class HomePageFactory extends Component {
 }
 
 export default HomePageFactory;
-

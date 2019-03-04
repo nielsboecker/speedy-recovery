@@ -9,7 +9,6 @@ import ConversationPage from "../conversation/ConversationPage";
 import InfoFactory from "../patientinformation/InfoFactory";
 import CalendarFactory from "../calendar/CalendarFactory";
 import HomePageFactory from "../home/HomePageFactory";
-import HomePageForPatient from "../home/HomePageForPatient";
 
 class SecuredMainPage extends Component {
   constructor(props) {

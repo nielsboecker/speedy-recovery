@@ -23,7 +23,6 @@ class HomePageForPractitioner extends Component {
   }
 
   render() {
-
     return (
       <div>
         <h3>Hello {this.state.user.name}</h3>
