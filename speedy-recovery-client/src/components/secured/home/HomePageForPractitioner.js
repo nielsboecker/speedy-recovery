@@ -23,7 +23,6 @@ class HomePageForPractitioner extends Component {
   }
 
   render() {
-    const { user, patient } = this.props;
 
     return (
       <div>

@@ -65,6 +65,3 @@ class HomePageFactory extends Component {
 
 export default HomePageFactory;
 
-{
-  /*events={(events.filter(event => new Date(event.start)-new Date()>0)).sort(function(a,b){return  new Date(b.date) - new Date(a.date)[0];})} */
-}

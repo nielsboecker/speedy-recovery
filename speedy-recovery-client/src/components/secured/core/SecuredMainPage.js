@@ -3,7 +3,6 @@ import Header from "../shared/Header";
 import Footer from "../shared/Footer";
 import { BrowserRouter, Redirect, Route } from "react-router-dom";
 import { Container } from "semantic-ui-react";
-import HomePage from "../home/HomePage";
 import MessagingPage from "../messaging/MessagingPage";
 import ProfilePage from "../profile/ProfilePage";
 import ConversationPage from "../conversation/ConversationPage";
