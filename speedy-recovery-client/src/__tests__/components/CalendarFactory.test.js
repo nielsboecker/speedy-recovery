@@ -2,9 +2,9 @@ import React from "react";
 import Enzyme, { mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import CalendarFactory from "../../components/secured/calendar/CalendarFactory";
-import ParentCalendar from "../../components/secured/calendar/ParentCalendar";
-import PatientCalendar from "../../components/secured/calendar/PatientCalendar";
-import PractitionerCalendar from "../../components/secured/calendar/PractitionerCalendar";
+import ParentCalendar from "../../components/secured/calendar/parent/ParentCalendar";
+import PatientCalendar from "../../components/secured/calendar/patient/PatientCalendar";
+import PractitionerCalendar from "../../components/secured/calendar/practitioner/PractitionerCalendar";
 
 Enzyme.configure({ adapter: new Adapter() });
 
