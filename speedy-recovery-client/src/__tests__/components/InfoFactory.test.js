@@ -13,13 +13,23 @@ Enzyme.configure({ adapter: new Adapter() });
 
 test("InfoFactory renders without crashing", () => {
   mount(
-    <InfoFactory user={{ role: "Patient" }} patient={{}} conditions={[]} />
+    <InfoFactory
+      user={{ role: "Patient" }}
+      patient={{}}
+      conditions={[]}
+      medicationDispenses={[]}
+    />
   );
 });
 
 test("InfoFactory renders patient info for patient users", () => {
   const wrapper = mount(
-    <InfoFactory user={{ role: "Patient" }} patient={{}} conditions={[]} />
+    <InfoFactory
+      user={{ role: "Patient" }}
+      patient={{}}
+      conditions={[]}
+      medicationDispenses={[]}
+    />
   );
   expect(wrapper.children().length).toBe(1);
   expect(wrapper.children().type().name).toEqual("PatientInfo");
