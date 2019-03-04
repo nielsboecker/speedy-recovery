@@ -43,15 +43,20 @@ class SecuredMainPage extends Component {
                   <CalendarFactory
                     events={this.props.appointments}
                     role={this.props.user.role}
+                    child={this.props.child}
+                    id={this.props.user.id}
                   />
                 )}
               />
               <Route
                 path={`${match.url}/messaging`}
                 render={() => (
-                    <MessagingPage
-                        id = {this.props.user.id}
-                    />
+                  <MessagingPage
+                    user={this.props.user}
+                    patients={this.props.patients}
+                    practitioners={this.props.practitioners}
+                    child={this.props.child}
+                  />
                 )}
               />
               <Route

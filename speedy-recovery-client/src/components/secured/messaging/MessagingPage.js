@@ -9,47 +9,65 @@ class MessagingPage extends Component {
     super(props);
     this.state = {
       conversations: [],
+      id: null
     };
   }
 
   render() {
     const chatItems = this.state.conversations.map(conversation => {
       return (
-          <Link
-              to={{pathname:`/secured/conversation/${conversation.id}`,
-                  state:{id: this.props.id, id2: conversation.title}}}
-              key={conversation.id}
-          >
-              <ChatItem
-                  avatar={conversation.avatar}
-                  alt={conversation.alt}
-                  title={conversation.title}
-                  subtitle={conversation.subtitle}
-                  date={conversation.date}
-                  unread={conversation.unread}
-              />
-          </Link>
+        <Link
+          to={{
+            pathname: `/secured/conversation/${conversation.userId}`,
+            state: {
+              id: this.state.id,
+              id2: conversation.userId,
+              title: ": " + conversation.title
+            }
+          }}
+          key={conversation.userId}
+        >
+          <ChatItem
+            avatar={conversation.avatar}
+            alt={conversation.alt}
+            title={conversation.title}
+            subtitle={conversation.subtitle}
+            date={conversation.date}
+            unread={conversation.unread}
+          />
+        </Link>
       );
     });
 
     return (
-        <div>
-          <h1>Messaging </h1>
-          {chatItems}
-        </div>
+      <div>
+        <h1>Messaging </h1>
+        {chatItems}
+      </div>
     );
   }
 
   componentDidMount() {
-      getConversation(this.props.id)
+    if(this.props.user){
+      const userList =
+          this.props.user.role === "Parent"
+              ? this.props.practitioners
+              : this.props.patients;
+      const id =
+          this.props.user.role === "Parent" ? this.props.child : this.props.user.id;
+      this.setState({ id });
+      getConversation(id)
           .then(conversationResource => {
-              //console.log(conversations);
-              const conversations = conversationResource.map(conversation => mapConversations(conversation, this.props.id));
-              this.setState({ conversations });
+            //console.log(conversations);
+            const conversations = conversationResource.map(conversation =>
+                mapConversations(conversation, id, userList)
+            );
+            this.setState({ conversations });
           })
           .catch(error => {
-              console.error(error);
+            console.error(error);
           });
+    }
   }
 }
 
