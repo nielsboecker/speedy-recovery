@@ -2,6 +2,14 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class HomePageForPatient extends Component {
+  static defaultProps = {
+    event: {
+      start: [],
+      patient: [],
+      user: []
+    }
+  };
+
   constructor(props) {
     super(props);
 

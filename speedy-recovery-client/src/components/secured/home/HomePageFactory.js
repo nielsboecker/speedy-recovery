@@ -16,7 +16,7 @@ class HomePageFactory extends Component {
               events
                 .filter(
                   event =>
-                    new Date(event.start) - new Date("2019", "01", "8") > 0
+                    new Date(event.start) - new Date() > 0
                 )
                 .sort(function(a, b) {
                   return new Date(a.start) - new Date(b.start);
@@ -32,7 +32,7 @@ class HomePageFactory extends Component {
               events
                 .filter(
                   event =>
-                    new Date(event.start) - new Date("2019", "01", "8") > 0
+                    new Date(event.start) - new Date() > 0
                 )
                 .sort(function(a, b) {
                   return new Date(a.start) - new Date(b.start);
@@ -49,7 +49,7 @@ class HomePageFactory extends Component {
               events
                 .filter(
                   event =>
-                    new Date(event.start) - new Date("2019", "01", "8") > 0
+                    new Date(event.start) - new Date() > 0
                 )
                 .sort(function(a, b) {
                   return new Date(a.start) - new Date(b.start);

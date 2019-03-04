@@ -18,7 +18,7 @@ const mapPatientToUserSTU2 = fhirPatientResource => ({
   id: fhirPatientResource.id ? fhirPatientResource.id : missingField,
   //This is a temporary hard-code fix as we have not implemented the searching for a patients' parent
   role:
-    fhirPatientResource.id === "219915"
+    fhirPatientResource.id === "219961"
       ? "Parent"
       : fhirPatientResource.resourceType,
 
