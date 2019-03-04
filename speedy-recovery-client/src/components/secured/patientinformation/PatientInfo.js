@@ -25,13 +25,17 @@ class PatientInfo extends Component {
         let searchQuery = "https://www.google.com/search?q=" + summary;
 
         children.push(
-          <Table.Cell>
+          <Table.Cell style={{ textAlign: "center" }}>
             <Label ribbon>{`${i + 1}`} </Label>
           </Table.Cell>
         );
-        children.push(<Table.Cell>{<h4>{summary}</h4>}</Table.Cell>);
         children.push(
-          <Table.Cell>
+          <Table.Cell style={{ textAlign: "center" }}>
+            {<h4>{summary}</h4>}
+          </Table.Cell>
+        );
+        children.push(
+          <Table.Cell style={{ textAlign: "center" }}>
             {
               <h4>
                 <a href={searchQuery}>
@@ -42,7 +46,7 @@ class PatientInfo extends Component {
           </Table.Cell>
         );
         children.push(
-          <Table.Cell>
+          <Table.Cell style={{ textAlign: "center" }}>
             {<h4>{conditions[i].onsetDateTime.toString()}</h4>}
           </Table.Cell>
         );
@@ -62,6 +66,7 @@ class PatientInfo extends Component {
             <Table.HeaderCell>Name</Table.HeaderCell>
             <Table.HeaderCell />
             <Table.HeaderCell>Quantity</Table.HeaderCell>
+            <Table.HeaderCell>Supply Time Length</Table.HeaderCell>
           </Table.Row>
         ];
         table.push(<Table.Header>{header}</Table.Header>);
@@ -73,13 +78,17 @@ class PatientInfo extends Component {
         let searchQuery = "https://www.google.com/search?q=" + name;
 
         children.push(
-          <Table.Cell>
+          <Table.Cell style={{ textAlign: "center" }}>
             <Label ribbon>{`${i + 1}`} </Label>
           </Table.Cell>
         );
-        children.push(<Table.Cell>{<h4>{name}</h4>}</Table.Cell>);
         children.push(
-          <Table.Cell>
+          <Table.Cell style={{ textAlign: "center" }}>
+            {<h4>{name}</h4>}
+          </Table.Cell>
+        );
+        children.push(
+          <Table.Cell style={{ textAlign: "left" }}>
             {
               <h4>
                 <a href={searchQuery}>
@@ -90,7 +99,14 @@ class PatientInfo extends Component {
           </Table.Cell>
         );
         children.push(
-          <Table.Cell>{<h4>{medicationDispenses[i].quantity}</h4>}</Table.Cell>
+          <Table.Cell style={{ textAlign: "center" }}>
+            {<h4>{medicationDispenses[i].quantity}</h4>}
+          </Table.Cell>
+        );
+        children.push(
+          <Table.Cell style={{ textAlign: "center", padding: "0 50px 0 50px" }}>
+            {<h4>{medicationDispenses[i].daysSupply}</h4>}
+          </Table.Cell>
         );
         body.push(<Table.Row>{children}</Table.Row>);
       }
