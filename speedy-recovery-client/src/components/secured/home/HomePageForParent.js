@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class HomePageForParent extends Component {
-
   static defaultProps = {
     event: {
-      start: "no appointment time",
+      start: "no appointment time"
     }
   };
 

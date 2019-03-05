@@ -204,7 +204,7 @@ class App extends Component {
     var user = undefined;
     const filteredPatient = filterPatientResource(currentUserResource);
     if (filteredPatient) {
-      user = fhirMapPatient(filteredPatient, "3");
+      user = fhirMapPatient(filteredPatient, this.state.fhirVersion);
       console.log("User Resource after mapping: ", user);
     } else {
       console.error(

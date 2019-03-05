@@ -4,12 +4,11 @@ import { Link } from "react-router-dom";
 class HomePageForPractitioner extends Component {
   static defaultProps = {
     event: {
-      start: "no appointment time",
+      start: "no appointment time"
     }
   };
 
   render() {
-
     return (
       <div>
         <p>Hello {this.props.user.name}</p>
