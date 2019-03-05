@@ -2,13 +2,17 @@ import {
   fhirMapAppointment,
   fhirMapCondition,
   fhirMapMedication,
-  fhirMapPatient
+  fhirMapMedicationDispense,
+  fhirMapPatient,
+  fhirMapCarePlan
 } from "../../service/FhirDataMappingService";
 import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatientSTU3.json";
 import fhirExamplePatientMissingField from "../test_input/fhir_resources_stu3/FhirExamplePatientMissingFieldSTU3.json";
 import fhirShortApp from "../test_input/fhir_resources_stu3/FhirSingleExampleAppointmentSTU3.json";
 import fhirExampleCondition from "../test_input/fhir_resources_stu3/FhirExampleConditionSTU3.json";
 import fhirExampleMedication from "../test_input/fhir_resources_stu3/FhirExampleMedicationSTU3.json";
+import fhirExampleCarePlan from "../test_input/fhir_resources_stu3/FhirExampleCarePlanSTU3.json";
+import fhirExampleMedicationDispense from "../test_input/fhir_resources_stu3/FhirExampleMedicationDispenseSTU3.json";
 
 test("map FHIR Patient resource to internal user data model", () => {
   const user = fhirMapPatient(fhirExamplePatient, "3");
@@ -33,4 +37,17 @@ test("map FHIR Condition resource to internal data model", () => {
 test("map FHIR Medication resource to internal data model", () => {
   const medication = fhirMapMedication(fhirExampleMedication, "3");
   expect(medication).toMatchSnapshot();
+});
+
+test("map FHIR CarePlan resource to internal data model", () => {
+  const carePlan = fhirMapCarePlan(fhirExampleCarePlan, "3");
+  expect(carePlan).toMatchSnapshot();
+});
+
+test("map FHIR MedicationDispense resource to internal data model", () => {
+  const medicationDispense = fhirMapMedicationDispense(
+    fhirExampleMedicationDispense,
+    "3"
+  );
+  expect(medicationDispense).toMatchSnapshot();
 });
