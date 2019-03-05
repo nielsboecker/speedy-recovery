@@ -95,6 +95,66 @@ const mapMedicationDispenseSTU2 = fhirMedResource => ({
       : missingField
 });
 
+const mapCarePlanSTU2 = fhirCareResource => ({
+  id: fhirCareResource.id ? fhirCareResource.id : missingField,
+  status:
+    fhirCareResource.status !== undefined
+      ? fhirCareResource.status
+      : missingField,
+  activities: getCarePlanActivities(fhirCareResource.activity),
+  category: getCarePlanCategory(fhirCareResource.category),
+  period: getCarePlanPeriod(fhirCareResource.period)
+});
+
+const getCarePlanCategory = category => {
+  if (
+    category &&
+    category[0] &&
+    category[0].coding &&
+    category[0].coding[0] &&
+    category[0].coding[0].display
+  ) {
+    return category[0].coding[0].display;
+  }
+  return missingField;
+};
+
+const getCarePlanActivities = activity => {
+  if (
+    activity &&
+    activity[0] &&
+    activity[0].detail &&
+    activity[0].detail.code &&
+    activity[0].detail.code.coding &&
+    activity[0].detail.code.coding[0] &&
+    activity[0].detail.code.coding[0].display
+  ) {
+    return activity[0].detail.code.coding[0].display;
+  }
+  return missingField;
+};
+
+const getCarePlanPeriod = period => {
+  if (period) {
+    return getCarePlanStart(period) + " - " + getCarePlanEnd(period);
+  }
+  return missingField;
+};
+
+const getCarePlanStart = period => {
+  if (period && period.start) {
+    return period.start;
+  }
+  return missingField;
+};
+
+const getCarePlanEnd = period => {
+  if (period && period.end) {
+    return period.end;
+  }
+  return missingField;
+};
+
 const getMedDispenseDaysSupply = daysSupply => {
   if (daysSupply && daysSupply.value && daysSupply.unit) {
     return daysSupply.value + " " + daysSupply.unit;
@@ -160,5 +220,6 @@ export {
   mapAppointmentSTU2,
   mapConditionSTU2,
   mapMedicationSTU2,
-  mapMedicationDispenseSTU2
+  mapMedicationDispenseSTU2,
+  mapCarePlanSTU2
 };

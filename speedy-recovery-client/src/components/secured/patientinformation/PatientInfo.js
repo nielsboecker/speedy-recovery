@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Icon, Label, Menu, Tab, Table } from "semantic-ui-react";
-import "./PatientInfo.css";
 class PatientInfo extends Component {
   render() {
-    const { user, conditions, medicationDispenses } = this.props;
+    const { user, conditions, medicationDispenses, carePlans } = this.props;
+
     const conditionsNum = conditions.length;
     const createConditionTable = () => {
       let table = [];
@@ -104,6 +104,40 @@ class PatientInfo extends Component {
       return table;
     };
 
+    const carePlansNum = carePlans.length;
+    const createCarePlanTable = () => {
+      let table = [];
+      if (carePlansNum) {
+        let header = [
+          <Table.Row>
+            <Table.HeaderCell>#</Table.HeaderCell>
+            <Table.HeaderCell>Activities</Table.HeaderCell>
+            <Table.HeaderCell>Period</Table.HeaderCell>
+          </Table.Row>
+        ];
+        table.push(<Table.Header>{header}</Table.Header>);
+      }
+      let body = [];
+      for (let i = 0; i < carePlansNum; i++) {
+        let children = [];
+        let activities = carePlans[i].activities;
+
+        children.push(
+          <Table.Cell>
+            <Label ribbon>{`${i + 1}`} </Label>
+          </Table.Cell>
+        );
+        children.push(<Table.Cell>{<h4>{activities}</h4>}</Table.Cell>);
+        children.push(
+          <Table.Cell>{<h4>{carePlans[i].period}</h4>}</Table.Cell>
+        );
+
+        body.push(<Table.Row>{children}</Table.Row>);
+      }
+      table.push(<Table.Body>{body}</Table.Body>);
+      return table;
+    };
+
     const panes = [
       {
         menuItem: (
@@ -158,7 +192,12 @@ class PatientInfo extends Component {
             Care Plan
           </Menu.Item>
         ),
-        render: () => <Tab.Pane>Care Plan Content</Tab.Pane>
+        render: () => (
+          <Tab.Pane>
+            <h4>How many recorded care plans? {carePlansNum}</h4>
+            {createCarePlanTable()}
+          </Tab.Pane>
+        )
       }
     ];
 

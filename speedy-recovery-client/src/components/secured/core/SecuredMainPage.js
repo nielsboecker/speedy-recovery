@@ -63,6 +63,7 @@ class SecuredMainPage extends Component {
                     patient={this.props.patient}
                     conditions={this.props.conditions}
                     medicationDispenses={this.props.medicationDispenses}
+                    carePlans={this.props.carePlans}
                   />
                 )}
               />

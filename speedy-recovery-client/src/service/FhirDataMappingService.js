@@ -3,6 +3,7 @@ import {
   mapConditionSTU2,
   mapMedicationSTU2,
   mapMedicationDispenseSTU2,
+  mapCarePlanSTU2,
   mapPatientToUserSTU2
 } from "./FhirMappingAdapterDSTU2";
 import {
@@ -10,6 +11,7 @@ import {
   mapConditionSTU3,
   mapMedicationSTU3,
   mapMedicationDispenseSTU3,
+  mapCarePlanSTU3,
   mapPatientToUserSTU3
 } from "./FhirMappingAdapterSTU3";
 
@@ -88,10 +90,26 @@ const fhirMapMedicationDispense = (resource, version) => {
   console.log("No FHIR version has been supplied");
 };
 
+const fhirMapCarePlan = (resource, version) => {
+  if (version) {
+    switch (version[0]) {
+      case "1":
+      case "2":
+        return mapCarePlanSTU2(resource);
+      case "3":
+        return mapCarePlanSTU3(resource);
+      default:
+        console.log("Invalid version of FHIR resource provided: ", version);
+    }
+  }
+  console.log("No FHIR version has been supplied");
+};
+
 export {
   fhirMapPatient,
   fhirMapAppointment,
   fhirMapCondition,
   fhirMapMedication,
-  fhirMapMedicationDispense
+  fhirMapMedicationDispense,
+  fhirMapCarePlan
 };

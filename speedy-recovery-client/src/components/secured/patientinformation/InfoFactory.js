@@ -14,6 +14,7 @@ class InfoFactory extends Component {
             user={user}
             conditions={this.props.conditions}
             medicationDispenses={this.props.medicationDispenses}
+            carePlans={this.props.carePlans}
           />
         );
       case "Parent":

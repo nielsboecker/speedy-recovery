@@ -11,6 +11,7 @@ import {
   fhirMapAppointment,
   fhirMapCondition,
   fhirMapMedicationDispense,
+  fhirMapCarePlan,
   fhirMapPatient
 } from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
@@ -25,6 +26,7 @@ class App extends Component {
       appointments: [],
       conditions: [],
       medicationDispenses: [],
+      carePlans: [],
       authRequestStarted: false,
       error: null,
       fhirVersion: null
@@ -77,6 +79,7 @@ class App extends Component {
                 appointments={this.state.appointments}
                 conditions={this.state.conditions}
                 medicationDispenses={this.state.medicationDispenses}
+                carePlans={this.state.carePlans}
                 fhirVersion={this.state.fhirVersion}
               />
             )}
@@ -156,6 +159,7 @@ class App extends Component {
         this.updateStateAppointment(user.id);
         this.updateStateCondition(user.id);
         this.updateStateMedicationDispense(user.id);
+        this.updateStateCarePlan(user.id);
 
         this.setState({ user });
       })
@@ -194,6 +198,19 @@ class App extends Component {
           fhirMapMedicationDispense(medication, this.state.fhirVersion)
         );
         this.setState({ medicationDispenses });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  updateStateCarePlan(userId) {
+    FhirDataQueryingService.getUserCarePlan(userId)
+      .then(carePlanResource => {
+        const carePlans = carePlanResource.map(carePlan =>
+          fhirMapCarePlan(carePlan, this.state.fhirVersion)
+        );
+        this.setState({ carePlans });
       })
       .catch(error => {
         console.error(error);

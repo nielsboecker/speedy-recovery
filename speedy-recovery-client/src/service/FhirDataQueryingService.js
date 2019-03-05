@@ -80,9 +80,31 @@ const getUserMedicationDispense = userID => {
   });
 };
 
+const getUserCarePlan = userID => {
+  return new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      smart => {
+        smart.api
+          .search({ type: "CarePlan", query: { subject: userID } })
+          .done(carePlanBundle => {
+            console.log("User care plan response: ", carePlanBundle);
+            const carePlans = extractResourcesFromBundle(carePlanBundle);
+            console.log("CarePlans Resource after mapping: ", carePlans);
+            return resolve(carePlans);
+          });
+      },
+      error => {
+        console.error("CarePlan fetching error: ", error);
+        return reject(error);
+      }
+    );
+  });
+};
+
 export default {
   getUserAppointments,
   getUserConditions,
   getUserMedicationDispense,
+  getUserCarePlan,
   extractResourcesFromBundle
 };
