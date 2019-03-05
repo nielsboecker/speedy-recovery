@@ -111,6 +111,7 @@ class PatientInfo extends Component {
         let header = [
           <Table.Row>
             <Table.HeaderCell>#</Table.HeaderCell>
+            <Table.HeaderCell>Category</Table.HeaderCell>
             <Table.HeaderCell>Activities</Table.HeaderCell>
             <Table.HeaderCell>Period</Table.HeaderCell>
           </Table.Row>
@@ -120,14 +121,18 @@ class PatientInfo extends Component {
       let body = [];
       for (let i = 0; i < carePlansNum; i++) {
         let children = [];
-        let activities = carePlans[i].activities;
 
         children.push(
           <Table.Cell>
             <Label ribbon>{`${i + 1}`} </Label>
           </Table.Cell>
         );
-        children.push(<Table.Cell>{<h4>{activities}</h4>}</Table.Cell>);
+        children.push(
+          <Table.Cell>{<h4>{carePlans[i].category}</h4>}</Table.Cell>
+        );
+        children.push(
+          <Table.Cell>{<h4>{carePlans[i].activities}</h4>}</Table.Cell>
+        );
         children.push(
           <Table.Cell>{<h4>{carePlans[i].period}</h4>}</Table.Cell>
         );
