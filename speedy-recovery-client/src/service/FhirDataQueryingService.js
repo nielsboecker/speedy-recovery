@@ -26,9 +26,45 @@ const getUserAppointments = userID => {
   });
 };
 
+const getPracitionerInfo = (practId, familyName) => {
+  return new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      smart => {
+        smart.api
+          .search({ type: "Practitioner", query: { family: familyName } })
+          .done(practitionerBundle => {
+            console.log("Practitioner response: ", practitionerBundle);
+            console.log(familyName);
+            if (practitionerBundle.data.total === 0) {
+              console.log("No practitioner found with name " + familyName);
+              return;
+            }
+            const practitioner = extractSpecificPractitionerFromBundle(
+              practitionerBundle,
+              practId
+            );
+            console.log(
+              "Practitioner response Resource after mapping: ",
+              practitioner
+            );
+            return resolve(practitioner[0]);
+          });
+      },
+      error => {
+        console.error("Practitioner fetching error: ", error);
+        return reject(error);
+      }
+    );
+  });
+};
+
 const extractResourcesFromBundle = appointments =>
   appointments.data.entry.map(app => app.resource);
 
+const extractSpecificPractitionerFromBundle = (practitioner, practId) =>
+  practitioner.data.entry.filter(pract => pract.resource.id === practId);
+
 export default {
-  getUserAppointments
+  getUserAppointments,
+  getPracitionerInfo
 };
