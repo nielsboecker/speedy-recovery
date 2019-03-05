@@ -18,6 +18,7 @@ test("InfoFactory renders without crashing", () => {
       patient={{}}
       conditions={[]}
       medicationDispenses={[]}
+      carePlans={[]}
     />
   );
 });
@@ -29,6 +30,7 @@ test("InfoFactory renders patient info for patient users", () => {
       patient={{}}
       conditions={[]}
       medicationDispenses={[]}
+      carePlans={[]}
     />
   );
   expect(wrapper.children().length).toBe(1);
