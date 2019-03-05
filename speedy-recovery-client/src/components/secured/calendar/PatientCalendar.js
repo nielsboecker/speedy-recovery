@@ -21,13 +21,13 @@ class PatientCalendar extends React.Component {
     }
 
     getDoctorsInfo = () => {
-                this.props.events.map(event => {
-                    var family = event.practitioner.split(' ');
-                    var id = event.practitionerId.substring(13, event.practitionerId.length);
-                    this.getPractInfo(event, id, family[family.length - 1]);
-
-                });
-           this.setState( {dropdownList:
+        this.props.events.map(event => {
+            const family = event.practitioner.split(' ');
+            const id = event.practitionerId.substring(13, event.practitionerId.length);
+            return this.getPractInfo(event, id, family[family.length - 1]);
+        });
+        this.setState({
+            dropdownList:
                 this.removeDuplicates(this.props.events.map(event => {
                     return {text: event.practitioner, value: event.practitionerId}
                 }))
@@ -43,7 +43,8 @@ class PatientCalendar extends React.Component {
                             info: practitionerResource.resource.name[0].family,
                             gender: practitionerResource.resource.gender,
                             birthDate: practitionerResource.resource.birthDate
-                    })
+                    });
+
             })
             .catch(error => {
                 console.error(error);
@@ -88,7 +89,7 @@ class PatientCalendar extends React.Component {
                     <Grid.Column color={'green'}>
                         <h2 align="center">My Appointments</h2>
                         <Segment >
-                            <div style={{ height: 450 }}>
+                            <div style={{ height: 500 }}>
                                 <BigCalendar
                                     localizer={this.props.localizer}
                                     events={this.props.events}
