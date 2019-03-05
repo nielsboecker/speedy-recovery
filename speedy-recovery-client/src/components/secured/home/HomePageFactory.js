@@ -13,25 +13,16 @@ class HomePageFactory extends Component {
 
     switch (homePage) {
       case "PatientHomePage":
-        return <HomePageForPatient user={user}
-                                   events={events} />;
+        return <HomePageForPatient user={user} events={events} />;
       case "ParentHomePage":
-        return (
-          <HomePageForParent user={user}
-                             events={events}
-                             />
-        );
+        return <HomePageForParent user={user} events={events} />;
       case "PractitionerHomePage":
-        return <HomePageForPractitioner user={user}
-                                        events={events}
-                                        />;
+        return <HomePageForPractitioner user={user} events={events} />;
       default:
         console.error("Enter the wrong page");
         return null;
     }
   }
-
-
 }
 
 export default HomePageFactory;

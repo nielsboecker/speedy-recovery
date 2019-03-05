@@ -4,16 +4,21 @@ import { Loader } from "semantic-ui-react";
 
 class HomePageForPractitioner extends Component {
   render() {
-    if (this.props.user && this.props.events&&
-        this.getNextEvent(this.props.events).start&&this.getNextEvent(this.props.events).patient) {
+    if (
+      this.props.user &&
+      this.props.events &&
+      this.getNextEvent(this.props.events).start &&
+      this.getNextEvent(this.props.events).patient
+    ) {
       return (
         <div>
           <p>Hello {this.props.user.name}</p>
-          {new Date(this.getNextEvent(this.props.events).start).toLocaleString("en-uk") !==
-          "Invalid Date" ? (
+          {new Date(this.getNextEvent(this.props.events).start).toLocaleString(
+            "en-uk"
+          ) !== "Invalid Date" ? (
             <p>
-              Here is the time for your patient {this.getNextEvent(this.props.events).start}'s next
-              appointment:{" "}
+              Here is the time for your patient{" "}
+              {this.getNextEvent(this.props.events).start}'s next appointment:{" "}
               <Link to={"/secured/calendar"}>
                 {this.formatDate(this.props.event.start)}
               </Link>
@@ -23,16 +28,15 @@ class HomePageForPractitioner extends Component {
           )}
         </div>
       );
-
     } else {
-      return <Loader content="Loading" inline="centered" active size="large"/>;
+      return <Loader content="Loading" inline="centered" active size="large" />;
     }
-
   }
-  getNextEvent(events){
-    const event=events.filter(event => new Date(event.start) - new Date() > 0)
-                      .sort((a, b) => new Date(a.start) - new Date(b.start))[0];
-    return (event?event:{start:[], patient:[]});
+  getNextEvent(events) {
+    const event = events
+      .filter(event => new Date(event.start) - new Date() > 0)
+      .sort((a, b) => new Date(a.start) - new Date(b.start))[0];
+    return event ? event : { start: [], patient: [] };
   }
 
   formatDate(date) {
@@ -41,7 +45,6 @@ class HomePageForPractitioner extends Component {
     }
     return "Invalid date";
   }
-
 }
 
 export default HomePageForPractitioner;
