@@ -1,17 +1,17 @@
 import {
-  getPosition,
-  getText,
+  getAlt,
+  getAvatar,
   getDate,
+  getId,
+  getPosition,
+  getSubtitle,
+  getText,
   getTime,
   getTitle,
-  getId,
-  getAvatar,
-  getAlt,
-  getSubtitle,
   getUnread,
   getUserId
 } from "./BackendMappingExtractionUtils";
-import axios from 'axios';
+import axios from "axios";
 
 const baseUrl = "https://speedy-recovery-server.azurewebsites.net";
 const getConversation = async id => {
@@ -26,21 +26,24 @@ const getMessages = async (id, id2) => {
   return response.data;
 };
 
+// TODO @Fabiha rename variables so it is clear who is sender and receiver
 const postMessages = async (id1, id2, message) => {
   const url = baseUrl + "/messages?";
-  axios({
-    method: "post",
-    url: url,
-    data: {
-      message: "<message_start>" + message + "<message_end>"
-    },
-    headers: {
-      Sender: id1,
-      Recipient: id2
-    }
-  }).then(response => {
-    console.log(response);
-  });
+  axios
+    .post(url, {
+      // TODO @Fabiha Use ES6 string template syntax (also for similar string concatenations in this file)
+      data: {
+        message: "<message_start>" + message + "<message_end>"
+      },
+      headers: {
+        Sender: id1,
+        Recipient: id2
+      }
+    })
+    .then(response => {
+      console.log(response);
+    });
+  // TODO @Fabiha also have an error handling, even if it is just logging
 };
 
 const getPractitionerInfo = async id => {
@@ -74,14 +77,14 @@ const setupMessages = messageResource => ({
   date: new Date()
 });
 
-const getSenderMessageNum = (messageResource)=>{
-    var num = 0;
-    for (var i = 0; i < messageResource.length; i++) {
-        if (messageResource[i].position === "right") {
-            num ++;
-        }
+const getSenderMessageNum = messageResource => {
+  var num = 0;
+  for (var i = 0; i < messageResource.length; i++) {
+    if (messageResource[i].position === "right") {
+      num++;
     }
-    return num;
+  }
+  return num;
 };
 
 export {
@@ -92,5 +95,5 @@ export {
   mapConversations,
   mapMessages,
   setupMessages,
-    getSenderMessageNum
+  getSenderMessageNum
 };
