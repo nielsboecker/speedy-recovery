@@ -8,6 +8,7 @@ import {
   getPhone,
   getPractitioner,
   getPractitionerId,
+  getPractName,
   getSeverity,
   getSummary
 } from "./FhirDataMappingExtractionUtils";
@@ -88,6 +89,23 @@ const mapMedicationSTU3 = fhirMedResource => ({
   content: getContent(fhirMedResource.package),
   imageURL: getImageURL(fhirMedResource.image)
 });
+
+const mapPractitionerSTU3 = fhirPractResource => ({
+  name: getPractName(fhirPractResource.name),
+  id: fhirPractResource.id ? fhirPractResource.id : missingField,
+  gender: fhirPractResource.gender ? fhirPractResource.gender : missingField,
+  birthDate: fhirPractResource.birthDate
+    ? fhirPractResource.birthDate
+    : missingField,
+  photo: getPhoto(fhirPractResource.photo)
+});
+
+const getPhoto = photo => {
+  if (photo && photo[0] && photo[0].data) {
+    return photo[0].data;
+  }
+  return missingField;
+};
 
 const getGP = generalPractitioner => {
   if (
@@ -211,5 +229,6 @@ export {
   mapPatientToUserSTU3,
   mapAppointmentSTU3,
   mapConditionSTU3,
-  mapMedicationSTU3
+  mapMedicationSTU3,
+  mapPractitionerSTU3
 };

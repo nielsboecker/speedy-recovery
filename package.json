@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "base64-img": "^1.0.4"
+    "base64-img": "^1.0.4",
+    "base64-to-image": "^1.0.2"
   }
 }

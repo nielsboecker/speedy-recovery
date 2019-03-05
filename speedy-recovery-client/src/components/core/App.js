@@ -6,8 +6,8 @@ import LandingMainPage from "../landing/core/LandingMainPage";
 import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
-import { filterPatientResource } from "../../service/FhirDataFilteringService";
-import { fhirMapAppointment, fhirMapPatient } from "../../service/FhirDataMappingService";
+import {filterPatientResource} from "../../service/FhirDataFilteringService";
+import {fhirMapAppointment, fhirMapPatient} from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
 
 class App extends Component {
@@ -119,7 +119,7 @@ class App extends Component {
     this.setState({ fhirClient });
     console.log("Received FHIR client: ", fhirClient);
 
-    fhirClient.user
+     fhirClient.user
       .read()
       .then(currentUserResource => {
         console.log("Received current user resources: ", currentUserResource);
@@ -144,15 +144,17 @@ class App extends Component {
         //      user.role = "Parent";
         //      TODO
         // }
-        this.updateStateAppointment(user.id);
+         this.updateStateAppointment(user.id);
 
         this.setState({ user });
       })
       .catch(error => console.error(error));
+
+
   };
 
-  updateStateAppointment(userId) {
-    FhirDataQueryingService.getUserAppointments(userId)
+   updateStateAppointment(userId) {
+     FhirDataQueryingService.getUserAppointments(userId)
       .then(appointmentResource => {
         const appointments = appointmentResource.map(appointment =>
           fhirMapAppointment(appointment, this.state.fhirVersion)
@@ -163,6 +165,8 @@ class App extends Component {
         console.error(error);
       });
   }
+
+
 
   updateStatePatient(patientResource) {
     const filteredPatientResource = filterPatientResource(patientResource);

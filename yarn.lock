@@ -18,6 +18,11 @@ base64-img@^1.0.4:
     ajax-request "^1.2.0"
     file-system "^2.1.0"
 
+base64-to-image@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/base64-to-image/-/base64-to-image-1.0.2.tgz#a6f30606e52174d2499fcee21eebb74b7a731c69"
+  integrity sha1-pvMGBuUhdNJJn87iHuu3S3pzHGk=
+
 file-match@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/file-match/-/file-match-1.0.2.tgz#c9cad265d2c8adf3a81475b0df475859069faef7"
