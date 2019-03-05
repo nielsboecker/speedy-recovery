@@ -6,9 +6,6 @@ import HomePageForPractitioner from "../home/HomePageForPractitioner";
 class HomePageFactory extends Component {
   render() {
     const { user, events } = this.props;
-    const event = events
-      .filter(event => new Date(event.start) - new Date() > 0)
-      .sort((a, b) => new Date(a.start) - new Date(b.start))[0];
     const homePage = user.role.toString() + "HomePage";
 
     switch (homePage) {
