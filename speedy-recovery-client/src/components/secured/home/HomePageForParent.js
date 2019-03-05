@@ -1,37 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Loader} from "semantic-ui-react";
+import { Loader } from "semantic-ui-react";
 
 class HomePageForParent extends Component {
-  constructor(props) {
-    super(props);
-    this.bool=true;
-  }
-
-  static defaultProps = {
-    event: {
-      start: "no appointment time"
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const cProps=JSON.stringify(this.props);
-    const pProps=JSON.stringify(prevProps);
-    if(cProps!==pProps)
-    {
-      this.bool=false;
-    }else{
-      this.props.event.start="Invalid Date"
-      this.bool=false;
-    }
-  }
-  updateHomePage(){
-    if(this.bool){
-      return <Loader content='Loading' active inline='centered' size='large'/>;
-    }else{
+  render() {
+    if (this.props.user && this.props.event && this.props.event.start && this.props.event.patient) {
       return (
         <div>
-          <Loader inverted inline='centre' size="large" />
           <p>Hello {this.props.user.name}</p>
           {new Date(this.props.event.start).toLocaleString("en-uk") !==
           "Invalid Date" ? (
@@ -39,7 +14,7 @@ class HomePageForParent extends Component {
               Here is the time for your child {this.props.event.patient}'s next
               appointment:{" "}
               <Link to={"/secured/calendar"}>
-                {new Date(this.props.event.start).toLocaleString("en-uk")}
+                {this.formatDate(this.props.event.start)}
               </Link>
             </p>
           ) : (
@@ -48,14 +23,19 @@ class HomePageForParent extends Component {
         </div>
       );
 
-
+    } else {
+      return <Loader content="Loading" inline="centered" active size="large"/>;
     }
 
   }
 
-  render() {
-    return this.updateHomePage();
+  formatDate(date) {
+    if (date) {
+      return new Date(date).toLocaleString("en-uk");
+    }
+    return "Invalid date";
   }
+
 }
 
 export default HomePageForParent;
