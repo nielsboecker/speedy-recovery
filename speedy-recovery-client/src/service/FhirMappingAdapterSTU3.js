@@ -127,23 +127,35 @@ const getCarePlanCategory = category => {
 };
 
 const getCarePlanActivities = activity => {
-  if (
-    activity &&
-    activity[0] &&
-    activity[0].detail &&
-    activity[0].detail.code &&
-    activity[0].detail.code.coding &&
-    activity[0].detail.code.coding[0] &&
-    activity[0].detail.code.coding[0].display
-  ) {
-    return activity[0].detail.code.coding[0].display;
+  if (activity) {
+    let actStr = "";
+    let actNum = activity.length;
+    for (let i = 0; i < actNum; i++) {
+      if (
+        activity[i] &&
+        activity[i].detail &&
+        activity[i].detail.code &&
+        activity[i].detail.code.coding &&
+        activity[i].detail.code.coding[0] &&
+        activity[i].detail.code.coding[0].display
+      ) {
+        actStr =
+          actStr +
+          (i + 1).toString() +
+          ". " +
+          activity[i].detail.code.coding[0].display +
+          "; ";
+      }
+    }
+    return actStr;
   }
+
   return missingField;
 };
 
 const getCarePlanPeriod = period => {
   if (period) {
-    return getCarePlanStart(period) + " - " + getCarePlanEnd(period);
+    return "from " + getCarePlanStart(period) + " to " + getCarePlanEnd(period);
   }
   return missingField;
 };
