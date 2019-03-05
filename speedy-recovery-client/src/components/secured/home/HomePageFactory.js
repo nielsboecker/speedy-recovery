@@ -5,7 +5,7 @@ import HomePageForPractitioner from "../home/HomePageForPractitioner";
 
 class HomePageFactory extends Component {
   render() {
-    const { user, patient, events } = this.props;
+    const { user, events } = this.props;
     const event = events
       .filter(event => new Date(event.start) - new Date() > 0)
       .sort((a, b) => new Date(a.start) - new Date(b.start))[0];
@@ -13,18 +13,25 @@ class HomePageFactory extends Component {
 
     switch (homePage) {
       case "PatientHomePage":
-        return <HomePageForPatient user={user} event={event} />;
+        return <HomePageForPatient user={user}
+                                   events={events} />;
       case "ParentHomePage":
         return (
-          <HomePageForParent user={user} event={event} patient={patient} />
+          <HomePageForParent user={user}
+                             events={events}
+                             />
         );
       case "PractitionerHomePage":
-        return <HomePageForPractitioner user={user} event={event} />;
+        return <HomePageForPractitioner user={user}
+                                        events={events}
+                                        />;
       default:
         console.error("Enter the wrong page");
         return null;
     }
   }
+
+
 }
 
 export default HomePageFactory;

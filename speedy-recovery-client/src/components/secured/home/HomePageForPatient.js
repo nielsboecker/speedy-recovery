@@ -3,56 +3,47 @@ import { Link } from "react-router-dom";
 import { Loader } from "semantic-ui-react";
 
 class HomePageForPatient extends Component {
-  constructor(props) {
-    super(props);
-    this.bool= true;
-  }
-
-  static defaultProps = {
-    event: {
-      start: "no appointment time"
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const cProps=JSON.stringify(this.props);
-    const pProps=JSON.stringify(prevProps);
-    if(cProps!==pProps)
-    {
-      this.bool=false;
-    }else{
-      this.props.event.start="Invalid Date"
-      this.bool=false;
-    }
-  }
-  updateHomePage(){
-    if(this.bool){
-      return <Loader content='Loading' active inline='centered' size='large'/>;
-    }else{
+  render() {
+    if (this.props.user && this.props.events &&
+      this.getNextEvent(this.props.events).start&&
+      this.getNextEvent(this.props.events).patient) {
       return (
         <div>
           <p>Hello {this.props.user.name}</p>
-          {new Date(this.props.event.start).toLocaleString("en-uk") !==
+          {new Date(this.getNextEvent(this.props.events).start).toLocaleString("en-uk") !==
           "Invalid Date" ? (
             <p>
-              Here is the time for your next appointment:{" "}
+              Here is the time for your next
+              appointment:{" "}
               <Link to={"/secured/calendar"}>
-                {new Date(this.props.event.start).toLocaleString("en-uk")}
+                {this.formatDate(this.getNextEvent(this.props.events).start)}
               </Link>
             </p>
           ) : (
             <p>You dont't have any appointment</p>
           )}
         </div>
-      )
+      );
+
+    } else {
+      return <Loader content="Loading" inline="centered" active size="large"/>;
     }
 
-
   }
 
-  render() {
-    return this.updateHomePage();
+  getNextEvent(events){
+    const event=events.filter(event => new Date(event.start) - new Date() > 0)
+      .sort((a, b) => new Date(a.start) - new Date(b.start))[0];
+    return (event?event:{start:[]});
   }
+
+  formatDate(date) {
+    if (date) {
+      return new Date(date).toLocaleString("en-uk");
+    }
+    return "Invalid date";
+  }
+
+
 }
-
 export default HomePageForPatient;

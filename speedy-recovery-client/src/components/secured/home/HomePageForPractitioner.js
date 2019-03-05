@@ -3,32 +3,37 @@ import { Link } from "react-router-dom";
 import { Loader } from "semantic-ui-react";
 
 class HomePageForPractitioner extends Component {
-  render(){
-    if (this.props.user && this.props.user.name ){
-      if(this.props.event&&this.props.event.start && this.props.event.patient){
-        return (
-          <div>
-            <p>Hello {this.props.user.name}</p>
+  render() {
+    if (this.props.user && this.props.events&&
+        this.getNextEvent(this.props.events).start&&this.getNextEvent(this.props.events).patient) {
+      return (
+        <div>
+          <p>Hello {this.props.user.name}</p>
+          {new Date(this.getNextEvent(this.props.events).start).toLocaleString("en-uk") !==
+          "Invalid Date" ? (
             <p>
-              Here is the time for your patient {this.props.event.patient}'s next
+              Here is the time for your patient {this.getNextEvent(this.props.events).start}'s next
               appointment:{" "}
               <Link to={"/secured/calendar"}>
                 {this.formatDate(this.props.event.start)}
               </Link>
             </p>
-          </div>
-          )}else{
-          return(
-          <div>
-            <p>Hello {this.props.user.name}</p>
+          ) : (
             <p>You dont't have any appointment</p>
-          </div> )
-        }
+          )}
+        </div>
+      );
 
-      }else{
-      return <Loader content='Loading' active inline='centered' size='large'/>;
+    } else {
+      return <Loader content="Loading" inline="centered" active size="large"/>;
     }
-    }
+
+  }
+  getNextEvent(events){
+    const event=events.filter(event => new Date(event.start) - new Date() > 0)
+                      .sort((a, b) => new Date(a.start) - new Date(b.start))[0];
+    return (event?event:{start:[], patient:[]});
+  }
 
   formatDate(date) {
     if (date) {
