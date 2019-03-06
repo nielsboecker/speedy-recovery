@@ -35,7 +35,7 @@ const getUserAppointments = userID => {
   });
 };
 
-const getPracitionerInfo = (practId, familyName) => {
+const getPractitioner = (practId, familyName) => {
   return new Promise((resolve, reject) => {
     FHIR.oauth2.ready(
       smart => {
@@ -68,7 +68,7 @@ const getPracitionerInfo = (practId, familyName) => {
 };
 
 export default {
-  getPracitionerInfo,
+  getPractitioner,
   getUserAppointments,
   extractResourcesFromBundle
 };

@@ -3,12 +3,12 @@ import BigCalendar from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
 import "../CalendarPages.css";
-import axios from 'axios';
 import { Grid, Segment, Dropdown } from "semantic-ui-react";
 import FhirDataQueryingService from "../../../../service/FhirDataQueryingService";
 import {filterPractitionerResource} from "../../../../service/FhirDataFilteringService";
 import {fhirMapPractitioner} from "../../../../service/FhirDataMappingService";
 import PatientPractitionerCard from "./PatientPractitionerCard";
+import BackendDataQueryingService from "../../../../service/BackendDataQueryingService";
 
 class PatientCalendar extends React.Component {
 
@@ -22,25 +22,25 @@ class PatientCalendar extends React.Component {
         };
     }
 
-    getDoctorsInfo = () => {
+    getPractitionerInfo = () => {
         this.props.events.map(event => {
-            const family = event.practitioner.split(' ');
-            const id = event.practitionerId.substring(13, event.practitionerId.length);
-            return this.queryPractInfo(id, family[family.length - 1]);
+                const family = event.practitioner.split(' ');
+                const id = event.practitionerId.substring(13, event.practitionerId.length);
+                return this.queryPractInfo(id, family[family.length - 1]);
         });
         this.setState({
             dropdownList:
                 this.removeArrayDuplicates(this.props.events.map(event => {
-                    return {text: event.practitioner, value: event.practitionerId}
+                        return {text: event.practitioner, value: event.practitionerId}
                 }))
         });
     };
 
-    removeArrayDuplicates = array => array.reduce((prev, curr) =>
-        prev.find(a => a["text"] === curr["text"]) ? prev : prev.push(curr) && prev, []);
+    removeArrayDuplicates = array => array !== undefined ? array.reduce((prev, curr) =>
+        prev.find(a => a["text"] === curr["text"]) ? prev : prev.push(curr) && prev, []) : array;
 
     queryPractInfo = (practId, familyName) =>
-        FhirDataQueryingService.getPracitionerInfo(practId, familyName)
+        FhirDataQueryingService.getPractitioner(practId, familyName)
             .then(practitionerResource => {
 
                 const filteredPractitionerResource = filterPractitionerResource(practitionerResource.resource);
@@ -66,19 +66,22 @@ class PatientCalendar extends React.Component {
 
     getBackendInfo =  (practitionerID) => {
         const id = practitionerID.substring(13, practitionerID.length);
-        axios.get('https://speedy-recovery-server.azurewebsites.net/practitioners?userid=' + id)
-            .then(response => {this.setState({backendInfo: response.data[0]});}
+        BackendDataQueryingService.getBackendPractitionerInfo(id)
+            .then(response =>
+                this.setState({backendInfo: response.data[0]})
             )
-            .catch(error => console.log("No extra info: " + error ));
+            .catch(error => console.log(error))
     };
 
     onDropdownChange = (e, data) => {
         this.getBackendInfo(data.value);
-        this.setState({ selectedPractitioner: this.state.practitionerList.find(element => element.id === data.value.substring(13, data.value.length)) });
+        this.setState({ selectedPractitioner:
+                this.state.practitionerList.find(element => element.id ===
+                    data.value.substring(13, data.value.length)) });
     };
 
     componentWillMount = () => {
-        this.getDoctorsInfo();
+        this.getPractitionerInfo();
     };
 
     render() {
