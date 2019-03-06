@@ -1,0 +1,50 @@
+{
+  "resourceType": "MedicationDispense",
+  "id": "smart-MedicationDispense-313",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2018-04-30T13:30:38.522-04:00",
+    "tag": [
+      {
+        "system": "https://smarthealthit.org/tags",
+        "code": "smart-7-2017"
+      }
+    ]
+  },
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Dispensed 30 tablets = 30 day supply of clopidogrel 75 MG Oral Tablet [Plavix]</div>"
+  },
+  "status": "completed",
+  "medicationCodeableConcept": {
+    "coding": [
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "code": "213169",
+        "display": "clopidogrel 75 MG Oral Tablet [Plavix]"
+      }
+    ],
+    "text": "clopidogrel 75 MG Oral Tablet [Plavix]"
+  },
+  "subject": {
+    "reference": "Patient/smart-2113340"
+  },
+  "authorizingPrescription": [
+    {
+      "reference": "MedicationRequest/smart-MedicationRequest-225"
+    }
+  ],
+  "quantity": {
+    "value": 30,
+    "unit": "tablets",
+    "system": "http://unitsofmeasure.org",
+    "code": "{tablets}"
+  },
+  "daysSupply": {
+    "value": 30,
+    "unit": "days",
+    "system": "http://unitsofmeasure.org",
+    "code": "d"
+  },
+  "whenHandedOver": "2009-07-08"
+}

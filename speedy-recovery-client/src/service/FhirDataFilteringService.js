@@ -70,10 +70,39 @@ const filterPractitionerResource = resource => {
   return null;
 };
 
+const filterMedicationDispenseResource = resource => {
+  if (
+    resource &&
+    resource.medicationCodeableConcept &&
+    resource.medicationCodeableConcept.text &&
+    resource.id
+  ) {
+    return resource;
+  }
+  return null;
+};
+
+const filterCarePlanResource = resource => {
+  if (
+    resource &&
+    resource.category &&
+    resource.category[0] &&
+    resource.category[0].coding &&
+    resource.category[0].coding[0] &&
+    resource.category[0].coding[0].display &&
+    resource.id
+  ) {
+    return resource;
+  }
+  return null;
+};
+
 export {
   filterPatientResource,
   filterAppointmentResource,
   filterConditionResource,
   filterMedicationResource,
-  filterPractitionerResource
+  filterPractitionerResource,
+  filterMedicationDispenseResource,
+  filterCarePlanResource
 };

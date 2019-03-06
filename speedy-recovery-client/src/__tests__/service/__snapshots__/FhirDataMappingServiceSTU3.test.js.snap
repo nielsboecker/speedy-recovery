@@ -21,6 +21,16 @@ Object {
 }
 `;
 
+exports[`map FHIR CarePlan resource to internal data model 1`] = `
+Object {
+  "activities": "1. Antenatal education; 2. Stress management; 3. Pregnancy diet education; ",
+  "category": "Routine antenatal care",
+  "id": "RES47187",
+  "period": "from 1960-09-13 to 1961-04-11",
+  "status": "completed",
+}
+`;
+
 exports[`map FHIR Condition resource to internal data model 1`] = `
 Object {
   "bodySite": "Left Ear",
@@ -42,6 +52,17 @@ Object {
   "isOverTheCounter": false,
   "name": "Vancomycin Hydrochloride (VANCOMYCIN HYDROCHLORIDE)",
   "producer": "Pfizer Laboratories Div Pfizer Inc",
+}
+`;
+
+exports[`map FHIR MedicationDispense resource to internal data model 1`] = `
+Object {
+  "daysSupply": "30 days",
+  "id": "smart-MedicationDispense-313",
+  "name": "clopidogrel 75 MG Oral Tablet [Plavix]",
+  "quantity": "30 tablets",
+  "status": "completed",
+  "whenHandedOver": "2009-07-08",
 }
 `;
 

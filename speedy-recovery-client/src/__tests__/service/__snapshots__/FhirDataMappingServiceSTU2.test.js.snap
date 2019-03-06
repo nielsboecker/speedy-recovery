@@ -21,6 +21,16 @@ Object {
 }
 `;
 
+exports[`map FHIR CarePlan resource to internal data model 1`] = `
+Object {
+  "activities": "1. Recommendation to avoid exercise; 2. Deep breathing and coughing exercises; ",
+  "category": "Respiratory therapy",
+  "id": "RES383736",
+  "period": "from 1985-03-31 to 1985-08-16",
+  "status": "completed",
+}
+`;
+
 exports[`map FHIR Condition resource to internal data model 1`] = `
 Object {
   "bodySite": "Left Ear",
@@ -42,6 +52,17 @@ Object {
   "isOverTheCounter": "Undefined in STU2",
   "name": "Apo-Amoxi Cap 250mg",
   "producer": "Undefined in STU2",
+}
+`;
+
+exports[`map FHIR MedicationDispense resource to internal data model 1`] = `
+Object {
+  "daysSupply": "30 days",
+  "id": "smart-MedicationDispense-332",
+  "name": "Lisinopril 5 MG Oral Tablet",
+  "quantity": "30 tablets",
+  "status": "completed",
+  "whenHandedOver": "2009-04-09",
 }
 `;
 

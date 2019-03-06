@@ -6,8 +6,14 @@ import LandingMainPage from "../landing/core/LandingMainPage";
 import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
-import {filterPatientResource} from "../../service/FhirDataFilteringService";
-import {fhirMapAppointment, fhirMapPatient} from "../../service/FhirDataMappingService";
+import { filterPatientResource } from "../../service/FhirDataFilteringService";
+import {
+  fhirMapAppointment,
+  fhirMapCondition,
+  fhirMapMedicationDispense,
+  fhirMapCarePlan,
+  fhirMapPatient
+} from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
 
 class App extends Component {
@@ -18,6 +24,9 @@ class App extends Component {
       user: null,
       patient: {},
       appointments: [],
+      conditions: [],
+      medicationDispenses: [],
+      carePlans: [],
       authRequestStarted: false,
       error: null,
       fhirVersion: null
@@ -68,6 +77,9 @@ class App extends Component {
                 user={this.state.user}
                 patient={this.state.patient}
                 appointments={this.state.appointments}
+                conditions={this.state.conditions}
+                medicationDispenses={this.state.medicationDispenses}
+                carePlans={this.state.carePlans}
                 fhirVersion={this.state.fhirVersion}
               />
             )}
@@ -119,7 +131,7 @@ class App extends Component {
     this.setState({ fhirClient });
     console.log("Received FHIR client: ", fhirClient);
 
-     fhirClient.user
+    fhirClient.user
       .read()
       .then(currentUserResource => {
         console.log("Received current user resources: ", currentUserResource);
@@ -144,17 +156,18 @@ class App extends Component {
         //      user.role = "Parent";
         //      TODO
         // }
-         this.updateStateAppointment(user.id);
+        this.updateStateAppointment(user.id);
+        this.updateStateCondition(user.id);
+        this.updateStateMedicationDispense(user.id);
+        this.updateStateCarePlan(user.id);
 
         this.setState({ user });
       })
       .catch(error => console.error(error));
-
-
   };
 
-   updateStateAppointment(userId) {
-     FhirDataQueryingService.getUserAppointments(userId)
+  updateStateAppointment(userId) {
+    FhirDataQueryingService.getUserAppointments(userId)
       .then(appointmentResource => {
         const appointments = appointmentResource.map(appointment =>
           fhirMapAppointment(appointment, this.state.fhirVersion)
@@ -165,8 +178,44 @@ class App extends Component {
         console.error(error);
       });
   }
+  updateStateCondition(userId) {
+    FhirDataQueryingService.getUserConditions(userId)
+      .then(conditionResource => {
+        const conditions = conditionResource.map(condition =>
+          fhirMapCondition(condition, this.state.fhirVersion)
+        );
+        this.setState({ conditions });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 
+  updateStateMedicationDispense(userId) {
+    FhirDataQueryingService.getUserMedicationDispense(userId)
+      .then(medicationResource => {
+        const medicationDispenses = medicationResource.map(medication =>
+          fhirMapMedicationDispense(medication, this.state.fhirVersion)
+        );
+        this.setState({ medicationDispenses });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 
+  updateStateCarePlan(userId) {
+    FhirDataQueryingService.getUserCarePlan(userId)
+      .then(carePlanResource => {
+        const carePlans = carePlanResource.map(carePlan =>
+          fhirMapCarePlan(carePlan, this.state.fhirVersion)
+        );
+        this.setState({ carePlans });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 
   updateStatePatient(patientResource) {
     const filteredPatientResource = filterPatientResource(patientResource);
@@ -233,7 +282,5 @@ class App extends Component {
 
   resetError = () => this.setState({ error: null });
 }
-
-
 
 export default App;

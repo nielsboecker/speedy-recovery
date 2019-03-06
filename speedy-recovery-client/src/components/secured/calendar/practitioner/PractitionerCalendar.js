@@ -44,9 +44,9 @@ class PractitionerCalendar extends React.Component {
               />
 
               <PractitionerModal
-                  appointment={this.state.appointment}
-                  toggleEditModal={this.toggleEditModal}
-                  isEditModalOpen={this.state.isEditModalOpen}
+                appointment={this.state.appointment}
+                toggleEditModal={this.toggleEditModal}
+                isEditModalOpen={this.state.isEditModalOpen}
               />
             </div>
           </Segment>

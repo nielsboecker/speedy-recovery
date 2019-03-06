@@ -90,6 +90,106 @@ const mapMedicationSTU3 = fhirMedResource => ({
   imageURL: getImageURL(fhirMedResource.image)
 });
 
+const mapMedicationDispenseSTU3 = fhirMedResource => ({
+  id: fhirMedResource.id ? fhirMedResource.id : missingField,
+  status:
+    fhirMedResource.status !== undefined
+      ? fhirMedResource.status
+      : missingField,
+  name: getMedDispenseName(fhirMedResource.medicationCodeableConcept),
+  quantity: getMedDispenseQuantity(fhirMedResource.quantity),
+  daysSupply: getMedDispenseDaysSupply(fhirMedResource.daysSupply),
+  whenHandedOver:
+    fhirMedResource.whenHandedOver !== undefined
+      ? fhirMedResource.whenHandedOver
+      : missingField
+});
+
+const mapCarePlanSTU3 = fhirCareResource => ({
+  id: fhirCareResource.id ? fhirCareResource.id : missingField,
+  status:
+    fhirCareResource.status !== undefined
+      ? fhirCareResource.status
+      : missingField,
+  activities: getCarePlanActivities(fhirCareResource.activity),
+  category: getCarePlanCategory(fhirCareResource.category),
+  period: getCarePlanPeriod(fhirCareResource.period)
+});
+
+const getCarePlanCategory = category => {
+  if (
+    category &&
+    category[0] &&
+    category[0].coding &&
+    category[0].coding[0] &&
+    category[0].coding[0].display
+  ) {
+    return category[0].coding[0].display;
+  }
+  return missingField;
+};
+
+const getCarePlanActivities = activity => {
+  if (activity) {
+    let actStr = "";
+    let actNum = activity.length;
+    for (let i = 0; i < actNum; i++) {
+      if (
+        activity[i] &&
+        activity[i].detail &&
+        activity[i].detail.code &&
+        activity[i].detail.code.coding &&
+        activity[i].detail.code.coding[0] &&
+        activity[i].detail.code.coding[0].display
+      ) {
+        actStr =
+          actStr +
+          (i + 1).toString() +
+          ". " +
+          activity[i].detail.code.coding[0].display +
+          "; ";
+      }
+    }
+    return actStr;
+  }
+
+  return missingField;
+};
+
+const getCarePlanPeriod = period => {
+  if (period) {
+    return "from " + getCarePlanStart(period) + " to " + getCarePlanEnd(period);
+  }
+  return missingField;
+};
+
+const getCarePlanStart = period => {
+  if (period && period.start) {
+    return period.start;
+  }
+  return missingField;
+};
+
+const getCarePlanEnd = period => {
+  if (period && period.end) {
+    return period.end;
+  }
+  return missingField;
+};
+
+const getMedDispenseDaysSupply = daysSupply => {
+  if (daysSupply && daysSupply.value && daysSupply.unit) {
+    return daysSupply.value + " " + daysSupply.unit;
+  }
+  return missingField;
+};
+
+const getMedDispenseQuantity = quantity => {
+  if (quantity && quantity.value && quantity.unit) {
+    return quantity.value + " " + quantity.unit;
+  }
+};
+
 const mapPractitionerSTU3 = fhirPractResource => ({
   name: getPractName(fhirPractResource.name),
   id: fhirPractResource.id ? fhirPractResource.id : missingField,
@@ -196,6 +296,13 @@ const getProducer = contained => {
   return missingField;
 };
 
+const getMedDispenseName = medicationCodeableConcept => {
+  if (medicationCodeableConcept && medicationCodeableConcept.text) {
+    return medicationCodeableConcept.text;
+  }
+  return missingField;
+};
+
 const getContent = packageC => {
   if (
     packageC &&
@@ -230,5 +337,7 @@ export {
   mapAppointmentSTU3,
   mapConditionSTU3,
   mapMedicationSTU3,
+  mapMedicationDispenseSTU3,
+  mapCarePlanSTU3,
   mapPractitionerSTU3
 };
