@@ -5,13 +5,12 @@ import "./PatientInfo.css";
 class PatientInfo extends Component {
   render() {
     const { user, conditions, medicationDispenses, carePlans } = this.props;
-
     const conditionsNum = conditions.length;
     const createConditionTable = () => {
       let table = [];
       if (conditionsNum) {
         let header = [
-          <Table.Row>
+          <Table.Row key={"conditionrow"}>
             <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">Summary</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell" />
@@ -19,7 +18,9 @@ class PatientInfo extends Component {
           </Table.Row>
         ];
         table.push(
-          <Table.Header id="patientTableHeader">{header}</Table.Header>
+          <Table.Header id="patientTableHeader" key="conditionTableHeader">
+            {header}
+          </Table.Header>
         );
       }
       let body = [];
@@ -29,15 +30,17 @@ class PatientInfo extends Component {
         let searchQuery = "https://www.google.com/search?q=" + summary;
 
         children.push(
-          <Table.Cell>
+          <Table.Cell key={"conditionordercell" + i}>
             <Label ribbon>{`${i + 1}`} </Label>
           </Table.Cell>
         );
         children.push(
-          <Table.Cell id="patientTableCell">{<h4>{summary}</h4>}</Table.Cell>
+          <Table.Cell key={"conditionsummarycell" + i} id="patientTableCell">
+            {<h4>{summary}</h4>}
+          </Table.Cell>
         );
         children.push(
-          <Table.Cell id="patientTableCell">
+          <Table.Cell key={"conditionsearchcell" + i} id="patientTableCell">
             {
               <h4>
                 <a href={searchQuery}>
@@ -48,18 +51,24 @@ class PatientInfo extends Component {
           </Table.Cell>
         );
         children.push(
-          <Table.Cell id="patientTableCell">
+          <Table.Cell key={"conditiontimecell" + i} id="patientTableCell">
             {<h4>{conditions[i].onsetDateTime.toString()}</h4>}
           </Table.Cell>
         );
-        body.push(<Table.Row id="patientTableRow">{children}</Table.Row>);
+        body.push(
+          <Table.Row id="patientTableRow" key={"conditionrow2" + i}>
+            {children}
+          </Table.Row>
+        );
       }
       table.push(
-        <Table.Body key={"b"} id="patientTableBody">
+        <Table.Body key="conditionTableBody" id="patientTableBody">
           {body}
         </Table.Body>
       );
-      return table;
+      let conditionTable = [];
+      conditionTable.push(<Table key="conditionTable">{table}</Table>);
+      return conditionTable;
     };
 
     const medicationDispensesNum = medicationDispenses.length;
@@ -67,7 +76,7 @@ class PatientInfo extends Component {
       let table = [];
       if (medicationDispensesNum) {
         let header = [
-          <Table.Row key={"row"}>
+          <Table.Row key={"medicationDrow"}>
             <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">Name</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell" />
@@ -78,7 +87,9 @@ class PatientInfo extends Component {
           </Table.Row>
         ];
         table.push(
-          <Table.Header id="patientTableHeader">{header}</Table.Header>
+          <Table.Header id="patientTableHeader" key="medicationDTableHeader">
+            {header}
+          </Table.Header>
         );
       }
       let body = [];
@@ -88,15 +99,17 @@ class PatientInfo extends Component {
         let searchQuery = "https://www.google.com/search?q=" + name;
 
         children.push(
-          <Table.Cell>
+          <Table.Cell key={"medicationDordercell" + i}>
             <Label ribbon>{`${i + 1}`} </Label>
           </Table.Cell>
         );
         children.push(
-          <Table.Cell id="patientTableCell">{<h4>{name}</h4>}</Table.Cell>
+          <Table.Cell key={"medicationDnamecell" + i} id="patientTableCell">
+            {<h4>{name}</h4>}
+          </Table.Cell>
         );
         children.push(
-          <Table.Cell id="patientTableCell">
+          <Table.Cell key={"medicationDsearchcell" + i} id="patientTableCell">
             {
               <h4>
                 <a href={searchQuery}>
@@ -107,27 +120,29 @@ class PatientInfo extends Component {
           </Table.Cell>
         );
         children.push(
-          <Table.Cell id="patientTableCell">
+          <Table.Cell key={"medicationDquantitycell" + i} id="patientTableCell">
             {<h4>{medicationDispenses[i].quantity}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell id="patientTableCell">
+          <Table.Cell key={"medicationDsupplycell" + i} id="patientTableCell">
             {<h4>{medicationDispenses[i].daysSupply}</h4>}
           </Table.Cell>
         );
         body.push(
-          <Table.Row key={"row2"} id="patientTableRow">
+          <Table.Row key={"medicationDrow2" + i} id="patientTableRow">
             {children}
           </Table.Row>
         );
       }
       table.push(
-        <Table.Body key={"body"} id="patientTableBody">
+        <Table.Body key="medicationDTableBody" id="patientTableBody">
           {body}
         </Table.Body>
       );
-      return table;
+      let medicationDTable = [];
+      medicationDTable.push(<Table key="medicationDTable">{table}</Table>);
+      return medicationDTable;
     };
 
     const carePlansNum = carePlans.length;
@@ -135,7 +150,7 @@ class PatientInfo extends Component {
       let table = [];
       if (carePlansNum) {
         let header = [
-          <Table.Row key={"row"}>
+          <Table.Row key={"careplanrow"}>
             <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">Category</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">
@@ -145,7 +160,9 @@ class PatientInfo extends Component {
           </Table.Row>
         ];
         table.push(
-          <Table.Header id="patientTableHeader">{header}</Table.Header>
+          <Table.Header key="carePlanTableHeader" id="patientTableHeader">
+            {header}
+          </Table.Header>
         );
       }
       let body = [];
@@ -153,38 +170,40 @@ class PatientInfo extends Component {
         let children = [];
 
         children.push(
-          <Table.Cell>
+          <Table.Cell key={"careplanordercell" + i}>
             <Label ribbon>{`${i + 1}`} </Label>
           </Table.Cell>
         );
         children.push(
-          <Table.Cell id="patientTableCell">
+          <Table.Cell key={"careplancategorycell" + i} id="patientTableCell">
             {<h4>{carePlans[i].category}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell id="patientTableCell">
+          <Table.Cell key={"careplanactcell" + i} id="patientTableCell">
             {<h4>{carePlans[i].activities}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell id="patientTableCell">
+          <Table.Cell key={"careplanperiodcell" + i} id="patientTableCell">
             {<h4>{carePlans[i].period}</h4>}
           </Table.Cell>
         );
 
         body.push(
-          <Table.Row key={"row2"} id="patientTableRow">
+          <Table.Row key={"careplanrow2" + i} id="patientTableRow">
             {children}
           </Table.Row>
         );
       }
       table.push(
-        <Table.Body key={"body2"} id="patientTableBody">
+        <Table.Body key="carePlanTableBody" id="patientTableBody">
           {body}
         </Table.Body>
       );
-      return table;
+      let carePlanTable = [];
+      carePlanTable.push(<Table key="carePlanTable">{table}</Table>);
+      return carePlanTable;
     };
 
     const showGenderText = () => {
