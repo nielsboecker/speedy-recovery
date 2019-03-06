@@ -65,7 +65,8 @@ class PatientCalendar extends React.Component {
     getExtraInfo =  (practitionerID) => {
         const id = practitionerID.substring(13, practitionerID.length);
         axios.get('https://speedy-recovery-server.azurewebsites.net/practitioners?userid=' + id)
-            .then(response => this.setState({extraInfo: response.data[0]}))
+            .then(response => {this.setState({extraInfo: response.data[0]});}
+            )
             .catch(error => console.log("No extra info: " + error ));
 
     };
@@ -124,9 +125,10 @@ class PatientCalendar extends React.Component {
                                   onChange={this.onChange}/>
                         <Card centered>
                             {this.state.selectedDoctor !== undefined ?
-                                this.state.selectedDoctor.photo !== undefined ?
+                                this.state.selectedDoctor.photo !== undefined &&
+                                this.state.selectedDoctor.photo !== "Unknown"?
                                 <Image src={"data:image/png;base64," + this.state.selectedDoctor.photo}/>
-                                : <Image src={require('../../../defaultImages/femaleDoctor.jpg')} />
+                                : <Image src={require('../../../defaultImages/maleDoctor.png')} />
                                 : <Image src={require('../../../defaultImages/femaleDoctor.jpg')} />
                             }
                             <Card.Content>
