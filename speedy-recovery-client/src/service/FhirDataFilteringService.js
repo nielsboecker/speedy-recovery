@@ -55,9 +55,25 @@ const filterMedicationResource = resource => {
   return null;
 };
 
+const filterPractitionerResource = resource => {
+  if (
+    resource &&
+    resource.name &&
+    resource.name[0] &&
+    resource.name[0].given &&
+    resource.name[0].given[0] &&
+    resource.name[0].family &&
+    resource.id
+  ) {
+    return resource;
+  }
+  return null;
+};
+
 export {
   filterPatientResource,
   filterAppointmentResource,
   filterConditionResource,
-  filterMedicationResource
+  filterMedicationResource,
+  filterPractitionerResource
 };

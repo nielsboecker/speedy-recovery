@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-prettier": "^3.0.1",
     "fhirclient": "^0.1.15",
@@ -56,13 +57,11 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-
   "husky": {
     "hooks": {
       "pre-commit": "yarn format"
     }
   },
-
   "devDependencies": {
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.8.0",

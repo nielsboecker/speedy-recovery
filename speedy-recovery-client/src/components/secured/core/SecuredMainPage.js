@@ -20,63 +20,62 @@ class SecuredMainPage extends Component {
 
   render() {
     if (!this.props.user) {
-      return <Redirect to="/" />;
+      return <Redirect to="/"/>;
     }
 
-    const { match } = this.props;
+    const {match} = this.props;
 
     return (
-      <div>
-        <BrowserRouter>
-          <Fragment>
-            <Header
-              username={this.props.user.name}
-              onLogout={this.props.onLogout}
-            />
-
-            <Container>
-              <Route path={`${match.url}`} exact component={HomePage} />
-              <Route path={`${match.url}/home`} component={HomePage} />
-              <Route
-                path={`${match.url}/calendar`}
-                render={() => (
-                  <CalendarFactory
-                    events={this.props.appointments}
-                    role={this.props.user.role}
-                  />
-                )}
-              />
-              <Route
-                path={`${match.url}/messaging`}
-                component={MessagingPage}
-              />
-              <Route
-                path={`${match.url}/profile`}
-                render={() => <ProfilePage user={this.props.user} />}
+        <div>
+          <BrowserRouter>
+            <Fragment>
+              <Header
+                  username={this.props.user.name}
+                  onLogout={this.props.onLogout}
               />
 
-              <Route
-                path={`${match.url}/patientinformation`}
-                render={() => (
-                  <InfoFactory
-                    user={this.props.user}
-                    patient={this.props.patient}
-                    conditions={this.props.conditions}
-                    medicationDispenses={this.props.medicationDispenses}
-                    carePlans={this.props.carePlans}
-                  />
-                )}
-              />
-
-              <Route
-                path={`${match.url}/conversation`}
-                component={ConversationPage}
-              />
-            </Container>
-            <Footer />
-          </Fragment>
-        </BrowserRouter>
-      </div>
+              <Container>
+                <Route path={`${match.url}`} exact component={HomePage}/>
+                <Route path={`${match.url}/home`} component={HomePage}/>
+                <Route
+                    path={`${match.url}/calendar`}
+                    render={() => (
+                        <CalendarFactory
+                            events={this.props.appointments}
+                            role={this.props.user.role}
+                            fhirVersion={this.props.fhirVersion}
+                        />
+                    )}
+                />
+                <Route
+                    path={`${match.url}/messaging`}
+                    component={MessagingPage}
+                />
+                <Route
+                    path={`${match.url}/profile`}
+                    render={() => <ProfilePage user={this.props.user}/>}
+                />
+                <Route
+                    path={`${match.url}/patientinformation`}
+                    render={() => (
+                        <InfoFactory
+                            user={this.props.user}
+                            patient={this.props.patient}
+                            conditions={this.props.conditions}
+                            medicationDispenses={this.props.medicationDispenses}
+                            carePlans={this.props.carePlans}
+                        />
+                    )}
+                />
+                <Route
+                    path={`${match.url}/conversation`}
+                    component={ConversationPage}
+                />
+              </Container>
+              <Footer/>
+            </Fragment>
+          </BrowserRouter>
+        </div>
     );
   }
 }

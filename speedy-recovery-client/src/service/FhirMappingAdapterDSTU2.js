@@ -8,7 +8,9 @@ import {
   getPhone,
   getPractitioner,
   getSeverity,
-  getSummary
+  getSummary,
+  getPractitionerId,
+  getPractName
 } from "./FhirDataMappingExtractionUtils";
 
 const missingField = "Unknown";
@@ -50,6 +52,7 @@ const mapAppointmentSTU2 = fhirAppResource => ({
   comment: fhirAppResource.comment ? fhirAppResource.comment : missingField,
   patient: getPatient(fhirAppResource.participant),
   practitioner: getPractitioner(fhirAppResource.participant),
+  practitionerId: getPractitionerId(fhirAppResource.participant),
   location: getLocation(fhirAppResource.participant)
 });
 
@@ -188,6 +191,14 @@ const getMedDispenseName = medicationCodeableConcept => {
   return missingField;
 };
 
+const mapPractitionerSTU2 = fhirPractResource => ({
+  name: getPractName(fhirPractResource.name),
+  id: fhirPractResource.id ? fhirPractResource.id : missingField,
+  gender: "Undefined in STU2",
+  birthDate: "Undefined in STU2",
+  photo: "Undefined in STU2"
+});
+
 const getAddress = address => {
   if (
     address &&
@@ -233,5 +244,6 @@ export {
   mapConditionSTU2,
   mapMedicationSTU2,
   mapMedicationDispenseSTU2,
-  mapCarePlanSTU2
+  mapCarePlanSTU2,
+  mapPractitionerSTU2
 };

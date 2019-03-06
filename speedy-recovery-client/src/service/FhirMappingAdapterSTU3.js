@@ -7,6 +7,8 @@ import {
   getPatient,
   getPhone,
   getPractitioner,
+  getPractitionerId,
+  getPractName,
   getSeverity,
   getSummary
 } from "./FhirDataMappingExtractionUtils";
@@ -52,6 +54,7 @@ const mapAppointmentSTU3 = fhirAppResource => ({
   comment: fhirAppResource.comment ? fhirAppResource.comment : missingField,
   patient: getPatient(fhirAppResource.participant),
   practitioner: getPractitioner(fhirAppResource.participant),
+  practitionerId: getPractitionerId(fhirAppResource.participant),
   location: getLocation(fhirAppResource.participant)
 });
 
@@ -184,6 +187,22 @@ const getMedDispenseDaysSupply = daysSupply => {
 const getMedDispenseQuantity = quantity => {
   if (quantity && quantity.value && quantity.unit) {
     return quantity.value + " " + quantity.unit;
+  }
+};
+
+const mapPractitionerSTU3 = fhirPractResource => ({
+  name: getPractName(fhirPractResource.name),
+  id: fhirPractResource.id ? fhirPractResource.id : missingField,
+  gender: fhirPractResource.gender ? fhirPractResource.gender : missingField,
+  birthDate: fhirPractResource.birthDate
+    ? fhirPractResource.birthDate
+    : missingField,
+  photo: getPhoto(fhirPractResource.photo)
+});
+
+const getPhoto = photo => {
+  if (photo && photo[0] && photo[0].data) {
+    return photo[0].data;
   }
   return missingField;
 };
@@ -319,5 +338,6 @@ export {
   mapConditionSTU3,
   mapMedicationSTU3,
   mapMedicationDispenseSTU3,
-  mapCarePlanSTU3
+  mapCarePlanSTU3,
+  mapPractitionerSTU3
 };

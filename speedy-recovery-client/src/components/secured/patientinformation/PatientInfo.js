@@ -54,7 +54,7 @@ class PatientInfo extends Component {
         );
         body.push(<Table.Row id="patientTableRow">{children}</Table.Row>);
       }
-      table.push(<Table.Body id="patientTableBody">{body}</Table.Body>);
+      table.push(<Table.Body key={"b"} id="patientTableBody">{body}</Table.Body>);
       return table;
     };
 
@@ -63,7 +63,7 @@ class PatientInfo extends Component {
       let table = [];
       if (medicationDispensesNum) {
         let header = [
-          <Table.Row>
+          <Table.Row key={"row"}>
             <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">Name</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell" />
@@ -112,9 +112,9 @@ class PatientInfo extends Component {
             {<h4>{medicationDispenses[i].daysSupply}</h4>}
           </Table.Cell>
         );
-        body.push(<Table.Row id="patientTableRow">{children}</Table.Row>);
+        body.push(<Table.Row key={"row2"} id="patientTableRow">{children}</Table.Row>);
       }
-      table.push(<Table.Body id="patientTableBody">{body}</Table.Body>);
+      table.push(<Table.Body key={"body"} id="patientTableBody">{body}</Table.Body>);
       return table;
     };
 
@@ -123,7 +123,7 @@ class PatientInfo extends Component {
       let table = [];
       if (carePlansNum) {
         let header = [
-          <Table.Row>
+          <Table.Row key={"row"}>
             <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">Category</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">
@@ -161,9 +161,9 @@ class PatientInfo extends Component {
           </Table.Cell>
         );
 
-        body.push(<Table.Row id="patientTableRow">{children}</Table.Row>);
+        body.push(<Table.Row key={"row2"} id="patientTableRow">{children}</Table.Row>);
       }
-      table.push(<Table.Body id="patientTableBody">{body}</Table.Body>);
+      table.push(<Table.Body key={"body2"} id="patientTableBody">{body}</Table.Body>);
       return table;
     };
 
@@ -194,7 +194,7 @@ class PatientInfo extends Component {
     const panes = [
       {
         menuItem: (
-          <Menu.Item>
+          <Menu.Item key={"basic"}>
             <Icon fitted name="id card outline" />
             Basic
           </Menu.Item>
@@ -215,7 +215,7 @@ class PatientInfo extends Component {
       },
       {
         menuItem: (
-          <Menu.Item>
+          <Menu.Item key={"medication"}>
             <Icon fitted name="pills" />
             Dispensed Medication
           </Menu.Item>
@@ -232,7 +232,7 @@ class PatientInfo extends Component {
       },
       {
         menuItem: (
-          <Menu.Item>
+          <Menu.Item key={"condition"}>
             <Icon fitted name="heartbeat" />
             Condition
           </Menu.Item>
@@ -246,7 +246,7 @@ class PatientInfo extends Component {
       },
       {
         menuItem: (
-          <Menu.Item>
+          <Menu.Item key={"careplan"}>
             <Icon fitted name="unordered list" />
             Care Plan
           </Menu.Item>
@@ -262,7 +262,7 @@ class PatientInfo extends Component {
 
     return (
       <div>
-        <h1>Patient Information For Patient View</h1>
+        <h1 align="center">Patient Information</h1>
         <Tab
           menu={{ fluid: true, vertical: true, tabular: true }}
           panes={panes}
