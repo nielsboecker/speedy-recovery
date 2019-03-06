@@ -44,6 +44,8 @@ class SecuredMainPage extends Component {
                     events={this.props.appointments}
                     role={this.props.user.role}
                     fhirVersion={this.props.fhirVersion}
+                    updateStatePractitioner={this.props.updateStatePractitioner}
+                    patientPractitioner={this.props.patientPractitioner}
                   />
                 )}
               />

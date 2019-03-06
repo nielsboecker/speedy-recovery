@@ -19,7 +19,13 @@ it("parentCalendar renders without crashing", () => {
 });
 
 it("patientCalendar renders without crashing", () => {
-  shallow(<PatientCalendar onChange={jest.fn()} events={exampleAppointment} />);
+  shallow(<PatientCalendar
+      onChange={jest.fn()}
+      events={exampleAppointments}
+      localizer={localizer}
+      updateStatePractitioner={jest.fn()}
+      patientPractitioner={[]}
+  />);
 });
 
 it("practitionerCalendar renders without crashing", () => {
@@ -38,6 +44,8 @@ it("can access BigCalendar instance for patient", () => {
       onChange={jest.fn()}
       events={exampleAppointments}
       localizer={localizer}
+      updateStatePractitioner={jest.fn()}
+      patientPractitioner={[]}
     />
   );
   const { bigCalendarRef } = wrapper.instance();

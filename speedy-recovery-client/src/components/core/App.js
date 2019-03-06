@@ -6,31 +6,32 @@ import LandingMainPage from "../landing/core/LandingMainPage";
 import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
-import { filterPatientResource } from "../../service/FhirDataFilteringService";
+import {filterPatientResource, filterPractitionerResource} from "../../service/FhirDataFilteringService";
 import {
-  fhirMapAppointment,
-  fhirMapCondition,
-  fhirMapMedicationDispense,
-  fhirMapCarePlan,
-  fhirMapPatient
+    fhirMapAppointment,
+    fhirMapCondition,
+    fhirMapMedicationDispense,
+    fhirMapCarePlan,
+    fhirMapPatient, fhirMapPractitioner
 } from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
 
 class App extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      fhirClient: {},
-      user: null,
-      patient: {},
-      appointments: [],
-      conditions: [],
-      medicationDispenses: [],
-      carePlans: [],
-      authRequestStarted: false,
-      error: null,
-      fhirVersion: null
-    };
+      super(props);
+      this.state = {
+          fhirClient: {},
+          user: null,
+          patient: {},
+          appointments: [],
+          conditions: [],
+          medicationDispenses: [],
+          carePlans: [],
+          authRequestStarted: false,
+          error: null,
+          fhirVersion: null,
+          patientPractitioner: []
+      }
   }
 
   render = () => {
@@ -81,6 +82,8 @@ class App extends Component {
                 medicationDispenses={this.state.medicationDispenses}
                 carePlans={this.state.carePlans}
                 fhirVersion={this.state.fhirVersion}
+                updateStatePractitioner={this.updateStatePractitioner}
+                patientPractitioner={this.state.patientPractitioner}
               />
             )}
           />
@@ -248,6 +251,30 @@ class App extends Component {
     }
     return user;
   }
+
+    updateStatePractitioner = (practId, familyName) =>
+        FhirDataQueryingService.getPractitioner(practId, familyName)
+            .then(practitionerResource => {
+
+                const filteredPractitionerResource = filterPractitionerResource(practitionerResource.resource);
+                if (filteredPractitionerResource) {
+
+                    const practitioner = fhirMapPractitioner(
+                        filteredPractitionerResource,
+                        this.state.fhirVersion
+                    );
+
+                    this.state.patientPractitioner.push(practitioner);
+                } else {
+                    console.error(
+                        "Crucial information missing from resource: ",
+                        practitionerResource
+                    );
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
 
   handleLoginError = errorMessage => {
     if (

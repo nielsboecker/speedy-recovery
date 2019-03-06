@@ -17,7 +17,8 @@ class CalendarFactory extends React.Component {
             events={this.props.events}
             localizer={localizer}
             fhirVersion={this.props.fhirVersion}
-
+            updateStatePractitioner={this.props.updateStatePractitioner}
+            patientPractitioner={this.props.patientPractitioner}
           />
         );
       case "Parent":

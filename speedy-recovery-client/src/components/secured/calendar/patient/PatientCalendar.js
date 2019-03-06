@@ -4,9 +4,6 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
 import "../CalendarPages.css";
 import { Grid, Segment, Dropdown } from "semantic-ui-react";
-import FhirDataQueryingService from "../../../../service/FhirDataQueryingService";
-import {filterPractitionerResource} from "../../../../service/FhirDataFilteringService";
-import {fhirMapPractitioner} from "../../../../service/FhirDataMappingService";
 import PatientPractitionerCard from "./PatientPractitionerCard";
 import BackendDataQueryingService from "../../../../service/BackendDataQueryingService";
 
@@ -26,43 +23,19 @@ class PatientCalendar extends React.Component {
     this.props.events.map(event => {
       const family = event.practitioner.split(' ');
       const id = event.practitionerId.substring(13, event.practitionerId.length);
-      return this.queryPractInfo(id, family[family.length - 1]);
+      return this.props.updateStatePractitioner(id, family[family.length - 1]);
     });
     this.setState({
       dropdownList:
           this.removeArrayDuplicates(this.props.events.map(event => {
             return {text: event.practitioner, value: event.practitionerId}
-          }))
+          })),
+      practitionerList: this.props.patientPractitioner
     });
   };
 
   removeArrayDuplicates = array => array !== undefined ? array.reduce((prev, curr) =>
       prev.find(a => a["text"] === curr["text"]) ? prev : prev.push(curr) && prev, []) : array;
-
-  queryPractInfo = (practId, familyName) =>
-      FhirDataQueryingService.getPractitioner(practId, familyName)
-          .then(practitionerResource => {
-
-            const filteredPractitionerResource = filterPractitionerResource(practitionerResource.resource);
-            if (filteredPractitionerResource) {
-
-              const practitioner = fhirMapPractitioner(
-                  filteredPractitionerResource,
-                  this.props.fhirVersion
-              );
-
-              this.state.practitionerList.push(practitioner);
-            } else {
-              console.error(
-                  "Crucial information missing from resource: ",
-                  practitionerResource
-              );
-            }
-          })
-          .catch(error => {
-            console.error(error);
-          });
-
 
   getBackendInfo =  (practitionerID) => {
     const id = practitionerID.substring(13, practitionerID.length);
