@@ -83,7 +83,7 @@ const getUserMedicationDispense = userID => {
   });
 };
 
-const getPracitionerInfo = (practId, familyName) => {
+const getPractitioner = (practId, familyName) => {
   return new Promise((resolve, reject) => {
     FHIR.oauth2.ready(
       smart => {
@@ -137,7 +137,7 @@ const getUserCarePlan = userID => {
 };
 
 export default {
-  getPracitionerInfo,
+  getPractitioner,
   getUserAppointments,
   getUserConditions,
   getUserMedicationDispense,

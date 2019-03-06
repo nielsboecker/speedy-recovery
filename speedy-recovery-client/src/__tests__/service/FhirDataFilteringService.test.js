@@ -10,14 +10,13 @@ import fhirExampleCondition from "../test_input/fhir_resources_stu3/FhirExampleC
 import fhirExampleMedication from "../test_input/fhir_resources_stu3/FhirExampleMedicationSTU3.json";
 import fhirExampleMedicationDispense from "../test_input/fhir_resources_stu3/FhirExampleMedicationDispenseSTU3.json";
 import fhirExampleCarePlan from "../test_input/fhir_resources_stu3/FhirExampleCarePlanSTU3.json";
-
+import fhirExamplePractitioner from "../test_input/fhir_resources_stu3/FhirExamplePractitionerSTU3.json";
+import fhirBrokenPractitioner from "../test_input/fhir_resources_stu3/broken_resources/FhirExamplePractitionerBroken.json";
 import {
-  filterAppointmentResource,
-  filterConditionResource,
+  filterAppointmentResource, filterCarePlanResource,
+  filterConditionResource, filterMedicationDispenseResource,
   filterMedicationResource,
-  filterPatientResource,
-  filterMedicationDispenseResource,
-  filterCarePlanResource
+  filterPatientResource, filterPractitionerResource
 } from "../../service/FhirDataFilteringService";
 
 test("filter out patient resource with missing info only", () => {
@@ -59,3 +58,10 @@ test("filter out carePlan resource with missing info only", () => {
     fhirExampleCarePlan
   );
 });
+
+test("filter out practitioner resource with missing info only", () => {
+    expect(filterPractitionerResource(fhirBrokenPractitioner)).toBeFalsy();
+    expect(filterPractitionerResource(fhirExamplePractitioner)).toEqual(fhirExamplePractitioner);
+});
+
+
