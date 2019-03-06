@@ -2,12 +2,12 @@ import React from "react";
 import BigCalendar from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
-import "./CalendarPages.css";
+import "../CalendarPages.css";
 import axios from 'axios';
 import { Grid, Segment, Card, Dropdown, Image } from "semantic-ui-react";
-import FhirDataQueryingService from "../../../service/FhirDataQueryingService";
-import {filterPractitionerResource} from "../../../service/FhirDataFilteringService";
-import {fhirMapPractitioner} from "../../../service/FhirDataMappingService";
+import FhirDataQueryingService from "../../../../service/FhirDataQueryingService";
+import {filterPractitionerResource} from "../../../../service/FhirDataFilteringService";
+import {fhirMapPractitioner} from "../../../../service/FhirDataMappingService";
 
 class PatientCalendar extends React.Component {
 
@@ -128,8 +128,8 @@ class PatientCalendar extends React.Component {
                                 this.state.selectedDoctor.photo !== undefined &&
                                 this.state.selectedDoctor.photo !== "Unknown"?
                                 <Image src={"data:image/png;base64," + this.state.selectedDoctor.photo}/>
-                                : <Image src={require('../../../defaultImages/maleDoctor.png')} />
-                                : <Image src={require('../../../defaultImages/femaleDoctor.jpg')} />
+                                : <Image src={require('../../../../defaultImages/maleDoctor.png')} />
+                                : <Image src={require('../../../../defaultImages/femaleDoctor.jpg')} />
                             }
                             <Card.Content>
                                 <Card.Header>{this.state.selectedDoctor !== undefined ? this.state.selectedDoctor.text : ""}</Card.Header>

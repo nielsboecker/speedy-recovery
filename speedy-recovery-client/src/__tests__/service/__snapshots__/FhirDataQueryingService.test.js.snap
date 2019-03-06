@@ -1,0 +1,1548 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`extracting data from bundle works for valid data 1`] = `
+Array [
+  Object {
+    "appointmentType": Object {
+      "coding": Array [
+        Object {
+          "code": "follow",
+          "display": "Followup",
+          "system": "http://example.org/appointment-type",
+        },
+      ],
+    },
+    "comment": "Further expand on the results of the MRI and determine the next actions that may be appropriate.",
+    "created": "2018-10-10",
+    "description": "Discussion on the results of your recent MRI",
+    "end": "2019-02-01T11:00:00Z",
+    "id": "219850",
+    "indication": Array [
+      Object {
+        "display": "Severe burn of left ear",
+        "reference": "Condition/example",
+      },
+    ],
+    "meta": Object {
+      "lastUpdated": "2019-02-24T20:47:54.108-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "display": "Steve Richey",
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+      Object {
+        "actor": Object {
+          "display": "Dr Susan A Clark",
+          "reference": "Practitioner/smart-Practitioner-71482713",
+        },
+        "required": "required",
+        "status": "accepted",
+        "type": Array [
+          Object {
+            "coding": Array [
+              Object {
+                "code": "ATND",
+                "system": "http://hl7.org/fhir/v3/ParticipationType",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    "priority": 5,
+    "resourceType": "Appointment",
+    "serviceCategory": Object {
+      "coding": Array [
+        Object {
+          "code": "gp",
+          "display": "General Practice",
+          "system": "http://example.org/service-category",
+        },
+      ],
+    },
+    "serviceType": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "52",
+            "display": "General Discussion",
+          },
+        ],
+      },
+    ],
+    "specialty": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "gp",
+            "display": "General Practice",
+            "system": "http://example.org/specialty",
+          },
+        ],
+      },
+    ],
+    "start": "2019-02-01T10:00:00Z",
+    "status": "booked",
+    "supportingInformation": Array [
+      Object {
+        "reference": "DiagnosticReport/ultrasound",
+      },
+    ],
+    "text": Object {
+      "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\">Brian MRI results discussion</div>",
+      "status": "generated",
+    },
+  },
+  Object {
+    "appointmentType": Object {
+      "coding": Array [
+        Object {
+          "code": "follow",
+          "display": "Followup",
+          "system": "http://example.org/appointment-type",
+        },
+      ],
+    },
+    "comment": "Further expand on the results of the MRI and determine the next actions that may be appropriate.",
+    "created": "2018-10-10",
+    "description": "Discussion on the results of your recent MRI",
+    "end": "2019-02-10T11:00:00Z",
+    "id": "219739",
+    "indication": Array [
+      Object {
+        "display": "Severe burn of left ear",
+        "reference": "Condition/example",
+      },
+    ],
+    "meta": Object {
+      "lastUpdated": "2019-02-23T16:03:37.027-05:00",
+      "versionId": "3",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "display": "Shelby Von",
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+      Object {
+        "actor": Object {
+          "display": "Dr Joseph P Nichols",
+          "reference": "Practitioner/smart-Practitioner-72080416",
+        },
+        "required": "required",
+        "status": "accepted",
+        "type": Array [
+          Object {
+            "coding": Array [
+              Object {
+                "code": "ATND",
+                "system": "http://hl7.org/fhir/v3/ParticipationType",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    "priority": 5,
+    "resourceType": "Appointment",
+    "serviceCategory": Object {
+      "coding": Array [
+        Object {
+          "code": "gp",
+          "display": "General Practice",
+          "system": "http://example.org/service-category",
+        },
+      ],
+    },
+    "serviceType": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "52",
+            "display": "General Discussion",
+          },
+        ],
+      },
+    ],
+    "specialty": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "gp",
+            "display": "General Practice",
+            "system": "http://example.org/specialty",
+          },
+        ],
+      },
+    ],
+    "start": "2019-02-10T10:00:00Z",
+    "status": "booked",
+    "supportingInformation": Array [
+      Object {
+        "reference": "DiagnosticReport/ultrasound",
+      },
+    ],
+    "text": Object {
+      "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\">Brian MRI results discussion</div>",
+      "status": "generated",
+    },
+  },
+  Object {
+    "appointmentType": Object {
+      "coding": Array [
+        Object {
+          "code": "follow",
+          "display": "Followup",
+          "system": "http://example.org/appointment-type",
+        },
+      ],
+    },
+    "comment": "Further expand on the results of the CT and determine the next actions that may be appropriate.",
+    "created": "2019-01-10",
+    "description": "Discussion on the results of your recent CT",
+    "end": "2019-02-23T11:00:00Z",
+    "id": "219737",
+    "indication": Array [
+      Object {
+        "display": "Severe burn of left leg",
+        "reference": "Condition/example",
+      },
+    ],
+    "meta": Object {
+      "lastUpdated": "2019-02-23T16:04:46.275-05:00",
+      "versionId": "2",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "display": "Shelby Von",
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+      Object {
+        "actor": Object {
+          "display": "Dr Joseph P Nichols",
+          "reference": "Practitioner/smart-Practitioner-72080416",
+        },
+        "required": "required",
+        "status": "accepted",
+        "type": Array [
+          Object {
+            "coding": Array [
+              Object {
+                "code": "ATND",
+                "system": "http://hl7.org/fhir/v3/ParticipationType",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    "priority": 5,
+    "resourceType": "Appointment",
+    "serviceCategory": Object {
+      "coding": Array [
+        Object {
+          "code": "gp",
+          "display": "General Practice",
+          "system": "http://example.org/service-category",
+        },
+      ],
+    },
+    "serviceType": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "52",
+            "display": "General Discussion",
+          },
+        ],
+      },
+    ],
+    "specialty": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "gp",
+            "display": "General Practice",
+            "system": "http://example.org/specialty",
+          },
+        ],
+      },
+    ],
+    "start": "2019-02-23T09:00:00Z",
+    "status": "booked",
+    "supportingInformation": Array [
+      Object {
+        "reference": "DiagnosticReport/ultrasound",
+      },
+    ],
+    "text": Object {
+      "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\">CT results discussion</div>",
+      "status": "generated",
+    },
+  },
+  Object {
+    "appointmentType": Object {
+      "coding": Array [
+        Object {
+          "code": "follow",
+          "display": "Followup",
+          "system": "http://example.org/appointment-type",
+        },
+      ],
+    },
+    "comment": "Further expand on the results of the Ultrasound and determine the actions that may be appropriate.",
+    "created": "2019-02-10",
+    "description": "Discussion on the results of your recent Ultrasound",
+    "end": "2019-02-25T17:00:00Z",
+    "id": "219736",
+    "indication": Array [
+      Object {
+        "display": "Stomach pains",
+        "reference": "Condition/example",
+      },
+    ],
+    "meta": Object {
+      "lastUpdated": "2019-02-23T16:05:08.332-05:00",
+      "versionId": "2",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "display": "Shelby Von",
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+      Object {
+        "actor": Object {
+          "display": "Dr Joseph P Nichols",
+          "reference": "Practitioner/smart-Practitioner-72080416",
+        },
+        "required": "required",
+        "status": "accepted",
+        "type": Array [
+          Object {
+            "coding": Array [
+              Object {
+                "code": "ATND",
+                "system": "http://hl7.org/fhir/v3/ParticipationType",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    "priority": 5,
+    "resourceType": "Appointment",
+    "serviceCategory": Object {
+      "coding": Array [
+        Object {
+          "code": "gp",
+          "display": "General Practice",
+          "system": "http://example.org/service-category",
+        },
+      ],
+    },
+    "serviceType": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "52",
+            "display": "General Discussion",
+          },
+        ],
+      },
+    ],
+    "specialty": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "gp",
+            "display": "General Practice",
+            "system": "http://example.org/specialty",
+          },
+        ],
+      },
+    ],
+    "start": "2019-02-25T15:00:00Z",
+    "status": "booked",
+    "supportingInformation": Array [
+      Object {
+        "reference": "DiagnosticReport/ultrasound",
+      },
+    ],
+    "text": Object {
+      "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\">Ultrasound results discussion</div>",
+      "status": "generated",
+    },
+  },
+  Object {
+    "appointmentType": Object {
+      "coding": Array [
+        Object {
+          "code": "follow",
+          "display": "Followup",
+          "system": "http://example.org/appointment-type",
+        },
+      ],
+    },
+    "comment": "Further expand on the results of the Chemo and determine the next actions that may be appropriate.",
+    "created": "2019-01-10",
+    "description": "Discussion on chemo progress on cancer",
+    "end": "2019-02-15T11:00:00Z",
+    "id": "219734",
+    "indication": Array [
+      Object {
+        "display": "Cancer treatment",
+        "reference": "Condition/example",
+      },
+    ],
+    "meta": Object {
+      "lastUpdated": "2019-02-23T16:05:44.149-05:00",
+      "versionId": "2",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "display": "Shelby Von",
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+      Object {
+        "actor": Object {
+          "display": "Dr Joseph P Nichols",
+          "reference": "Practitioner/smart-Practitioner-72080416",
+        },
+        "required": "required",
+        "status": "accepted",
+        "type": Array [
+          Object {
+            "coding": Array [
+              Object {
+                "code": "ATND",
+                "system": "http://hl7.org/fhir/v3/ParticipationType",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    "priority": 5,
+    "resourceType": "Appointment",
+    "serviceCategory": Object {
+      "coding": Array [
+        Object {
+          "code": "gp",
+          "display": "General Practice",
+          "system": "http://example.org/service-category",
+        },
+      ],
+    },
+    "serviceType": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "52",
+            "display": "General Discussion",
+          },
+        ],
+      },
+    ],
+    "specialty": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "gp",
+            "display": "General Practice",
+            "system": "http://example.org/specialty",
+          },
+        ],
+      },
+    ],
+    "start": "2019-02-15T09:00:00Z",
+    "status": "booked",
+    "supportingInformation": Array [
+      Object {
+        "reference": "DiagnosticReport/ultrasound",
+      },
+    ],
+    "text": Object {
+      "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\">Chemotherapy results discussion</div>",
+      "status": "generated",
+    },
+  },
+  Object {
+    "appointmentType": Object {
+      "coding": Array [
+        Object {
+          "code": "follow",
+          "display": "Followup",
+          "system": "http://example.org/appointment-type",
+        },
+      ],
+    },
+    "comment": "Normal test for the patient.",
+    "created": "2019-01-10",
+    "description": "Normal test for the patient",
+    "end": "2019-02-07T11:00:00Z",
+    "id": "219728",
+    "indication": Array [
+      Object {
+        "display": "Testing",
+        "reference": "Condition/example",
+      },
+    ],
+    "meta": Object {
+      "lastUpdated": "2019-02-23T16:10:43.383-05:00",
+      "versionId": "2",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "display": "Shelby Von",
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+      Object {
+        "actor": Object {
+          "display": "Dr Joseph P Nichols",
+          "reference": "Practitioner/smart-Practitioner-72080416",
+        },
+        "required": "required",
+        "status": "accepted",
+        "type": Array [
+          Object {
+            "coding": Array [
+              Object {
+                "code": "ATND",
+                "system": "http://hl7.org/fhir/v3/ParticipationType",
+              },
+            ],
+          },
+        ],
+      },
+    ],
+    "priority": 5,
+    "resourceType": "Appointment",
+    "serviceCategory": Object {
+      "coding": Array [
+        Object {
+          "code": "gp",
+          "display": "General Practice",
+          "system": "http://example.org/service-category",
+        },
+      ],
+    },
+    "serviceType": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "52",
+            "display": "General Discussion",
+          },
+        ],
+      },
+    ],
+    "specialty": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "gp",
+            "display": "General Practice",
+            "system": "http://example.org/specialty",
+          },
+        ],
+      },
+    ],
+    "start": "2019-02-07T09:00:00Z",
+    "status": "booked",
+    "supportingInformation": Array [
+      Object {
+        "reference": "DiagnosticReport/ultrasound",
+      },
+    ],
+    "text": Object {
+      "div": "<div xmlns=\\"http://www.w3.org/1999/xhtml\\">Normal Test</div>",
+      "status": "generated",
+    },
+  },
+  Object {
+    "id": "219709",
+    "meta": Object {
+      "lastUpdated": "2019-02-13T05:40:18.399-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219708",
+    "meta": Object {
+      "lastUpdated": "2019-02-13T03:12:56.845-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219707",
+    "meta": Object {
+      "lastUpdated": "2019-02-13T03:06:15.965-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219706",
+    "meta": Object {
+      "lastUpdated": "2019-02-13T03:06:01.662-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219703",
+    "meta": Object {
+      "lastUpdated": "2019-02-13T00:53:18.115-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219702",
+    "meta": Object {
+      "lastUpdated": "2019-02-13T00:52:13.916-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219694",
+    "meta": Object {
+      "lastUpdated": "2019-02-12T16:09:34.046-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219693",
+    "meta": Object {
+      "lastUpdated": "2019-02-12T16:08:26.617-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219692",
+    "meta": Object {
+      "lastUpdated": "2019-02-12T16:07:43.821-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219691",
+    "meta": Object {
+      "lastUpdated": "2019-02-12T15:59:25.556-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219690",
+    "meta": Object {
+      "lastUpdated": "2019-02-12T15:58:40.906-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219689",
+    "meta": Object {
+      "lastUpdated": "2019-02-12T15:55:31.156-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219688",
+    "meta": Object {
+      "lastUpdated": "2019-02-12T15:53:41.540-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219687",
+    "meta": Object {
+      "lastUpdated": "2019-02-12T15:53:05.352-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219686",
+    "meta": Object {
+      "lastUpdated": "2019-02-12T15:52:45.878-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219685",
+    "meta": Object {
+      "lastUpdated": "2019-02-12T15:51:56.915-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219678",
+    "meta": Object {
+      "lastUpdated": "2019-02-11T14:09:11.140-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219655",
+    "meta": Object {
+      "lastUpdated": "2019-02-11T02:19:52.905-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219654",
+    "meta": Object {
+      "lastUpdated": "2019-02-11T02:17:07.623-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219653",
+    "meta": Object {
+      "lastUpdated": "2019-02-11T02:16:39.164-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219652",
+    "meta": Object {
+      "lastUpdated": "2019-02-11T02:14:41.047-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219651",
+    "meta": Object {
+      "lastUpdated": "2019-02-11T02:13:49.862-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219650",
+    "meta": Object {
+      "lastUpdated": "2019-02-11T02:13:26.556-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219649",
+    "meta": Object {
+      "lastUpdated": "2019-02-11T02:11:56.787-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219648",
+    "meta": Object {
+      "lastUpdated": "2019-02-11T02:11:24.704-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219647",
+    "meta": Object {
+      "lastUpdated": "2019-02-11T02:10:43.906-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219644",
+    "meta": Object {
+      "lastUpdated": "2019-02-10T13:53:27.443-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219643",
+    "meta": Object {
+      "lastUpdated": "2019-02-10T13:25:37.524-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219642",
+    "meta": Object {
+      "lastUpdated": "2019-02-10T13:25:36.922-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219608",
+    "meta": Object {
+      "lastUpdated": "2019-02-08T10:07:42.544-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219607",
+    "meta": Object {
+      "lastUpdated": "2019-02-08T09:57:20.234-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+  Object {
+    "id": "219515",
+    "meta": Object {
+      "lastUpdated": "2019-01-31T20:36:50.804-05:00",
+      "versionId": "1",
+    },
+    "participant": Array [
+      Object {
+        "actor": Object {
+          "reference": "Patient/d0d0cde0-4b21-42f6-9c1e-bfa447d72059",
+        },
+        "required": "required",
+        "status": "accepted",
+      },
+    ],
+    "reason": Array [
+      Object {
+        "coding": Array [
+          Object {
+            "code": "1",
+            "display": "Check-up",
+            "system": "snomed",
+          },
+        ],
+      },
+    ],
+    "resourceType": "Appointment",
+    "start": "2017-01-02T03:04:05+01:00",
+    "status": "booked",
+  },
+]
+`;
