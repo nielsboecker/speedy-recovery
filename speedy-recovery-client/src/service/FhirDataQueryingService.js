@@ -5,6 +5,15 @@ import "fhirclient/fhir-client";
 // the relevant fields for given queries. This might change if there are breaking changes in the standard
 // or more specific queries will be added.
 
+// TODO: Also add error handling and return [] if (!appointments.data || !appointments.data.total)
+const extractResourcesFromBundle = appointments =>
+  appointments.data.total !== 0
+    ? appointments.data.entry.map(app => app.resource)
+    : [];
+
+const extractSpecificPractitionerFromBundle = (practitioner, practId) =>
+  practitioner.data.entry.filter(pract => pract.resource.id === practId);
+
 const getUserAppointments = userID => {
   return new Promise((resolve, reject) => {
     FHIR.oauth2.ready(
@@ -26,14 +35,6 @@ const getUserAppointments = userID => {
   });
 };
 
-// TODO: Also add error handling and return [] if (!appointments.data || !appointments.data.total)
-const extractResourcesFromBundle = appointments =>
-  appointments.data.total !== 0
-    ? appointments.data.entry.map(app => app.resource)
-    : [];
-
-const extractSpecificPractitionerFromBundle = (practitioner, practId) =>
-  practitioner.data.entry.filter(pract => pract.resource.id === practId);
 
 const getUserConditions = userID => {
   return new Promise((resolve, reject) => {
@@ -137,10 +138,10 @@ const getUserCarePlan = userID => {
 };
 
 export default {
+  getPracitionerInfo,
   getUserAppointments,
   getUserConditions,
   getUserMedicationDispense,
   getUserCarePlan,
   extractResourcesFromBundle,
-  getPracitionerInfo
 };
