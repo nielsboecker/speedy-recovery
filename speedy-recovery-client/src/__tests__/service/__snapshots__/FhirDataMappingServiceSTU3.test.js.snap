@@ -72,3 +72,13 @@ Object {
   "role": "Patient",
 }
 `;
+
+exports[`map FHIR Practitioner resource to internal data model 1`] = `
+Object {
+  "birthDate": "1971-11-07",
+  "gender": "female",
+  "id": "f007",
+  "name": "Simone Heps",
+  "photo": "Unknown",
+}
+`;

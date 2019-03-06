@@ -9,8 +9,7 @@ import {
   getPractitioner,
   getSeverity,
   getSummary,
-  getPractitionerId,
-  getPractName
+  getPractitionerId
 } from "./FhirDataMappingExtractionUtils";
 
 const missingField = "Unknown";
@@ -90,6 +89,13 @@ const mapPractitionerSTU2 = fhirPractResource => ({
   birthDate: "Undefined in STU2",
   photo: "Undefined in STU2"
 });
+
+const getPractName = name => {
+  if (name && name.given && name.given[0] && name.family) {
+    return name.given[0] + " " + name.family;
+  }
+  return missingField;
+};
 
 const getAddress = address => {
   if (
