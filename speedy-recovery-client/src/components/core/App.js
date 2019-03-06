@@ -131,7 +131,7 @@ class App extends Component {
     this.setState({ fhirClient });
     console.log("Received FHIR client: ", fhirClient);
 
-     fhirClient.user
+    fhirClient.user
       .read()
       .then(currentUserResource => {
         console.log("Received current user resources: ", currentUserResource);
@@ -164,12 +164,10 @@ class App extends Component {
         this.setState({ user });
       })
       .catch(error => console.error(error));
-
-
   };
 
-   updateStateAppointment(userId) {
-     FhirDataQueryingService.getUserAppointments(userId)
+  updateStateAppointment(userId) {
+    FhirDataQueryingService.getUserAppointments(userId)
       .then(appointmentResource => {
         const appointments = appointmentResource.map(appointment =>
           fhirMapAppointment(appointment, this.state.fhirVersion)
@@ -218,8 +216,6 @@ class App extends Component {
         console.error(error);
       });
   }
-
-
 
   updateStatePatient(patientResource) {
     const filteredPatientResource = filterPatientResource(patientResource);
@@ -286,7 +282,5 @@ class App extends Component {
 
   resetError = () => this.setState({ error: null });
 }
-
-
 
 export default App;

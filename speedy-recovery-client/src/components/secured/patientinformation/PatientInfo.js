@@ -54,7 +54,11 @@ class PatientInfo extends Component {
         );
         body.push(<Table.Row id="patientTableRow">{children}</Table.Row>);
       }
-      table.push(<Table.Body key={"b"} id="patientTableBody">{body}</Table.Body>);
+      table.push(
+        <Table.Body key={"b"} id="patientTableBody">
+          {body}
+        </Table.Body>
+      );
       return table;
     };
 
@@ -112,9 +116,17 @@ class PatientInfo extends Component {
             {<h4>{medicationDispenses[i].daysSupply}</h4>}
           </Table.Cell>
         );
-        body.push(<Table.Row key={"row2"} id="patientTableRow">{children}</Table.Row>);
+        body.push(
+          <Table.Row key={"row2"} id="patientTableRow">
+            {children}
+          </Table.Row>
+        );
       }
-      table.push(<Table.Body key={"body"} id="patientTableBody">{body}</Table.Body>);
+      table.push(
+        <Table.Body key={"body"} id="patientTableBody">
+          {body}
+        </Table.Body>
+      );
       return table;
     };
 
@@ -161,9 +173,17 @@ class PatientInfo extends Component {
           </Table.Cell>
         );
 
-        body.push(<Table.Row key={"row2"} id="patientTableRow">{children}</Table.Row>);
+        body.push(
+          <Table.Row key={"row2"} id="patientTableRow">
+            {children}
+          </Table.Row>
+        );
       }
-      table.push(<Table.Body key={"body2"} id="patientTableBody">{body}</Table.Body>);
+      table.push(
+        <Table.Body key={"body2"} id="patientTableBody">
+          {body}
+        </Table.Body>
+      );
       return table;
     };
 

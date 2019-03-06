@@ -35,7 +35,6 @@ const getUserAppointments = userID => {
   });
 };
 
-
 const getUserConditions = userID => {
   return new Promise((resolve, reject) => {
     FHIR.oauth2.ready(
@@ -143,5 +142,5 @@ export default {
   getUserConditions,
   getUserMedicationDispense,
   getUserCarePlan,
-  extractResourcesFromBundle,
+  extractResourcesFromBundle
 };
