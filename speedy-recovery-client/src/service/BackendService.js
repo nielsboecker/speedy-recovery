@@ -14,50 +14,61 @@ import {
 import axios from "axios";
 
 const baseUrl = "https://speedy-recovery-server.azurewebsites.net";
+
 const getConversation = async id => {
-  const url = baseUrl + "/conversations?userid=" + id;
-  const response = await axios.get(url);
-  return response.data;
+  const url = `${baseUrl}/conversations?userid=${id}`;
+  try{
+    const response = await axios.get(url);
+    return response.data;
+  }catch(error) {
+    console.log(error);
+  } 
 };
 
 const getMessages = async (id, id2) => {
-  const url = baseUrl + "/conversation?userid1=" + id + "&userid2=" + id2;
-  const response = await axios.get(url);
-  return response.data;
-};
-
-// TODO @Fabiha rename variables so it is clear who is sender and receiver
-const postMessages = async (id1, id2, message) => {
-  const url = baseUrl + "/messages?";
-  axios
-    .post(url, {
-      // TODO @Fabiha Use ES6 string template syntax (also for similar string concatenations in this file)
-      data: {
-        message: "<message_start>" + message + "<message_end>"
-      },
-      headers: {
-        Sender: id1,
-        Recipient: id2
-      }
-    })
-    .then(response => {
-      console.log(response);
-    });
-  // TODO @Fabiha also have an error handling, even if it is just logging
+  const url = `${baseUrl}/conversation?userid1=${id}&userid2=${id2}`;
+  try{
+    const response = await axios.get(url);
+    return response.data;
+  }catch(error){
+    console.log(error);
+  }
 };
 
 const getPractitionerInfo = async id => {
-  const url = baseUrl + "/practitioners?userid=" + id;
-  const response = await axios.get(url);
-  return response.data;
+  const url = `${baseUrl}/practitioners?userid=${id}`;
+  try{
+    const response = await axios.get(url);
+    return response;
+  }catch(error){
+    console.log(error);
+  }
 };
 
-const mapConversations = (conversationResource, id, userList) => ({
+const postMessages = async (senderID,recipientID, message) => {
+  const url = `${baseUrl}/messages?`;
+  let headers = {
+    Sender: senderID,
+    Recipient: recipientID
+  }
+  let data = {
+    message: `<message_start>${message}<message_end>`
+  }
+   axios
+    .post(url, data, {headers:headers})
+    .then(response => {
+      console.log("POSTING MESSAGE response", response);
+    }).catch(error => {
+      console.log(error);
+    });
+  }
+  
+const mapConversations = (conversationResource, id, conversationList) => ({
   userId: getUserId(conversationResource, id),
   id: getId(conversationResource),
   avatar: getAvatar(conversationResource),
   alt: getAlt(conversationResource),
-  title: getTitle(conversationResource, id, userList),
+  title: getTitle(conversationResource, id, conversationList),
   subtitle: getSubtitle(conversationResource),
   unread: getUnread(conversationResource),
   date: getDate(conversationResource)
@@ -77,10 +88,11 @@ const setupMessages = messageResource => ({
   date: new Date()
 });
 
+
 const getSenderMessageNum = messageResource => {
-  var num = 0;
-  for (var i = 0; i < messageResource.length; i++) {
-    if (messageResource[i].position === "right") {
+  let num = 0;
+  for (let resource of messageResource) {
+    if (resource.position === "right") {
       num++;
     }
   }

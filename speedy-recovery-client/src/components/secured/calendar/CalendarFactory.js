@@ -19,7 +19,7 @@ class CalendarFactory extends React.Component {
         return (
           <ParentCalendar
             events={this.props.events}
-            id={this.props.child}
+            id={this.props.childID}
             localizer={localizer}
           />
         );

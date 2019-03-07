@@ -71,7 +71,7 @@ const fhirMapMedication = (resource, version) => {
   console.log("No FHIR version has been supplied");
 };
 
-const getChild = currentUserResource => {
+const getChildID = currentUserResource => {
   if (
     currentUserResource &&
     currentUserResource.link &&
@@ -79,8 +79,8 @@ const getChild = currentUserResource => {
     currentUserResource.link[0].other.reference
   ) {
     const patient = currentUserResource.link[0].other.reference;
-    const child = patient.split("/")[1];
-    return child;
+    const childID = patient.split("/")[1];
+    return childID;
   }
   return null;
 };
@@ -90,5 +90,5 @@ export {
   fhirMapAppointment,
   fhirMapCondition,
   fhirMapMedication,
-  getChild
+  getChildID
 };

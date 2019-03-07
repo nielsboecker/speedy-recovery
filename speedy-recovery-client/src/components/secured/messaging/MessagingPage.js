@@ -49,18 +49,17 @@ class MessagingPage extends Component {
 
   componentDidMount() {
     if(this.props.user){
-      const userList =
+      const conversationList =
           this.props.user.role === "Parent"
               ? this.props.practitioners
               : this.props.patients;
       const id =
-          this.props.user.role === "Parent" ? this.props.child : this.props.user.id;
+          this.props.user.role === "Parent" ? this.props.childID : this.props.user.id;
       this.setState({ id });
       getConversation(id)
           .then(conversationResource => {
-            //console.log(conversations);
             const conversations = conversationResource.map(conversation =>
-                mapConversations(conversation, id, userList)
+                mapConversations(conversation, id, conversationList)
             );
             this.setState({ conversations });
           })

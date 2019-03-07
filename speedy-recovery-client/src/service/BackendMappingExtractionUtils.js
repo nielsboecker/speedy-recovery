@@ -1,106 +1,121 @@
+const missingField = "Unknown";
 const getPosition = (messageResource, id) => {
-  if (
-    messageResource &&
-    messageResource.Recipient &&
+  if(
+    messageResource && 
+    messageResource.Recipient && 
     messageResource.Recipient === id
-  ) {
+    ) {
     return "left";
   }
   return "right";
 };
 
 const getText = messageResource => {
-  if (messageResource && messageResource.Message) {
+  if(messageResource && 
+    messageResource.Message
+  ) {
     return messageResource.Message;
   }
-  return null;
+  return missingField;
 };
 
 const getTime = messageResource => {
-  if (messageResource && messageResource.time) {
+  if(messageResource && 
+    messageResource.time
+  ) {
     return new Date(messageResource.time);
   }
-  return null;
+  return missingField;
 };
 
 const getUserId = (conversationResource, id) => {
-  if (
-    conversationResource &&
-    conversationResource.userid1 &&
+  if(conversationResource && 
+    conversationResource.userid1 && 
     conversationResource.userid2
-  ) {
+  ){
     if (conversationResource.userid1 === id) {
       return conversationResource.userid2;
     }
     return conversationResource.userid1;
   }
-  return "Unknow Id";
+  return missingField;
 };
 
-const getTitle = (conversationResource, id, userList) => {
-  if (
-    conversationResource &&
-    conversationResource.userid1 &&
+const getTitle = (conversationResource, id, conversationList) => {
+  if(conversationResource && 
+    conversationResource.userid1 && 
     conversationResource.userid2 &&
-    userList
+    conversationList
   ) {
     if (conversationResource.userid1 === id) {
-      for (var i = 0; i < userList.length; i++) {
-        if (conversationResource.userid2 === userList[i].id) {
-          return userList[i].name;
+      for (let conversation of conversationList) {
+        if (conversation.id === conversationResource.userid2) {
+          return conversation.name;
         }
       }
     } else {
-      for (var j = 0; j < userList.length; j++) {
-        if (conversationResource.userid1 === userList[j].id) {
-          return userList[j].name;
+       for(let conversation of conversationList) {
+        if (conversation.id === conversationResource.userid1) {
+          return conversation.name;
         }
       }
     }
   }
-  return "Unknow user";
+  return missingField;
 };
 
 const getId = conversationResource => {
-  if (conversationResource && conversationResource.Conversation_Id) {
+  if (conversationResource && 
+    conversationResource.Conversation_Id
+  ) {
     return conversationResource.Conversation_Id;
   }
-  return "undefined";
+  return missingField;
 };
 
 const getAvatar = conversationResource => {
-  if (conversationResource && conversationResource.avatar) {
+  if (conversationResource &&
+     conversationResource.avatar
+  ) {
     return conversationResource.avatar;
   }
-  return null;
+  return missingField;
 };
 
 const getAlt = conversationResource => {
-  if (conversationResource && conversationResource.alt) {
+  if (conversationResource && 
+    conversationResource.alt
+  ) {
     return conversationResource.alt;
   }
-  return null;
+  return missingField;
 };
 
 const getSubtitle = conversationResource => {
-  if (conversationResource && conversationResource.subtitle) {
+  if (conversationResource && 
+    conversationResource.subtitle
+  ) {
     return conversationResource.subtitle;
   }
-  return null;
+  return missingField;
 };
 
 const getUnread = conversationResource => {
-  if (conversationResource && conversationResource.unread) {
+  if (conversationResource && 
+    conversationResource.unread
+  ) {
     return conversationResource.unread;
   }
-  return null;
+  return missingField;
 };
 
 const getDate = conversationResource => {
-  if (conversationResource && conversationResource.date) {
+  if (conversationResource &&
+     conversationResource.date
+  ) {
     return new Date(conversationResource.date);
   }
-  return null;
+  return missingField;
 };
 
 export {

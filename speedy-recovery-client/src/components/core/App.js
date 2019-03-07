@@ -7,7 +7,7 @@ import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
 import { filterPatientResource } from "../../service/FhirDataFilteringService";
-import {fhirMapAppointment, fhirMapPatient, getChild} from "../../service/FhirDataMappingService";
+import {fhirMapAppointment, fhirMapPatient, getChildID} from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
 
 class App extends Component {
@@ -23,7 +23,7 @@ class App extends Component {
       authRequestStarted: false,
       error: null,
       fhirVersion: null,
-      child: null
+      childID: null
     };
   }
 
@@ -74,7 +74,7 @@ class App extends Component {
                 patients={this.state.patients}
                 practitioners={this.state.practitioners}
                 fhirVersion={this.state.fhirVersion}
-                child={this.state.child}
+                childID={this.state.childID}
               />
             )}
           />
@@ -134,11 +134,11 @@ class App extends Component {
         var user = this.updateStateUser(currentUserResource);
 
         if (user.role === "Parent") {
-          this.updateStateChild(currentUserResource);
+          this.updateStatechildID(currentUserResource);
         }
 
-        if (user.role === "Parent" && this.state.child) {
-          this.updateStateAppointment(this.state.child);
+        if (user.role === "Parent" && this.state.childID) {
+          this.updateStateAppointment(this.state.childID);
         } else {
           this.updateStateAppointment(user.id);
         }
@@ -225,9 +225,10 @@ class App extends Component {
     return user;
   }
 
-  updateStateChild(currentUserResource) {
-    const child = getChild(currentUserResource);
-    this.setState({ child });
+  updateStatechildID(currentUserResource) {
+    const childID = getChildID(currentUserResource);
+    console.log("CHILDID", childID);
+    this.setState({ childID });
   }
 
   handleLoginError = errorMessage => {

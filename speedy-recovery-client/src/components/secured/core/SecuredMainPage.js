@@ -44,7 +44,7 @@ class SecuredMainPage extends Component {
                   <CalendarFactory
                     events={this.props.appointments}
                     role={this.props.user.role}
-                    child={this.props.child}
+                    childID={this.props.childID}
                     id={this.props.user.id}
                   />
                 )}
@@ -56,7 +56,7 @@ class SecuredMainPage extends Component {
                     user={this.props.user}
                     patients={this.props.patients}
                     practitioners={this.props.practitioners}
-                    child={this.props.child}
+                    childID={this.props.childID}
                   />
                 )}
               />
