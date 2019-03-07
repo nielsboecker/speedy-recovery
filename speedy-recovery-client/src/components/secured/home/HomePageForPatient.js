@@ -1,39 +1,46 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Loader } from "semantic-ui-react";
+import { Loader, Label, Icon } from "semantic-ui-react";
 
 class HomePageForPatient extends Component {
   render() {
-    if (
-      this.props.user &&
-      this.props.events &&
-      this.getNextEvent(this.props.events).start &&
-      this.getNextEvent(this.props.events).patient
-    ) {
+    if (this.dataIsReady()) {
+      const nextEvent = this.getNextEvent();
       return (
         <div>
-          <p>Hello {this.props.user.name}</p>
-          {new Date(this.getNextEvent(this.props.events).start).toLocaleString(
+          <h1>Howdy, {this.props.user.name}!</h1>
+          {new Date(nextEvent.start).toLocaleString(
             "en-uk"
           ) !== "Invalid Date" ? (
             <p>
-              Here is the time for your next appointment:{" "}
-              <Link to={"/secured/calendar"}>
-                {this.formatDate(this.getNextEvent(this.props.events).start)}
-              </Link>
+              Your next appointment is at {" "}
+              <Label image color="yellow" as={Link} to={"/secured/calendar"}>
+                <Icon name="calendar check"/>
+                {this.formatDate(nextEvent.start)}
+                <Label.Detail as="span">
+                  {nextEvent.title}
+                </Label.Detail>
+              </Label>
             </p>
           ) : (
-            <p>You dont't have any appointment</p>
+            <p>You dont't have any appointments upcoming. Lucky you, right?!</p>
           )}
         </div>
       );
     } else {
-      return <Loader content="Loading" inline="centered" active size="large" />;
+      return <Loader content="Loading" inline="centered" active size="large"/>;
     }
   }
 
-  getNextEvent(events) {
-    const event = events
+  dataIsReady() {
+    return this.props.user &&
+      this.props.events &&
+      this.getNextEvent(this.props.events).start &&
+      this.getNextEvent(this.props.events).patient;
+  }
+
+  getNextEvent() {
+    const event = this.props.events
       .filter(event => new Date(event.start) - new Date() > 0)
       .sort((a, b) => new Date(a.start) - new Date(b.start))[0];
     return event ? event : { start: [] };
@@ -46,4 +53,5 @@ class HomePageForPatient extends Component {
     return "Invalid date";
   }
 }
+
 export default HomePageForPatient;

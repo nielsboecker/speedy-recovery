@@ -5,9 +5,9 @@ import {
   getMedName,
   getName,
   getPatient,
+  getPatientId,
   getPhone,
   getPractitioner,
-  getPatientId,
   getPractitionerId,
   getSeverity,
   getSummary
@@ -16,7 +16,7 @@ import {
 const missingField = "Unknown";
 const mapPatientToUserSTU2 = fhirPatientResource => ({
   id: fhirPatientResource.id ? fhirPatientResource.id : missingField,
-  //This is a temporary hard-code fix as we have not implemented the searching for a patients' parent
+  // This is a temporary hard-code fix as the SMART sandbox does not support logging in as a patients' parent
   role:
     fhirPatientResource.id === "219971"
       ? "Parent"
