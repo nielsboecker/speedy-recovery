@@ -20,11 +20,7 @@ class PatientCalendar extends React.Component {
   }
 
   getPractitionerInfo = () => {
-    this.props.events.map(event => {
-      const family = event.practitioner.split(' ');
-      const id = event.practitionerId.substring(13, event.practitionerId.length);
-      return this.props.updateStatePractitioner(id, family[family.length - 1]);
-    });
+
     this.setState({
       dropdownList:
           this.removeArrayDuplicates(this.props.events.map(event => {

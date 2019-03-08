@@ -82,7 +82,6 @@ class App extends Component {
                 medicationDispenses={this.state.medicationDispenses}
                 carePlans={this.state.carePlans}
                 fhirVersion={this.state.fhirVersion}
-                updateStatePractitioner={this.updateStatePractitioner}
                 patientPractitioner={this.state.patientPractitioner}
               />
             )}
@@ -175,12 +174,31 @@ class App extends Component {
         const appointments = appointmentResource.map(appointment =>
           fhirMapAppointment(appointment, this.state.fhirVersion)
         );
+          const practitioners = this.removeArrayDuplicates(
+              appointments.map(appointment => ({
+                  name: appointment.practitioner,
+                  id: appointment.practitionerId
+              }))
+          );
+
+          practitioners.map(practitioner => {
+              const family = practitioner.name.split(' ');
+              const id = practitioner.id.substring(13, practitioner.id.length);
+              return this.updateStatePractitioner(id, family[family.length - 1]);
+          });
+
         this.setState({ appointments });
       })
       .catch(error => {
         console.error(error);
       });
   }
+
+
+    removeArrayDuplicates = array => array !== undefined ? array.reduce((prev, curr) =>
+        prev.find(a => a["id"] === curr["id"]) ? prev : prev.push(curr) && prev, []) : array;
+
+
   updateStateCondition(userId) {
     FhirDataQueryingService.getUserConditions(userId)
       .then(conditionResource => {
