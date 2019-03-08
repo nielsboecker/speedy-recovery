@@ -1,5 +1,5 @@
-const expect = require('chai').expect;
-const backendService = require('../src/service/BackendService');
+const expect = import('chai').expect;
+const backendService = import('../src/service/BackendService');
 
 describe('Test to fetch data from backend database', () => {
     it('Test to fetch Conversations from backend', async() => {      

@@ -10,13 +10,13 @@ Enzyme.configure({ adapter: new Adapter() });
 
 test("HomePageFactory renders without crashing", () => {
   mount(
-    <HomePageFactory user={{ role: "Patient" }} patient={{}} events={[]} />
+    <HomePageFactory user={{}} patient={{}} events={[]} homePage={"PatientHomePage"} />
   );
 });
 
 test("HomePageFactory renders patient's home page for patient users", () => {
   const wrapper = mount(
-    <HomePageFactory user={{ role: "Patient" }} patient={{}} events={[]} />
+    <HomePageFactory user={{}} patient={{}} events={[]} homePage={"PatientHomePage"} />
   );
   expect(wrapper.children().length).toBe(1);
   expect(wrapper.children().type().name).toEqual("HomePageForPatient");
@@ -24,7 +24,7 @@ test("HomePageFactory renders patient's home page for patient users", () => {
 
 test("HomePageFactory renders parent's home page for parent users", () => {
   const wrapper = mount(
-    <HomePageFactory user={{ role: "Parent" }} patient={{}} events={[]} />
+    <HomePageFactory user={{}} patient={{}} events={[]} homePage={"ParentHomePage"} />
   );
   expect(wrapper.children().length).toBe(1);
   expect(wrapper.children().type().name).toEqual("HomePageForParent");
@@ -32,7 +32,7 @@ test("HomePageFactory renders parent's home page for parent users", () => {
 
 test("HomePageFactory renders practitioner's home page for practitioner users", () => {
   const wrapper = mount(
-    <HomePageFactory user={{ role: "Practitioner" }} patient={{}} events={[]} />
+    <HomePageFactory user={{}} patient={{}} events={[]} homePage={"PractitionerHomePage"} />
   );
   expect(wrapper.children().length).toBe(1);
   expect(wrapper.children().type().name).toEqual("HomePageForPractitioner");

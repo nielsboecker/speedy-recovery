@@ -5,8 +5,7 @@ import HomePageForPractitioner from "../home/HomePageForPractitioner";
 
 class HomePageFactory extends Component {
   render() {
-    const { user, events } = this.props;
-    const homePage = user.role.toString() + "HomePage";
+    const { user, events, homePage } = this.props;
 
     switch (homePage) {
       case "PatientHomePage":
