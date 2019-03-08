@@ -9,17 +9,14 @@ class HomePageForPatient extends Component {
       return (
         <div>
           <h1>Howdy, {this.props.user.name}!</h1>
-          {new Date(nextEvent.start).toLocaleString(
-            "en-uk"
-          ) !== "Invalid Date" ? (
+          {new Date(nextEvent.start).toLocaleString("en-uk") !==
+          "Invalid Date" ? (
             <p>
-              Your next appointment is at {" "}
+              Your next appointment is at{" "}
               <Label image color="yellow" as={Link} to={"/secured/calendar"}>
-                <Icon name="calendar check"/>
+                <Icon name="calendar check" />
                 {this.formatDate(nextEvent.start)}
-                <Label.Detail as="span">
-                  {nextEvent.title}
-                </Label.Detail>
+                <Label.Detail as="span">{nextEvent.title}</Label.Detail>
               </Label>
             </p>
           ) : (
@@ -28,15 +25,17 @@ class HomePageForPatient extends Component {
         </div>
       );
     } else {
-      return <Loader content="Loading" inline="centered" active size="large"/>;
+      return <Loader content="Loading" inline="centered" active size="large" />;
     }
   }
 
   dataIsReady() {
-    return this.props.user &&
+    return (
+      this.props.user &&
       this.props.events &&
       this.getNextEvent(this.props.events).start &&
-      this.getNextEvent(this.props.events).patient;
+      this.getNextEvent(this.props.events).patient
+    );
   }
 
   getNextEvent() {

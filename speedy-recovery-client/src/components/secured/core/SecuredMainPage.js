@@ -40,7 +40,7 @@ class SecuredMainPage extends Component {
                 exact
                 render={() => (
                   <HomePageFactory
-                    homePage={this.props.user.role.toString()+"HomePage"}
+                    homePage={this.props.user.role.toString() + "HomePage"}
                     user={this.props.user}
                     patient={this.props.patient}
                     events={this.props.appointments}
