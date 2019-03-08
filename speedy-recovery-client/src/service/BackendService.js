@@ -17,52 +17,49 @@ const baseUrl = "https://speedy-recovery-server.azurewebsites.net";
 
 const getConversation = async id => {
   const url = `${baseUrl}/conversations?userid=${id}`;
-  try{
+  try {
     const response = await axios.get(url);
     return response.data;
-  }catch(error) {
+  } catch (error) {
     console.log(error);
-  } 
+  }
 };
 
 const getMessages = async (id, id2) => {
   const url = `${baseUrl}/conversation?userid1=${id}&userid2=${id2}`;
-  try{
+  try {
     const response = await axios.get(url);
     return response.data;
-  }catch(error){
+  } catch (error) {
     console.log(error);
   }
 };
 
 const getPractitionerInfo = async id => {
   const url = `${baseUrl}/practitioners?userid=${id}`;
-  try{
-    const response = await axios.get(url);
-    return response;
-  }catch(error){
-    console.log(error);
+  try {
+    return await axios.get(url);
+  } catch (error) {
+    console.error(error);
   }
 };
 
-const postMessages = async (senderID,recipientID, message) => {
+const postMessages = async (senderID, recipientID, message) => {
   const url = `${baseUrl}/messages?`;
-  let headers = {
+  const headers = {
     Sender: senderID,
     Recipient: recipientID
-  }
-  let data = {
+  };
+  const data = {
     message: `<message_start>${message}<message_end>`
-  }
-   axios
-    .post(url, data, {headers:headers})
-    .then(response => {
-      console.log("POSTING MESSAGE response", response);
-    }).catch(error => {
-      console.log(error);
-    });
-  }
-  
+  };
+
+  axios
+    .post(url, data, { headers: headers })
+    .then(response => console.log("POST server success: ", response))
+    .catch(error => console.error("POST server error: ", error));
+};
+
 const mapConversations = (conversationResource, id, conversationList) => ({
   userId: getUserId(conversationResource, id),
   id: getId(conversationResource),
