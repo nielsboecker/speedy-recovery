@@ -4,8 +4,8 @@ import { Loader, Label, Icon } from "semantic-ui-react";
 
 class HomePageForPatient extends Component {
   render() {
-    if (this.dataIsReady()) {
-      const nextEvent = this.getNextEvent();
+    if (dataIsReady(this.props.user,this.props.events)) {
+      const nextEvent = getNextEvent(this.props.events);
       return (
         <div>
           <h1>Howdy, {this.props.user.name}!</h1>
@@ -15,7 +15,7 @@ class HomePageForPatient extends Component {
               Your next appointment is at{" "}
               <Label image color="yellow" as={Link} to={"/secured/calendar"}>
                 <Icon name="calendar check" />
-                {this.formatDate(nextEvent.start)}
+                {formatDate(nextEvent.start)}
                 <Label.Detail as="span">{nextEvent.title}</Label.Detail>
               </Label>
             </p>
@@ -29,28 +29,28 @@ class HomePageForPatient extends Component {
     }
   }
 
-  dataIsReady() {
-    return (
-      this.props.user &&
-      this.props.events &&
-      this.getNextEvent(this.props.events).start &&
-      this.getNextEvent(this.props.events).patient
-    );
-  }
+}
 
-  getNextEvent() {
-    const event = this.props.events
+export function dataIsReady(user,events) {
+  return (
+      user &&
+      events &&
+      getNextEvent(events).start &&
+      getNextEvent(events).patient
+  );
+}
+export function getNextEvent(events) {
+  const event =events
       .filter(event => new Date(event.start) - new Date() > 0)
       .sort((a, b) => new Date(a.start) - new Date(b.start))[0];
-    return event ? event : { start: [] };
-  }
+  return event ? event : { start: [],patient: [] };
+}
 
-  formatDate(date) {
-    if (date) {
-      return new Date(date).toLocaleString("en-uk");
-    }
-    return "Invalid date";
+export function formatDate(date) {
+  if (date) {
+    return new Date(date).toLocaleString("en-uk");
   }
+  return "Invalid date";
 }
 
 export default HomePageForPatient;
