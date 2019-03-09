@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { MessageList } from "react-chat-elements";
-import { Container, Form, Grid, Button } from "semantic-ui-react";
+import { Container, Form, Grid, Button, GridColumn } from "semantic-ui-react";
 import { getMessages, mapMessages, postMessages, setupMessages, getSenderMessageNum } from "../../../service/BackendService";
-
+import "./ConversationPage.css";
 class ConversationPage extends Component {
   constructor(props) {
     super(props);
@@ -31,37 +31,39 @@ class ConversationPage extends Component {
     this.setState({ message: "" });
   };
 
-  render() {
+  render() { 
     return (
-      <Container text>
-        <h1>Conversation {this.state.title}</h1>
-        <MessageList
-          className="message-list"
-          lockable={true}
-          toBottomHeight={"100%"}
-          dataSource={this.state.messages}
-        />
-
-        <Grid>
-          <Grid.Row />
-          <Grid.Row>
-            <Grid.Column width={15}>
-              <Form onSubmit={this.handleSubmit}>
-                <input
-                  placeholder="Text messages here"
-                  value={this.state.message}
-                  onChange={this.handleChange}
-                />
-              </Form>
-            </Grid.Column>
-            <Grid.Column>
-              <Button primary onClick={this.handleSubmit}>
-                Send
-              </Button>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Container>
+      <div>
+        <h3 className ="topTitle">Conversation{this.state.title}</h3>
+        <div className= "showList">
+          <MessageList
+              className="message-list"
+              lockable={true}
+              toBottomHeight={"100%"}
+              dataSource={this.state.messages}
+            />
+            <Grid textAlign="center">
+              <Grid.Row />
+              <Grid.Row>
+                <Grid.Column width={12}>
+                  <Form onSubmit={this.handleSubmit} className="messageField">
+                    <input 
+                      placeholder="Text messages here"
+                      value={this.state.message}
+                      onChange={this.handleChange}
+                    />
+                  </Form>
+                </Grid.Column>
+                <Grid.Column>
+                  <Button color="red" onClick={this.handleSubmit}>
+                    Send
+                  </Button>
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row />
+            </Grid>
+        </div>
+      </div>
     );
   }
 
