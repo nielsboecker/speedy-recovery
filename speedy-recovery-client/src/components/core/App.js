@@ -131,12 +131,9 @@ class App extends Component {
 
         var user = this.updateStateUser(currentUserResource);
 
-        if (user.role === "Parent") {
-          this.updateStatechildID(currentUserResource);
-        }
-
         switch(user.role){
             case "Parent":
+                this.updateStatechildID(currentUserResource);
                 this.updateStateAppointment(this.state.childID, user.role);
                 break;
             case "Practitioner":
