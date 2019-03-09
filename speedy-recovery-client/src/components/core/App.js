@@ -129,7 +129,7 @@ class App extends Component {
         console.log("Received current user resources: ", currentUserResource);
         console.log("Current user id: ", currentUserResource.id);
 
-        var user = this.updateStateUser(currentUserResource);
+        const user = this.updateStateUser(currentUserResource);
 
         switch(user.role){
             case "Parent":
