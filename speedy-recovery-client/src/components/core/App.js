@@ -17,8 +17,7 @@ class App extends Component {
       fhirClient: {},
       user: null,
       patient: {},
-      patients: [],
-      practitioners: [],
+      userList:[],
       appointments: [],
       authRequestStarted: false,
       error: null,
@@ -71,8 +70,7 @@ class App extends Component {
                 user={this.state.user}
                 patient={this.state.patient}
                 appointments={this.state.appointments}
-                patients={this.state.patients}
-                practitioners={this.state.practitioners}
+                userList={this.state.userList}
                 fhirVersion={this.state.fhirVersion}
                 childID={this.state.childID}
               />
@@ -137,10 +135,18 @@ class App extends Component {
           this.updateStatechildID(currentUserResource);
         }
 
-        if (user.role === "Parent" && this.state.childID) {
-          this.updateStateAppointment(this.state.childID);
-        } else {
-          this.updateStateAppointment(user.id);
+        switch(user.role){
+            case "Parent":
+                this.updateStateAppointment(this.state.childID, user.role);
+                break;
+            case "Practitioner":
+                this.updateStateAppointment(user.id, user.role);
+                break;
+            case "Patient":
+                this.updateStateAppointment(user.id, user.role);
+                break;
+            default:
+                console.log("Invalid user role: ", user.role);
         }
 
         if (user.role === "Practitioner") {
@@ -158,39 +164,40 @@ class App extends Component {
               console.error(error);
             });
         }
-        // else if(userType === "Parent"){
-        //      user.role = "Parent";
-        //      TODO
-        // }
 
         this.setState({ user });
       })
       .catch(error => console.error(error));
   };
 
-  updateStateAppointment(userId) {
+  updateStateAppointment(userId, role) {
     FhirDataQueryingService.getUserAppointments(userId)
       .then(appointmentResource => {
         const appointments = appointmentResource.map(appointment =>
           fhirMapAppointment(appointment, this.state.fhirVersion)
         );
-        const patients = this.deleteRepeatingElement(
-          appointments.map(appointment => ({
-            name: appointment.patient,
-            id: appointment.patientId
-          }))
-        );
-        const practitioners = this.deleteRepeatingElement(
-          appointments.map(appointment => ({
-            name: appointment.practitioner,
-            id: appointment.practitionerId
-          }))
-        );
-        this.setState({ appointments, patients, practitioners });
+        const userList = this.setUserList(appointments, role);
+        this.setState({ appointments, userList });
       })
       .catch(error => {
         console.error(error);
       });
+  }
+
+  setUserList(resource, role){
+      if(resource && role){
+          return role === "Practitioner" ? this.removeArrayDuplicates(
+              resource.map(appointment => ({
+                  name: appointment.patient,
+                  id: appointment.patientId
+              }))) : this.removeArrayDuplicates(
+              resource.map(appointment => ({
+                  name: appointment.practitioner,
+                  id: appointment.practitionerId
+              }))
+          )
+      }
+      return [];
   }
 
   updateStatePatient(patientResource) {
@@ -226,7 +233,7 @@ class App extends Component {
   }
 
   updateStatechildID(currentUserResource) {
-    const childID = getChildID(currentUserResource);
+    const childID = getChildID(currentUserResource, this.state.fhirVersion);
     console.log("CHILDID", childID);
     this.setState({ childID });
   }
@@ -264,22 +271,8 @@ class App extends Component {
 
   resetError = () => this.setState({ error: null });
 
-  deleteRepeatingElement = resource => {
-    var handledResource = [resource[0]];
-    for (var i = 1; i < resource.length; i++) {
-      var element = resource[i];
-      var repeat = false;
-      for (var j = 0; j < handledResource.length; j++) {
-        if (element.id === handledResource[j].id) {
-          repeat = true;
-          break;
-        }
-      }
-      if (!repeat) {
-        handledResource.push(element);
-      }
-    }
-    return handledResource;
+  removeArrayDuplicates = array => {
+      return array !== undefined ? array.reduce((prev, curr) => prev.find(a => a["id"] === curr["id"]) ? prev : prev.push(curr) && prev, []) : array;
   };
 }
 

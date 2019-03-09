@@ -18,7 +18,7 @@ const mapPatientToUserSTU3 = fhirPatientResource => ({
   id: fhirPatientResource.id ? fhirPatientResource.id : missingField,
   //This is a temporary hard-code fix as we have not implemented the searching for a patients' parent
   role:
-    fhirPatientResource.id === "220004"
+    fhirPatientResource.id === "220041"
       ? "Parent"
       : fhirPatientResource.resourceType,
 
@@ -209,9 +209,24 @@ const formatBirthDate = birthDate => {
   return missingField;
 };
 
+const getChildIDSTU3 = currentUserResource => {
+  if (
+      currentUserResource &&
+      currentUserResource.link &&
+      currentUserResource.link[0].other &&
+      currentUserResource.link[0].other.reference
+  ) {
+    const patient = currentUserResource.link[0].other.reference;
+    const childID = patient.split("/")[1];
+    return childID;
+  }
+  return null;
+};
+
 export {
   mapPatientToUserSTU3,
   mapAppointmentSTU3,
   mapConditionSTU3,
-  mapMedicationSTU3
+  mapMedicationSTU3,
+  getChildIDSTU3
 };

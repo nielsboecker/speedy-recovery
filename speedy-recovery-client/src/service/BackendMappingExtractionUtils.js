@@ -77,9 +77,9 @@ const getAvatar = conversationResource => {
   if (conversationResource &&
      conversationResource.avatar
   ) {
-    return conversationResource.avatar;
+    return "https://institutogoldenprana.com.br/wp-content/uploads/2015/08/no-avatar-25359d55aa3c93ab3466622fd2ce712d1.jpg";
   }
-  return missingField;
+  return "https://institutogoldenprana.com.br/wp-content/uploads/2015/08/no-avatar-25359d55aa3c93ab3466622fd2ce712d1.jpg";
 };
 
 const getAlt = conversationResource => {

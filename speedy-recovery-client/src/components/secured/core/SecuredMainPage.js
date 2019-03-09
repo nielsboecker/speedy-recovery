@@ -54,8 +54,7 @@ class SecuredMainPage extends Component {
                 render={() => (
                   <MessagingPage
                     user={this.props.user}
-                    patients={this.props.patients}
-                    practitioners={this.props.practitioners}
+                    userList={this.props.userList}
                     childID={this.props.childID}
                   />
                 )}
