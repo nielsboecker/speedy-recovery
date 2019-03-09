@@ -2,15 +2,18 @@ import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { MessageList } from "react-chat-elements";
 import { Form, Grid, Button} from "semantic-ui-react";
-import { getMessages, mapMessages, postMessages, setupMessages, getSenderMessageNum } from "../../../service/BackendService";
+import { getMessages, postMessages} from "../../../service/BackendService";
+import { messageMap, setupMessages, getSenderMessageNum } from "../../../service/BackendMapping";
 import "./ConversationPage.css";
+
 class ConversationPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       message: "",
       messages: [],
-      title: null
+      title: null,
+      dbType: "MySQL"
     };
   }
 
@@ -34,7 +37,7 @@ class ConversationPage extends Component {
   render() { 
     return (
       <div>
-        <h3 className ="topTitle">Conversation{this.state.title}</h3>
+        <h3 className ="topTitle"><i class="user icon"></i>{this.state.title}</h3>
         <div className= "showList">
           <MessageList
               className="message-list"
@@ -80,11 +83,11 @@ class ConversationPage extends Component {
 
   setMessageList = () => {
     if (this.props.location) {
-      this.setState({ title: this.props.location.state.title });
+      this.setState({ title: this.props.location.state.title});
       getMessages(this.props.location.state.id, this.props.location.state.id2)
         .then(messagesResource => {
           const messages = messagesResource.map(message =>
-            mapMessages(message, this.props.location.state.id)
+            messageMap(message, this.props.location.state.id, this.state.dbType)
           );
           if(getSenderMessageNum(messages) >= getSenderMessageNum(this.state.messages)){
             this.setState({ messages });

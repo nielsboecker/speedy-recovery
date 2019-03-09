@@ -2,14 +2,16 @@ import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { ChatItem } from "react-chat-elements";
 import { Link } from "react-router-dom";
-import {getConversation, mapConversations} from "../../../service/BackendService";
+import {getConversation} from "../../../service/BackendService";
+import {conversationMap} from "../../../service/BackendMapping";
 
 class MessagingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       conversations: [],
-      id: null
+      id: null,
+      dbType: "MySQL"
     };
   }
 
@@ -22,7 +24,7 @@ class MessagingPage extends Component {
             state: {
               id: this.state.id,
               id2: conversation.userId,
-              title: ": " + conversation.title
+              title: conversation.title
             }
           }}
           key={conversation.userId}
@@ -59,7 +61,7 @@ class MessagingPage extends Component {
     getConversation(id)
     .then(conversationResource => {
       const conversations = conversationResource.map(conversation =>
-          mapConversations(conversation, id, this.props.userList)
+        conversationMap(conversation, id, this.props.userList, this.state.dbType)
       );
       this.setState({ conversations });
     })
