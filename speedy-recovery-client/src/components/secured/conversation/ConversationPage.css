@@ -15,8 +15,4 @@
     text-align: center;
     color: #5677b4 ;
 }
-.naughty { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: red;
-    opacity: 1; /* Firefox */
-  }
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { MessageList } from "react-chat-elements";
-import { Container, Form, Grid, Button, GridColumn } from "semantic-ui-react";
+import { Form, Grid, Button} from "semantic-ui-react";
 import { getMessages, mapMessages, postMessages, setupMessages, getSenderMessageNum } from "../../../service/BackendService";
 import "./ConversationPage.css";
 class ConversationPage extends Component {
