@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Loader, Label, Icon } from "semantic-ui-react";
+import { Icon, Label, Loader } from "semantic-ui-react";
 
-class HomePageForPatient extends Component {
+class PatientHomePage extends Component {
   render() {
     if (dataIsReady(this.props.user, this.props.events)) {
       const nextEvent = getNextEvent(this.props.events);
@@ -53,4 +53,4 @@ export function formatDate(date) {
   return "Invalid date";
 }
 
-export default HomePageForPatient;
+export default PatientHomePage;

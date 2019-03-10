@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import HomePageForPatient from "../home/HomePageForPatient";
-import HomePageForParent from "../home/HomePageForParent";
-import HomePageForPractitioner from "../home/HomePageForPractitioner";
+import PatientHomePage from "./PatientHomePage";
+import ParentHomePage from "./ParentHomePage";
+import PractitionerHomePage from "./PractitionerHomePage";
 
 class HomePageFactory extends Component {
   render() {
@@ -9,11 +9,11 @@ class HomePageFactory extends Component {
 
     switch (user.role.toLowerCase()) {
       case "patient":
-        return <HomePageForPatient user={user} events={events} />;
+        return <PatientHomePage user={user} events={events}/>;
       case "parent":
-        return <HomePageForParent user={user} events={events} />;
+        return <ParentHomePage user={user} events={events}/>;
       case "practitioner":
-        return <HomePageForPractitioner user={user} events={events} />;
+        return <PractitionerHomePage user={user} events={events}/>;
       default:
         console.error(`HomePage for user role ${user.role} is invalid`);
         return null;

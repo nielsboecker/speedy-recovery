@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Label, Icon, Loader } from "semantic-ui-react";
-import { dataIsReady, formatDate, getNextEvent } from "./HomePageForPatient";
+import { Icon, Label, Loader } from "semantic-ui-react";
+import { dataIsReady, formatDate, getNextEvent } from "./PatientHomePage";
 
-class HomePageForPractitioner extends Component {
+class ParentHomePage extends Component {
   render() {
     if (dataIsReady(this.props.user, this.props.events)) {
       const nextEvent = getNextEvent(this.props.events);
@@ -13,7 +13,7 @@ class HomePageForPractitioner extends Component {
           {new Date(nextEvent.start).toLocaleString("en-uk") !==
           "Invalid Date" ? (
             <p>
-              Your patient {nextEvent.patient}'s next appointment is at{" "}
+              Your child {nextEvent.patient}'s appointment is at{" "}
               <Label image color="yellow" as={Link} to={"/secured/calendar"}>
                 <Icon name="calendar check" />
                 {formatDate(nextEvent.start)}
@@ -31,4 +31,4 @@ class HomePageForPractitioner extends Component {
   }
 }
 
-export default HomePageForPractitioner;
+export default ParentHomePage;
