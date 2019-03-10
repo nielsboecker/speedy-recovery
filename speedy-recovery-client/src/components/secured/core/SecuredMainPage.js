@@ -36,18 +36,8 @@ class SecuredMainPage extends Component {
 
             <Container>
               <Route
-                path={`${match.url}`}
+                path={`(${match.url}|${match.url}/home)`}
                 exact
-                render={() => (
-                  <HomePageFactory
-                    user={this.props.user}
-                    patient={this.props.patient}
-                    events={this.props.appointments}
-                  />
-                )}
-              />
-              <Route
-                path={`${match.url}/home`}
                 render={() => (
                   <HomePageFactory
                     user={this.props.user}
