@@ -5,17 +5,17 @@ import HomePageForPractitioner from "../home/HomePageForPractitioner";
 
 class HomePageFactory extends Component {
   render() {
-    const { user, events, homePage } = this.props;
+    const { user, events } = this.props;
 
-    switch (homePage) {
-      case "PatientHomePage":
+    switch (user.role.toLowerCase()) {
+      case "patient":
         return <HomePageForPatient user={user} events={events} />;
-      case "ParentHomePage":
+      case "parent":
         return <HomePageForParent user={user} events={events} />;
-      case "PractitionerHomePage":
+      case "practitioner":
         return <HomePageForPractitioner user={user} events={events} />;
       default:
-        console.error("Enter the wrong page");
+        console.error(`HomePage for user role ${user.role} is invalid`);
         return null;
     }
   }
