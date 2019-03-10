@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Icon, Label, Loader } from "semantic-ui-react";
 import { dataIsReady, getNextEvent } from "./HomePageDataUtils";
-import { formatDate } from "../../../service/DateUtils";
+import { formatDate, isValidDate } from "../../../service/DateUtils";
 
 class ParentHomePage extends Component {
   render() {
@@ -11,8 +11,7 @@ class ParentHomePage extends Component {
       return (
         <div>
           <h1>Hello, {this.props.user.firstName}!</h1>
-          {new Date(nextEvent.start).toLocaleString("en-uk") !==
-          "Invalid Date" ? (
+          {isValidDate(nextEvent.start) ? (
             <p>
               Your child {nextEvent.patient}'s appointment is at{" "}
               <Label image color="yellow" as={Link} to={"/secured/calendar"}>
