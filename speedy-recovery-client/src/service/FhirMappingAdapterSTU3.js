@@ -35,27 +35,27 @@ const mapPatientToUserSTU3 = fhirPatientResource => ({
   email: getEmail(fhirPatientResource.telecom)
 });
 
-const mapAppointmentSTU3 = fhirAppResource => ({
-  id: fhirAppResource.id ? fhirAppResource.id : missingField,
-  title: getTitle(fhirAppResource.text),
-  status: fhirAppResource.status ? fhirAppResource.status : missingField,
-  appType: getAppType(fhirAppResource.appointmentType),
-  indication: getIndication(fhirAppResource.indication),
-  priority: fhirAppResource.priority ? fhirAppResource.priority : missingField,
-  description: fhirAppResource.description
-    ? fhirAppResource.description
+const mapAppointmentSTU3 = fhirAppointmentResource => ({
+  id: fhirAppointmentResource.id ? fhirAppointmentResource.id : missingField,
+  title: getTitle(fhirAppointmentResource.text),
+  status: fhirAppointmentResource.status ? fhirAppointmentResource.status : missingField,
+  appType: getAppType(fhirAppointmentResource.appointmentType),
+  indication: getIndication(fhirAppointmentResource.indication),
+  priority: fhirAppointmentResource.priority ? fhirAppointmentResource.priority : missingField,
+  description: fhirAppointmentResource.description
+    ? fhirAppointmentResource.description
     : missingField,
-  supportingInfo: getSupportingInfo(fhirAppResource.supportingInformation),
-  start: fhirAppResource.start ? new Date(fhirAppResource.start) : missingField,
-  end: fhirAppResource.end ? new Date(fhirAppResource.end) : missingField,
-  created: fhirAppResource.created
-    ? new Date(fhirAppResource.created)
+  supportingInfo: getSupportingInfo(fhirAppointmentResource.supportingInformation),
+  start: fhirAppointmentResource.start ? new Date(fhirAppointmentResource.start) : missingField,
+  end: fhirAppointmentResource.end ? new Date(fhirAppointmentResource.end) : missingField,
+  created: fhirAppointmentResource.created
+    ? new Date(fhirAppointmentResource.created)
     : missingField,
-  comment: fhirAppResource.comment ? fhirAppResource.comment : missingField,
-  patient: getPatient(fhirAppResource.participant),
-  practitioner: getPractitioner(fhirAppResource.participant),
-  practitionerId: getPractitionerId(fhirAppResource.participant),
-  location: getLocation(fhirAppResource.participant)
+  comment: fhirAppointmentResource.comment ? fhirAppointmentResource.comment : missingField,
+  patient: getPatient(fhirAppointmentResource.participant),
+  practitioner: getPractitioner(fhirAppointmentResource.participant),
+  practitionerId: getPractitionerId(fhirAppointmentResource.participant),
+  location: getLocation(fhirAppointmentResource.participant)
 });
 
 const mapConditionSTU3 = fhirCondResource => ({
@@ -114,6 +114,16 @@ const mapCarePlanSTU3 = fhirCareResource => ({
   activities: getCarePlanActivities(fhirCareResource.activity),
   category: getCarePlanCategory(fhirCareResource.category),
   period: getCarePlanPeriod(fhirCareResource.period)
+});
+
+const mapPractitionerSTU3 = fhirPractResource => ({
+  name: getPractName(fhirPractResource.name),
+  id: fhirPractResource.id ? fhirPractResource.id : missingField,
+  gender: fhirPractResource.gender ? fhirPractResource.gender : missingField,
+  birthDate: fhirPractResource.birthDate
+      ? fhirPractResource.birthDate
+      : missingField,
+  photo: getPhoto(fhirPractResource.photo)
 });
 
 const getCarePlanCategory = category => {
@@ -189,16 +199,6 @@ const getMedDispenseQuantity = quantity => {
     return quantity.value + " " + quantity.unit;
   }
 };
-
-const mapPractitionerSTU3 = fhirPractResource => ({
-  name: getPractName(fhirPractResource.name),
-  id: fhirPractResource.id ? fhirPractResource.id : missingField,
-  gender: fhirPractResource.gender ? fhirPractResource.gender : missingField,
-  birthDate: fhirPractResource.birthDate
-    ? fhirPractResource.birthDate
-    : missingField,
-  photo: getPhoto(fhirPractResource.photo)
-});
 
 const getPhoto = photo => {
   if (photo && photo[0] && photo[0].data) {

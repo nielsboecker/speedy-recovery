@@ -34,25 +34,25 @@ const mapPatientToUserSTU2 = fhirPatientResource => ({
   email: "Undefined in STU2"
 });
 
-const mapAppointmentSTU2 = fhirAppResource => ({
-  id: fhirAppResource.id ? fhirAppResource.id : missingField,
-  title: getTitle(fhirAppResource.text),
-  status: fhirAppResource.status ? fhirAppResource.status : missingField,
+const mapAppointmentSTU2 = fhirAppointmentResource => ({
+  id: fhirAppointmentResource.id ? fhirAppointmentResource.id : missingField,
+  title: getTitle(fhirAppointmentResource.text),
+  status: fhirAppointmentResource.status ? fhirAppointmentResource.status : missingField,
   appType: "Undefined in STU2",
   indication: "Undefined in STU2",
-  priority: fhirAppResource.priority ? fhirAppResource.priority : missingField,
-  description: fhirAppResource.description
-    ? fhirAppResource.description
+  priority: fhirAppointmentResource.priority ? fhirAppointmentResource.priority : missingField,
+  description: fhirAppointmentResource.description
+    ? fhirAppointmentResource.description
     : missingField,
   supportingInfo: "Undefined in STU2",
-  start: fhirAppResource.start ? new Date(fhirAppResource.start) : missingField,
-  end: fhirAppResource.end ? new Date(fhirAppResource.end) : missingField,
+  start: fhirAppointmentResource.start ? new Date(fhirAppointmentResource.start) : missingField,
+  end: fhirAppointmentResource.end ? new Date(fhirAppointmentResource.end) : missingField,
   created: "Undefined in STU2",
-  comment: fhirAppResource.comment ? fhirAppResource.comment : missingField,
-  patient: getPatient(fhirAppResource.participant),
-  practitioner: getPractitioner(fhirAppResource.participant),
-  practitionerId: getPractitionerId(fhirAppResource.participant),
-  location: getLocation(fhirAppResource.participant)
+  comment: fhirAppointmentResource.comment ? fhirAppointmentResource.comment : missingField,
+  patient: getPatient(fhirAppointmentResource.participant),
+  practitioner: getPractitioner(fhirAppointmentResource.participant),
+  practitionerId: getPractitionerId(fhirAppointmentResource.participant),
+  location: getLocation(fhirAppointmentResource.participant)
 });
 
 const mapConditionSTU2 = fhirCondResource => ({

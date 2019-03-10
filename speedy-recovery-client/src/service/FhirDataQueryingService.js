@@ -5,7 +5,6 @@ import "fhirclient/fhir-client";
 // the relevant fields for given queries. This might change if there are breaking changes in the standard
 // or more specific queries will be added.
 
-// TODO: Also add error handling and return [] if (!appointments.data || !appointments.data.total)
 const extractResourcesFromBundle = appointments =>
   appointments.data.total !== 0
     ? appointments.data.entry.map(app => app.resource)

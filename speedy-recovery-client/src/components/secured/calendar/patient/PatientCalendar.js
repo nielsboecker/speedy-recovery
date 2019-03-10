@@ -13,20 +13,15 @@ class PatientCalendar extends React.Component {
     super(...args);
     this.state = {
       practitionerList: [],
-      dropdownList: [],
       selectedPractitioner: undefined,
       backendInfo: undefined
     };
   }
 
-  getPractitionerInfo = () => {
+  getPractitionerInfo = async () => {
 
     this.setState({
-      dropdownList:
-          this.removeArrayDuplicates(this.props.events.map(event => {
-            return {text: event.practitioner, value: event.practitionerId}
-          })),
-      practitionerList: this.props.patientPractitioner
+      practitionerList: this.props.patientPractitioners
     });
   };
 
@@ -34,6 +29,7 @@ class PatientCalendar extends React.Component {
       prev.find(a => a["text"] === curr["text"]) ? prev : prev.push(curr) && prev, []) : array;
 
   getBackendInfo =  (practitionerID) => {
+    // we remove the first 13 characters from the id which show that the id is for a practitioner
     const id = practitionerID.substring(13, practitionerID.length);
     BackendDataQueryingService.getBackendPractitionerInfo(id)
         .then(response =>
@@ -85,7 +81,10 @@ class PatientCalendar extends React.Component {
             <Grid.Column color={'yellow'}>
               <h2 align="center">My Doctors</h2>
               <Dropdown placeholder='Select Doctor' fluid selection
-                        options={this.state.dropdownList}
+                        options={this.removeArrayDuplicates(this.props.events.map(event => {
+                          return {text: event.practitioner, value: event.practitionerId}
+                        }))
+                        }
                         onChange={this.onDropdownChange}/>
               <PatientPractitionerCard
                   selectedPractitioner={this.state.selectedPractitioner}

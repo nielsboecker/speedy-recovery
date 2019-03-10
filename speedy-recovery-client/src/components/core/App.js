@@ -30,7 +30,7 @@ class App extends Component {
           authRequestStarted: false,
           error: null,
           fhirVersion: null,
-          patientPractitioner: []
+          patientPractitioners: []
       }
   }
 
@@ -82,7 +82,7 @@ class App extends Component {
                 medicationDispenses={this.state.medicationDispenses}
                 carePlans={this.state.carePlans}
                 fhirVersion={this.state.fhirVersion}
-                patientPractitioner={this.state.patientPractitioner}
+                patientPractitioner={this.state.patientPractitioners}
               />
             )}
           />
@@ -282,7 +282,7 @@ class App extends Component {
                         this.state.fhirVersion
                     );
 
-                    this.state.patientPractitioner.push(practitioner);
+                    this.state.patientPractitioners.push(practitioner);
                 } else {
                     console.error(
                         "Crucial information missing from resource: ",
