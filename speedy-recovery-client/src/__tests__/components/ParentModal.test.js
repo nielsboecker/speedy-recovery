@@ -7,5 +7,11 @@ import ParentModal from "../../components/secured/calendar/parent/ParentModal";
 Enzyme.configure({ adapter: new Adapter() });
 
 it("parentmodal renders", () => {
-  shallow(<ParentModal appointment={exampleAppointment} toggleEditModal={jest.fn()} isEditModalOpen={false} />);
+  shallow(
+    <ParentModal
+      appointment={exampleAppointment}
+      toggleEditModal={jest.fn()}
+      isEditModalOpen={false}
+    />
+  );
 });

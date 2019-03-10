@@ -51,6 +51,7 @@ class SecuredMainPage extends Component {
                 path={`${match.url}/home`}
                 render={() => (
                   <HomePageFactory
+                    homePage={this.props.user.role.toString() + "HomePage"}
                     user={this.props.user}
                     patient={this.props.patient}
                     events={this.props.appointments}

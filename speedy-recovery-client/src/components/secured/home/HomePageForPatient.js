@@ -4,11 +4,11 @@ import { Loader, Label, Icon } from "semantic-ui-react";
 
 class HomePageForPatient extends Component {
   render() {
-    if (dataIsReady(this.props.user,this.props.events)) {
+    if (dataIsReady(this.props.user, this.props.events)) {
       const nextEvent = getNextEvent(this.props.events);
       return (
         <div>
-          <h1>Howdy, {this.props.user.name}!</h1>
+          <h1>Howdy, {this.props.user.firstName}!</h1>
           {new Date(nextEvent.start).toLocaleString("en-uk") !==
           "Invalid Date" ? (
             <p>
@@ -28,22 +28,22 @@ class HomePageForPatient extends Component {
       return <Loader content="Loading" inline="centered" active size="large" />;
     }
   }
-
 }
-
-export function dataIsReady(user,events) {
+export function dataIsReady(user, events) {
   return (
-      user &&
-      events &&
-      getNextEvent(events).start &&
-      getNextEvent(events).patient
+    user && events && getNextEvent(events).patient && getNextEvent(events).start
   );
 }
+
 export function getNextEvent(events) {
-  const event =events
+  if (events.length > 0) {
+    const event = events
       .filter(event => new Date(event.start) - new Date() > 0)
       .sort((a, b) => new Date(a.start) - new Date(b.start))[0];
-  return event ? event : { start: [],patient: [] };
+    return event ? event : { start: [], patient: [] };
+  } else {
+    return "No event";
+  }
 }
 
 export function formatDate(date) {

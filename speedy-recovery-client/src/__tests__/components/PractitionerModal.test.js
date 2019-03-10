@@ -7,5 +7,11 @@ import PractitionerModal from "../../components/secured/calendar/practitioner/Pr
 Enzyme.configure({ adapter: new Adapter() });
 
 it("practitionermodal renders", () => {
-  shallow(<PractitionerModal appointment={exampleAppointment} toggleEditModal={jest.fn()} isEditModalOpen={false} />);
+  shallow(
+    <PractitionerModal
+      appointment={exampleAppointment}
+      toggleEditModal={jest.fn()}
+      isEditModalOpen={false}
+    />
+  );
 });
