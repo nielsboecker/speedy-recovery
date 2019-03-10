@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "latest",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-prettier": "^3.0.1",
     "fhirclient": "^0.1.15",
+    "jest-mock-axios": "^2.1.11",
     "moment": "latest",
     "react": "^16.7.0",
     "react-big-calendar": "latest",
@@ -56,13 +58,11 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-
   "husky": {
     "hooks": {
       "pre-commit": "yarn format"
     }
   },
-
   "devDependencies": {
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.8.0",

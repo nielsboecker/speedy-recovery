@@ -32,6 +32,7 @@ class SecuredMainPage extends Component {
             <Header
               username={this.props.user.name}
               onLogout={this.props.onLogout}
+              role={this.props.user.role}
             />
 
             <Container>
@@ -43,12 +44,20 @@ class SecuredMainPage extends Component {
                   <CalendarFactory
                     events={this.props.appointments}
                     role={this.props.user.role}
+                    childID={this.props.childID}
+                    id={this.props.user.id}
                   />
                 )}
               />
               <Route
                 path={`${match.url}/messaging`}
-                component={MessagingPage}
+                render={() => (
+                  <MessagingPage
+                    user={this.props.user}
+                    userList={this.props.userList}
+                    childID={this.props.childID}
+                  />
+                )}
               />
               <Route
                 path={`${match.url}/profile`}

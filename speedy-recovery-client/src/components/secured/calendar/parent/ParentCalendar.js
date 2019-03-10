@@ -46,6 +46,7 @@ class ParentCalendar extends React.Component {
                   appointment={this.state.appointment}
                   toggleEditModal={this.toggleEditModal}
                   isEditModalOpen={this.state.isEditModalOpen}
+                  id={this.props.id}
               />
             </div>
           </Segment>

@@ -1,5 +1,6 @@
 import {Button, Modal, Table, Grid} from "semantic-ui-react";
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class PractitionerModal extends Component {
     render() {
@@ -121,6 +122,23 @@ class PractitionerModal extends Component {
                         </Table>
                         <Grid>
                             <Grid.Row centered>
+                            <Button>
+                          <Link
+                            to={{
+                              pathname: `/secured/conversation/${
+                                this.props.appointment.patientId
+                              }`,
+                              state: {
+                                id: this.props.id,
+                                id2: this.props.appointment.patientId,
+                                title: this.props.appointment.patient
+                              }
+                            }}
+                            key={this.props.appointment.patientId}
+                          >
+                            Chat with this patient
+                          </Link>
+                        </Button>
                                 <Button>Patient Info</Button>
                             </Grid.Row>
                         </Grid>

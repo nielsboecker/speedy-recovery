@@ -26,7 +26,6 @@ const getUserAppointments = userID => {
   });
 };
 
-// TODO: Also add error handling and return [] if (!appointments.data || !appointments.data.total)
 const extractResourcesFromBundle = appointments =>
   appointments.data.total !== 0
     ? appointments.data.entry.map(app => app.resource)

@@ -7,7 +7,7 @@ import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
 import { filterPatientResource } from "../../service/FhirDataFilteringService";
-import { fhirMapAppointment, fhirMapPatient } from "../../service/FhirDataMappingService";
+import {fhirMapAppointment, fhirMapPatient, getChildID} from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
 
 class App extends Component {
@@ -17,10 +17,12 @@ class App extends Component {
       fhirClient: {},
       user: null,
       patient: {},
+      userList:[],
       appointments: [],
       authRequestStarted: false,
       error: null,
-      fhirVersion: null
+      fhirVersion: null,
+      childID: null
     };
   }
 
@@ -68,7 +70,9 @@ class App extends Component {
                 user={this.state.user}
                 patient={this.state.patient}
                 appointments={this.state.appointments}
+                userList={this.state.userList}
                 fhirVersion={this.state.fhirVersion}
+                childID={this.state.childID}
               />
             )}
           />
@@ -123,8 +127,25 @@ class App extends Component {
       .read()
       .then(currentUserResource => {
         console.log("Received current user resources: ", currentUserResource);
+        console.log("Current user id: ", currentUserResource.id);
 
-        var user = this.updateStateUser(currentUserResource);
+        const user = this.updateStateUser(currentUserResource);
+
+        switch(user.role){
+            case "Parent":
+                this.updateStatechildID(currentUserResource);
+                this.updateStateAppointment(this.state.childID, user.role);
+                break;
+            case "Practitioner":
+                this.updateStateAppointment(user.id, user.role);
+                break;
+            case "Patient":
+                this.updateStateAppointment(user.id, user.role);
+                break;
+            default:
+                console.log("Invalid user role: ", user.role);
+        }
+
         if (user.role === "Practitioner") {
           // also get patient info
           fhirClient.patient
@@ -140,28 +161,40 @@ class App extends Component {
               console.error(error);
             });
         }
-        // else if(userType === "Parent"){
-        //      user.role = "Parent";
-        //      TODO
-        // }
-        this.updateStateAppointment(user.id);
 
         this.setState({ user });
       })
       .catch(error => console.error(error));
   };
 
-  updateStateAppointment(userId) {
+  updateStateAppointment(userId, role) {
     FhirDataQueryingService.getUserAppointments(userId)
       .then(appointmentResource => {
         const appointments = appointmentResource.map(appointment =>
           fhirMapAppointment(appointment, this.state.fhirVersion)
         );
-        this.setState({ appointments });
+        const userList = this.setUserList(appointments, role);
+        this.setState({ appointments, userList });
       })
       .catch(error => {
         console.error(error);
       });
+  }
+
+  setUserList(resource, role){
+      if(resource && role){
+          return role === "Practitioner" ? this.removeArrayDuplicates(
+              resource.map(appointment => ({
+                  name: appointment.patient,
+                  id: appointment.patientId
+              }))) : this.removeArrayDuplicates(
+              resource.map(appointment => ({
+                  name: appointment.practitioner,
+                  id: appointment.practitionerId
+              }))
+          )
+      }
+      return [];
   }
 
   updateStatePatient(patientResource) {
@@ -196,6 +229,12 @@ class App extends Component {
     return user;
   }
 
+  updateStatechildID(currentUserResource) {
+    const childID = getChildID(currentUserResource, this.state.fhirVersion);
+    console.log("CHILDID", childID);
+    this.setState({ childID });
+  }
+
   handleLoginError = errorMessage => {
     if (
       errorMessage ===
@@ -228,6 +267,10 @@ class App extends Component {
   };
 
   resetError = () => this.setState({ error: null });
+
+  removeArrayDuplicates = array => {
+      return array !== undefined ? array.reduce((prev, curr) => prev.find(a => a["id"] === curr["id"]) ? prev : prev.push(curr) && prev, []) : array;
+  };
 }
 
 export default App;

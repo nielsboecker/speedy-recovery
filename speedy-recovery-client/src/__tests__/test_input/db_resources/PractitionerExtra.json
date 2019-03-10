@@ -1,0 +1,16 @@
+{
+    "data" : 
+    [{
+        "favouriteAnimal": "cat",
+        "favouriteFood": "pizza",
+        "favouriteFootballTeam": "Chelsea",
+        "hometown": "Bristol",
+        "id": "smart-Practitioner-72080416"
+    }],
+    "config": {}, 
+    "headers": {}, 
+    "status": 200, 
+    "statusText": "OK"
+}  
+
+
