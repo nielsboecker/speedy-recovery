@@ -37,7 +37,7 @@ class ConversationPage extends Component {
   render() { 
     return (
       <div>
-        <h3 className ="topTitle"><i class="user icon"></i>{this.state.title}</h3>
+        <h3 className ="topTitle"><i className="user icon"></i>{this.state.title}</h3>
         <div className= "showList">
           <MessageList
               className="message-list"
