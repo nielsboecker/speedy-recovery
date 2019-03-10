@@ -4,11 +4,10 @@
   "private": true,
   "dependencies": {
     "axios": "latest",
-    "chai": "^4.2.0",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-prettier": "^3.0.1",
     "fhirclient": "^0.1.15",
-    "mocha": "^6.0.2",
+    "jest-mock-axios": "^2.1.11",
     "moment": "latest",
     "react": "^16.7.0",
     "react-big-calendar": "latest",
@@ -26,8 +25,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint \"src/**/*.js\"",
     "format": "prettier --write src/**/*.{js,css}",
-    "format:check": "prettier --list-different src/**/*.{js,css}",
-    "test2": "mocha"
+    "format:check": "prettier --list-different src/**/*.{js,css}"
   },
   "eslintConfig": {
     "extends": [

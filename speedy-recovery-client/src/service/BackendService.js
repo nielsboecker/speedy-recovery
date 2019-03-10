@@ -1,61 +1,56 @@
-import {
-  getPosition,
-  getText,
-  getDate,
-  getTime,
-  getTitle,
-  getId,
-  getAvatar,
-  getAlt,
-  getSubtitle,
-  getUnread
-} from "./BackendMappingExtractionUtils";
-const axios = require("axios");
+import axios from "axios";
 
 const baseUrl = "https://speedy-recovery-server.azurewebsites.net";
+
 const getConversation = async id => {
-  const url = baseUrl + "/conversations?userid=" + id;
-  const response = await axios.get(url);
-  return response.data;
+  const url = `${baseUrl}/conversations?userid=${id}`;
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.log("GET server error: ", error);
+  }
 };
 
 const getMessages = async (id, id2) => {
-  const url = baseUrl + "/conversation?userid1=" + id + "&userid2=" + id2;
-  const response = await axios.get(url);
-  return response.data;
+  const url = `${baseUrl}/conversation?userid1=${id}&userid2=${id2}`;
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (error) {
+    console.log("GET server error: ", error);
+  }
 };
-
-const postMessages = async id => {};
 
 const getPractitionerInfo = async id => {
-  const url = baseUrl + "/practitioners?userid=" + id;
-  const response = await axios.get(url);
-  return response.data;
+  const url = `${baseUrl}/practitioners?userid=${id}`;
+  try {
+    return await axios.get(url);
+  } catch (error) {
+    console.error("GET server error: ", error);
+  }
 };
 
-const mapConversations = (conversationResource, id) => ({
-  id: getId(conversationResource),
-  avatar: getAvatar(conversationResource),
-  alt: getAlt(conversationResource),
-  title: getTitle(conversationResource, id),
-  subtitle: getSubtitle(conversationResource),
-  unread: getUnread(conversationResource),
-  date: getDate(conversationResource)
-});
+const postMessages = async (senderID, recipientID, message) => {
+  const url = `${baseUrl}/messages?`;
+  const headers = {
+    Sender: senderID,
+    Recipient: recipientID
+  };
+  const data = {
+    message: `<message_start>${message}<message_end>`
+  };
 
-const mapMessages = (messageResource, id) => ({
-  position: getPosition(messageResource, id),
-  type: "text",
-  text: getText(messageResource),
-  date: getTime(messageResource)
-});
+  axios
+    .post(url, data, { headers: headers })
+    .then(response => console.log("POST server success: ", response))
+    .catch(error => console.error("POST server error: ", error));
+};
+
 
 export {
   getConversation,
   getMessages,
   postMessages,
-  getPractitionerInfo,
-  mapConversations,
-  mapMessages
+  getPractitionerInfo
 };
-//module.exports = { getConversation, getMessages, getPractitionerInfo, mapMessages };

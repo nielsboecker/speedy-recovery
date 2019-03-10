@@ -1,14 +1,5 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Card,
-  Container,
-  Form,
-  Grid,
-  Image,
-  Message,
-  Segment
-} from "semantic-ui-react";
+import {Button, Card, Container, Form, Grid, Image, Message, Segment} from "semantic-ui-react";
 import "./WelcomeBox.css";
 import UserModal from "./UserModal";
 

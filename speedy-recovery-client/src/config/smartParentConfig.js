@@ -1,6 +1,7 @@
 const smartSandboxConfigs = {
   parentSandbox_1:
-    "http://launch.smarthealthit.org/v/r3/sim/eyJrIjoiMSIsImoiOiIxIiwiYiI6IjIyMDA0MyJ9/fhir"
+    "https://launch.smarthealthit.org/v/r3/sim/eyJrIjoiMSIsImoiOiIxIiwiYiI6IjIyMDA0MSJ9/fhir"
+
 };
 
 const smartParentConfig = {
