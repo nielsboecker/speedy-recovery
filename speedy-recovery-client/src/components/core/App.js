@@ -7,11 +7,7 @@ import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
 import { filterPatientResource } from "../../service/FhirDataFilteringService";
-import {
-  fhirMapAppointment,
-  fhirMapPatient,
-  getChild
-} from "../../service/FhirDataMappingService";
+import { fhirMapAppointment, fhirMapPatient, getChild } from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
 
 class App extends Component {
@@ -204,7 +200,7 @@ class App extends Component {
     var user = undefined;
     const filteredPatient = filterPatientResource(currentUserResource);
     if (filteredPatient) {
-      user = fhirMapPatient(filteredPatient, "3");
+      user = fhirMapPatient(filteredPatient, this.state.fhirVersion);
       console.log("User Resource after mapping: ", user);
     } else {
       console.error(
