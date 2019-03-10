@@ -9,7 +9,7 @@ class ParentHomePage extends Component {
       const nextEvent = getNextEvent(this.props.events);
       return (
         <div>
-          <h1>Howdy, {this.props.user.firstName}!</h1>
+          <h1>Hello, {this.props.user.firstName}!</h1>
           {new Date(nextEvent.start).toLocaleString("en-uk") !==
           "Invalid Date" ? (
             <p>
@@ -21,7 +21,7 @@ class ParentHomePage extends Component {
               </Label>
             </p>
           ) : (
-            <p>You dont't have any appointments upcoming. Lucky you, right?!</p>
+            <p>Your child does not have any appointments upcoming.</p>
           )}
         </div>
       );
