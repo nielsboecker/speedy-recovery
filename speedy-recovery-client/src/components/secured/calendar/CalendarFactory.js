@@ -1,7 +1,7 @@
 import * as React from "react";
-import PractitionerCalendar from "./PractitionerCalendar";
-import PatientCalendar from "./PatientCalendar";
-import ParentCalendar from "./ParentCalendar";
+import PractitionerCalendar from "./practitioner/PractitionerCalendar";
+import PatientCalendar from "./patient/PatientCalendar";
+import ParentCalendar from "./parent/ParentCalendar";
 import BigCalendar from "react-big-calendar";
 import moment from "moment";
 

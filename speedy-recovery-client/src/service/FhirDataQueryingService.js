@@ -32,5 +32,6 @@ const extractResourcesFromBundle = appointments =>
     : [];
 
 export default {
-  getUserAppointments
+  getUserAppointments,
+  extractResourcesFromBundle
 };
