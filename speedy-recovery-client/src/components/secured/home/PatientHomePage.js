@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Icon, Label, Loader } from "semantic-ui-react";
+import { dataIsReady, getNextEvent } from "./HomePageDataUtils";
+import { formatDate } from "../../../service/DateUtils";
 
 class PatientHomePage extends Component {
   render() {
@@ -28,29 +30,6 @@ class PatientHomePage extends Component {
       return <Loader content="Loading" inline="centered" active size="large" />;
     }
   }
-}
-export function dataIsReady(user, events) {
-  return (
-    user && events && getNextEvent(events).patient && getNextEvent(events).start
-  );
-}
-
-export function getNextEvent(events) {
-  if (events.length > 0) {
-    const event = events
-      .filter(event => new Date(event.start) - new Date() > 0)
-      .sort((a, b) => new Date(a.start) - new Date(b.start))[0];
-    return event ? event : { start: [], patient: [] };
-  } else {
-    return "No event";
-  }
-}
-
-export function formatDate(date) {
-  if (date) {
-    return new Date(date).toLocaleString("en-uk");
-  }
-  return "Invalid date";
 }
 
 export default PatientHomePage;

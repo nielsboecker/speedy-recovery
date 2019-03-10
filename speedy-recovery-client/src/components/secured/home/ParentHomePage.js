@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Icon, Label, Loader } from "semantic-ui-react";
-import { dataIsReady, formatDate, getNextEvent } from "./PatientHomePage";
+import { dataIsReady, getNextEvent } from "./HomePageDataUtils";
+import { formatDate } from "../../../service/DateUtils";
 
 class ParentHomePage extends Component {
   render() {
