@@ -9,11 +9,11 @@ class HomePageFactory extends Component {
 
     switch (user.role.toLowerCase()) {
       case "patient":
-        return <PatientHomePage user={user} events={events}/>;
+        return <PatientHomePage user={user} events={events} />;
       case "parent":
-        return <ParentHomePage user={user} events={events}/>;
+        return <ParentHomePage user={user} events={events} />;
       case "practitioner":
-        return <PractitionerHomePage user={user} events={events}/>;
+        return <PractitionerHomePage user={user} events={events} />;
       default:
         console.error(`HomePage for user role ${user.role} is invalid`);
         return null;

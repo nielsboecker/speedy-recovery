@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { ChatItem } from "react-chat-elements";
 import { Link } from "react-router-dom";
-import {getConversation} from "../../../service/BackendService";
-import {conversationMap} from "../../../service/BackendMapping";
-
+import { getConversation } from "../../../service/BackendService";
+import { conversationMap } from "../../../service/BackendMapping";
 
 class MessagingPage extends Component {
   constructor(props) {
@@ -29,7 +28,6 @@ class MessagingPage extends Component {
             }
           }}
           key={conversation.userId}
-
         >
           <ChatItem
             avatar={conversation.avatar}
@@ -52,26 +50,33 @@ class MessagingPage extends Component {
   }
 
   componentDidMount() {
-    if(this.props.user && this.props.userList){
-      const id = this.props.user.role === "Parent" ? this.props.childID : this.props.user.id;
+    if (this.props.user && this.props.userList) {
+      const id =
+        this.props.user.role === "Parent"
+          ? this.props.childID
+          : this.props.user.id;
       this.setState({ id });
       this.fetchConversation(id);
     }
   }
 
-  fetchConversation(id){
+  fetchConversation(id) {
     getConversation(id)
-    .then(conversationResource => {
-      const conversations = conversationResource.map(conversation =>
-        conversationMap(conversation, id, this.props.userList, this.state.dbType)
-      );
-      this.setState({ conversations });
-    })
-    .catch(error => {
-      console.error(error);
-    });
+      .then(conversationResource => {
+        const conversations = conversationResource.map(conversation =>
+          conversationMap(
+            conversation,
+            id,
+            this.props.userList,
+            this.state.dbType
+          )
+        );
+        this.setState({ conversations });
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
-
 }
 
 export default MessagingPage;

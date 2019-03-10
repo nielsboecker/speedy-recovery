@@ -7,7 +7,11 @@ import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
 import { filterPatientResource } from "../../service/FhirDataFilteringService";
-import {fhirMapAppointment, fhirMapPatient, getChildID} from "../../service/FhirDataMappingService";
+import {
+  fhirMapAppointment,
+  fhirMapPatient,
+  getChildID
+} from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
 
 class App extends Component {
@@ -17,7 +21,7 @@ class App extends Component {
       fhirClient: {},
       user: null,
       patient: {},
-      userList:[],
+      userList: [],
       appointments: [],
       authRequestStarted: false,
       error: null,
@@ -131,20 +135,19 @@ class App extends Component {
 
         const user = this.updateStateUser(currentUserResource);
 
-
-        switch(user.role){
-            case "Parent":
-                this.updateStatechildID(currentUserResource);
-                this.updateStateAppointment(this.state.childID, user.role);
-                break;
-            case "Practitioner":
-                this.updateStateAppointment(user.id, user.role);
-                break;
-            case "Patient":
-                this.updateStateAppointment(user.id, user.role);
-                break;
-            default:
-                console.log("Invalid user role: ", user.role);
+        switch (user.role) {
+          case "Parent":
+            this.updateStatechildID(currentUserResource);
+            this.updateStateAppointment(this.state.childID, user.role);
+            break;
+          case "Practitioner":
+            this.updateStateAppointment(user.id, user.role);
+            break;
+          case "Patient":
+            this.updateStateAppointment(user.id, user.role);
+            break;
+          default:
+            console.log("Invalid user role: ", user.role);
         }
 
         if (user.role === "Practitioner") {
@@ -182,20 +185,23 @@ class App extends Component {
       });
   }
 
-  setUserList(resource, role){
-      if(resource && role){
-          return role === "Practitioner" ? this.removeArrayDuplicates(
-              resource.map(appointment => ({
-                  name: appointment.patient,
-                  id: appointment.patientId
-              }))) : this.removeArrayDuplicates(
-              resource.map(appointment => ({
-                  name: appointment.practitioner,
-                  id: appointment.practitionerId
-              }))
+  setUserList(resource, role) {
+    if (resource && role) {
+      return role === "Practitioner"
+        ? this.removeArrayDuplicates(
+            resource.map(appointment => ({
+              name: appointment.patient,
+              id: appointment.patientId
+            }))
           )
-      }
-      return [];
+        : this.removeArrayDuplicates(
+            resource.map(appointment => ({
+              name: appointment.practitioner,
+              id: appointment.practitionerId
+            }))
+          );
+    }
+    return [];
   }
 
   updateStatePatient(patientResource) {
@@ -270,7 +276,15 @@ class App extends Component {
   resetError = () => this.setState({ error: null });
 
   removeArrayDuplicates = array => {
-      return array !== undefined ? array.reduce((prev, curr) => prev.find(a => a["id"] === curr["id"]) ? prev : prev.push(curr) && prev, []) : array;
+    return array !== undefined
+      ? array.reduce(
+          (prev, curr) =>
+            prev.find(a => a["id"] === curr["id"])
+              ? prev
+              : prev.push(curr) && prev,
+          []
+        )
+      : array;
   };
 }
 

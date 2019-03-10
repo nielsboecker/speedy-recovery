@@ -8,19 +8,13 @@ import PractitionerHomePage from "../../components/secured/home/PractitionerHome
 Enzyme.configure({ adapter: new Adapter() });
 
 it("Patient's home page renders without crashing", () => {
-  shallow(
-    <PatientHomePage/>
-  );
+  shallow(<PatientHomePage />);
 });
 
 it("Parent's home page renders without crashing", () => {
-  shallow(
-    <ParentHomePage/>
-  );
+  shallow(<ParentHomePage />);
 });
 
 it("Practitioner's home page renders without crashing", () => {
-  shallow(
-    <PractitionerHomePage/>
-  );
+  shallow(<PractitionerHomePage />);
 });

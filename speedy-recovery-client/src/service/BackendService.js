@@ -47,10 +47,4 @@ const postMessages = async (senderID, recipientID, message) => {
     .catch(error => console.error("POST server error: ", error));
 };
 
-
-export {
-  getConversation,
-  getMessages,
-  postMessages,
-  getPractitionerInfo
-};
+export { getConversation, getMessages, postMessages, getPractitionerInfo };

@@ -73,7 +73,6 @@ const fhirMapMedication = (resource, version) => {
   console.log("No FHIR version has been supplied");
 };
 
-
 const getChildID = (resource, version) => {
   if (version) {
     switch (version[0]) {

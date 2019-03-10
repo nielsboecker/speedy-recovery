@@ -67,7 +67,6 @@ class SecuredMainPage extends Component {
                     childID={this.props.childID}
                   />
                 )}
-
               />
               <Route
                 path={`${match.url}/profile`}
