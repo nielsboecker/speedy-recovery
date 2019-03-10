@@ -13,7 +13,7 @@ class HomePageForParent extends Component {
           {new Date(nextEvent.start).toLocaleString("en-uk") !==
           "Invalid Date" ? (
             <p>
-              Your child {nextEvent.patient}'s next appointment is at{" "}
+              Your child {nextEvent.patient}'s appointment is at{" "}
               <Label image color="yellow" as={Link} to={"/secured/calendar"}>
                 <Icon name="calendar check" />
                 {formatDate(nextEvent.start)}
