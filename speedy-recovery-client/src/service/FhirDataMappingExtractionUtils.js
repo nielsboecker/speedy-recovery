@@ -45,6 +45,19 @@ const getPractitioner = participant => {
   return missingField;
 };
 
+const getPatientId = participant => {
+  if (
+    participant &&
+    participant[0] &&
+    participant[0].actor &&
+    participant[0].actor.reference
+  ) {
+    const arr = participant[0].actor.reference.split("/");
+    return arr[1];
+  }
+  return missingField;
+};
+
 const getPractitionerId = participant => {
   if (
     participant &&
@@ -52,7 +65,8 @@ const getPractitionerId = participant => {
     participant[1].actor &&
     participant[1].actor.reference
   ) {
-    return participant[1].actor.reference;
+    const arr = participant[1].actor.reference.split("/");
+    return arr[1];
   }
   return missingField;
 };
@@ -121,12 +135,13 @@ export {
   getPhone,
   getPatient,
   getPractitioner,
+  getPatientId,
+  getPractitionerId,
   getLocation,
   getSeverity,
   getSummary,
   getbodySite,
   getMedName,
   getForm,
-  getPractitionerId,
   getPractName
 };

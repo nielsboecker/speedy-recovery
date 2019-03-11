@@ -5,7 +5,7 @@ import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
 import "../CalendarPages.css";
 import { Grid, Segment, Dropdown } from "semantic-ui-react";
 import PatientPractitionerCard from "./PatientPractitionerCard";
-import BackendDataQueryingService from "../../../../service/BackendDataQueryingService";
+import { getPractitionerInfo } from "../../../../service/BackendService";
 
 class PatientCalendar extends React.Component {
 
@@ -29,9 +29,8 @@ class PatientCalendar extends React.Component {
       prev.find(a => a["text"] === curr["text"]) ? prev : prev.push(curr) && prev, []) : array;
 
   getBackendInfo =  (practitionerID) => {
-    // we remove the first 13 characters from the id which show that the id is for a practitioner
-    const id = practitionerID.substring(13, practitionerID.length);
-    BackendDataQueryingService.getBackendPractitionerInfo(id)
+    const id = practitionerID;
+    getPractitionerInfo(id)
         .then(response =>
             this.setState({backendInfo: response.data[0]})
         )
@@ -42,7 +41,8 @@ class PatientCalendar extends React.Component {
     this.getBackendInfo(data.value);
     this.setState({ selectedPractitioner:
           this.state.practitionerList.find(element => element.id ===
-              data.value.substring(13, data.value.length)) });
+              data.value)});
+
   };
 
   componentWillMount = () => {

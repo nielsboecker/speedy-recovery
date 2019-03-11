@@ -2,13 +2,16 @@ import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { ChatItem } from "react-chat-elements";
 import { Link } from "react-router-dom";
-import exampleConversations from "../../../__tests__/test_input/internal/ExampleConversations";
+import {getConversation} from "../../../service/BackendService";
+import {conversationMap} from "../../../service/BackendMapping";
 
 class MessagingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      conversations: []
+      conversations: [],
+      id: null,
+      dbType: "MySQL"
     };
   }
 
@@ -16,7 +19,14 @@ class MessagingPage extends Component {
     const chatItems = this.state.conversations.map(conversation => {
       return (
         <Link
-          to={`/secured/conversation/${conversation.userId}`}
+          to={{
+            pathname: `/secured/conversation/${conversation.userId}`,
+            state: {
+              id: this.state.id,
+              id2: conversation.userId,
+              title: conversation.title
+            }
+          }}
           key={conversation.userId}
         >
           <ChatItem
@@ -34,22 +44,32 @@ class MessagingPage extends Component {
     return (
       <div>
         <h1>Messaging </h1>
-
         {chatItems}
       </div>
     );
   }
 
   componentDidMount() {
-    // TODO: Update state when data from back-end is available instead
-    this.convertAndSetData(exampleConversations);
+    if(this.props.user && this.props.userList){
+      const id = this.props.user.role === "Parent" ? this.props.childID : this.props.user.id;
+      this.setState({ id });
+      this.fetchConversation(id);
+    }
   }
 
-  convertAndSetData(conversationData) {
-    // TODO: Access actual back-end data, consider missing values for optional fields
-    const conversations = conversationData;
-    this.setState({ conversations });
+  fetchConversation(id){
+    getConversation(id)
+    .then(conversationResource => {
+      const conversations = conversationResource.map(conversation =>
+        conversationMap(conversation, id, this.props.userList, this.state.dbType)
+      );
+      this.setState({ conversations });
+    })
+    .catch(error => {
+      console.error(error);
+    });
   }
+
 }
 
 export default MessagingPage;

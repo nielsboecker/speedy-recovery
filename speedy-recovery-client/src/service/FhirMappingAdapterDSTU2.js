@@ -7,6 +7,7 @@ import {
   getPatient,
   getPhone,
   getPractitioner,
+  getPatientId,
   getSeverity,
   getSummary,
   getPractitionerId
@@ -17,7 +18,7 @@ const mapPatientToUserSTU2 = fhirPatientResource => ({
   id: fhirPatientResource.id ? fhirPatientResource.id : missingField,
   //This is a temporary hard-code fix as we have not implemented the searching for a patients' parent
   role:
-    fhirPatientResource.id === "f0462936-eb4b-4da1-b45a-fbd96ebf8ccb"
+    fhirPatientResource.id === "220041"
       ? "Parent"
       : fhirPatientResource.resourceType,
 
@@ -56,10 +57,9 @@ const mapAppointmentSTU2 = fhirAppointmentResource => ({
     ? new Date(fhirAppointmentResource.end)
     : missingField,
   created: "Undefined in STU2",
-  comment: fhirAppointmentResource.comment
-    ? fhirAppointmentResource.comment
-    : missingField,
+  comment: fhirAppointmentResource.comment ? fhirAppointmentResource.comment : missingField,
   patient: getPatient(fhirAppointmentResource.participant),
+  patientId: getPatientId(fhirAppointmentResource.participant),
   practitioner: getPractitioner(fhirAppointmentResource.participant),
   practitionerId: getPractitionerId(fhirAppointmentResource.participant),
   location: getLocation(fhirAppointmentResource.participant)
@@ -254,6 +254,20 @@ const formatBirthDate = birthDate => {
   return missingField;
 };
 
+const getChildIDSTU2 = currentUserResource => {
+  if (
+      currentUserResource &&
+      currentUserResource.link &&
+      currentUserResource.link[0].other &&
+      currentUserResource.link[0].other.reference
+  ) {
+    const patient = currentUserResource.link[0].other.reference;
+    const childID = patient.split("/")[1];
+    return childID;
+  }
+  return null;
+};
+
 export {
   mapPatientToUserSTU2,
   mapAppointmentSTU2,
@@ -261,5 +275,6 @@ export {
   mapMedicationSTU2,
   mapMedicationDispenseSTU2,
   mapCarePlanSTU2,
-  mapPractitionerSTU2
+  mapPractitionerSTU2,
+  getChildIDSTU2
 };

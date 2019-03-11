@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "latest",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-prettier": "^3.0.1",
     "fhirclient": "^0.1.15",
+    "jest-mock-axios": "^2.1.11",
     "moment": "latest",
     "react": "^16.7.0",
     "react-big-calendar": "latest",

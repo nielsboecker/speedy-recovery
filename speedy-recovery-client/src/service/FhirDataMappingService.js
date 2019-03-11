@@ -5,7 +5,8 @@ import {
   mapMedicationDispenseSTU2,
   mapCarePlanSTU2,
   mapPatientToUserSTU2,
-  mapPractitionerSTU2
+  mapPractitionerSTU2,
+  getChildIDSTU2
 } from "./FhirMappingAdapterDSTU2";
 import {
   mapAppointmentSTU3,
@@ -14,7 +15,8 @@ import {
   mapMedicationDispenseSTU3,
   mapCarePlanSTU3,
   mapPatientToUserSTU3,
-  mapPractitionerSTU3
+  mapPractitionerSTU3,
+  getChildIDSTU3
 } from "./FhirMappingAdapterSTU3";
 
 const fhirMapPatient = (resource, version) => {
@@ -129,6 +131,21 @@ const fhirMapCarePlan = (resource, version) => {
   return null;
 };
 
+const getChildID = (resource, version) => {
+  if (version) {
+    switch (version[0]) {
+      case "1":
+      case "2":
+        return getChildIDSTU2(resource);
+      case "3":
+        return getChildIDSTU3(resource);
+      default:
+        console.log("Invalid version of FHIR resource provided: ", version);
+    }
+  }
+  console.log("No FHIR version has been supplied");
+};
+
 export {
   fhirMapPatient,
   fhirMapAppointment,
@@ -136,5 +153,6 @@ export {
   fhirMapMedication,
   fhirMapMedicationDispense,
   fhirMapCarePlan,
-  fhirMapPractitioner
+  fhirMapPractitioner,
+  getChildID
 };
