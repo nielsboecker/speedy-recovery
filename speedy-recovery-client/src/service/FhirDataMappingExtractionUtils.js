@@ -11,6 +11,16 @@ const getName = name => {
   return missingField;
 };
 
+const getFirstName = name => {
+  if (name && name[0] && name[0].given) {
+    let firstName = name[0].given;
+    if (firstName.length > 1) {
+      firstName = firstName[0];
+    }
+    return firstName.toString();
+  }
+};
+
 const getPhone = telecom => {
   if (telecom) {
     const result = telecom.filter(element => element.system === "phone");
@@ -132,6 +142,7 @@ const getPractName = name => {
 
 export {
   getName,
+  getFirstName,
   getPhone,
   getPatient,
   getPractitioner,

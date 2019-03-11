@@ -17,24 +17,33 @@ class PatientPractitionerCard extends React.Component {
                     : <Image src={require('../../../../defaultImages/femaleDoctor.jpg')}/>
                 }
                 <Card.Content>
-                    <Card.Header>{this.filterUndefined("name",
-                                            this.props.selectedPractitioner)}</Card.Header>
-                    <Card.Meta>
+                    <Card.Header>{this.props.selectedPractitioner ? this.filterUndefined("name",
+                        this.props.selectedPractitioner).split(" ")[0]
+                        : this.filterUndefined("name",
+                            this.props.selectedPractitioner)
+                    }</Card.Header>
+
+                    {this.props.selectedPractitioner ?
+                        <Card.Meta>
                         <span className='Hometown'>{this.filterUndefined("hometown",
-                                                                        this.props.backendInfo)}</span>
-                    </Card.Meta>
-                    <Card.Description>
-                        Supports: <b>{this.filterUndefined("favouriteFootballTeam",
-                                                                        this.props.backendInfo)}</b><br/>
+                            this.props.backendInfo)}</span>
+                        </Card.Meta>
+                        : ""}
+                    {this.props.selectedPractitioner ?
+                        < Card.Description >
+                        Supports : <b>{this.filterUndefined("favouriteFootballTeam",
+                        this.props.backendInfo)}</b> < br / >
                         Favourite Food: <b>{this.filterUndefined("favouriteFood",
-                                                                        this.props.backendInfo)} </b><br/>
+                        this.props.backendInfo)} </b><br/>
                         Favourite Animal: <b>{this.filterUndefined("favouriteAnimal",
-                                                                        this.props.backendInfo)}</b><br/>
+                        this.props.backendInfo)}</b><br/>
                         Gender: <b>{this.filterUndefined("gender",
-                                                                        this.props.selectedPractitioner)}</b><br/>
+                        this.props.selectedPractitioner)}</b><br/>
                         Birthday: <b>{this.filterUndefined("birthDate",
-                                                                        this.props.selectedPractitioner)}</b><br/>
-                    </Card.Description>
+                        this.props.selectedPractitioner)}</b><br/>
+                        </Card.Description>
+                        : ""
+                    }
                 </Card.Content>
             </Card>
         );

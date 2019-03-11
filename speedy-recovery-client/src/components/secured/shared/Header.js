@@ -1,19 +1,28 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import {Container, Dropdown, Icon, Image, Label, Menu} from "semantic-ui-react";
+import {
+  Container,
+  Dropdown,
+  Icon,
+  Image,
+  Label,
+  Menu
+} from "semantic-ui-react";
 import "./Header.css";
 
 class Header extends Component {
   render() {
     let showMessage;
-    if(this.props.role !== "Patient"){
-       showMessage = <Menu.Item as={Link} to="/secured/messaging" >
-       <Icon name="mail" />
-       Messages
-       <Label color="teal" circular>
-         2
-       </Label>
-       </Menu.Item> 
+    if (this.props.role !== "Patient") {
+      showMessage = (
+        <Menu.Item as={Link} to="/secured/messaging">
+          <Icon name="mail" />
+          Messages
+          <Label color="teal" circular>
+            2
+          </Label>
+        </Menu.Item>
+      );
     }
     return (
       <header>
@@ -27,7 +36,9 @@ class Header extends Component {
               <Icon name="calendar alternate" />
               Calendar
             </Menu.Item>
+
             {showMessage}
+
             <Menu.Item as={Link} to="/secured/patientinformation">
               Patient Information
             </Menu.Item>
@@ -58,4 +69,3 @@ class Header extends Component {
 }
 
 export default Header;
-

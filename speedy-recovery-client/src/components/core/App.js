@@ -145,19 +145,19 @@ class App extends Component {
 
         const user = this.updateStateUser(currentUserResource);
 
-        switch(user.role){
-            case "Parent":
-                this.updateStatechildID(currentUserResource);
-                this.updateStateAppointment(this.state.childID, user.role);
-                break;
-            case "Practitioner":
-                this.updateStateAppointment(user.id, user.role);
-                break;
-            case "Patient":
-                this.updateStateAppointment(user.id, user.role);
-                break;
-            default:
-                console.log("Invalid user role: ", user.role);
+        switch (user.role) {
+          case "Parent":
+            this.updateStatechildID(currentUserResource);
+            this.updateStateAppointment(this.state.childID, user.role);
+            break;
+          case "Practitioner":
+            this.updateStateAppointment(user.id, user.role);
+            break;
+          case "Patient":
+            this.updateStateAppointment(user.id, user.role);
+            break;
+          default:
+            console.log("Invalid user role: ", user.role);
         }
 
         if (user.role === "Practitioner") {
@@ -213,6 +213,24 @@ class App extends Component {
       });
   }
 
+  setUserList(resource, role) {
+    if (resource && role) {
+      return role === "Practitioner"
+        ? this.removeArrayDuplicates(
+            resource.map(appointment => ({
+              name: appointment.patient,
+              id: appointment.patientId
+            }))
+          )
+        : this.removeArrayDuplicates(
+            resource.map(appointment => ({
+              name: appointment.practitioner,
+              id: appointment.practitionerId
+            }))
+          );
+    }
+    return [];
+  }
 
   removeArrayDuplicates = array => array !== undefined ? array.reduce((prev, curr) =>
         prev.find(a => a["id"] === curr["id"]) ? prev : prev.push(curr) && prev, []) : array;
@@ -257,24 +275,7 @@ class App extends Component {
           });
   }
 
-  setUserList(resource, role)
-      {
-          if (resource && role) {
-              return role === "Practitioner" ? this.removeArrayDuplicates(
-                  resource.map(appointment => ({
-                      name: appointment.patient,
-                      id: appointment.patientId
-                  }))) : this.removeArrayDuplicates(
-                  resource.map(appointment => ({
-                      name: appointment.practitioner,
-                      id: appointment.practitionerId
-                  }))
-              )
-          }
-          return [];
-      }
-
-      updateStatePatient(patientResource)
+  updateStatePatient(patientResource)
       {
           const filteredPatientResource = filterPatientResource(patientResource);
           if (filteredPatientResource) {
@@ -372,7 +373,17 @@ class App extends Component {
 
       resetError = () => this.setState({error: null});
 
-
+  removeArrayDuplicates = array => {
+    return array
+      ? array.reduce(
+          (prev, curr) =>
+            prev.find(a => a["id"] === curr["id"])
+              ? prev
+              : prev.push(curr) && prev,
+          []
+        )
+      : array;
+  };
 }
 
 export default App;

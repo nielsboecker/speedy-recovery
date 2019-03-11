@@ -3,8 +3,8 @@ import {
   fhirMapCondition,
   fhirMapMedication,
   fhirMapMedicationDispense,
-  fhirMapPatient,
-  fhirMapCarePlan, fhirMapPractitioner
+  fhirMapCarePlan, fhirMapPractitioner,
+  fhirMapPatient
 } from "../../service/FhirDataMappingService";
 import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatientSTU3.json";
 import fhirExamplePatientMissingField from "../test_input/fhir_resources_stu3/FhirExamplePatientMissingFieldSTU3.json";

@@ -12,7 +12,11 @@ const conversationMap = (
   if (dbType) {
     switch (dbType) {
       case "MySQL":
-        return mapConversationsGOSH(conversationResource, id, conversationList);
+        return mapConversationsGOSH(
+          conversationResource,
+          id,
+          conversationList
+        );
       case "2":
       default:
         console.log("Invalid type of database resource provided: ", dbType);
