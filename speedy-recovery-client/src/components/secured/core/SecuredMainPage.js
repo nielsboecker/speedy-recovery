@@ -53,6 +53,8 @@ class SecuredMainPage extends Component {
                   <CalendarFactory
                     events={this.props.appointments}
                     role={this.props.user.role}
+                    fhirVersion={this.props.fhirVersion}
+                    patientPractitioners={this.props.patientPractitioners}
                     childID={this.props.childID}
                     id={this.props.user.id}
                   />
@@ -72,17 +74,18 @@ class SecuredMainPage extends Component {
                 path={`${match.url}/profile`}
                 render={() => <ProfilePage user={this.props.user} />}
               />
-
               <Route
                 path={`${match.url}/patientinformation`}
                 render={() => (
                   <InfoFactory
                     user={this.props.user}
                     patient={this.props.patient}
+                    conditions={this.props.conditions}
+                    medicationDispenses={this.props.medicationDispenses}
+                    carePlans={this.props.carePlans}
                   />
                 )}
               />
-
               <Route
                 path={`${match.url}/conversation`}
                 component={ConversationPage}

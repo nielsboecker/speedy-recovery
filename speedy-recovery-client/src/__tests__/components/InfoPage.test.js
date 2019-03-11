@@ -14,7 +14,14 @@ it("PractitionerInfo renders without crashing", () => {
 });
 
 it("PatientInfo renders without crashing", () => {
-  shallow(<PatientInfo user={exampleUser} />);
+  shallow(
+    <PatientInfo
+      user={exampleUser}
+      conditions={[]}
+      medicationDispenses={[]}
+      carePlans={[]}
+    />
+  );
 });
 
 it("ParentInfo renders without crashing", () => {

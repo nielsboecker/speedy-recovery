@@ -133,6 +133,13 @@ const getForm = form => {
   return missingField;
 };
 
+const getPractName = name => {
+  if (name && name[0] && name[0].given && name[0].given[0] && name[0].family) {
+    return name[0].given[0] + " " + name[0].family;
+  }
+  return missingField;
+};
+
 export {
   getName,
   getFirstName,
@@ -146,5 +153,6 @@ export {
   getSummary,
   getbodySite,
   getMedName,
-  getForm
+  getForm,
+  getPractName
 };

@@ -1,7 +1,7 @@
 import {
-  mapMessagesMySQL,
-  mapConversationsMySQL
-} from "./BackendMappingAdapterMySQL";
+  mapMessagesGOSH,
+  mapConversationsGOSH
+} from "./BackendMappingAdapterGOSH";
 
 const conversationMap = (
   conversationResource,
@@ -12,11 +12,7 @@ const conversationMap = (
   if (dbType) {
     switch (dbType) {
       case "MySQL":
-        return mapConversationsMySQL(
-          conversationResource,
-          id,
-          conversationList
-        );
+        return mapConversationsGOSH(conversationResource, id, conversationList);
       case "2":
       default:
         console.log("Invalid type of database resource provided: ", dbType);
@@ -29,7 +25,7 @@ const messageMap = (messageResource, id, dbType) => {
   if (dbType) {
     switch (dbType) {
       case "MySQL":
-        return mapMessagesMySQL(messageResource, id);
+        return mapMessagesGOSH(messageResource, id);
       case "2":
       default:
         console.log("Invalid type of database resource provided: ", dbType);

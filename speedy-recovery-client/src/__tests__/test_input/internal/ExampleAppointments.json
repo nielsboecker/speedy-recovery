@@ -11,6 +11,7 @@
     "comment": "test",
     "patient": "test",
     "practitioner": "test",
+    "practitionerId": "test",
     "location": "test"
   },
   {
@@ -25,6 +26,7 @@
     "comment": "test",
     "patient": "test",
     "practitioner": "test",
+    "practitionerId": "test",
     "location": "test"
   }
 ]

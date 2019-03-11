@@ -6,28 +6,35 @@ import LandingMainPage from "../landing/core/LandingMainPage";
 import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
-import { filterPatientResource } from "../../service/FhirDataFilteringService";
 import {
-  fhirMapAppointment,
-  fhirMapPatient,
-  getChildID
+    fhirMapAppointment,
+    fhirMapCondition,
+    fhirMapMedicationDispense,
+    fhirMapCarePlan,
+    fhirMapPatient,
+    fhirMapPractitioner, getChildID
 } from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
+import {filterPatientResource, filterPractitionerResource} from "../../service/FhirDataFilteringService";
 
 class App extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      fhirClient: {},
-      user: null,
-      patient: {},
-      userList: [],
-      appointments: [],
-      authRequestStarted: false,
-      error: null,
-      fhirVersion: null,
-      childID: null
-    };
+      super(props);
+      this.state = {
+          fhirClient: {},
+          user: null,
+          patient: {},
+          appointments: [],
+          conditions: [],
+          medicationDispenses: [],
+          carePlans: [],
+          authRequestStarted: false,
+          error: null,
+          fhirVersion: null,
+          patientPractitioners: [],
+          userList:[],
+          childID: null
+      }
   }
 
   render = () => {
@@ -74,6 +81,10 @@ class App extends Component {
                 user={this.state.user}
                 patient={this.state.patient}
                 appointments={this.state.appointments}
+                conditions={this.state.conditions}
+                medicationDispenses={this.state.medicationDispenses}
+                carePlans={this.state.carePlans}
+                patientPractitioners={this.state.patientPractitioners}
                 userList={this.state.userList}
                 fhirVersion={this.state.fhirVersion}
                 childID={this.state.childID}
@@ -165,6 +176,10 @@ class App extends Component {
               console.error(error);
             });
         }
+        this.updateStateAppointment(user.id);
+        this.updateStateCondition(user.id);
+        this.updateStateMedicationDispense(user.id);
+        this.updateStateCarePlan(user.id);
 
         this.setState({ user });
       })
@@ -177,6 +192,20 @@ class App extends Component {
         const appointments = appointmentResource.map(appointment =>
           fhirMapAppointment(appointment, this.state.fhirVersion)
         );
+        const practitioners = this.removeArrayDuplicates(
+          appointments.map(appointment => ({
+            name: appointment.practitioner,
+            id: appointment.practitionerId
+          }))
+        );
+
+          practitioners.map(practitioner => {
+              const family = practitioner.name.split(' ');
+              const id = practitioner.id;
+              return this.updateStatePractitioner(id, family[family.length - 1]);
+          });
+
+        this.setState({ appointments });
         const userList = this.setUserList(appointments, role);
         this.setState({ appointments, userList });
       })
@@ -204,79 +233,149 @@ class App extends Component {
     return [];
   }
 
-  updateStatePatient(patientResource) {
-    const filteredPatientResource = filterPatientResource(patientResource);
-    if (filteredPatientResource) {
-      const patient = fhirMapPatient(
-        filteredPatientResource,
-        this.state.fhirVersion
-      );
-      console.log("Patient Resource after mapping: ", patient);
-      this.setState({ patient });
-    } else {
-      console.error(
-        "Crucial information missing from resource: ",
-        patientResource
-      );
-    }
+  removeArrayDuplicates = array => array ? array.reduce((prev, curr) =>
+        prev.find(a => a["id"] === curr["id"]) ? prev : prev.push(curr) && prev, []) : array;
+
+
+  updateStateCondition(userId) {
+    FhirDataQueryingService.getUserConditions(userId)
+      .then(conditionResource => {
+        const conditions = conditionResource.map(condition =>
+          fhirMapCondition(condition, this.state.fhirVersion)
+        );
+        this.setState({ conditions });
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
-  updateStateUser(currentUserResource) {
-    var user = undefined;
-    const filteredPatient = filterPatientResource(currentUserResource);
-    if (filteredPatient) {
-      user = fhirMapPatient(filteredPatient, this.state.fhirVersion);
-      console.log("User Resource after mapping: ", user);
-    } else {
-      console.error(
-        "Crucial information missing from resource: ",
-        filteredPatient
-      );
-    }
-    return user;
+  updateStateMedicationDispense(userId) {
+    FhirDataQueryingService.getUserMedicationDispense(userId)
+      .then(medicationResource => {
+        const medicationDispenses = medicationResource.map(medication =>
+          fhirMapMedicationDispense(medication, this.state.fhirVersion)
+        );
+        this.setState({ medicationDispenses });
+      })
+      .catch(error => {
+        console.error(error);
+      });
   }
 
-  updateStatechildID(currentUserResource) {
-    const childID = getChildID(currentUserResource, this.state.fhirVersion);
-    console.log("CHILDID", childID);
-    this.setState({ childID });
+  updateStateCarePlan(userId) {
+      FhirDataQueryingService.getUserCarePlan(userId)
+          .then(carePlanResource => {
+              const carePlans = carePlanResource.map(carePlan =>
+                  fhirMapCarePlan(carePlan, this.state.fhirVersion)
+              );
+              this.setState({carePlans});
+          })
+          .catch(error => {
+              console.error(error);
+          });
   }
 
-  handleLoginError = errorMessage => {
-    if (
-      errorMessage ===
-        "No 'state' parameter found in authorization response." &&
-      !this.state.authRequestStarted
-    ) {
-      // SMART JS library will always try to login based on last stored token, which leads to this error at initial page load
-      console.info("Ignoring initial SMART auth error");
-      return;
-    }
-
-    this.setState({
-      error: {
-        rootCause: "SMART_AUTH",
-        message: errorMessage,
-        resolvable: true
+  updateStatePatient(patientResource)
+      {
+          const filteredPatientResource = filterPatientResource(patientResource);
+          if (filteredPatientResource) {
+              const patient = fhirMapPatient(
+                  filteredPatientResource,
+                  this.state.fhirVersion
+              );
+              console.log("Patient Resource after mapping: ", patient);
+              this.setState({patient});
+          } else {
+              console.error(
+                  "Crucial information missing from resource: ",
+                  patientResource
+              );
+          }
       }
-    });
-  };
 
-  handleFhirServerError = () => {
-    this.setState({
-      error: {
-        rootCause: "FHIR_SERVER",
-        message:
-          "The EHR's FHIR server does not provide the required functionality.",
-        resolvable: false
+      updateStateUser(currentUserResource)
+      {
+          var user = undefined;
+          const filteredPatient = filterPatientResource(currentUserResource);
+          if (filteredPatient) {
+              user = fhirMapPatient(filteredPatient, this.state.fhirVersion);
+              console.log("User Resource after mapping: ", user);
+          } else {
+              console.error(
+                  "Crucial information missing from resource: ",
+                  filteredPatient
+              );
+          }
+          return user;
       }
-    });
-  };
 
-  resetError = () => this.setState({ error: null });
+      updateStatePractitioner = (practId, familyName) =>
+          FhirDataQueryingService.getPractitioner(practId, familyName)
+              .then(practitionerResource => {
+                  const filteredPractitionerResource = filterPractitionerResource(practitionerResource.resource);
+                  if (filteredPractitionerResource) {
+
+                      const practitioner = fhirMapPractitioner(
+                          filteredPractitionerResource,
+                          this.state.fhirVersion
+                      );
+
+                      this.state.patientPractitioners.push(practitioner);
+                  } else {
+                      console.error(
+                          "Crucial information missing from resource: ",
+                          practitionerResource
+                      );
+                  }
+              })
+              .catch(error => {
+                  console.error(error);
+              });
+
+      updateStatechildID(currentUserResource)
+      {
+          const childID = getChildID(currentUserResource, this.state.fhirVersion);
+          console.log("CHILDID", childID);
+          this.setState({childID});
+      }
+
+      handleLoginError = errorMessage => {
+          if (
+              errorMessage ===
+              "No 'state' parameter found in authorization response." &&
+              !this.state.authRequestStarted
+          ) {
+              // SMART JS library will always try to login based on last stored token, which leads to this error at
+              // initial page load
+              console.info("Ignoring initial SMART auth error");
+              return;
+          }
+
+          this.setState({
+              error: {
+                  rootCause: "SMART_AUTH",
+                  message: errorMessage,
+                  resolvable: true
+              }
+          });
+      };
+
+      handleFhirServerError = () => {
+          this.setState({
+              error: {
+                  rootCause: "FHIR_SERVER",
+                  message:
+                      "The EHR's FHIR server does not provide the required functionality.",
+                  resolvable: false
+              }
+          });
+      };
+
+      resetError = () => this.setState({error: null});
 
   removeArrayDuplicates = array => {
-    return array !== undefined
+    return array
       ? array.reduce(
           (prev, curr) =>
             prev.find(a => a["id"] === curr["id"])

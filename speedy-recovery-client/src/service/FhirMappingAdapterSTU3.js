@@ -6,10 +6,10 @@ import {
   getName,
   getFirstName,
   getPatient,
-  getPatientId,
   getPhone,
   getPractitioner,
   getPractitionerId,
+  getPractName,
   getSeverity,
   getSummary
 } from "./FhirDataMappingExtractionUtils";
@@ -37,28 +37,39 @@ const mapPatientToUserSTU3 = fhirPatientResource => ({
   email: getEmail(fhirPatientResource.telecom)
 });
 
-const mapAppointmentSTU3 = fhirAppResource => ({
-  id: fhirAppResource.id ? fhirAppResource.id : missingField,
-  title: getTitle(fhirAppResource.text),
-  status: fhirAppResource.status ? fhirAppResource.status : missingField,
-  appType: getAppType(fhirAppResource.appointmentType),
-  indication: getIndication(fhirAppResource.indication),
-  priority: fhirAppResource.priority ? fhirAppResource.priority : missingField,
-  description: fhirAppResource.description
-    ? fhirAppResource.description
+const mapAppointmentSTU3 = fhirAppointmentResource => ({
+  id: fhirAppointmentResource.id ? fhirAppointmentResource.id : missingField,
+  title: getTitle(fhirAppointmentResource.text),
+  status: fhirAppointmentResource.status
+    ? fhirAppointmentResource.status
     : missingField,
-  supportingInfo: getSupportingInfo(fhirAppResource.supportingInformation),
-  start: fhirAppResource.start ? new Date(fhirAppResource.start) : missingField,
-  end: fhirAppResource.end ? new Date(fhirAppResource.end) : missingField,
-  created: fhirAppResource.created
-    ? new Date(fhirAppResource.created)
+  appType: getAppType(fhirAppointmentResource.appointmentType),
+  indication: getIndication(fhirAppointmentResource.indication),
+  priority: fhirAppointmentResource.priority
+    ? fhirAppointmentResource.priority
     : missingField,
-  comment: fhirAppResource.comment ? fhirAppResource.comment : missingField,
-  patient: getPatient(fhirAppResource.participant),
-  patientId: getPatientId(fhirAppResource.participant),
-  practitioner: getPractitioner(fhirAppResource.participant),
-  practitionerId: getPractitionerId(fhirAppResource.participant),
-  location: getLocation(fhirAppResource.participant)
+  description: fhirAppointmentResource.description
+    ? fhirAppointmentResource.description
+    : missingField,
+  supportingInfo: getSupportingInfo(
+    fhirAppointmentResource.supportingInformation
+  ),
+  start: fhirAppointmentResource.start
+    ? new Date(fhirAppointmentResource.start)
+    : missingField,
+  end: fhirAppointmentResource.end
+    ? new Date(fhirAppointmentResource.end)
+    : missingField,
+  created: fhirAppointmentResource.created
+    ? new Date(fhirAppointmentResource.created)
+    : missingField,
+  comment: fhirAppointmentResource.comment
+    ? fhirAppointmentResource.comment
+    : missingField,
+  patient: getPatient(fhirAppointmentResource.participant),
+  practitioner: getPractitioner(fhirAppointmentResource.participant),
+  practitionerId: getPractitionerId(fhirAppointmentResource.participant),
+  location: getLocation(fhirAppointmentResource.participant)
 });
 
 const mapConditionSTU3 = fhirCondResource => ({
@@ -92,6 +103,123 @@ const mapMedicationSTU3 = fhirMedResource => ({
   content: getContent(fhirMedResource.package),
   imageURL: getImageURL(fhirMedResource.image)
 });
+
+const mapMedicationDispenseSTU3 = fhirMedResource => ({
+  id: fhirMedResource.id ? fhirMedResource.id : missingField,
+  status:
+    fhirMedResource.status !== undefined
+      ? fhirMedResource.status
+      : missingField,
+  name: getMedDispenseName(fhirMedResource.medicationCodeableConcept),
+  quantity: getMedDispenseQuantity(fhirMedResource.quantity),
+  daysSupply: getMedDispenseDaysSupply(fhirMedResource.daysSupply),
+  whenHandedOver:
+    fhirMedResource.whenHandedOver !== undefined
+      ? fhirMedResource.whenHandedOver
+      : missingField
+});
+
+const mapCarePlanSTU3 = fhirCareResource => ({
+  id: fhirCareResource.id ? fhirCareResource.id : missingField,
+  status:
+    fhirCareResource.status !== undefined
+      ? fhirCareResource.status
+      : missingField,
+  activities: getCarePlanActivities(fhirCareResource.activity),
+  category: getCarePlanCategory(fhirCareResource.category),
+  period: getCarePlanPeriod(fhirCareResource.period)
+});
+
+const mapPractitionerSTU3 = fhirPractResource => ({
+  name: getPractName(fhirPractResource.name),
+  id: fhirPractResource.id ? fhirPractResource.id : missingField,
+  gender: fhirPractResource.gender ? fhirPractResource.gender : missingField,
+  birthDate: fhirPractResource.birthDate
+    ? fhirPractResource.birthDate
+    : missingField,
+  photo: getPhoto(fhirPractResource.photo)
+});
+
+const getCarePlanCategory = category => {
+  if (
+    category &&
+    category[0] &&
+    category[0].coding &&
+    category[0].coding[0] &&
+    category[0].coding[0].display
+  ) {
+    return category[0].coding[0].display;
+  }
+  return missingField;
+};
+
+const getCarePlanActivities = activity => {
+  if (activity) {
+    let actStr = "";
+    let actNum = activity.length;
+    for (let i = 0; i < actNum; i++) {
+      if (
+        activity[i] &&
+        activity[i].detail &&
+        activity[i].detail.code &&
+        activity[i].detail.code.coding &&
+        activity[i].detail.code.coding[0] &&
+        activity[i].detail.code.coding[0].display
+      ) {
+        actStr =
+          actStr +
+          (i + 1).toString() +
+          ". " +
+          activity[i].detail.code.coding[0].display +
+          "; ";
+      }
+    }
+    return actStr;
+  }
+
+  return missingField;
+};
+
+const getCarePlanPeriod = period => {
+  if (period) {
+    return "from " + getCarePlanStart(period) + " to " + getCarePlanEnd(period);
+  }
+  return missingField;
+};
+
+const getCarePlanStart = period => {
+  if (period && period.start) {
+    return period.start;
+  }
+  return missingField;
+};
+
+const getCarePlanEnd = period => {
+  if (period && period.end) {
+    return period.end;
+  }
+  return missingField;
+};
+
+const getMedDispenseDaysSupply = daysSupply => {
+  if (daysSupply && daysSupply.value && daysSupply.unit) {
+    return daysSupply.value + " " + daysSupply.unit;
+  }
+  return missingField;
+};
+
+const getMedDispenseQuantity = quantity => {
+  if (quantity && quantity.value && quantity.unit) {
+    return quantity.value + " " + quantity.unit;
+  }
+};
+
+const getPhoto = photo => {
+  if (photo && photo[0] && photo[0].data) {
+    return photo[0].data;
+  }
+  return missingField;
+};
 
 const getGP = generalPractitioner => {
   if (
@@ -182,6 +310,13 @@ const getProducer = contained => {
   return missingField;
 };
 
+const getMedDispenseName = medicationCodeableConcept => {
+  if (medicationCodeableConcept && medicationCodeableConcept.text) {
+    return medicationCodeableConcept.text;
+  }
+  return missingField;
+};
+
 const getContent = packageC => {
   if (
     packageC &&
@@ -230,5 +365,8 @@ export {
   mapAppointmentSTU3,
   mapConditionSTU3,
   mapMedicationSTU3,
+  mapMedicationDispenseSTU3,
+  mapCarePlanSTU3,
+  mapPractitionerSTU3,
   getChildIDSTU3
 };

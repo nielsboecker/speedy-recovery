@@ -12,7 +12,7 @@ import {
   getUserId
 } from "./BackendMappingExtractionUtils";
 
-const mapConversationsMySQL = (conversationResource, id, conversationList) => ({
+const mapConversationsGOSH = (conversationResource, id, conversationList) => ({
   userId: getUserId(conversationResource, id),
   id: getId(conversationResource),
   avatar: getAvatar(conversationResource),
@@ -23,11 +23,11 @@ const mapConversationsMySQL = (conversationResource, id, conversationList) => ({
   date: getDate(conversationResource)
 });
 
-const mapMessagesMySQL = (messageResource, id) => ({
+const mapMessagesGOSH = (messageResource, id) => ({
   position: getPosition(messageResource, id),
   type: "text",
   text: getText(messageResource),
   date: getTime(messageResource)
 });
 
-export { mapConversationsMySQL, mapMessagesMySQL };
+export { mapConversationsGOSH, mapMessagesGOSH };
