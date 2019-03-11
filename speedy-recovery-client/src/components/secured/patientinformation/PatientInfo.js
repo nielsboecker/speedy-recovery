@@ -262,7 +262,8 @@ class PatientInfo extends Component {
         render: () => (
           <Tab.Pane>
             <h4>
-              You have {medicationDispensesNum} dispensed medications in the records.
+              You have {medicationDispensesNum} dispensed medications in the
+              records.
             </h4>
             {createMedicationDispenseTable()}
           </Tab.Pane>
