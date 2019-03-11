@@ -57,7 +57,9 @@ const mapAppointmentSTU2 = fhirAppointmentResource => ({
     ? new Date(fhirAppointmentResource.end)
     : missingField,
   created: "Undefined in STU2",
-  comment: fhirAppointmentResource.comment ? fhirAppointmentResource.comment : missingField,
+  comment: fhirAppointmentResource.comment
+    ? fhirAppointmentResource.comment
+    : missingField,
   patient: getPatient(fhirAppointmentResource.participant),
   patientId: getPatientId(fhirAppointmentResource.participant),
   practitioner: getPractitioner(fhirAppointmentResource.participant),
@@ -256,10 +258,10 @@ const formatBirthDate = birthDate => {
 
 const getChildIDSTU2 = currentUserResource => {
   if (
-      currentUserResource &&
-      currentUserResource.link &&
-      currentUserResource.link[0].other &&
-      currentUserResource.link[0].other.reference
+    currentUserResource &&
+    currentUserResource.link &&
+    currentUserResource.link[0].other &&
+    currentUserResource.link[0].other.reference
   ) {
     const patient = currentUserResource.link[0].other.reference;
     const childID = patient.split("/")[1];

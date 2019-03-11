@@ -346,10 +346,10 @@ const formatBirthDate = birthDate => {
 
 const getChildIDSTU3 = currentUserResource => {
   if (
-      currentUserResource &&
-      currentUserResource.link &&
-      currentUserResource.link[0].other &&
-      currentUserResource.link[0].other.reference
+    currentUserResource &&
+    currentUserResource.link &&
+    currentUserResource.link[0].other &&
+    currentUserResource.link[0].other.reference
   ) {
     const patient = currentUserResource.link[0].other.reference;
     const childID = patient.split("/")[1];

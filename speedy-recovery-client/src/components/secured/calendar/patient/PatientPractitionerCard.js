@@ -17,7 +17,7 @@ class PatientPractitionerCard extends React.Component {
                     : <Image src={require('../../../../defaultImages/femaleDoctor.jpg')}/>
                 }
                 <Card.Content>
-                    <Card.Header>{this.filterUndefined("text",
+                    <Card.Header>{this.filterUndefined("name",
                                             this.props.selectedPractitioner)}</Card.Header>
                     <Card.Meta>
                         <span className='Hometown'>{this.filterUndefined("hometown",

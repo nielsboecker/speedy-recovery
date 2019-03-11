@@ -5,13 +5,11 @@
   position: absolute;
   left: 200px;
   right: 200px;
-
 }
 
 .messageField {
   border-style: ridge;
   border-color: #173670;
-
 }
 .topTitle {
   text-align: center;
