@@ -7,9 +7,9 @@ class PatientInfo extends Component {
     const { user, conditions, medicationDispenses, carePlans } = this.props;
     const conditionsNum = conditions.length;
     const createConditionTable = () => {
-      let table = [];
+      const table = [];
       if (conditionsNum) {
-        let header = [
+        const header = [
           <Table.Row key={"conditionrow"}>
             <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">Summary</Table.HeaderCell>
@@ -23,11 +23,11 @@ class PatientInfo extends Component {
           </Table.Header>
         );
       }
-      let body = [];
+      const body = [];
       for (let i = 0; i < conditionsNum; i++) {
-        let children = [];
-        let summary = conditions[i].summary;
-        let searchQuery = "https://www.google.com/search?q=" + summary;
+        const children = [];
+        const summary = conditions[i].summary;
+        const searchQuery = "https://www.google.com/search?q=" + summary;
 
         children.push(
           <Table.Cell key={"conditionordercell" + i}>
@@ -66,16 +66,16 @@ class PatientInfo extends Component {
           {body}
         </Table.Body>
       );
-      let conditionTable = [];
+      const conditionTable = [];
       conditionTable.push(<Table key="conditionTable">{table}</Table>);
       return conditionTable;
     };
 
     const medicationDispensesNum = medicationDispenses.length;
     const createMedicationDispenseTable = () => {
-      let table = [];
+      const table = [];
       if (medicationDispensesNum) {
-        let header = [
+        const header = [
           <Table.Row key={"medicationDrow"}>
             <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">Name</Table.HeaderCell>
@@ -92,11 +92,11 @@ class PatientInfo extends Component {
           </Table.Header>
         );
       }
-      let body = [];
+      const body = [];
       for (let i = 0; i < medicationDispensesNum; i++) {
-        let children = [];
-        let name = medicationDispenses[i].name;
-        let searchQuery = "https://www.google.com/search?q=" + name;
+        const children = [];
+        const name = medicationDispenses[i].name;
+        const searchQuery = "https://www.google.com/search?q=" + name;
 
         children.push(
           <Table.Cell key={"medicationDordercell" + i}>
@@ -140,16 +140,16 @@ class PatientInfo extends Component {
           {body}
         </Table.Body>
       );
-      let medicationDTable = [];
+      const medicationDTable = [];
       medicationDTable.push(<Table key="medicationDTable">{table}</Table>);
       return medicationDTable;
     };
 
     const carePlansNum = carePlans.length;
     const createCarePlanTable = () => {
-      let table = [];
+      const table = [];
       if (carePlansNum) {
-        let header = [
+        const header = [
           <Table.Row key={"careplanrow"}>
             <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">Category</Table.HeaderCell>
@@ -165,9 +165,9 @@ class PatientInfo extends Component {
           </Table.Header>
         );
       }
-      let body = [];
+      const body = [];
       for (let i = 0; i < carePlansNum; i++) {
-        let children = [];
+        const children = [];
 
         children.push(
           <Table.Cell key={"careplanordercell" + i}>
@@ -201,14 +201,14 @@ class PatientInfo extends Component {
           {body}
         </Table.Body>
       );
-      let carePlanTable = [];
+      const carePlanTable = [];
       carePlanTable.push(<Table key="carePlanTable">{table}</Table>);
       return carePlanTable;
     };
 
     const showGenderText = () => {
       let genderStr = "";
-      let gender = user.gender;
+      const gender = user.gender;
       if (gender === "female") {
         genderStr = "Girl";
       } else if (gender === "male") {
@@ -221,7 +221,7 @@ class PatientInfo extends Component {
 
     const showGenderIcon = () => {
       let genderIcon = <Icon fitted name="smile outline" />;
-      let gender = user.gender;
+      const gender = user.gender;
       if (gender === "female") {
         genderIcon = <Icon color="pink" fitted name="woman" />;
       } else if (gender === "male") {
