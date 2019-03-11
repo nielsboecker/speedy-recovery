@@ -4,10 +4,11 @@ import {
   getLocation,
   getMedName,
   getName,
+  getFirstName,
   getPatient,
+  getPatientId,
   getPhone,
   getPractitioner,
-  getPatientId,
   getPractitionerId,
   getSeverity,
   getSummary
@@ -16,13 +17,14 @@ import {
 const missingField = "Unknown";
 const mapPatientToUserSTU3 = fhirPatientResource => ({
   id: fhirPatientResource.id ? fhirPatientResource.id : missingField,
-  //This is a temporary hard-code fix as we have not implemented the searching for a patients' parent
+  // This is a temporary hard-code fix as the SMART sandbox does not support logging in as a patients' parent
   role:
     fhirPatientResource.id === "220041"
       ? "Parent"
       : fhirPatientResource.resourceType,
 
   name: getName(fhirPatientResource.name),
+  firstName: getFirstName(fhirPatientResource.name),
   birthDate: fhirPatientResource.birthDate
     ? formatBirthDate(fhirPatientResource.birthDate)
     : missingField,
@@ -211,10 +213,10 @@ const formatBirthDate = birthDate => {
 
 const getChildIDSTU3 = currentUserResource => {
   if (
-      currentUserResource &&
-      currentUserResource.link &&
-      currentUserResource.link[0].other &&
-      currentUserResource.link[0].other.reference
+    currentUserResource &&
+    currentUserResource.link &&
+    currentUserResource.link[0].other &&
+    currentUserResource.link[0].other.reference
   ) {
     const patient = currentUserResource.link[0].other.reference;
     const childID = patient.split("/")[1];

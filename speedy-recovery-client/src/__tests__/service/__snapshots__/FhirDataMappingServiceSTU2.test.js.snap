@@ -52,6 +52,7 @@ Object {
   "birthDate": "12/25/1974",
   "careProvider": "Undefined in STU2",
   "email": "Undefined in STU2",
+  "firstName": "Peter",
   "gender": "male",
   "id": "example",
   "name": "Peter James Chalmers",
