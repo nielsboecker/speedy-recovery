@@ -262,8 +262,7 @@ class PatientInfo extends Component {
         render: () => (
           <Tab.Pane>
             <h4>
-              How many dispensed medication in the records?{" "}
-              {medicationDispensesNum}
+              You have {medicationDispensesNum} dispensed medications in the records.
             </h4>
             {createMedicationDispenseTable()}
           </Tab.Pane>
@@ -278,7 +277,7 @@ class PatientInfo extends Component {
         ),
         render: () => (
           <Tab.Pane>
-            <h4>How many recorded conditions? {conditionsNum}</h4>
+            <h4>You have {conditionsNum} recorded conditions.</h4>
             {createConditionTable()}
           </Tab.Pane>
         )
@@ -292,7 +291,7 @@ class PatientInfo extends Component {
         ),
         render: () => (
           <Tab.Pane>
-            <h4>How many recorded care plans? {carePlansNum}</h4>
+            <h4>You have {carePlansNum} recorded care plans.</h4>
             {createCarePlanTable()}
           </Tab.Pane>
         )
