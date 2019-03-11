@@ -5,7 +5,7 @@ import "../CalendarPages.css";
 import { Card, Image } from "semantic-ui-react";
 
 class PatientPractitionerCard extends React.Component {
-    
+
     render() {
         return (
             <Card centered>
@@ -49,11 +49,13 @@ class PatientPractitionerCard extends React.Component {
         );
     }
 
-    filterUndefined = (field, object) => {
-        return !object ?  "Data not found" :
-                object[field] !== "Unknown" && object[field] ?
-                object[field] : "Data not found";
-    };
+  filterUndefined = (field, object) => {
+    return !object
+      ? "Data not found"
+      : object[field] !== "Unknown" && object[field]
+      ? object[field]
+      : "Data not found";
+  };
 }
 
 export default PatientPractitionerCard;

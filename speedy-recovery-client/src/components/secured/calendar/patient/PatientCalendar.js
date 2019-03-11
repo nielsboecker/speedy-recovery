@@ -8,7 +8,6 @@ import PatientPractitionerCard from "./PatientPractitionerCard";
 import { getPractitionerInfo } from "../../../../service/BackendService";
 
 class PatientCalendar extends React.Component {
-
   constructor(...args) {
     super(...args);
     this.state = {
@@ -19,14 +18,21 @@ class PatientCalendar extends React.Component {
   }
 
   getPractitionerInfo = async () => {
-
     this.setState({
       practitionerList: this.props.patientPractitioners
     });
   };
 
-  removeArrayDuplicates = array => array !== undefined ? array.reduce((prev, curr) =>
-      prev.find(a => a["text"] === curr["text"]) ? prev : prev.push(curr) && prev, []) : array;
+  removeArrayDuplicates = array =>
+    array !== undefined
+      ? array.reduce(
+          (prev, curr) =>
+            prev.find(a => a["text"] === curr["text"])
+              ? prev
+              : prev.push(curr) && prev,
+          []
+        )
+      : array;
 
   getBackendInfo =  (practitionerID) => {
     const id = practitionerID;
@@ -42,7 +48,6 @@ class PatientCalendar extends React.Component {
     this.setState({ selectedPractitioner:
           this.state.practitionerList.find(element => element.id ===
               data.value)});
-
   };
 
   componentWillMount = () => {
@@ -51,48 +56,56 @@ class PatientCalendar extends React.Component {
 
   render() {
     const styled = {
-      agenda:{
-        backgroundColor: '#4285F4',
+      agenda: {
+        backgroundColor: "#4285F4"
       }
     };
 
     return (
-        <Grid columns={2} divided>
-          <Grid.Row stretched>
-            <Grid.Column color={'green'}>
-              <h2 align="center">My Appointments</h2>
-              <Segment >
-                <div style={{ height: 500 }}>
-                  <BigCalendar
-                      localizer={this.props.localizer}
-                      events={this.props.events}
-                      onSelectEvent={this.toggleEditModal}
-                      defaultView={BigCalendar.Views.AGENDA}
-                      defaultDate={new Date()}
-                      views={["agenda"]}
-                      ref={node => {
-                        this.bigCalendarRef = node;
-                      }}
-                      style={styled.agenda}
-                  />
-                </div>
-              </Segment>
-            </Grid.Column>
-            <Grid.Column color={'yellow'}>
-              <h2 align="center">My Doctors</h2>
-              <Dropdown placeholder='Select Doctor' fluid selection
-                        options={this.removeArrayDuplicates(this.props.events.map(event => {
-                          return {text: event.practitioner, value: event.practitionerId}
-                        }))
-                        }
-                        onChange={this.onDropdownChange}/>
-              <PatientPractitionerCard
-                  selectedPractitioner={this.state.selectedPractitioner}
-                  backendInfo={this.state.backendInfo}/>
-            </Grid.Column>
-          </Grid.Row>
-
-        </Grid>
+      <Grid columns={2} divided>
+        <Grid.Row stretched>
+          <Grid.Column color={"green"}>
+            <h2 align="center">My Appointments</h2>
+            <Segment>
+              <div style={{ height: 500 }}>
+                <BigCalendar
+                  localizer={this.props.localizer}
+                  events={this.props.events}
+                  onSelectEvent={this.toggleEditModal}
+                  defaultView={BigCalendar.Views.AGENDA}
+                  defaultDate={new Date()}
+                  views={["agenda"]}
+                  ref={node => {
+                    this.bigCalendarRef = node;
+                  }}
+                  style={styled.agenda}
+                />
+              </div>
+            </Segment>
+          </Grid.Column>
+          <Grid.Column color={"yellow"}>
+            <h2 align="center">My Doctors</h2>
+            <Dropdown
+              placeholder="Select Doctor"
+              fluid
+              selection
+              options={this.removeArrayDuplicates(
+                this.props.events.map(event => {
+                  return {
+                    text: event.practitioner,
+                    value: event.practitionerId
+                  };
+                })
+              )}
+              onChange={this.onDropdownChange}
+            />
+            <PatientPractitionerCard
+              selectedPractitioner={this.state.selectedPractitioner}
+              backendInfo={this.state.backendInfo}
+            />
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     );
   }
 }

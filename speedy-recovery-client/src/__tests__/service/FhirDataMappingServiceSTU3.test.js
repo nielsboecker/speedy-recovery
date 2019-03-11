@@ -15,7 +15,6 @@ import fhirExampleCarePlan from "../test_input/fhir_resources_stu3/FhirExampleCa
 import fhirExampleMedicationDispense from "../test_input/fhir_resources_stu3/FhirExampleMedicationDispenseSTU3.json";
 import fhirExamplePractitioner from "../test_input/fhir_resources_stu3/FhirExamplePractitionerSTU3.json";
 
-
 test("map FHIR Patient resource to internal user data model", () => {
   const user = fhirMapPatient(fhirExamplePatient, "3");
   expect(user).toMatchSnapshot();
@@ -48,8 +47,8 @@ test("map FHIR CarePlan resource to internal data model", () => {
 
 test("map FHIR MedicationDispense resource to internal data model", () => {
   const medicationDispense = fhirMapMedicationDispense(
-      fhirExampleMedicationDispense,
-      "3"
+    fhirExampleMedicationDispense,
+    "3"
   );
   expect(medicationDispense).toMatchSnapshot();
 });

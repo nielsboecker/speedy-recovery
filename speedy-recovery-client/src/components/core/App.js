@@ -6,15 +6,16 @@ import LandingMainPage from "../landing/core/LandingMainPage";
 import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
-import {filterPatientResource, filterPractitionerResource} from "../../service/FhirDataFilteringService";
 import {
     fhirMapAppointment,
     fhirMapCondition,
     fhirMapMedicationDispense,
     fhirMapCarePlan,
-    fhirMapPatient, fhirMapPractitioner, getChildID
+    fhirMapPatient,
+    fhirMapPractitioner, getChildID
 } from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
+import {filterPatientResource, filterPractitionerResource} from "../../service/FhirDataFilteringService";
 
 class App extends Component {
   constructor(props) {
@@ -191,12 +192,12 @@ class App extends Component {
         const appointments = appointmentResource.map(appointment =>
           fhirMapAppointment(appointment, this.state.fhirVersion)
         );
-          const practitioners = this.removeArrayDuplicates(
-              appointments.map(appointment => ({
-                  name: appointment.practitioner,
-                  id: appointment.practitionerId
-              }))
-          );
+        const practitioners = this.removeArrayDuplicates(
+          appointments.map(appointment => ({
+            name: appointment.practitioner,
+            id: appointment.practitionerId
+          }))
+        );
 
           practitioners.map(practitioner => {
               const family = practitioner.name.split(' ');
@@ -232,7 +233,7 @@ class App extends Component {
     return [];
   }
 
-  removeArrayDuplicates = array => array !== undefined ? array.reduce((prev, curr) =>
+  removeArrayDuplicates = array => array ? array.reduce((prev, curr) =>
         prev.find(a => a["id"] === curr["id"]) ? prev : prev.push(curr) && prev, []) : array;
 
 
@@ -312,7 +313,6 @@ class App extends Component {
       updateStatePractitioner = (practId, familyName) =>
           FhirDataQueryingService.getPractitioner(practId, familyName)
               .then(practitionerResource => {
-
                   const filteredPractitionerResource = filterPractitionerResource(practitionerResource.resource);
                   if (filteredPractitionerResource) {
 
@@ -346,7 +346,8 @@ class App extends Component {
               "No 'state' parameter found in authorization response." &&
               !this.state.authRequestStarted
           ) {
-              // SMART JS library will always try to login based on last stored token, which leads to this error at initial page load
+              // SMART JS library will always try to login based on last stored token, which leads to this error at
+              // initial page load
               console.info("Ignoring initial SMART auth error");
               return;
           }
