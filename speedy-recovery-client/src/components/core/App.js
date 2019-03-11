@@ -120,8 +120,15 @@ class App extends Component {
 
     // Register SMART auth callback
     SmartAuthService.onSmartAuthenticatedSessionReady()
-      .then(fhirClient => this.handleLoginSuccess(fhirClient))
+      .then(fhirClient => this.setState({ fhirClient }))
       .catch(errorMessage => this.handleLoginError(errorMessage));
+  };
+
+
+  componentDidUpdate = (prevProps, prevState) => {
+      if (prevState.fhirClient !== this.state.fhirVersion && prevState.fhirVersion !== this.state.fhirVersion) {
+          this.handleLoginSuccess(this.state.fhirClient);
+      }
   };
 
   handleLoginRequest = user => {
@@ -135,7 +142,6 @@ class App extends Component {
   };
 
   handleLoginSuccess = fhirClient => {
-    this.setState({ fhirClient });
     console.log("Received FHIR client: ", fhirClient);
 
     fhirClient.user
@@ -232,10 +238,6 @@ class App extends Component {
     }
     return [];
   }
-
-  removeArrayDuplicates = array => array ? array.reduce((prev, curr) =>
-        prev.find(a => a["id"] === curr["id"]) ? prev : prev.push(curr) && prev, []) : array;
-
 
   updateStateCondition(userId) {
     FhirDataQueryingService.getUserConditions(userId)
