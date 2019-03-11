@@ -6,5 +6,7 @@ import PatientPractitionerCard from "../../components/secured/calendar/patient/P
 Enzyme.configure({ adapter: new Adapter() });
 
 it("patientpractitionercard renders", () => {
-  shallow(<PatientPractitionerCard selectedPractitioner={{}} backendInfo={{}}/>);
+  shallow(
+    <PatientPractitionerCard selectedPractitioner={{}} backendInfo={{}} />
+  );
 });

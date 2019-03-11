@@ -19,13 +19,15 @@ it("parentCalendar renders without crashing", () => {
 });
 
 it("patientCalendar renders without crashing", () => {
-  shallow(<PatientCalendar
+  shallow(
+    <PatientCalendar
       onChange={jest.fn()}
       events={exampleAppointments}
       localizer={localizer}
       updateStatePractitioner={jest.fn()}
       patientPractitioner={[]}
-  />);
+    />
+  );
 });
 
 it("practitionerCalendar renders without crashing", () => {

@@ -38,20 +38,32 @@ const mapPatientToUserSTU3 = fhirPatientResource => ({
 const mapAppointmentSTU3 = fhirAppointmentResource => ({
   id: fhirAppointmentResource.id ? fhirAppointmentResource.id : missingField,
   title: getTitle(fhirAppointmentResource.text),
-  status: fhirAppointmentResource.status ? fhirAppointmentResource.status : missingField,
+  status: fhirAppointmentResource.status
+    ? fhirAppointmentResource.status
+    : missingField,
   appType: getAppType(fhirAppointmentResource.appointmentType),
   indication: getIndication(fhirAppointmentResource.indication),
-  priority: fhirAppointmentResource.priority ? fhirAppointmentResource.priority : missingField,
+  priority: fhirAppointmentResource.priority
+    ? fhirAppointmentResource.priority
+    : missingField,
   description: fhirAppointmentResource.description
     ? fhirAppointmentResource.description
     : missingField,
-  supportingInfo: getSupportingInfo(fhirAppointmentResource.supportingInformation),
-  start: fhirAppointmentResource.start ? new Date(fhirAppointmentResource.start) : missingField,
-  end: fhirAppointmentResource.end ? new Date(fhirAppointmentResource.end) : missingField,
+  supportingInfo: getSupportingInfo(
+    fhirAppointmentResource.supportingInformation
+  ),
+  start: fhirAppointmentResource.start
+    ? new Date(fhirAppointmentResource.start)
+    : missingField,
+  end: fhirAppointmentResource.end
+    ? new Date(fhirAppointmentResource.end)
+    : missingField,
   created: fhirAppointmentResource.created
     ? new Date(fhirAppointmentResource.created)
     : missingField,
-  comment: fhirAppointmentResource.comment ? fhirAppointmentResource.comment : missingField,
+  comment: fhirAppointmentResource.comment
+    ? fhirAppointmentResource.comment
+    : missingField,
   patient: getPatient(fhirAppointmentResource.participant),
   practitioner: getPractitioner(fhirAppointmentResource.participant),
   practitionerId: getPractitionerId(fhirAppointmentResource.participant),
@@ -121,8 +133,8 @@ const mapPractitionerSTU3 = fhirPractResource => ({
   id: fhirPractResource.id ? fhirPractResource.id : missingField,
   gender: fhirPractResource.gender ? fhirPractResource.gender : missingField,
   birthDate: fhirPractResource.birthDate
-      ? fhirPractResource.birthDate
-      : missingField,
+    ? fhirPractResource.birthDate
+    : missingField,
   photo: getPhoto(fhirPractResource.photo)
 });
 

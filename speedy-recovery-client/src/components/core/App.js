@@ -6,32 +6,36 @@ import LandingMainPage from "../landing/core/LandingMainPage";
 import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
-import {filterPatientResource, filterPractitionerResource} from "../../service/FhirDataFilteringService";
 import {
-    fhirMapAppointment,
-    fhirMapCondition,
-    fhirMapMedicationDispense,
-    fhirMapCarePlan,
-    fhirMapPatient, fhirMapPractitioner
+  filterPatientResource,
+  filterPractitionerResource
+} from "../../service/FhirDataFilteringService";
+import {
+  fhirMapAppointment,
+  fhirMapCondition,
+  fhirMapMedicationDispense,
+  fhirMapCarePlan,
+  fhirMapPatient,
+  fhirMapPractitioner
 } from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
 
 class App extends Component {
   constructor(props) {
-      super(props);
-      this.state = {
-          fhirClient: {},
-          user: null,
-          patient: {},
-          appointments: [],
-          conditions: [],
-          medicationDispenses: [],
-          carePlans: [],
-          authRequestStarted: false,
-          error: null,
-          fhirVersion: null,
-          patientPractitioners: []
-      }
+    super(props);
+    this.state = {
+      fhirClient: {},
+      user: null,
+      patient: {},
+      appointments: [],
+      conditions: [],
+      medicationDispenses: [],
+      carePlans: [],
+      authRequestStarted: false,
+      error: null,
+      fhirVersion: null,
+      patientPractitioners: []
+    };
   }
 
   render = () => {
@@ -174,18 +178,18 @@ class App extends Component {
         const appointments = appointmentResource.map(appointment =>
           fhirMapAppointment(appointment, this.state.fhirVersion)
         );
-          const practitioners = this.removeArrayDuplicates(
-              appointments.map(appointment => ({
-                  name: appointment.practitioner,
-                  id: appointment.practitionerId
-              }))
-          );
+        const practitioners = this.removeArrayDuplicates(
+          appointments.map(appointment => ({
+            name: appointment.practitioner,
+            id: appointment.practitionerId
+          }))
+        );
 
-          practitioners.map(practitioner => {
-              const family = practitioner.name.split(' ');
-              const id = practitioner.id.substring(13, practitioner.id.length);
-              return this.updateStatePractitioner(id, family[family.length - 1]);
-          });
+        practitioners.map(practitioner => {
+          const family = practitioner.name.split(" ");
+          const id = practitioner.id.substring(13, practitioner.id.length);
+          return this.updateStatePractitioner(id, family[family.length - 1]);
+        });
 
         this.setState({ appointments });
       })
@@ -194,10 +198,16 @@ class App extends Component {
       });
   }
 
-
-    removeArrayDuplicates = array => array !== undefined ? array.reduce((prev, curr) =>
-        prev.find(a => a["id"] === curr["id"]) ? prev : prev.push(curr) && prev, []) : array;
-
+  removeArrayDuplicates = array =>
+    array !== undefined
+      ? array.reduce(
+          (prev, curr) =>
+            prev.find(a => a["id"] === curr["id"])
+              ? prev
+              : prev.push(curr) && prev,
+          []
+        )
+      : array;
 
   updateStateCondition(userId) {
     FhirDataQueryingService.getUserConditions(userId)
@@ -270,29 +280,29 @@ class App extends Component {
     return user;
   }
 
-    updateStatePractitioner = (practId, familyName) =>
-        FhirDataQueryingService.getPractitioner(practId, familyName)
-            .then(practitionerResource => {
+  updateStatePractitioner = (practId, familyName) =>
+    FhirDataQueryingService.getPractitioner(practId, familyName)
+      .then(practitionerResource => {
+        const filteredPractitionerResource = filterPractitionerResource(
+          practitionerResource.resource
+        );
+        if (filteredPractitionerResource) {
+          const practitioner = fhirMapPractitioner(
+            filteredPractitionerResource,
+            this.state.fhirVersion
+          );
 
-                const filteredPractitionerResource = filterPractitionerResource(practitionerResource.resource);
-                if (filteredPractitionerResource) {
-
-                    const practitioner = fhirMapPractitioner(
-                        filteredPractitionerResource,
-                        this.state.fhirVersion
-                    );
-
-                    this.state.patientPractitioners.push(practitioner);
-                } else {
-                    console.error(
-                        "Crucial information missing from resource: ",
-                        practitionerResource
-                    );
-                }
-            })
-            .catch(error => {
-                console.error(error);
-            });
+          this.state.patientPractitioners.push(practitioner);
+        } else {
+          console.error(
+            "Crucial information missing from resource: ",
+            practitionerResource
+          );
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
 
   handleLoginError = errorMessage => {
     if (
