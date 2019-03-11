@@ -13,8 +13,8 @@ class PatientPractitionerCard extends React.Component {
                     this.props.selectedPractitioner.photo  &&
                     this.props.selectedPractitioner.photo !== "Unknown" ?
                         <Image src={"data:image/png;base64," + this.props.selectedPractitioner.photo}/>
-                        : <Image src={require('../../../../defaultImages/maleDoctor.png')}/>
-                    : <Image src={require('../../../../defaultImages/femaleDoctor.jpg')}/>
+                        : <Image src={this.displayDefaultImage()}/>
+                    : <Image src={this.displayDefaultImage()}/>
                 }
                 <Card.Content>
                     <Card.Header>{this.props.selectedPractitioner ? this.filterUndefined("name",
@@ -32,7 +32,7 @@ class PatientPractitionerCard extends React.Component {
                     {this.props.selectedPractitioner ?
                         < Card.Description >
                         Supports : <b>{this.filterUndefined("favouriteFootballTeam",
-                        this.props.backendInfo)}</b> < br / >
+                        this.props.backendInfo)}</b> < br />
                         Favourite Food: <b>{this.filterUndefined("favouriteFood",
                         this.props.backendInfo)} </b><br/>
                         Favourite Animal: <b>{this.filterUndefined("favouriteAnimal",
@@ -56,6 +56,14 @@ class PatientPractitionerCard extends React.Component {
       ? object[field]
       : "Data not found";
   };
+
+  displayDefaultImage = () => {
+      return this.props.selectedPractitioner ?
+          this.props.selectedPractitioner.gender === 'female' ?
+              require('../../../../defaultImages/femaleDoctor.jpg')
+              : require('../../../../defaultImages/maleDoctor.png')
+          : require('../../../../defaultImages/maleDoctor.png')
+  }
 }
 
 export default PatientPractitionerCard;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Icon, Label, Tab, Table } from "semantic-ui-react";
+import { Label, Tab, Table } from "semantic-ui-react";
 import "./PatientInfo.css";
 
 class PatientConditionPane extends Component {
@@ -27,7 +27,6 @@ class PatientConditionPane extends Component {
       for (let i = 0; i < conditionsNum; i++) {
         const children = [];
         const summary = conditions[i].summary;
-        const searchQuery = "https://www.google.com/search?q=" + summary;
 
         children.push(
           <Table.Cell key={"conditionOrderCell" + i}>
@@ -37,17 +36,6 @@ class PatientConditionPane extends Component {
         children.push(
           <Table.Cell key={"conditionSummaryCell" + i} id="patientTableCell">
             {<h4>{summary}</h4>}
-          </Table.Cell>
-        );
-        children.push(
-          <Table.Cell key={"conditionSearchCell" + i} id="patientTableCell">
-            {
-              <h4>
-                <a href={searchQuery}>
-                  <Icon fitted name="search" />
-                </a>
-              </h4>
-            }
           </Table.Cell>
         );
         children.push(
