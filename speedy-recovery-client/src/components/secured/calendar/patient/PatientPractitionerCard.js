@@ -17,11 +17,14 @@ class PatientPractitionerCard extends React.Component {
                     : <Image src={this.displayDefaultImage()}/>
                 }
                 <Card.Content>
-                    <Card.Header>{this.props.selectedPractitioner ? this.filterUndefined("name",
-                        this.props.selectedPractitioner).split(" ")[0]
-                        : this.filterUndefined("name",
-                            this.props.selectedPractitioner)
-                    }</Card.Header>
+                  {this.props.selectedPractitioner ?
+                    (<Card.Header>{this.props.selectedPractitioner ? this.filterUndefined("name",
+                      this.props.selectedPractitioner).split(" ")[0]
+                      : this.filterUndefined("name",
+                        this.props.selectedPractitioner)
+                    }</Card.Header>)
+                    : <p style={{ color: "black" }}>Please select a staff member from the list.</p>
+                  }
 
                     {this.props.selectedPractitioner ?
                         <Card.Meta>
