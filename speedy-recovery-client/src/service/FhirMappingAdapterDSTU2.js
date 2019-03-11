@@ -37,18 +37,28 @@ const mapPatientToUserSTU2 = fhirPatientResource => ({
 const mapAppointmentSTU2 = fhirAppointmentResource => ({
   id: fhirAppointmentResource.id ? fhirAppointmentResource.id : missingField,
   title: getTitle(fhirAppointmentResource.text),
-  status: fhirAppointmentResource.status ? fhirAppointmentResource.status : missingField,
+  status: fhirAppointmentResource.status
+    ? fhirAppointmentResource.status
+    : missingField,
   appType: "Undefined in STU2",
   indication: "Undefined in STU2",
-  priority: fhirAppointmentResource.priority ? fhirAppointmentResource.priority : missingField,
+  priority: fhirAppointmentResource.priority
+    ? fhirAppointmentResource.priority
+    : missingField,
   description: fhirAppointmentResource.description
     ? fhirAppointmentResource.description
     : missingField,
   supportingInfo: "Undefined in STU2",
-  start: fhirAppointmentResource.start ? new Date(fhirAppointmentResource.start) : missingField,
-  end: fhirAppointmentResource.end ? new Date(fhirAppointmentResource.end) : missingField,
+  start: fhirAppointmentResource.start
+    ? new Date(fhirAppointmentResource.start)
+    : missingField,
+  end: fhirAppointmentResource.end
+    ? new Date(fhirAppointmentResource.end)
+    : missingField,
   created: "Undefined in STU2",
-  comment: fhirAppointmentResource.comment ? fhirAppointmentResource.comment : missingField,
+  comment: fhirAppointmentResource.comment
+    ? fhirAppointmentResource.comment
+    : missingField,
   patient: getPatient(fhirAppointmentResource.participant),
   practitioner: getPractitioner(fhirAppointmentResource.participant),
   practitionerId: getPractitionerId(fhirAppointmentResource.participant),

@@ -30,6 +30,7 @@ const fhirMapPatient = (resource, version) => {
     }
   }
   console.log("No FHIR version has been supplied");
+  return null;
 };
 
 const fhirMapAppointment = (resource, version) => {
@@ -45,6 +46,7 @@ const fhirMapAppointment = (resource, version) => {
     }
   }
   console.log("No FHIR version has been supplied");
+  return null;
 };
 
 const fhirMapCondition = (resource, version) => {
@@ -60,6 +62,7 @@ const fhirMapCondition = (resource, version) => {
     }
   }
   console.log("No FHIR version has been supplied");
+  return null;
 };
 
 const fhirMapMedication = (resource, version) => {
@@ -75,6 +78,7 @@ const fhirMapMedication = (resource, version) => {
     }
   }
   console.log("No FHIR version has been supplied");
+  return null;
 };
 
 const fhirMapMedicationDispense = (resource, version) => {
@@ -90,6 +94,7 @@ const fhirMapMedicationDispense = (resource, version) => {
     }
   }
   console.log("No FHIR version has been supplied");
+  return null;
 };
 
 const fhirMapPractitioner = (resource, version) => {
@@ -104,6 +109,8 @@ const fhirMapPractitioner = (resource, version) => {
         console.log("Invalid version of FHIR resource provided: ", version);
     }
   }
+  console.log("No FHIR version has been supplied");
+  return null;
 };
 
 const fhirMapCarePlan = (resource, version) => {
@@ -119,6 +126,7 @@ const fhirMapCarePlan = (resource, version) => {
     }
   }
   console.log("No FHIR version has been supplied");
+  return null;
 };
 
 export {
