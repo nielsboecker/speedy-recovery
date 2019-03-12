@@ -30,6 +30,7 @@ class App extends Component {
           medicationDispenses: [],
           carePlans: [],
           authRequestStarted: false,
+        authenticationInitiated: false,
           error: null,
           fhirVersion: null,
           patientPractitioners: [],
@@ -121,19 +122,16 @@ class App extends Component {
 
     // Register SMART auth callback
     SmartAuthService.onSmartAuthenticatedSessionReady()
-      .then(fhirClient => this.setState({ fhirClient }))
+      .then(fhirClient => {
+        console.log("Received FHIR client: ", fhirClient);
+        return this.setState({ fhirClient });
+      })
       .catch(errorMessage => this.handleLoginError(errorMessage));
   };
 
 
-  componentDidUpdate = (prevProps, prevState) => {
-
-    console.log("prevState.fhirClient = " + prevState.fhirClient);
-    console.log("this.state.fhirClient = " + this.state.fhirClient);
-    console.log("prevState.fhirVersion = " + prevState.fhirVersion);
-    console.log("this.state.fhirVersion", this.state.fhirVersion);
-
-    if (prevState.fhirClient !== this.state.fhirClient && prevState.fhirVersion !== this.state.fhirVersion) {
+  componentDidUpdate = () => {
+    if (this.state.fhirClient && this.state.fhirVersion && !this.state.authenticationInitiated) {
           this.handleLoginSuccess(this.state.fhirClient);
       }
   };
@@ -149,7 +147,7 @@ class App extends Component {
   };
 
   handleLoginSuccess = fhirClient => {
-    console.log("Received FHIR client: ", fhirClient);
+    this.setState({ authenticationInitiated: true });
 
     fhirClient.user
       .read()
@@ -196,7 +194,10 @@ class App extends Component {
 
         this.setState({ user });
       })
-      .catch(error => console.error(error));
+      .catch(error => {
+        this.setState({ authenticationInitiated: false });
+        return console.error("Aborting login because of error:", error);
+      });
   };
 
   updateStateAppointment(userId, role) {
