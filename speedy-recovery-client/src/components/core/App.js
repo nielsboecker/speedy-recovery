@@ -7,15 +7,16 @@ import SecuredMainPage from "../secured/core/SecuredMainPage";
 import SmartAuthService from "../../service/SmartAuthService";
 import FhirServerService from "../../service/FhirServerService";
 import {
-    fhirMapAppointment,
-    fhirMapCondition,
-    fhirMapMedicationDispense,
-    fhirMapCarePlan,
-    fhirMapPatient,
-    fhirMapPractitioner, getChildID
+  fhirMapAppointment,
+  fhirMapCarePlan,
+  fhirMapCondition,
+  fhirMapMedicationDispense,
+  fhirMapPatient,
+  fhirMapPractitioner,
+  getChildID
 } from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
-import {filterPatientResource, filterPractitionerResource} from "../../service/FhirDataFilteringService";
+import { filterPatientResource, filterPractitionerResource } from "../../service/FhirDataFilteringService";
 
 class App extends Component {
   constructor(props) {
@@ -126,7 +127,13 @@ class App extends Component {
 
 
   componentDidUpdate = (prevProps, prevState) => {
-      if (prevState.fhirClient !== this.state.fhirVersion && prevState.fhirVersion !== this.state.fhirVersion) {
+
+    console.log("prevState.fhirClient = " + prevState.fhirClient);
+    console.log("this.state.fhirClient = " + this.state.fhirClient);
+    console.log("prevState.fhirVersion = " + prevState.fhirVersion);
+    console.log("this.state.fhirVersion", this.state.fhirVersion);
+
+    if (prevState.fhirClient !== this.state.fhirClient && prevState.fhirVersion !== this.state.fhirVersion) {
           this.handleLoginSuccess(this.state.fhirClient);
       }
   };
