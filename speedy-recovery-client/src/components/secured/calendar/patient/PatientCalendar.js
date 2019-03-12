@@ -54,6 +54,7 @@ class PatientCalendar extends React.Component {
       : array;
 
   getBackendInfo =  (practitionerID) => {
+    const id = practitionerID;
     getPractitionerInfo(id)
         .then(response =>
             this.setState({backendInfo: response.data[0]})
