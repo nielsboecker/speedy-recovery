@@ -6,13 +6,13 @@ import {
 const conversationMap = (
   conversationResource,
   id,
-  conversationList,
+  userList,
   dbType
 ) => {
   if (dbType) {
     switch (dbType) {
       case "MySQL":
-        return mapConversationsGOSH(conversationResource, id, conversationList);
+        return mapConversationsGOSH(conversationResource, id, userList);
       case "2":
       default:
         console.log("Invalid type of database resource provided: ", dbType);
@@ -21,11 +21,11 @@ const conversationMap = (
   console.log("No database type has been supplied");
 };
 
-const messageMap = (messageResource, id, dbType) => {
+const messageMap = (messageResource, id, dbType, role, name, title) => {
   if (dbType) {
     switch (dbType) {
       case "MySQL":
-        return mapMessagesGOSH(messageResource, id);
+        return mapMessagesGOSH(messageResource, id, role, name, title);
       case "2":
       default:
         console.log("Invalid type of database resource provided: ", dbType);
@@ -34,9 +34,10 @@ const messageMap = (messageResource, id, dbType) => {
   console.log("No database type has been supplied");
 };
 
-const setupMessages = messageResource => ({
+const setupMessages = (messageResource, name) => ({
   position: "right",
   type: "text",
+  title: name,
   text: messageResource,
   date: new Date()
 });

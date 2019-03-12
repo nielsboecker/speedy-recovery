@@ -2,9 +2,8 @@
   border-style: ridge;
   border-color: #173670;
   background-color: #5194ba;
-  position: absolute;
-  left: 200px;
-  right: 200px;
+  padding: 20px;
+  height: 70vh;
 }
 
 .messageField {
@@ -15,3 +14,8 @@
   text-align: center;
   color: #173670;
 }
+
+.message-list {
+  height: 55vh;
+}
+

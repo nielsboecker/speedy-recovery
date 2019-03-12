@@ -24,7 +24,9 @@ class MessagingPage extends Component {
             state: {
               id: this.state.id,
               id2: conversation.userId,
-              title: conversation.title
+              title: conversation.title,
+              role: this.props.user.role,
+              name: this.props.user.name,
             }
           }}
           key={conversation.userId}

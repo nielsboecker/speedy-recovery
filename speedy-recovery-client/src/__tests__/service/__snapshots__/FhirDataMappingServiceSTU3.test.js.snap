@@ -11,6 +11,7 @@ Object {
   "indication": "Severe burn of left ear",
   "location": "South Wing, second floor",
   "patient": "Peter James Chalmers",
+  "patientId": "example",
   "practitioner": "Dr Adam Careful",
   "practitionerId": "example",
   "priority": 5,

@@ -6,6 +6,7 @@ import {
   getName,
   getFirstName,
   getPatient,
+  getPatientId,
   getPhone,
   getPractitioner,
   getPractitionerId,
@@ -67,6 +68,8 @@ const mapAppointmentSTU3 = fhirAppointmentResource => ({
     ? fhirAppointmentResource.comment
     : missingField,
   patient: getPatient(fhirAppointmentResource.participant),
+  patientId: getPatientId(fhirAppointmentResource.participant),
+  practitioner: getPractitioner(fhirAppointmentResource.participant),
   practitioner: getPractitioner(fhirAppointmentResource.participant),
   practitionerId: getPractitionerId(fhirAppointmentResource.participant),
   location: getLocation(fhirAppointmentResource.participant)
