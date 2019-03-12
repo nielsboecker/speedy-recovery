@@ -1,3 +1,24 @@
+/*
+* Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
+* patients, parents and hospital staff
+*
+* Copyright (C) 2019 University College London
+*
+* This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+* Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+* warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+* details.
+* You should have received a copy of the GNU Affero General Public License along with this program. If not,
+* see http://www.gnu.org/license/.
+* */
+
+/* This file is the core component of the application. The file controls the discovery of the capability statements
+* from the server as well as the redirection of the user to the SMART on FHIR authentication interface. This file also
+* coordinates the filtering and mapping of each resource from FHIR. This file also routes the user to the correct
+* parts of the site, either the LandingArea, SecuredArea, based on their stage of the login process.*/
+
 import React, { Component } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
@@ -232,10 +253,6 @@ class App extends Component {
     }
     return [];
   }
-
-  removeArrayDuplicates = array => array ? array.reduce((prev, curr) =>
-        prev.find(a => a["id"] === curr["id"]) ? prev : prev.push(curr) && prev, []) : array;
-
 
   updateStateCondition(userId) {
     FhirDataQueryingService.getUserConditions(userId)
