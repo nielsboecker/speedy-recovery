@@ -34,7 +34,7 @@ The React client application can be found in the `/speedy-recovery-client` direc
 ### Development
 
 #### `yarn install`
-Installs all required dependencies.
+Installs all required dependencies. Also, this will implicitly run `patch-package`, a node module that makes slight adjustments to some third party dependencies in the `node_modules` directory. Needs to be run prior to running `yarn start`.
 
 #### `yarn start`
 Runs the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -51,11 +51,24 @@ Builds the app for production to the `build` folder. It correctly bundles React 
 
 The build is minified and the filenames include the hashes.
 
-### Deployment
+## SMART on FHIR
+For development purposes, the authentication and data access is set up to utilise the SMART Sandbox instead of accessing an actual EHR. Each sandbox configuration corresponds to a unique link. These links can be found in the `config` folder and adjusted as need be.
+
+## FHIR Versions
+Currently, we support FHIR DSTU2 and STU3. To add support for a new version, implement a new adapter in the `service` module and adjust the `FhirDataMappingService` to use it accordingly.
+
+## Deployment
 The app is currently deployed via Azure DevOps pipelines. Merge your changes into the `master` branch and trigger a release.
 
 ## Back-end
 Most back-end services are carries out through the SMART on FHIR sandbox. A distinct  back-end is being implemented to add some features and can be found at [speedy-recovery-server](https://github.com/JustinYaaang/speedy-recovery-server/).
+
+## Data creation
+In order to create test data on the SMART FHIR server, a helper program is available in the `smart-server-data-creation` package.
+
+##  Acknowledgement
+We would like to thank John Booth and Usman Bahadur from GOSH DRIVE as well as Marios Isaakidis for their advice throughout this project.
+
 
 -----
 
