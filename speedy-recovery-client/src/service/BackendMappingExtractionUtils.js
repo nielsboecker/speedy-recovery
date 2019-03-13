@@ -29,6 +29,14 @@ const getPosition = (messageResource, id) => {
   return "right";
 };
 
+const getMessageTitle = (position,role,name,title) =>{
+    if(position==="right"){
+      return name; 
+    }
+    return role === "Practitioner" ? "Parent": title;
+};
+
+
 const getText = messageResource => {
   if (messageResource && messageResource.Message) {
     return messageResource.Message;
@@ -57,25 +65,23 @@ const getUserId = (conversationResource, id) => {
   return missingField;
 };
 
-const getTitle = (conversationResource, id, conversationList) => {
+const getTitle = (conversationResource, id, userList) => {
   if (
     conversationResource &&
     conversationResource.userid1 &&
     conversationResource.userid2 &&
-    conversationList
+    userList
   ) {
     if (conversationResource.userid1 === id) {
-      for (let conversation of conversationList) {
-        if (conversation.id === conversationResource.userid2) {
-          return conversation.name;
-        }
-      }
+       const user = userList.find(user=>{
+        return user.id === conversationResource.userid2;
+       })
+       return user.name;
     } else {
-      for (let conversation of conversationList) {
-        if (conversation.id === conversationResource.userid1) {
-          return conversation.name;
-        }
-      }
+      const user = userList.find(user=>{
+        return user.id === conversationResource.userid1 
+      })
+      return user.name;
     }
   }
   return missingField;
@@ -134,5 +140,6 @@ export {
   getAlt,
   getSubtitle,
   getUnread,
-  getUserId
+  getUserId,
+  getMessageTitle
 };

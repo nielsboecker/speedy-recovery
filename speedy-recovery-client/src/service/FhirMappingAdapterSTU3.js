@@ -25,6 +25,7 @@ import {
   getName,
   getFirstName,
   getPatient,
+  getPatientId,
   getPhone,
   getPractitioner,
   getPractitionerId,
@@ -38,7 +39,7 @@ const mapPatientToUserSTU3 = fhirPatientResource => ({
   id: fhirPatientResource.id ? fhirPatientResource.id : missingField,
   // This is a temporary hard-code fix as the SMART sandbox does not support logging in as a patients' parent
   role:
-    fhirPatientResource.id === "220041"
+    fhirPatientResource.id === "220093"
       ? "Parent"
       : fhirPatientResource.resourceType,
 
@@ -86,6 +87,7 @@ const mapAppointmentSTU3 = fhirAppointmentResource => ({
     ? fhirAppointmentResource.comment
     : missingField,
   patient: getPatient(fhirAppointmentResource.participant),
+  patientId: getPatientId(fhirAppointmentResource.participant),
   practitioner: getPractitioner(fhirAppointmentResource.participant),
   practitionerId: getPractitionerId(fhirAppointmentResource.participant),
   location: getLocation(fhirAppointmentResource.participant)
