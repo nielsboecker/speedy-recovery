@@ -46,6 +46,7 @@ class SecuredMainPage extends Component {
     const { match } = this.props;
 
     return (
+      //  Routes the user to their selected page
       <div>
         <BrowserRouter>
           <Fragment>

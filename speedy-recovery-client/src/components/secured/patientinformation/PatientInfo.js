@@ -30,6 +30,7 @@ class PatientInfo extends Component {
   render() {
     const { user, conditions, medicationDispenses, carePlans } = this.props;
 
+    // Builds up table of panes, each containing different pieces of info about patient
     const panes = [
       {
         menuItem: (

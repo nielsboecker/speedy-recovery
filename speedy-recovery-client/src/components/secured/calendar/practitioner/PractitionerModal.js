@@ -143,6 +143,7 @@ class PractitionerModal extends Component {
             </Table>
             <Grid>
               <Grid.Row centered>
+                {/*Button to send user to a conversation with the relevant parent*/}
                 <Button>
                   <Link
                     to={{

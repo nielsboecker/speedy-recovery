@@ -29,6 +29,7 @@ class PatientPractitionerCard extends React.Component {
     render() {
         return (
             <Card centered>
+                {/*Check whether a practitioner's image can be found, if not display a default image*/}
                 {this.props.selectedPractitioner ?
                     this.props.selectedPractitioner.photo  &&
                     this.props.selectedPractitioner.photo !== "Unknown" ?
@@ -37,6 +38,7 @@ class PatientPractitionerCard extends React.Component {
                     : <Image src={this.displayDefaultImage()}/>
                 }
                 <Card.Content>
+                  {/*Display the first name of the practitioner*/}
                   {this.props.selectedPractitioner ?
                     (<Card.Header>{this.props.selectedPractitioner ? this.filterUndefined("name",
                       this.props.selectedPractitioner).split(" ")[0]
@@ -72,6 +74,7 @@ class PatientPractitionerCard extends React.Component {
         );
     }
 
+  //  Filter out any data that cannot be found
   filterUndefined = (field, object) => {
     return !object
       ? "Data not found"
@@ -80,6 +83,7 @@ class PatientPractitionerCard extends React.Component {
       : "Data not found";
   };
 
+  //  If image can't be found display a default image based on gender of practitioner
   displayDefaultImage = () => {
       return this.props.selectedPractitioner ?
           this.props.selectedPractitioner.gender === 'female' ?

@@ -22,6 +22,7 @@ import {
   mapConversationsGOSH
 } from "./BackendMappingAdapterGOSH";
 
+// Based on the type of the back-end data a different mapping function is used
 const conversationMap = (
   conversationResource,
   id,
@@ -39,6 +40,8 @@ const conversationMap = (
   }
   console.log("No database type has been supplied");
 };
+
+// Based on the type of the back-end data a different mapping function is used
 
 const messageMap = (messageResource, id, dbType) => {
   if (dbType) {

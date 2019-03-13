@@ -36,7 +36,8 @@ class PatientCalendar extends React.Component {
     };
   }
 
-  getPractitionerInfo = async () => {
+  // Store the list of practitioners that were queried from the patient's appointments
+  getPractitionerInfo = () => {
     this.setState({
       practitionerList: this.props.patientPractitioners
     });
@@ -53,9 +54,9 @@ class PatientCalendar extends React.Component {
         )
       : array;
 
+  // Retrieve extra practitioner info from the back-end
   getBackendInfo =  (practitionerID) => {
-    const id = practitionerID;
-    getPractitionerInfo(id)
+    getPractitionerInfo(practitionerID)
         .then(response =>
             this.setState({backendInfo: response.data[0]})
         )
@@ -91,6 +92,7 @@ class PatientCalendar extends React.Component {
                   localizer={this.props.localizer}
                   events={this.props.events}
                   onSelectEvent={this.toggleEditModal}
+                  //Only display the agenda view of the calendar
                   defaultView={BigCalendar.Views.AGENDA}
                   defaultDate={new Date()}
                   views={["agenda"]}

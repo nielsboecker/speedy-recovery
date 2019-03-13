@@ -49,6 +49,7 @@ class MessagingPage extends Component {
           }}
           key={conversation.userId}
         >
+          {/*Creates messages summary page*/}
           <ChatItem
             avatar={conversation.avatar}
             alt={conversation.alt}
@@ -80,6 +81,7 @@ class MessagingPage extends Component {
     }
   }
 
+  // Fetch all of the conversations that this id has been part of
   fetchConversation(id) {
     getConversation(id)
       .then(conversationResource => {

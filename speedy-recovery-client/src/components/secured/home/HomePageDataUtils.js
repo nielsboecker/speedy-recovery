@@ -22,7 +22,7 @@ export function dataIsReady(user, events) {
     user && events && getNextEvent(events).patient && getNextEvent(events).start
   );
 }
-
+// Get the next event for the user to be displayed on the homepage
 export function getNextEvent(events) {
   if (events.length > 0) {
     const event = events

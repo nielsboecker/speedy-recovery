@@ -111,6 +111,7 @@ class ParentModal extends Component {
             </Table>
             <Grid>
               <Grid.Row centered>
+                {/*Defines button that sends user to the conversation between the parent and their practitioner*/}
                 <Button>
                   <Link
                     to={{

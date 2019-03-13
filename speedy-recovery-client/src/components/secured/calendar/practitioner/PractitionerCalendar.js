@@ -25,6 +25,7 @@ import "../CalendarPages.css";
 import { Grid, Segment } from "semantic-ui-react";
 import PractitionerModal from "./PractitionerModal";
 
+// list of all possible calendar views
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
 
 class PractitionerCalendar extends React.Component {
@@ -37,6 +38,7 @@ class PractitionerCalendar extends React.Component {
     };
   }
 
+  // Toggle whether modal is open or closed
   toggleEditModal = event => {
     this.setState({
       isEditModalOpen: !this.state.isEditModalOpen,
@@ -61,7 +63,6 @@ class PractitionerCalendar extends React.Component {
                   this.bigCalendarRef = node;
                 }}
               />
-
               <PractitionerModal
                 appointment={this.state.appointment}
                 toggleEditModal={this.toggleEditModal}

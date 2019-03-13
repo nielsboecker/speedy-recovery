@@ -30,6 +30,7 @@ class PractitionerHomePage extends Component {
       return (
         <div>
           <h1>Hello, {this.props.user.firstName}!</h1>
+          {/*Check whether the practitioner has any upcoming appointments to be displayed*/}
           {isValidDate(nextEvent.start) ? (
             <p>
               Your patient {nextEvent.patient}'s next appointment is at{" "}

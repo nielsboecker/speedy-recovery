@@ -29,6 +29,7 @@ const startSmartAuthenticatedSession = user => {
   var config = undefined;
   const errorCallback = error => console.error(error);
 
+  //Depending on users role choose which sandbox configuration to use
   switch (user) {
     case "Practitioner":
       config = smartProviderConfig;

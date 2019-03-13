@@ -60,7 +60,6 @@ class ParentCalendar extends React.Component {
                   this.bigCalendarRef = node;
                 }}
               />
-
               <ParentModal
                 appointment={this.state.appointment}
                 toggleEditModal={this.toggleEditModal}

@@ -30,6 +30,7 @@ class ParentHomePage extends Component {
       return (
         <div>
           <h1>Hello, {this.props.user.firstName}!</h1>
+          {/*Check whether the parents child has any upcoming appointments to be displayed*/}
           {isValidDate(nextEvent.start) ? (
             <p>
               Your child {nextEvent.patient}'s appointment is at{" "}

@@ -99,6 +99,7 @@ class ConversationPage extends Component {
 
   componentDidMount() {
     this.setMessageList();
+    //Check for new messages every 3 seconds
     this.timer = setInterval(() => {
       this.setMessageList();
     }, 3000);
@@ -108,6 +109,7 @@ class ConversationPage extends Component {
     this.timer && clearTimeout(this.timer);
   }
 
+  //Populate the history of messages in this conversation on the page
   setMessageList = () => {
     if (this.props.location) {
       this.setState({ title: this.props.location.state.title });
