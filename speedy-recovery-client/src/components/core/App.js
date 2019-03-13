@@ -200,7 +200,6 @@ class App extends Component {
               console.error(error);
             });
         }
-        //this.updateStateAppointment(user.id);
         this.updateStateCondition(user.id);
         this.updateStateMedicationDispense(user.id);
         this.updateStateCarePlan(user.id);

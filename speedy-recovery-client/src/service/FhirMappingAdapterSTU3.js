@@ -39,7 +39,7 @@ const mapPatientToUserSTU3 = fhirPatientResource => ({
   id: fhirPatientResource.id ? fhirPatientResource.id : missingField,
   // This is a temporary hard-code fix as the SMART sandbox does not support logging in as a patients' parent
   role:
-    fhirPatientResource.id === "220041"
+    fhirPatientResource.id === "220093"
       ? "Parent"
       : fhirPatientResource.resourceType,
 

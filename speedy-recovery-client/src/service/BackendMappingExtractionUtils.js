@@ -30,19 +30,12 @@ const getPosition = (messageResource, id) => {
 };
 
 const getMessageTitle = (position,role,name,title) =>{
-  if(role === "Practitioner") {
     if(position==="right"){
-     return name;
+      return name; 
     }
-    return "Parent";
-  } 
-  else{
-    if(position==="right"){
-     return name; 
-    }
-    return title;
-  }
+    return role === "Practitioner" ? "Parent": title;
 };
+
 
 const getText = messageResource => {
   if (messageResource && messageResource.Message) {
@@ -80,17 +73,15 @@ const getTitle = (conversationResource, id, userList) => {
     userList
   ) {
     if (conversationResource.userid1 === id) {
-      for (let user of userList) {
-        if (user.id === conversationResource.userid2) {
-          return user.name;
-        }
-      }
+       const user = userList.find(user=>{
+        return user.id === conversationResource.userid2;
+       })
+       return user.name;
     } else {
-      for (let user of userList) {
-        if (user.id === conversationResource.userid1) {
-          return user.name;
-        }
-      }
+      const user = userList.find(user=>{
+        return user.id === conversationResource.userid1 
+      })
+      return user.name;
     }
   }
   return missingField;
