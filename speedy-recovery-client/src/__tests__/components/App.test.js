@@ -17,7 +17,7 @@
 /* This file tests the App.js component*/
 
 import React from "react";
-import Enzyme, { shallow } from "enzyme";
+import Enzyme, { mount, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import App from "../../components/core/App";
 import SmartAuthService from "../../service/SmartAuthService";
@@ -75,4 +75,10 @@ test("handleLoginSuccess() sets state appropriately", () => {
 
   // This should work, but there seems to be a bug, Promise.resolve executes too late
   // expect(wrapper.state().user).toEqual(mockUser);
+});
+
+test("App renders browser router", () => {
+  const wrapper = mount(<App />);
+  expect(wrapper.children().length).toBe(1);
+  expect(wrapper.children().type().name).toEqual("BrowserRouter");
 });
