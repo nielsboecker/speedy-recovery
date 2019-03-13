@@ -1,3 +1,23 @@
+/*
+* Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
+* patients, parents and hospital staff
+*
+* Copyright (C) 2019 University College London
+*
+* This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+* Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+* warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+* details.
+* You should have received a copy of the GNU Affero General Public License along with this program. If not,
+* see http://www.gnu.org/license/.
+* */
+
+/* This file defines the MessagingPage component which creates a summary page of the conversations a user has with
+other users, allowing them to select one to continue speaking to someone.
+ */
+
 import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { ChatItem } from "react-chat-elements";
@@ -29,6 +49,7 @@ class MessagingPage extends Component {
           }}
           key={conversation.userId}
         >
+          {/*Creates messages summary page*/}
           <ChatItem
             avatar={conversation.avatar}
             alt={conversation.alt}
@@ -60,6 +81,7 @@ class MessagingPage extends Component {
     }
   }
 
+  // Fetch all of the conversations that this id has been part of
   fetchConversation(id) {
     getConversation(id)
       .then(conversationResource => {
