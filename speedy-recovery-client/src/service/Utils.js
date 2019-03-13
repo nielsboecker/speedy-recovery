@@ -29,13 +29,14 @@ export const isValidDate = date => {
   return date instanceof Date && !isNaN(date);
 };
 
+// Adapted from: https://stackoverflow.com/a/54563488/9858344
 export const removeArrayDuplicates = (array, field) =>
-    array !== undefined
-        ? array.reduce(
+  array !== undefined
+    ? array.reduce(
         (prev, curr) =>
-            prev.find(a => a[field] === curr[field])
-                ? prev
-                : prev.push(curr) && prev,
+          prev.find(a => a[field] === curr[field])
+            ? prev
+            : prev.push(curr) && prev,
         []
-        )
-        : array;
+      )
+    : array;
