@@ -42,7 +42,7 @@ class InfoFactory extends Component {
       case "Practitioner":
         return <PractitionerInfo user={user} patient={patient} />;
       default:
-        return undefined;
+        return null;
     }
   }
 }
