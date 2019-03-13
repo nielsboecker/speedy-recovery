@@ -21,7 +21,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Icon, Label, Loader } from "semantic-ui-react";
 import { dataIsReady, getNextEvent } from "./HomePageDataUtils";
-import { formatDate, isValidDate } from "../../../service/DateUtils";
+import { formatDate, isValidDate } from "../../../service/Utils";
 
 class PatientHomePage extends Component {
   render() {

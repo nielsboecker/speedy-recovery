@@ -37,6 +37,7 @@ import {
 } from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
 import {filterPatientResource, filterPractitionerResource} from "../../service/FhirDataFilteringService";
+import {removeArrayDuplicates} from "../../service/Utils";
 
 class App extends Component {
   constructor(props) {
@@ -216,12 +217,12 @@ class App extends Component {
         const appointments = appointmentResource.map(appointment =>
           fhirMapAppointment(appointment, this.state.fhirVersion)
         );
-        const practitioners = this.removeArrayDuplicates(
+        const practitioners = removeArrayDuplicates(
           appointments.map(appointment => ({
             name: appointment.practitioner,
             id: appointment.practitionerId
-          }))
-        );
+          })),
+        'id');
 
         // Store all of the practitioners that a patient has appointments with
         practitioners.map(practitioner => {
@@ -242,18 +243,18 @@ class App extends Component {
   setUserList(resource, role) {
     if (resource && role) {
       return role === "Practitioner"
-        ? this.removeArrayDuplicates(
+        ? removeArrayDuplicates(
             resource.map(appointment => ({
               name: appointment.patient,
               id: appointment.patientId
-            }))
-          )
-        : this.removeArrayDuplicates(
+            })),
+          'id')
+        : removeArrayDuplicates(
             resource.map(appointment => ({
               name: appointment.practitioner,
               id: appointment.practitionerId
-            }))
-          );
+            })),
+          'id');
     }
     return [];
   }
@@ -389,18 +390,6 @@ class App extends Component {
   };
 
   resetError = () => this.setState({error: null});
-
-  removeArrayDuplicates = array => {
-    return array
-      ? array.reduce(
-          (prev, curr) =>
-            prev.find(a => a["id"] === curr["id"])
-              ? prev
-              : prev.push(curr) && prev,
-          []
-        )
-      : array;
-  };
 }
 
 export default App;
