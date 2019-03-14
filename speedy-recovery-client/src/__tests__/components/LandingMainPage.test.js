@@ -17,7 +17,7 @@
 /* This file tests the LandingMainPage component*/
 
 import React from "react";
-import Enzyme, { mount, shallow } from "enzyme";
+import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import LandingMainPage from "../../components/landing/core/LandingMainPage";
 
@@ -26,9 +26,7 @@ Enzyme.configure({ adapter: new Adapter() });
 it("renders without crashing", () => {
   shallow(<LandingMainPage />);
 });
-/*
-test("LandingMainPage renders start page", () => {
-  const wrapper = mount(<LandingMainPage user={{ role: "Patient" }} />);
-  expect(wrapper.children().length).toBe(1);
-  expect(wrapper.children().type().name).toEqual("StartPage");
-});*/
+
+test("LandingMainPage renders without crashing", () => {
+  shallow(<LandingMainPage user={{ role: "Patient" }} />);
+});
