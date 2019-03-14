@@ -194,9 +194,15 @@ class App extends Component {
 
         this.setState({ user });
       })
-      .catch(error => {
-        this.setState({ authenticationInitiated: false });
-        return console.error("Aborting login because of error:", error);
+      .catch(errorMessage => {
+        // This error happens e.g. when a user resource cannot be found because it has been deleted from FHIR
+        this.setState({
+          error: {
+            rootCause: "SMART_AUTH",
+            message: errorMessage,
+            resolvable: true
+          }
+        });
       });
   };
 
