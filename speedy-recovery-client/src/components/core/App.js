@@ -32,12 +32,12 @@ import {
   fhirMapCarePlan,
   fhirMapCondition,
   fhirMapMedicationDispense,
-  fhirMapPatient,
+  fhirMapPerson,
   fhirMapPractitioner,
   getChildID
 } from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
-import { filterPatientResource, filterPractitionerResource } from "../../service/FhirDataFilteringService";
+import { filterPersonResource, filterPractitionerResource } from "../../service/FhirDataFilteringService";
 
 class App extends Component {
   constructor(props) {
@@ -316,9 +316,9 @@ class App extends Component {
   }
 
   updateStatePatient(patientResource) {
-    const filteredPatientResource = filterPatientResource(patientResource);
+    const filteredPatientResource = filterPersonResource(patientResource);
     if (filteredPatientResource) {
-      const patient = fhirMapPatient(
+      const patient = fhirMapPerson(
         filteredPatientResource,
         this.state.fhirVersion
       );
@@ -333,13 +333,13 @@ class App extends Component {
   }
 
   filterUser(currentUserResource) {
-    const filteredPatient = filterPatientResource(currentUserResource);
-    if (filteredPatient) {
-      const user = fhirMapPatient(filteredPatient, this.state.fhirVersion);
+    const filteredPerson = filterPersonResource(currentUserResource);
+    if (filteredPerson) {
+      const user = fhirMapPerson(filteredPerson, this.state.fhirVersion);
       console.log("User Resource after mapping: ", user);
       return user;
     } else {
-      console.error("Crucial information missing from resource: ", filteredPatient);
+      console.error("Crucial information missing from resource: ", filteredPerson);
       return null;
     }
   }
