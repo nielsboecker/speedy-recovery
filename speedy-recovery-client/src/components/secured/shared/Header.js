@@ -37,9 +37,7 @@ class Header extends Component {
         <Menu.Item as={Link} to="/secured/messaging">
           <Icon name="mail" />
           Messages
-          <Label color="teal" circular>
-            2
-          </Label>
+          
         </Menu.Item>
       );
     }

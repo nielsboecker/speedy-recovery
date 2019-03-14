@@ -116,7 +116,7 @@ const getSubtitle = conversationResource => {
 };
 
 const getUnread = conversationResource => {
-  if (conversationResource && conversationResource.unread) {
+  if (conversationResource) {
     return conversationResource.unread;
   }
   return missingField;

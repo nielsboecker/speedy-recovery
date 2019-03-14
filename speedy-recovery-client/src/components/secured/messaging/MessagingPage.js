@@ -96,6 +96,9 @@ class MessagingPage extends Component {
           )
         );
         this.setState({ conversations });
+        console.log(conversations[0]);
+        console.log(conversations[1]);
+
       })
       .catch(error => {
         console.error(error);
