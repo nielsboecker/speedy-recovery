@@ -50,7 +50,6 @@ class App extends Component {
       conditions: [],
       medicationDispenses: [],
       carePlans: [],
-      authRequestStarted: false,
       error: null,
       fhirVersion: null,
       patientPractitioners: [],
@@ -157,7 +156,6 @@ class App extends Component {
   };
 
   handleLoginRequest = user => {
-    this.setState({ authRequestStarted: true });
     SmartAuthService.startSmartAuthenticatedSession(user);
   };
 
@@ -384,11 +382,7 @@ class App extends Component {
   }
 
   handleLoginError = errorMessage => {
-    if (
-      errorMessage ===
-      "No 'state' parameter found in authorization response." &&
-      !this.state.authRequestStarted
-    ) {
+    if (errorMessage === "No 'state' parameter found in authorization response.") {
       // SMART JS library will always try to login based on last stored token, which leads to this error at
       // initial page load. It will also try to set the fhirClient to {}, which is not helpful.
       console.info("Ignoring initial SMART auth error");
