@@ -165,9 +165,6 @@ class App extends Component {
   };
 
   handleLoginSuccess = () => {
-    console.log("--------------------login", this.state);
-
-
     // This method must only run when both fhirVersion is known and fhirClient is ready
     if (!this.state.fhirVersion ||
       !this.state.fhirClient ||
@@ -180,15 +177,14 @@ class App extends Component {
       .user
       .read()
       .then(currentUserResource => {
-        console.log("Received current user resources: ", currentUserResource);
-        console.log("Current user id: ", currentUserResource.id);
+        console.log("Received current user resource: ", currentUserResource);
 
-        const user = this.updateStateUser(currentUserResource);
+        const user = this.filterUser(currentUserResource);
 
         // Map/filter the relevant information for each role
         switch (user.role) {
           case "Parent":
-            this.updateStatechildID(currentUserResource);
+            this.updateStateChildID(currentUserResource);
             this.updateStateAppointment(this.state.childID, user.role);
             break;
           case "Practitioner":
@@ -212,9 +208,7 @@ class App extends Component {
               );
               this.updateStatePatient(patientResource);
             })
-            .catch(error => {
-              console.error(error);
-            });
+            .catch(error => console.error(error));
         }
         this.updateStateCondition(user.id);
         this.updateStateMedicationDispense(user.id);
@@ -251,7 +245,7 @@ class App extends Component {
         practitioners.map(practitioner => {
           const family = practitioner.name.split(" ");
           const id = practitioner.id;
-          return this.updateStatePractitioner(id, family[family.length - 1]);
+          return this.updateStatePractitioners(id, family[family.length - 1]);
         });
 
         this.setState({ appointments });
@@ -338,22 +332,19 @@ class App extends Component {
     }
   }
 
-  updateStateUser(currentUserResource) {
-    let user = undefined;
+  filterUser(currentUserResource) {
     const filteredPatient = filterPatientResource(currentUserResource);
     if (filteredPatient) {
-      user = fhirMapPatient(filteredPatient, this.state.fhirVersion);
+      const user = fhirMapPatient(filteredPatient, this.state.fhirVersion);
       console.log("User Resource after mapping: ", user);
+      return user;
     } else {
-      console.error(
-        "Crucial information missing from resource: ",
-        filteredPatient
-      );
+      console.error("Crucial information missing from resource: ", filteredPatient);
+      return null;
     }
-    return user;
   }
 
-  updateStatePractitioner = (practId, familyName) =>
+  updateStatePractitioners = (practId, familyName) =>
     FhirDataQueryingService.getPractitioner(practId, familyName)
       .then(practitionerResource => {
         const filteredPractitionerResource = filterPractitionerResource(practitionerResource.resource);
@@ -376,7 +367,7 @@ class App extends Component {
         console.error(error);
       });
 
-  updateStatechildID(currentUserResource) {
+  updateStateChildID(currentUserResource) {
     const childID = getChildID(currentUserResource, this.state.fhirVersion);
     this.setState({ childID });
   }
