@@ -1,9 +1,28 @@
+/*
+* Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
+* patients, parents and hospital staff
+*
+* Copyright (C) 2019 University College London
+*
+* This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+* Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+* warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+* details.
+* You should have received a copy of the GNU Affero General Public License along with this program. If not,
+* see http://www.gnu.org/license/.
+* */
+
+/* This file defines the PatientCalendar component which creates the patient view of the calendar
+ */
+
 import React from "react";
 import BigCalendar from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
 import "../CalendarPages.css";
-import { Grid, Segment, Dropdown } from "semantic-ui-react";
+import { Dropdown, Grid, Segment } from "semantic-ui-react";
 import PatientPractitionerCard from "./PatientPractitionerCard";
 import { getPractitionerInfo } from "../../../../service/BackendService";
 
@@ -17,7 +36,8 @@ class PatientCalendar extends React.Component {
     };
   }
 
-  getPractitionerInfo = async () => {
+  // Store the list of practitioners that were queried from the patient's appointments
+  getPractitionerInfo = () => {
     this.setState({
       practitionerList: this.props.patientPractitioners
     });
@@ -26,28 +46,28 @@ class PatientCalendar extends React.Component {
   removeArrayDuplicates = array =>
     array !== undefined
       ? array.reduce(
-          (prev, curr) =>
-            prev.find(a => a["text"] === curr["text"])
-              ? prev
-              : prev.push(curr) && prev,
-          []
-        )
+      (prev, curr) =>
+        prev.find(a => a["text"] === curr["text"])
+          ? prev
+          : prev.push(curr) && prev,
+      []
+      )
       : array;
 
+  // Retrieve extra practitioner info from the back-end
   getBackendInfo =  (practitionerID) => {
-    const id = practitionerID;
-    getPractitionerInfo(id)
-        .then(response =>
-            this.setState({backendInfo: response.data[0]})
-        )
-        .catch(error => console.log(error))
+    getPractitionerInfo(practitionerID)
+      .then(response =>
+        this.setState({backendInfo: response.data[0]})
+      )
+      .catch(error => console.log(error))
   };
 
   onDropdownChange = (e, data) => {
     this.getBackendInfo(data.value);
     this.setState({ selectedPractitioner:
-          this.state.practitionerList.find(element => element.id ===
-              data.value)});
+        this.state.practitionerList.find(element => element.id ===
+          data.value)});
   };
 
   componentWillMount = () => {
@@ -72,6 +92,7 @@ class PatientCalendar extends React.Component {
                   localizer={this.props.localizer}
                   events={this.props.events}
                   onSelectEvent={this.toggleEditModal}
+                  //Only display the agenda view of the calendar
                   defaultView={BigCalendar.Views.AGENDA}
                   defaultDate={new Date()}
                   views={["agenda"]}

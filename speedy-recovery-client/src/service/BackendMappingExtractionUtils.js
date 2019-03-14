@@ -1,3 +1,22 @@
+/*
+ * Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
+ * patients, parents and hospital staff
+ *
+ * Copyright (C) 2019 University College London
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+ * Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ * You should have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see http://www.gnu.org/license/.
+ * */
+
+/* This file contains functions used to help map data from our database into our internal format.
+ */
+
 const missingField = "Unknown";
 const getPosition = (messageResource, id) => {
   if (
@@ -9,6 +28,14 @@ const getPosition = (messageResource, id) => {
   }
   return "right";
 };
+
+const getMessageTitle = (position, role, name, title) => {
+  if (position === "right") {
+    return name;
+  }
+  return role === "Practitioner" ? "Parent" : title;
+};
+
 
 const getText = messageResource => {
   if (messageResource && messageResource.Message) {
@@ -38,25 +65,23 @@ const getUserId = (conversationResource, id) => {
   return missingField;
 };
 
-const getTitle = (conversationResource, id, conversationList) => {
+const getTitle = (conversationResource, id, userList) => {
   if (
     conversationResource &&
     conversationResource.userid1 &&
     conversationResource.userid2 &&
-    conversationList
+    userList
   ) {
     if (conversationResource.userid1 === id) {
-      for (let conversation of conversationList) {
-        if (conversation.id === conversationResource.userid2) {
-          return conversation.name;
-        }
-      }
+      const user = userList.find(user => {
+        return user.id === conversationResource.userid2;
+      });
+      return user.name;
     } else {
-      for (let conversation of conversationList) {
-        if (conversation.id === conversationResource.userid1) {
-          return conversation.name;
-        }
-      }
+      const user = userList.find(user => {
+        return user.id === conversationResource.userid1;
+      });
+      return user.name;
     }
   }
   return missingField;
@@ -115,5 +140,6 @@ export {
   getAlt,
   getSubtitle,
   getUnread,
-  getUserId
+  getUserId,
+  getMessageTitle
 };
