@@ -43,6 +43,7 @@ const fhirMapPatient = (resource, version) => {
   if (version) {
     switch (version[0]) {
       case "1":
+        return null;
       case "2":
         return mapPatientToUserSTU2(resource);
       case "3":
@@ -59,6 +60,7 @@ const fhirMapAppointment = (resource, version) => {
   if (version) {
     switch (version[0]) {
       case "1":
+        return null;
       case "2":
         return mapAppointmentSTU2(resource);
       case "3":
@@ -75,6 +77,7 @@ const fhirMapCondition = (resource, version) => {
   if (version) {
     switch (version[0]) {
       case "1":
+        return null;
       case "2":
         return mapConditionSTU2(resource);
       case "3":
@@ -91,6 +94,7 @@ const fhirMapMedication = (resource, version) => {
   if (version) {
     switch (version[0]) {
       case "1":
+        return null;
       case "2":
         return mapMedicationSTU2(resource);
       case "3":
@@ -107,6 +111,7 @@ const fhirMapMedicationDispense = (resource, version) => {
   if (version) {
     switch (version[0]) {
       case "1":
+        return null;
       case "2":
         return mapMedicationDispenseSTU2(resource);
       case "3":
@@ -123,6 +128,7 @@ const fhirMapPractitioner = (resource, version) => {
   if (version) {
     switch (version[0]) {
       case "1":
+        return null;
       case "2":
         return mapPractitionerSTU2(resource);
       case "3":
@@ -139,6 +145,7 @@ const fhirMapCarePlan = (resource, version) => {
   if (version) {
     switch (version[0]) {
       case "1":
+        return null;
       case "2":
         return mapCarePlanSTU2(resource);
       case "3":
@@ -155,6 +162,7 @@ const getChildID = (resource, version) => {
   if (version) {
     switch (version[0]) {
       case "1":
+        return null;
       case "2":
         return getChildIDSTU2(resource);
       case "3":
