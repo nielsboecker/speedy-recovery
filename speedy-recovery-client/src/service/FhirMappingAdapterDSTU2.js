@@ -47,9 +47,7 @@ const mapPersonToUserSTU2 = fhirPersonResource => ({
   birthDate: fhirPersonResource.birthDate
     ? formatBirthDate(fhirPersonResource.birthDate)
     : missingField,
-  gender: fhirPersonResource.gender
-    ? fhirPersonResource.gender
-    : missingField,
+  gender: fhirPersonResource.gender ? fhirPersonResource.gender : missingField,
   careProvider: "Undefined in STU2",
   address: getAddress(fhirPersonResource.address),
   phone: getPhone(fhirPersonResource.telecom),

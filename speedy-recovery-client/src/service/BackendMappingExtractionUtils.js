@@ -36,7 +36,6 @@ const getMessageTitle = (position, role, name, title) => {
   return role === "Practitioner" ? "Parent" : title;
 };
 
-
 const getText = messageResource => {
   if (messageResource && messageResource.Message) {
     return messageResource.Message;

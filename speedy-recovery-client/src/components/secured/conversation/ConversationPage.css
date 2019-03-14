@@ -2,8 +2,8 @@
   border-style: ridge;
   border-color: #173670;
   background-color: #5194ba;
-    padding: 20px;
-    height: 70vh;
+  padding: 20px;
+  height: 70vh;
 }
 
 .messageField {
@@ -16,6 +16,5 @@
 }
 
 .message-list {
-    height: 55vh;
+  height: 55vh;
 }
-
