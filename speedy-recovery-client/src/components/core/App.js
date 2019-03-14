@@ -30,7 +30,6 @@ class App extends Component {
           medicationDispenses: [],
           carePlans: [],
           authRequestStarted: false,
-        authenticationInitiated: false,
           error: null,
           fhirVersion: null,
           patientPractitioners: [],
@@ -112,28 +111,27 @@ class App extends Component {
   };
 
   componentWillMount = () => {
-    // Check FHIR server capability
-    FhirServerService.checkFhirCapabilityStatement()
+    // Check FHIR server capability, will determine the version of the FHIR standard
+    const capabilityPromise = FhirServerService.checkFhirCapabilityStatement()
       .then(result => {
         console.log("FHIR capability check successful", result);
         this.setState({ fhirVersion: result.fhirVersion });
       })
       .catch(() => this.handleFhirServerError());
 
-    // Register SMART auth callback
-    SmartAuthService.onSmartAuthenticatedSessionReady()
+    // Register SMART auth callback, will be triggered after browser redirected back from sandbox's login interface
+    const authenticationPromise = SmartAuthService.onSmartAuthenticatedSessionReady()
       .then(fhirClient => {
         console.log("Received FHIR client: ", fhirClient);
         return this.setState({ fhirClient });
       })
       .catch(errorMessage => this.handleLoginError(errorMessage));
-  };
 
-
-  componentDidUpdate = () => {
-    if (this.state.fhirClient && this.state.fhirVersion && !this.state.authenticationInitiated) {
-          this.handleLoginSuccess(this.state.fhirClient);
-      }
+    // Only after all required Promises are ready, continue with the login process
+    Promise.all([capabilityPromise, authenticationPromise])
+      .then(() => this.handleLoginSuccess())
+      // This should never occur, as we handle the errors on the individual Promises
+      .catch(reason => console.error(reason));
   };
 
   handleLoginRequest = user => {
@@ -146,10 +144,10 @@ class App extends Component {
     this.setState({ user: null });
   };
 
-  handleLoginSuccess = fhirClient => {
-    this.setState({ authenticationInitiated: true });
-
-    fhirClient.user
+  // This method runs when both fhirVersion is known and fhirClient is ready
+  handleLoginSuccess = () => {
+    this.state.fhirClient
+      .user
       .read()
       .then(currentUserResource => {
         console.log("Received current user resources: ", currentUserResource);
@@ -174,7 +172,8 @@ class App extends Component {
 
         if (user.role === "Practitioner") {
           // also get patient info
-          fhirClient.patient
+          this.state.fhirClient
+            .patient
             .read()
             .then(patientResource => {
               console.log(
