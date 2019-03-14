@@ -33,7 +33,6 @@ class PatientConditionPane extends Component {
           <Table.Row key={"conditionRow"}>
             <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">Summary</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell" />
             <Table.HeaderCell id="patientTableCell">Time</Table.HeaderCell>
           </Table.Row>
         ];
