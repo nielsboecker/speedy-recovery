@@ -166,8 +166,18 @@ class App extends Component {
     this.setState({ user: null });
   };
 
-  // This method runs when both fhirVersion is known and fhirClient is ready
   handleLoginSuccess = () => {
+    console.log("--------------------login", this.state);
+
+
+    // This method must only run when both fhirVersion is known and fhirClient is ready
+    if (!this.state.fhirVersion ||
+      !this.state.fhirClient ||
+      (Object.entries(this.state.fhirClient).length === 0 && this.state.fhirClient.constructor === Object)) {
+      console.log("Aborting login");
+      return;
+    }
+
     this.state.fhirClient
       .user
       .read()
@@ -380,8 +390,9 @@ class App extends Component {
       !this.state.authRequestStarted
     ) {
       // SMART JS library will always try to login based on last stored token, which leads to this error at
-      // initial page load
+      // initial page load. It will also try to set the fhirClient to {}, which is not helpful.
       console.info("Ignoring initial SMART auth error");
+      this.setState({ fhirClient: null });
       return;
     }
     this.setState({
