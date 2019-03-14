@@ -18,11 +18,12 @@
 
 import {
   fhirMapAppointment,
+  fhirMapCarePlan,
   fhirMapCondition,
   fhirMapMedication,
   fhirMapMedicationDispense,
-  fhirMapCarePlan, fhirMapPractitioner,
-  fhirMapPatient
+  fhirMapPerson,
+  fhirMapPractitioner
 } from "../../service/FhirDataMappingService";
 import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatientSTU3.json";
 import fhirExamplePatientMissingField from "../test_input/fhir_resources_stu3/FhirExamplePatientMissingFieldSTU3.json";
@@ -34,12 +35,12 @@ import fhirExampleMedicationDispense from "../test_input/fhir_resources_stu3/Fhi
 import fhirExamplePractitioner from "../test_input/fhir_resources_stu3/FhirExamplePractitionerSTU3.json";
 
 test("map FHIR Patient resource to internal user data model", () => {
-  const user = fhirMapPatient(fhirExamplePatient, "3");
+  const user = fhirMapPerson(fhirExamplePatient, "3");
   expect(user).toMatchSnapshot();
 });
 
 test("map FHIR Patient resource(with missing fields) to internal user data model", () => {
-  const user = fhirMapPatient(fhirExamplePatientMissingField, "3");
+  const user = fhirMapPerson(fhirExamplePatientMissingField, "3");
   expect(user).toMatchSnapshot();
 });
 

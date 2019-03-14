@@ -17,12 +17,7 @@
 /* This file tests the HTTP requests between the backend server and the frontend*/
 
 import mockAxios from "jest-mock-axios";
-import {
-  getConversation,
-  getMessages,
-  getPractitionerInfo,
-  postMessages
-} from "../../service/BackendService";
+import { getConversation, getMessages, getPractitionerInfo, postMessages } from "../../service/BackendService";
 import message from "../test_input/db_resources/Message.json";
 import conversation from "../test_input/db_resources/Conversation.json";
 import practitionerInfo from "../test_input/db_resources/PractitionerExtra.json";

@@ -20,7 +20,8 @@ import fhirBrokenPatient from "../test_input/fhir_resources_stu3/broken_resource
 import fhirBrokenApp from "../test_input/fhir_resources_stu3/broken_resources/FhirSingleExampleAppointmentBroken";
 import fhirBrokenCondition from "../test_input/fhir_resources_stu3/broken_resources/FhirExampleConditionBroken";
 import fhirBrokenMedication from "../test_input/fhir_resources_stu3/broken_resources/FhirExampleMedicationBroken";
-import fhirBrokenMedicationDispense from "../test_input/fhir_resources_stu3/broken_resources/FhirExampleMedicationDispenseBroken";
+import fhirBrokenMedicationDispense
+  from "../test_input/fhir_resources_stu3/broken_resources/FhirExampleMedicationDispenseBroken";
 import fhirBrokenCarePlan from "../test_input/fhir_resources_stu3/broken_resources/FhirExampleCarePlanBroken";
 import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatientSTU3.json";
 import fhirSingleApp from "../test_input/fhir_resources_stu3/FhirSingleExampleAppointmentSTU3.json";
@@ -29,20 +30,21 @@ import fhirExampleMedication from "../test_input/fhir_resources_stu3/FhirExample
 import fhirExampleMedicationDispense from "../test_input/fhir_resources_stu3/FhirExampleMedicationDispenseSTU3.json";
 import fhirExampleCarePlan from "../test_input/fhir_resources_stu3/FhirExampleCarePlanSTU3.json";
 import fhirExamplePractitioner from "../test_input/fhir_resources_stu3/FhirExamplePractitionerSTU3.json";
-import fhirBrokenPractitioner from "../test_input/fhir_resources_stu3/broken_resources/FhirExamplePractitionerBroken.json";
+import fhirBrokenPractitioner
+  from "../test_input/fhir_resources_stu3/broken_resources/FhirExamplePractitionerBroken.json";
 import {
   filterAppointmentResource,
   filterCarePlanResource,
   filterConditionResource,
   filterMedicationDispenseResource,
   filterMedicationResource,
-  filterPatientResource,
+  filterPersonResource,
   filterPractitionerResource
 } from "../../service/FhirDataFilteringService";
 
 test("filter out patient resource with missing info only", () => {
-  expect(filterPatientResource(fhirBrokenPatient)).toBeFalsy();
-  expect(filterPatientResource(fhirExamplePatient)).toEqual(fhirExamplePatient);
+  expect(filterPersonResource(fhirBrokenPatient)).toBeFalsy();
+  expect(filterPersonResource(fhirExamplePatient)).toEqual(fhirExamplePatient);
 });
 
 test("filter out appointment resource with missing info only", () => {

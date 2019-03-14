@@ -17,7 +17,7 @@
 /* This file filters the various fhir resources that our app retrieves ensuring that all important fields are present.
  */
 
-const filterPatientResource = resource => {
+const filterPersonResource = resource => {
   if (
     resource &&
     resource.name &&
@@ -116,7 +116,7 @@ const filterCarePlanResource = resource => {
 };
 
 export {
-  filterPatientResource,
+  filterPersonResource,
   filterAppointmentResource,
   filterConditionResource,
   filterMedicationResource,
