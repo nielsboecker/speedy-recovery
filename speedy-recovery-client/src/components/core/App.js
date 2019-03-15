@@ -186,34 +186,22 @@ class App extends Component {
           case "Parent":
             this.updateStateChildID(currentUserResource);
             this.updateStateAppointment(this.state.childID, user.role);
+            this.updateStateCondition(this.state.childID);
+            this.updateStateMedicationDispense(this.state.childID);
+            this.updateStateCarePlan(this.state.childID);
             break;
           case "Practitioner":
             this.updateStateAppointment(user.id, user.role);
             break;
           case "Patient":
             this.updateStateAppointment(user.id, user.role);
+            this.updateStateCondition(user.id);
+            this.updateStateMedicationDispense(user.id);
+            this.updateStateCarePlan(user.id);
             break;
           default:
             console.log("Invalid user role: ", user.role);
         }
-
-        if (user.role === "Practitioner") {
-          // Retrieve the practitioner's patients information
-          this.state.fhirClient.patient
-            .read()
-            .then(patientResource => {
-              console.log(
-                "Patient Resource for practitioner: ",
-                patientResource
-              );
-              this.updateStatePatient(patientResource);
-            })
-            .catch(error => console.error(error));
-        }
-        this.updateStateCondition(user.id);
-        this.updateStateMedicationDispense(user.id);
-        this.updateStateCarePlan(user.id);
-
         this.setState({ user });
       })
       .catch(errorMessage => {

@@ -155,11 +155,32 @@ const getUserCarePlan = userID => {
   });
 };
 
+const getPatient = userID => {
+    return new Promise((resolve, reject) => {
+        FHIR.oauth2.ready(
+            smart => {
+                smart.api
+                    .search({ type: "Patient", query: { _id: userID } })
+                    .done(patientInformation => {
+                        console.log("Patient response: ", patientInformation);
+                        const patient = extractResourcesFromBundle(patientInformation);
+                        return resolve(patient);
+                    });
+            },
+            error => {
+                console.error("Patient fetching error: ", error);
+                return reject(error);
+            }
+        );
+    });
+};
+
 export default {
   getPractitioner,
   getUserAppointments,
   getUserConditions,
   getUserMedicationDispense,
   getUserCarePlan,
-  extractResourcesFromBundle
+  extractResourcesFromBundle,
+  getPatient
 };

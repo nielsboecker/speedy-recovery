@@ -29,6 +29,7 @@ import ConversationPage from "../conversation/ConversationPage";
 import InfoFactory from "../patientinformation/InfoFactory";
 import CalendarFactory from "../calendar/CalendarFactory";
 import HomePageFactory from "../home/HomePageFactory";
+import practitionerPatientInfo from "../patientinformation/practitionerPatientInfo";
 
 class SecuredMainPage extends Component {
   constructor(props) {
@@ -104,12 +105,18 @@ class SecuredMainPage extends Component {
                     conditions={this.props.conditions}
                     medicationDispenses={this.props.medicationDispenses}
                     carePlans={this.props.carePlans}
+                    userList={this.props.userList}
+                    fhirVersion={this.props.fhirVersion}
                   />
                 )}
               />
               <Route
                 path={`${match.url}/conversation`}
                 component={ConversationPage}
+              />
+              <Route
+                  path={`${match.url}/information`}
+                  component={practitionerPatientInfo}
               />
             </Container>
             <Footer />

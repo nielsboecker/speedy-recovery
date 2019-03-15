@@ -19,21 +19,43 @@ about each of the practitioners' patients.
  */
 
 import React, { Component } from "react";
+import {Link} from "react-router-dom";
 
 class PractitionerInfo extends Component {
-  render() {
-    const { patient } = this.props;
+    constructor(props) {
+        super(props);
+        this.state = {
+            userList: []
+        };
+    }
 
-    return (
-      <div>
-        <h1>Patient Information For Practitioner View</h1>
-        <h4>Name: {patient.name}</h4>
-        <h4>Gender: {patient.gender}</h4>
-        <h4>Address: {patient.address}</h4>
-        <h4>Email: {patient.email}</h4>
-      </div>
-    );
-  }
+    render() {
+            const patientItems = this.state.userList.map(patient => {
+                return (
+                    <Link
+                        to={{
+                            pathname: `/secured/information/${patient.id}`,
+                            state: {
+                                id: patient.id,
+                                name: patient.name,
+                                fhirVersion : this.props.fhirVersion
+                            }}}
+                        key={patient.id}>
+                        <h3> {patient.name} </h3>
+                    </Link>
+                );});
+        return (
+            <div>
+                <h1>My patients: </h1>
+                {patientItems}
+            </div>
+        );
+    }
+    componentWillMount() {
+        if(this.props.userList){
+            this.setState({userList: this.props.userList});
+        }
+    }
 }
 
 export default PractitionerInfo;
