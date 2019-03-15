@@ -26,3 +26,8 @@ Enzyme.configure({ adapter: new Adapter() });
 it("renders without crashing", () => {
   shallow(<MessagingPage />);
 });
+
+it("renders without crashing", () => {
+  const wrapper = shallow(<MessagingPage />);
+  wrapper.setState({ conversations: [{ userId: "foo" }] });
+});
