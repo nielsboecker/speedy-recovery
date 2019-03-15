@@ -22,6 +22,7 @@ import Adapter from "enzyme-adapter-react-16";
 import PatientHomePage from "../../components/secured/home/PatientHomePage";
 import ParentHomePage from "../../components/secured/home/ParentHomePage";
 import PractitionerHomePage from "../../components/secured/home/PractitionerHomePage";
+import { getNextEvent } from "../../components/secured/home/HomePageDataUtils";
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -35,4 +36,9 @@ it("Parent's home page renders without crashing", () => {
 
 it("Practitioner's home page renders without crashing", () => {
   shallow(<PractitionerHomePage />);
+});
+
+test("When event exist, getNextEvent()", () => {
+  const mockEvents = [{ start: "2222-12-12" }, { start: "2222-12-12" }];
+  getNextEvent(mockEvents);
 });
