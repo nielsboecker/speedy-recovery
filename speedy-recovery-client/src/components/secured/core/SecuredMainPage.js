@@ -64,7 +64,6 @@ class SecuredMainPage extends Component {
                 render={() => (
                   <HomePageFactory
                     user={this.props.user}
-                    patient={this.props.patient}
                     events={this.props.appointments}
                   />
                 )}
@@ -101,11 +100,10 @@ class SecuredMainPage extends Component {
                 render={() => (
                   <InfoFactory
                     user={this.props.user}
-                    patient={this.props.patient}
+                    patients={this.props.patients}
                     conditions={this.props.conditions}
                     medicationDispenses={this.props.medicationDispenses}
                     carePlans={this.props.carePlans}
-                    userList={this.props.userList}
                     fhirVersion={this.props.fhirVersion}
                   />
                 )}

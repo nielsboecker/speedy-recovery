@@ -45,7 +45,7 @@ class App extends Component {
     this.state = {
       fhirClient: {},
       user: null,
-      patient: {},
+      patients: [],
       appointments: [],
       conditions: [],
       medicationDispenses: [],
@@ -101,7 +101,7 @@ class App extends Component {
                 {...props}
                 onLogout={this.handleLogoutRequest}
                 user={this.state.user}
-                patient={this.state.patient}
+                patients={this.state.patients}
                 appointments={this.state.appointments}
                 conditions={this.state.conditions}
                 medicationDispenses={this.state.medicationDispenses}
@@ -236,9 +236,9 @@ class App extends Component {
           return this.updateStatePractitioners(id, family[family.length - 1]);
         });
 
-        this.setState({ appointments });
         const userList = this.setUserList(appointments, role);
         this.setState({ appointments, userList });
+        this.updateStatePatient(userList, role);
       })
       .catch(error => {
         console.error(error);
@@ -263,6 +263,24 @@ class App extends Component {
     }
     return [];
   }
+
+    updateStatePatient(userList, role) {
+      if(role === "Practitioner"){
+          const patients = [];
+          for(let user of userList){
+              FhirDataQueryingService.getPatient(user.id)
+                  .then(patientResource => {
+                      const patient = patientResource.map(patient => fhirMapPerson(patient, this.state.fhirVersion)
+                      );
+                      patients.push(patient[0]);
+                      this.setState({patients})
+                  })
+                  .catch(error => {
+                      console.error(error);
+                  });
+          }
+      }
+    }
 
   updateStateCondition(userId) {
     FhirDataQueryingService.getUserConditions(userId)
@@ -301,23 +319,6 @@ class App extends Component {
       .catch(error => {
         console.error(error);
       });
-  }
-
-  updateStatePatient(patientResource) {
-    const filteredPatientResource = filterPersonResource(patientResource);
-    if (filteredPatientResource) {
-      const patient = fhirMapPerson(
-        filteredPatientResource,
-        this.state.fhirVersion
-      );
-      console.log("Patient Resource after mapping: ", patient);
-      this.setState({ patient });
-    } else {
-      console.error(
-        "Crucial information missing from resource: ",
-        patientResource
-      );
-    }
   }
 
   filterUser(currentUserResource) {

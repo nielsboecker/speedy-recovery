@@ -40,7 +40,7 @@ class InfoFactory extends Component {
       case "Parent":
         return <ParentInfo user={user} />;
       case "Practitioner":
-        return <PractitionerInfo userList={this.props.userList} fhirVersion={this.props.fhirVersion}/>;
+        return <PractitionerInfo patients={this.props.patients} fhirVersion={this.props.fhirVersion}/>;
       default:
         return undefined;
     }

@@ -33,16 +33,16 @@ class practitionerPatientInfo extends Component {
         return (
             <div>
                 <h1>Patient Information For Parent View</h1>
-                <h4>Name: {this.props.location.state.name}</h4>
+                <h4>Name: {this.props.location.state.patient.name}</h4>
             </div>
         );
     }
 
     componentWillMount() {
         if(this.props.location){
-            this.updateStateCondition(this.props.location.state.id);
-            this.updateStateMedicationDispense(this.props.location.state.id);
-            this.updateStateCarePlan(this.props.location.state.id);
+            this.updateStateCondition(this.props.location.state.patient.id);
+            this.updateStateMedicationDispense(this.props.location.state.patient.id);
+            this.updateStateCarePlan(this.props.location.state.patient.id);
         }
     }
 
