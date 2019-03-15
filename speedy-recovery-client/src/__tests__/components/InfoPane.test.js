@@ -25,31 +25,32 @@ import PatientCarePlanPane from "../../components/secured/patientinformation/Pat
 import PatientConditionPane from "../../components/secured/patientinformation/PatientConditionPane";
 import PatientMedicationDispensePane from "../../components/secured/patientinformation/PatientMedicationDispensePane";
 import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatientSTU3.json";
+import fhirExamplePractitioner from "../test_input/fhir_resources_stu3/FhirExamplePractitionerSTU3.json";
 
 Enzyme.configure({ adapter: new Adapter() });
+
+it("PatientBasicPane renders without crashing", () => {
+  shallow(
+    <PatientBasicPane
+      user={fhirExamplePractitioner}
+      patient={fhirExamplePatient}
+    />
+  );
+});
 
 it("PatientBasicPane renders without crashing", () => {
   shallow(<PatientBasicPane user={exampleUser} patient={fhirExamplePatient} />);
 });
 
 it("PatientCarePlanPane renders without crashing", () => {
-  shallow(
-    <PatientCarePlanPane
-      user={exampleUser}
-      conditions={[]}
-      medicationDispenses={[]}
-      carePlans={[]}
-    />
-  );
+  shallow(<PatientCarePlanPane user={exampleUser} carePlans={["foo"]} />);
 });
 
 it("PatientConditionPane renders without crashing", () => {
   shallow(
     <PatientConditionPane
       user={exampleUser}
-      conditions={[]}
-      medicationDispenses={[]}
-      carePlans={[]}
+      conditions={[{ onsetDateTime: "foo" }]}
     />
   );
 });
@@ -58,9 +59,7 @@ it("PatientMedicationDispensePane renders without crashing", () => {
   shallow(
     <PatientMedicationDispensePane
       user={exampleUser}
-      conditions={[]}
-      medicationDispenses={[]}
-      carePlans={[]}
+      medicationDispenses={["foo"]}
     />
   );
 });
