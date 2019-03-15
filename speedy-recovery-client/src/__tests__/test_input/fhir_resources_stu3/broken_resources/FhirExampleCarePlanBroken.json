@@ -1,0 +1,80 @@
+{
+  "resourceType": "CarePlan",
+  "id": "RES47187",
+  "meta": {
+    "versionId": "2",
+    "lastUpdated": "2018-10-26T02:44:11.369-04:00",
+    "tag": [
+      {
+        "system": "https://smarthealthit.org/tags",
+        "code": "synthea-7-2017"
+      }
+    ]
+  },
+  "status": "completed",
+  "intent": "order",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "134435003"
+        }
+      ]
+    }
+  ],
+  "subject": {
+    "reference": "Patient/77d4fd3a-681d-49e5-97cd-05fb8ad89d24"
+  },
+  "context": {
+    "reference": "Encounter/2eacd5fc-20d2-4e65-b9cf-00c375b194eb"
+  },
+  "period": {
+    "start": "1960-09-13",
+    "end": "1961-04-11"
+  },
+  "activity": [
+    {
+      "detail": {
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "135892000",
+              "display": "Antenatal education"
+            }
+          ]
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "detail": {
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "226060000",
+              "display": "Stress management"
+            }
+          ]
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "detail": {
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "171054004",
+              "display": "Pregnancy diet education"
+            }
+          ]
+        },
+        "status": "completed"
+      }
+    }
+  ]
+}

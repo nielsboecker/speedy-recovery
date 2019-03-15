@@ -1,35 +1,98 @@
 {
-  "role": "Patient",
-  "birthDate": "1985-08-01T00:00:00.000Z",
-  "gender": "male",
-  "name": "Jason Argonaut",
-  "careProvider": "Physician Family Medicine",
-  "language": "English",
-  "phone": [
+  "resourceType": "Patient",
+  "id": "example",
+  "email": "peter@live.com",
+  "careprovider": "Dr Example2",
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">\n      <table>\n        <tbody>\n          <tr>\n            <td>Name</td>\n            <td>Peter James <b>Chalmers</b> (&quot;Jim&quot;)</td>\n          </tr>\n          <tr>\n            <td>Address</td>\n            <td>534 Erewhon, Pleasantville, Vic, 3999</td>\n          </tr>\n          <tr>\n            <td>Contacts</td>\n            <td>Home: unknown. Work: (03) 5555 6473</td>\n          </tr>\n          <tr>\n            <td>Id</td>\n            <td>MRN: 12345 (Acme Healthcare)</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>"
+  },
+  "identifier": [
     {
-      "system": "phone",
-      "value": "608-271-9000",
+      "use": "usual",
+      "type": {
+        "coding": [
+          {
+            "system": "http://hl7.org/fhir/v2/0203",
+            "code": "MR"
+          }
+        ]
+      },
+      "system": "urn:oid:1.2.36.146.595.217.0.1",
+      "value": "12345",
+      "period": {
+        "start": "2001-05-06"
+      },
+      "assigner": {
+        "display": "Acme Healthcare"
+      }
+    }
+  ],
+  "name": [
+    {
+      "use": "official",
+      "family": "Louis",
+      "given": ["John", "James"]
+    },
+    {
+      "use": "usual",
+      "given": ["Jony"]
+    }
+  ],
+  "telecom": [
+    {
       "use": "home"
     },
     {
       "system": "phone",
-      "value": "608-771-9000",
+      "value": "(03) 6666 6473",
       "use": "work"
     },
     {
-      "system": "phone",
-      "value": "608-771-9000",
-      "use": "mobile"
-    },
+      "system": "email",
+      "value": "loius@example.org",
+      "use": "home"
+    }
+  ],
+  "gender": "male",
+  "birthDate": "2011-12-10",
+  "address": [
     {
-      "system": "phone",
-      "value": "608-771-9000",
-      "use": "temp",
-      "period": {
-        "start": "2011-08-04T00:00:00Z",
-        "end": "2014-08-04T00:00:00Z"
+      "use": "home",
+      "line": ["534 Central Road"],
+      "city": "PleasantVille",
+      "state": "NY",
+      "postalCode": "1205",
+      "country": "US"
+    }
+  ],
+  "active": true,
+  "communication": [
+    {
+      "language": {
+        "coding": [
+          {
+            "system": "http://hl7.org/fhir/ValueSet/languages",
+            "code": "en-US",
+            "display": "English (United States)"
+          }
+        ]
       }
     }
   ],
-  "email": "open@epic.com"
+  "link": [
+    {
+      "target": {
+        "reference": "RelatedPerson/peter",
+        "display": "John Louis"
+      }
+    },
+    {
+      "target": {
+        "reference": "Patient/example",
+        "display": "John Louis"
+      }
+    }
+  ]
 }
+

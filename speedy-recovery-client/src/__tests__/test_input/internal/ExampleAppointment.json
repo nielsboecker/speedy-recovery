@@ -1,14 +1,14 @@
-{
+[{
   "id": "example4",
   "title": "Chemo progress report",
   "status": "booked",
   "reason": "General Discussion",
   "priority": 5,
   "description": "test",
-  "start": "test",
   "end": "test",
   "comment": "test",
   "patient": "test",
   "practitioner": "test",
+  "practitionerId": "test",
   "location": "test"
-}
+}]

@@ -1,0 +1,53 @@
+{
+  "resourceType": "MedicationDispense",
+  "id": "smart-MedicationDispense-332",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2019-03-05T01:32:11.885-05:00",
+    "tag": [
+      {
+        "system": "https://smarthealthit.org/tags",
+        "code": "smart-8-2017"
+      }
+    ]
+  },
+  "text": {
+    "fhir_comments": [
+      "  insert contents here  "
+    ],
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"> Dispensed 30 tablets = 30 day supply of Lisinopril 5 MG Oral Tablet </div>"
+  },
+  "status": "completed",
+  "patient": {
+    "reference": "Patient/smart-2113340"
+  },
+  "authorizingPrescription": [
+    {
+      "reference": "MedicationOrder/smart-MedicationOrder-227"
+    }
+  ],
+  "quantity": {
+    "value": 30,
+    "unit": "tablets",
+    "system": "http://unitsofmeasure.org",
+    "code": "{tablets}"
+  },
+  "daysSupply": {
+    "value": 30,
+    "unit": "days",
+    "system": "http://unitsofmeasure.org",
+    "code": "d"
+  },
+  "medicationCodeableConcept": {
+    "coding": [
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "code": "311354",
+        "display": "Lisinopril 5 MG Oral Tablet"
+      }
+    ],
+    "text": "Lisinopril 5 MG Oral Tablet"
+  },
+  "whenHandedOver": "2009-04-09"
+}

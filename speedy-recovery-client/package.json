@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "latest",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-prettier": "^3.0.1",
     "fhirclient": "^0.1.15",
+    "jest-mock-axios": "^2.1.11",
     "moment": "latest",
+    "node": "11.0.0",
     "react": "^16.7.0",
     "react-big-calendar": "latest",
     "react-chat-elements": "^10.2.0",
@@ -56,9 +59,15 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn format"
+    }
+  },
   "devDependencies": {
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.8.0",
+    "husky": "^1.3.1",
     "jest-fetch-mock": "^2.1.1",
     "jest-localstorage-mock": "^2.4.0",
     "patch-package": "6.0.0-9",

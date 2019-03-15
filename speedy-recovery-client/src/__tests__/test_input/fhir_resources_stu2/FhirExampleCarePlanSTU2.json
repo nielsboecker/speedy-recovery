@@ -1,0 +1,66 @@
+{
+  "resourceType": "CarePlan",
+  "id": "RES383736",
+  "meta": {
+    "versionId": "1",
+    "lastUpdated": "2018-05-07T13:36:46.287-04:00",
+    "tag": [
+      {
+        "system": "https://smarthealthit.org/tags",
+        "code": "synthea-8-2017"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/a7c25832-268c-441c-a0a8-ef2fcd6040a2"
+  },
+  "status": "completed",
+  "context": {
+    "reference": "Encounter/e4c8d7b3-df14-4ed0-ba62-845b896343f7"
+  },
+  "period": {
+    "start": "1985-03-31",
+    "end": "1985-08-16"
+  },
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "53950000",
+          "display": "Respiratory therapy"
+        }
+      ]
+    }
+  ],
+  "activity": [
+    {
+      "detail": {
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "304510005",
+              "display": "Recommendation to avoid exercise"
+            }
+          ]
+        },
+        "status": "completed"
+      }
+    },
+    {
+      "detail": {
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "371605008",
+              "display": "Deep breathing and coughing exercises"
+            }
+          ]
+        },
+        "status": "completed"
+      }
+    }
+  ]
+}

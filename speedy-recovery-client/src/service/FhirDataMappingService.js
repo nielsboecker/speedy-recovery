@@ -1,76 +1,178 @@
-// TODO: Many different versions of fields like name, make more resilient (and be careful to work with V3!)
-// TODO: Add different mappings for different FHIR versions (as a proof of concept)
+/*
+ * Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
+ * patients, parents and hospital staff
+ *
+ * Copyright (C) 2019 University College London
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+ * Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ * You should have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see http://www.gnu.org/license/.
+ * */
 
-// FIXME: Update mapping
-// arrow function with parameter
+/* This file controls the mapping of fhir resources to our internal format and differs depending on the version of FHIR
+being used.
+ */
 
-const mapPatientToUser = fhirPatientResource => ({
-  //This is a temporary hard-code fix as we have not implemented the searching for a patients' parent
-  role:
-    fhirPatientResource.id === "f0462936-eb4b-4da1-b45a-fbd96ebf8ccb"
-      ? "Parent"
-      : fhirPatientResource.resourceType,
-  birthDate: fhirPatientResource.birthDate,
-  gender: fhirPatientResource.gender,
-  name: fhirPatientResource.name[0].family || "Unknown",
-  careProvider: fhirPatientResource.careprovider || "Unknown",
-  //languagePreferred:"Unknown" || fhirPatientResource.communication[0].language.coding[0].display,
-  address:
-    fhirPatientResource.address[0].line[0] +
-    ", " +
-    fhirPatientResource.address[0].city +
-    ", " +
-    fhirPatientResource.address[0].state +
-    ", " +
-    fhirPatientResource.address[0].postalCode +
-    ", " +
-    fhirPatientResource.address[0].country,
-  phone:
-    fhirPatientResource.telecom.filter(element => element.system === "phone") ||
-    [],
-  email: fhirPatientResource.email || "Unknown"
-});
+import {
+  getChildIDSTU2,
+  mapAppointmentSTU2,
+  mapCarePlanSTU2,
+  mapConditionSTU2,
+  mapMedicationDispenseSTU2,
+  mapMedicationSTU2,
+  mapPersonToUserSTU2,
+  mapPractitionerSTU2
+} from "./FhirMappingAdapterDSTU2";
+import {
+  getChildIDSTU3,
+  mapAppointmentSTU3,
+  mapCarePlanSTU3,
+  mapConditionSTU3,
+  mapMedicationDispenseSTU3,
+  mapMedicationSTU3,
+  mapPersonToUserSTU3,
+  mapPractitionerSTU3
+} from "./FhirMappingAdapterSTU3";
 
-const mapAppointment = fhirAppResource => ({
-  id: fhirAppResource.id,
-  title: fhirAppResource.text.div.substring(
-    42,
-    fhirAppResource.text.div.length - 6
-  ),
-  status: fhirAppResource.status,
-  appType: fhirAppResource.appointmentType.coding[0].display,
-  indication: fhirAppResource.indication[0].display,
-  priority: fhirAppResource.priority,
-  description: fhirAppResource.description,
-  supportingInfo: fhirAppResource.supportingInformation[0].reference, //TODO: Fix for multiple supporting info
-  start: new Date(fhirAppResource.start),
-  end: new Date(fhirAppResource.end),
-  created: new Date(fhirAppResource.created),
-  comment: fhirAppResource.comment,
-  patient: fhirAppResource.participant[0].actor.display,
-  practitioner: fhirAppResource.participant[1].actor.display,
-  location: fhirAppResource.participant[2].actor.display
-});
+const fhirMapPerson = (resource, version) => {
+  if (version) {
+    switch (version[0]) {
+      case "1":
+      case "2":
+        return mapPersonToUserSTU2(resource);
+      case "3":
+        return mapPersonToUserSTU3(resource);
+      default:
+        console.log("Invalid version of FHIR resource provided: ", version);
+    }
+  }
+  console.log("No FHIR version has been supplied");
+  return null;
+};
 
-const mapCondition = fhirCondResource => ({
-  clinicalStatus: fhirCondResource.clinicalStatus,
-  verificationStatus: fhirCondResource.verificationStatus,
-  severity: fhirCondResource.severity.coding[0].display,
-  summary: fhirCondResource.code.text,
-  bodySite: fhirCondResource.bodySite[0].text,
-  onsetDateTime: new Date(fhirCondResource.onsetDateTime)
-});
+const fhirMapAppointment = (resource, version) => {
+  if (version) {
+    switch (version[0]) {
+      case "1":
+      case "2":
+        return mapAppointmentSTU2(resource);
+      case "3":
+        return mapAppointmentSTU3(resource);
+      default:
+        console.log("App Invalid version of FHIR resource provided: ", version);
+    }
+  }
+  console.log("No FHIR version has been supplied");
+  return null;
+};
 
-const mapMedication = fhirMedResource => ({
-  id: fhirMedResource.id,
-  producer: fhirMedResource.contained[0].name,
-  name: fhirMedResource.code.coding[0].display,
-  isBrand: fhirMedResource.isBrand,
-  isOverTheCounter: fhirMedResource.isOverTheCounter,
-  form: fhirMedResource.form.coding[0].display,
-  content:
-    fhirMedResource.package.content[0].itemCodeableConcept.coding[0].display,
-  imageURL: fhirMedResource.image[0].title
-});
+const fhirMapCondition = (resource, version) => {
+  if (version) {
+    switch (version[0]) {
+      case "1":
+      case "2":
+        return mapConditionSTU2(resource);
+      case "3":
+        return mapConditionSTU3(resource);
+      default:
+        console.log("Invalid version of FHIR resource provided: ", version);
+    }
+  }
+  console.log("No FHIR version has been supplied");
+  return null;
+};
 
-export { mapPatientToUser, mapAppointment, mapCondition, mapMedication };
+const fhirMapMedication = (resource, version) => {
+  if (version) {
+    switch (version[0]) {
+      case "1":
+      case "2":
+        return mapMedicationSTU2(resource);
+      case "3":
+        return mapMedicationSTU3(resource);
+      default:
+        console.log("Invalid version of FHIR resource provided: ", version);
+    }
+  }
+  console.log("No FHIR version has been supplied");
+  return null;
+};
+
+const fhirMapMedicationDispense = (resource, version) => {
+  if (version) {
+    switch (version[0]) {
+      case "1":
+      case "2":
+        return mapMedicationDispenseSTU2(resource);
+      case "3":
+        return mapMedicationDispenseSTU3(resource);
+      default:
+        console.log("Invalid version of FHIR resource provided: ", version);
+    }
+  }
+  console.log("No FHIR version has been supplied");
+  return null;
+};
+
+const fhirMapPractitioner = (resource, version) => {
+  if (version) {
+    switch (version[0]) {
+      case "1":
+      case "2":
+        return mapPractitionerSTU2(resource);
+      case "3":
+        return mapPractitionerSTU3(resource);
+      default:
+        console.log("Invalid version of FHIR resource provided: ", version);
+    }
+  }
+  console.log("No FHIR version has been supplied");
+  return null;
+};
+
+const fhirMapCarePlan = (resource, version) => {
+  if (version) {
+    switch (version[0]) {
+      case "1":
+      case "2":
+        return mapCarePlanSTU2(resource);
+      case "3":
+        return mapCarePlanSTU3(resource);
+      default:
+        console.log("Invalid version of FHIR resource provided: ", version);
+    }
+  }
+  console.log("No FHIR version has been supplied");
+  return null;
+};
+
+const getChildID = (resource, version) => {
+  if (version) {
+    switch (version[0]) {
+      case "1":
+      case "2":
+        return getChildIDSTU2(resource);
+      case "3":
+        return getChildIDSTU3(resource);
+      default:
+        console.log("Invalid version of FHIR resource provided: ", version);
+    }
+  }
+  console.log("No FHIR version has been supplied");
+};
+
+export {
+  fhirMapPerson,
+  fhirMapAppointment,
+  fhirMapCondition,
+  fhirMapMedication,
+  fhirMapMedicationDispense,
+  fhirMapCarePlan,
+  fhirMapPractitioner,
+  getChildID
+};

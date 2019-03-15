@@ -1,3 +1,21 @@
+/*
+* Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
+* patients, parents and hospital staff
+*
+* Copyright (C) 2019 University College London
+*
+* This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+* Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+* any later version.
+* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+* warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+* details.
+* You should have received a copy of the GNU Affero General Public License along with this program. If not,
+* see http://www.gnu.org/license/.
+* */
+
+/* This file tests the InfoFactory component*/
+
 import React from "react";
 import Enzyme, { mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
@@ -12,12 +30,26 @@ Enzyme.configure({ adapter: new Adapter() });
 // interesting things happen in the child components
 
 test("InfoFactory renders without crashing", () => {
-  mount(<InfoFactory user={{ role: "Patient" }} patient={{}} />);
+  mount(
+    <InfoFactory
+      user={{ role: "Patient" }}
+      patient={{}}
+      conditions={[]}
+      medicationDispenses={[]}
+      carePlans={[]}
+    />
+  );
 });
 
 test("InfoFactory renders patient info for patient users", () => {
   const wrapper = mount(
-    <InfoFactory user={{ role: "Patient" }} patient={{}} />
+    <InfoFactory
+      user={{ role: "Patient" }}
+      patient={{}}
+      conditions={[]}
+      medicationDispenses={[]}
+      carePlans={[]}
+    />
   );
   expect(wrapper.children().length).toBe(1);
   expect(wrapper.children().type().name).toEqual("PatientInfo");

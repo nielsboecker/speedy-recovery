@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`map FHIR Appointment resource to calendar data model 1`] = `
+Object {
+  "appType": "Followup",
+  "comment": "Further expand on the results of the MRI and determine the next actions that may be appropriate.",
+  "created": 2013-10-10T00:00:00.000Z,
+  "description": "Discussion on the results of your recent MRI",
+  "end": 2013-12-10T11:00:00.000Z,
+  "id": "example",
+  "indication": "Severe burn of left ear",
+  "location": "South Wing, second floor",
+  "patient": "Peter James Chalmers",
+  "patientId": "example",
+  "practitioner": "Dr Adam Careful",
+  "practitionerId": "example",
+  "priority": 5,
+  "start": 2013-12-10T09:00:00.000Z,
+  "status": "booked",
+  "supportingInfo": "DiagnosticReport/ultrasound",
+  "title": "Brian MRI results discussion",
+}
+`;
+
+exports[`map FHIR CarePlan resource to internal data model 1`] = `
+Object {
+  "activities": "1. Antenatal education; 2. Stress management; 3. Pregnancy diet education; ",
+  "category": "Routine antenatal care",
+  "id": "RES47187",
+  "period": "from 1960-09-13 to 1961-04-11",
+  "status": "completed",
+}
+`;
+
+exports[`map FHIR Condition resource to internal data model 1`] = `
+Object {
+  "bodySite": "Left Ear",
+  "clinicalStatus": "active",
+  "onsetDateTime": 2012-05-24T00:00:00.000Z,
+  "severity": "Severe",
+  "summary": "Burnt Ear",
+  "verificationStatus": "confirmed",
+}
+`;
+
+exports[`map FHIR Medication resource to internal data model 1`] = `
+Object {
+  "content": "Vancomycin 500mg powder for infusion solution vial (product)",
+  "form": "Injection Solution (qualifier value)",
+  "id": "med0301",
+  "imageURL": "Vancomycin Image",
+  "isBrand": true,
+  "isOverTheCounter": false,
+  "name": "Vancomycin Hydrochloride (VANCOMYCIN HYDROCHLORIDE)",
+  "producer": "Pfizer Laboratories Div Pfizer Inc",
+}
+`;
+
+exports[`map FHIR MedicationDispense resource to internal data model 1`] = `
+Object {
+  "daysSupply": "30 days",
+  "id": "smart-MedicationDispense-313",
+  "name": "clopidogrel 75 MG Oral Tablet [Plavix]",
+  "quantity": "30 tablets",
+  "status": "completed",
+  "whenHandedOver": "2009-07-08",
+}
+`;
+
+exports[`map FHIR Patient resource to internal user data model 1`] = `
+Object {
+  "address": "534 Erewhon St, PleasantVille, Vic, 3999, US",
+  "birthDate": "12/14/1963",
+  "careProvider": "Practitioner/smart-Practitioner-71081332",
+  "email": "Jim@example.org",
+  "firstName": "Peter",
+  "gender": "male",
+  "id": "example",
+  "name": "Peter James Chalmers",
+  "phone": "(03) 5555 6473",
+  "role": "Patient",
+}
+`;
+
+exports[`map FHIR Patient resource(with missing fields) to internal user data model 1`] = `
+Object {
+  "address": "Unknown",
+  "birthDate": "9/16/2011",
+  "careProvider": "Practitioner/smart-Practitioner-71081332",
+  "email": "Unknown",
+  "firstName": "Steve",
+  "gender": "male",
+  "id": "smart-7777701",
+  "name": "Steve Richey",
+  "phone": "Unknown",
+  "role": "Patient",
+}
+`;
+
+exports[`map FHIR Practitioner resource to internal data model 1`] = `
+Object {
+  "birthDate": "1971-11-07",
+  "gender": "female",
+  "id": "f007",
+  "name": "Simone Heps",
+  "photo": "Unknown",
+}
+`;
