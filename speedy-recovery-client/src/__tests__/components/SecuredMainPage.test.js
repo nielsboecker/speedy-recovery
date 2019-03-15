@@ -31,3 +31,11 @@ it("renders without crashing", () => {
     </MemoryRouter>
   );
 });
+
+test("SecuredMainPage renders without crashing", () => {
+  mount(
+    <MemoryRouter>
+      <SecuredMainPage />
+    </MemoryRouter>
+  );
+});
