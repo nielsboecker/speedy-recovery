@@ -42,3 +42,30 @@ test("When event exist, getNextEvent()", () => {
   const mockEvents = [{ start: "2222-12-12" }, { start: "2222-12-12" }];
   getNextEvent(mockEvents);
 });
+
+test("PatientHomePage renders without crashing", () => {
+  const mockEvents = [
+    { patient: "foo", start: "2222-12-12" },
+    { patient: "foo", start: "2222-12-12" }
+  ];
+  const wrapper = shallow(<PatientHomePage />);
+  wrapper.setProps({ events: mockEvents, user: "foo" });
+});
+
+test("ParentHomePage renders without crashing", () => {
+  const mockEvents = [
+    { patient: "foo", start: "2222-12-12" },
+    { patient: "foo", start: "2222-12-12" }
+  ];
+  const wrapper = shallow(<ParentHomePage />);
+  wrapper.setProps({ events: mockEvents, user: "foo" });
+});
+
+test("PractitionerHomePage renders without crashing", () => {
+  const mockEvents = [
+    { patient: "foo", start: "2222-12-12" },
+    { patient: "foo", start: "2222-12-12" }
+  ];
+  const wrapper = shallow(<PractitionerHomePage />);
+  wrapper.setProps({ events: mockEvents, user: "foo" });
+});
