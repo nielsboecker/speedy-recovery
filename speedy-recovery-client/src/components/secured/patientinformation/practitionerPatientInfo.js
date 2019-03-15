@@ -16,7 +16,7 @@
 
 import React, { Component } from "react";
 import FhirDataQueryingService from "../../../service/FhirDataQueryingService";
-import {fhirMapCarePlan, fhirMapCondition, fhirMapMedicationDispense, fhirMapPerson} from "../../../service/FhirDataMappingService";
+import {fhirMapCarePlan, fhirMapCondition, fhirMapMedicationDispense} from "../../../service/FhirDataMappingService";
 
 class practitionerPatientInfo extends Component {
     constructor(props) {
@@ -40,24 +40,10 @@ class practitionerPatientInfo extends Component {
 
     componentWillMount() {
         if(this.props.location){
-            this.updateStatePatient(this.props.location.state.id);
             this.updateStateCondition(this.props.location.state.id);
             this.updateStateMedicationDispense(this.props.location.state.id);
             this.updateStateCarePlan(this.props.location.state.id);
         }
-    }
-
-    updateStatePatient(userId) {
-        FhirDataQueryingService.getPatient(userId)
-            .then(patientResource => {
-                const patient = patientResource.map(patient =>
-                    fhirMapPerson(patient, this.props.location.state.fhirVersion)
-                );
-                this.setState({ patient });
-            })
-            .catch(error => {
-                console.error(error);
-            });
     }
 
     updateStateCondition(userId) {
