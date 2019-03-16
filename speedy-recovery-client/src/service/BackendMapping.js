@@ -23,12 +23,7 @@ import {
 } from "./BackendMappingAdapterGOSH";
 
 // Based on the type of the back-end data a different mapping function is used
-const conversationMap = (
-  conversationResource,
-  id,
-  userList,
-  dbType
-) => {
+const conversationMap = (conversationResource, id, userList, dbType) => {
   if (dbType) {
     switch (dbType) {
       case "MySQL":
@@ -42,7 +37,7 @@ const conversationMap = (
 };
 
 const messageMap = (messageResource, id, dbType, role, name, title) => {
-// Based on the type of the back-end data a different mapping function is used
+  // Based on the type of the back-end data a different mapping function is used
   if (dbType) {
     switch (dbType) {
       case "MySQL":

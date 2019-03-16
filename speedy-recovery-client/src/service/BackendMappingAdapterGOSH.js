@@ -46,7 +46,7 @@ const mapConversationsGOSH = (conversationResource, id, userList) => ({
 const mapMessagesGOSH = (messageResource, id, role, name, title) => ({
   position: getPosition(messageResource, id),
   type: "text",
-  title: getMessageTitle(getPosition(messageResource, id),role, name, title),
+  title: getMessageTitle(getPosition(messageResource, id), role, name, title),
   text: getText(messageResource),
   date: getTime(messageResource)
 });

@@ -29,13 +29,12 @@ const getPosition = (messageResource, id) => {
   return "right";
 };
 
-const getMessageTitle = (position,role,name,title) =>{
-    if(position==="right"){
-      return name; 
-    }
-    return role === "Practitioner" ? "Parent": title;
+const getMessageTitle = (position, role, name, title) => {
+  if (position === "right") {
+    return name;
+  }
+  return role === "Practitioner" ? "Parent" : title;
 };
-
 
 const getText = messageResource => {
   if (messageResource && messageResource.Message) {
@@ -73,14 +72,14 @@ const getTitle = (conversationResource, id, userList) => {
     userList
   ) {
     if (conversationResource.userid1 === id) {
-       const user = userList.find(user=>{
+      const user = userList.find(user => {
         return user.id === conversationResource.userid2;
-       })
-       return user.name;
+      });
+      return user.name;
     } else {
-      const user = userList.find(user=>{
-        return user.id === conversationResource.userid1 
-      })
+      const user = userList.find(user => {
+        return user.id === conversationResource.userid1;
+      });
       return user.name;
     }
   }
