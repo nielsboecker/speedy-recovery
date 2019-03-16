@@ -1,23 +1,23 @@
 /*
-* Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
-* patients, parents and hospital staff
-*
-* Copyright (C) 2019 University College London
-*
-* This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
-* Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-* any later version.
-* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-* warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-* details.
-* You should have received a copy of the GNU Affero General Public License along with this program. If not,
-* see http://www.gnu.org/license/.
-* */
+ * Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
+ * patients, parents and hospital staff
+ *
+ * Copyright (C) 2019 University College London
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+ * Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ * You should have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see http://www.gnu.org/license/.
+ * */
 
 /* This file is the core component of the application. The file controls the discovery of the capability statements
-* from the server as well as the redirection of the user to the SMART on FHIR authentication interface. This file also
-* coordinates the filtering and mapping of each resource from FHIR. This file also routes the user to the correct
-* parts of the site, either the LandingArea, SecuredArea, based on their stage of the login process.*/
+ * from the server as well as the redirection of the user to the SMART on FHIR authentication interface. This file also
+ * coordinates the filtering and mapping of each resource from FHIR. This file also routes the user to the correct
+ * parts of the site, either the LandingArea, SecuredArea, based on their stage of the login process.*/
 
 import React, { Component } from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
@@ -37,7 +37,10 @@ import {
   getChildID
 } from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
-import { filterPersonResource, filterPractitionerResource } from "../../service/FhirDataFilteringService";
+import {
+  filterPersonResource,
+  filterPractitionerResource
+} from "../../service/FhirDataFilteringService";
 
 class App extends Component {
   constructor(props) {
@@ -53,9 +56,9 @@ class App extends Component {
       error: null,
       fhirVersion: null,
       patientPractitioners: [],
-      userList:[],
+      userList: [],
       childID: null
-    }
+    };
   }
 
   render = () => {
@@ -166,15 +169,17 @@ class App extends Component {
 
   handleLoginSuccess = () => {
     // This method must only run when both fhirVersion is known and fhirClient is ready
-    if (!this.state.fhirVersion ||
+    if (
+      !this.state.fhirVersion ||
       !this.state.fhirClient ||
-      (Object.entries(this.state.fhirClient).length === 0 && this.state.fhirClient.constructor === Object)) {
+      (Object.entries(this.state.fhirClient).length === 0 &&
+        this.state.fhirClient.constructor === Object)
+    ) {
       console.log("Aborting login");
       return;
     }
 
-    this.state.fhirClient
-      .user
+    this.state.fhirClient.user
       .read()
       .then(currentUserResource => {
         console.log("Received current user resource: ", currentUserResource);
@@ -249,38 +254,39 @@ class App extends Component {
     if (resource && role) {
       return role === "Practitioner"
         ? this.removeArrayDuplicates(
-          resource.map(appointment => ({
-            name: appointment.patient,
-            id: appointment.patientId
-          }))
-        )
+            resource.map(appointment => ({
+              name: appointment.patient,
+              id: appointment.patientId
+            }))
+          )
         : this.removeArrayDuplicates(
-          resource.map(appointment => ({
-            name: appointment.practitioner,
-            id: appointment.practitionerId
-          }))
-        );
+            resource.map(appointment => ({
+              name: appointment.practitioner,
+              id: appointment.practitionerId
+            }))
+          );
     }
     return [];
   }
 
-    updateStatePatient(userList, role) {
-      if(role === "Practitioner"){
-          const patients = [];
-          for(let user of userList){
-              FhirDataQueryingService.getPatient(user.id)
-                  .then(patientResource => {
-                      const patient = patientResource.map(patient => fhirMapPerson(patient, this.state.fhirVersion)
-                      );
-                      patients.push(patient[0]);
-                      this.setState({patients})
-                  })
-                  .catch(error => {
-                      console.error(error);
-                  });
-          }
+  updateStatePatient(userList, role) {
+    if (role === "Practitioner") {
+      const patients = [];
+      for (let user of userList) {
+        FhirDataQueryingService.getPatient(user.id)
+          .then(patientResource => {
+            const patient = patientResource.map(patient =>
+              fhirMapPerson(patient, this.state.fhirVersion)
+            );
+            patients.push(patient[0]);
+            this.setState({ patients });
+          })
+          .catch(error => {
+            console.error(error);
+          });
       }
     }
+  }
 
   updateStateCondition(userId) {
     FhirDataQueryingService.getUserConditions(userId)
@@ -314,7 +320,7 @@ class App extends Component {
         const carePlans = carePlanResource.map(carePlan =>
           fhirMapCarePlan(carePlan, this.state.fhirVersion)
         );
-        this.setState({carePlans});
+        this.setState({ carePlans });
       })
       .catch(error => {
         console.error(error);
@@ -328,7 +334,10 @@ class App extends Component {
       console.log("User Resource after mapping: ", user);
       return user;
     } else {
-      console.error("Crucial information missing from resource: ", filteredPerson);
+      console.error(
+        "Crucial information missing from resource: ",
+        filteredPerson
+      );
       return null;
     }
   }
@@ -336,9 +345,10 @@ class App extends Component {
   updateStatePractitioners = (practId, familyName) =>
     FhirDataQueryingService.getPractitioner(practId, familyName)
       .then(practitionerResource => {
-        const filteredPractitionerResource = filterPractitionerResource(practitionerResource.resource);
+        const filteredPractitionerResource = filterPractitionerResource(
+          practitionerResource.resource
+        );
         if (filteredPractitionerResource) {
-
           const practitioner = fhirMapPractitioner(
             filteredPractitionerResource,
             this.state.fhirVersion
@@ -362,7 +372,9 @@ class App extends Component {
   }
 
   handleLoginError = errorMessage => {
-    if (errorMessage === "No 'state' parameter found in authorization response.") {
+    if (
+      errorMessage === "No 'state' parameter found in authorization response."
+    ) {
       // SMART JS library will always try to login based on last stored token, which leads to this error at
       // initial page load. It will also try to set the fhirClient to {}, which is not helpful.
       console.info("Ignoring initial SMART auth error");
@@ -394,12 +406,12 @@ class App extends Component {
   removeArrayDuplicates = array => {
     return array
       ? array.reduce(
-        (prev, curr) =>
-          prev.find(a => a["id"] === curr["id"])
-            ? prev
-            : prev.push(curr) && prev,
-        []
-      )
+          (prev, curr) =>
+            prev.find(a => a["id"] === curr["id"])
+              ? prev
+              : prev.push(curr) && prev,
+          []
+        )
       : array;
   };
 }
