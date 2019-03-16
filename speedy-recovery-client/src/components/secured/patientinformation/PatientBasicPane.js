@@ -62,6 +62,17 @@ class PatientBasicPane extends Component {
             Birthday: {user.birthDate} <Icon fitted name="birthday" />
           </h4>
         </Tab.Pane>
+
+        <Tab.Pane>
+          <h4>Name: {user.name}</h4>
+          <h4>
+            Gender: {showGenderText()}
+            {showGenderIcon()}
+          </h4>
+          <h4>
+            Birthday: {user.birthDate} <Icon fitted name="birthday" />
+          </h4>
+        </Tab.Pane>
       </div>
     );
   }

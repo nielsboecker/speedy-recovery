@@ -24,7 +24,6 @@ import {
   Dropdown,
   Icon,
   Image,
-  Label,
   Menu
 } from "semantic-ui-react";
 import "./Header.css";
