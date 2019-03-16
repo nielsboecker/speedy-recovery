@@ -24,7 +24,7 @@ Object {
 
 exports[`map FHIR CarePlan resource to internal data model 1`] = `
 Object {
-  "activities": "1. Antenatal education; 2. Stress management; 3. Pregnancy diet education; ",
+  "activities": "1. Antenatal education;2. Stress management;3. Pregnancy diet education;",
   "category": "Routine antenatal care",
   "id": "RES47187",
   "period": "from 1960-09-13 to 1961-04-11",

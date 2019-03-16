@@ -20,7 +20,7 @@ displays all medication information regarding the patient
 
 import React, { Component } from "react";
 import { Icon, Label, Tab, Table } from "semantic-ui-react";
-import "./PatientInfo.css";
+import "./PatientInfo.css"
 
 class PatientMedicationDispensePane extends Component {
   render() {

@@ -1,27 +1,30 @@
-#patientTableBody {
+#parentTableBody {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
   text-align: left;
 }
 
-#patientTableRow:nth-child(even) {
+#parentTableRow:nth-child(even) {
   background-color: #f2f2f2;
 }
-#patientTableRow:hover {
-  background-color: orange;
+
+
+#parentTableRow:hover {
+  background-color: lightblue;
 }
 
-#patientTableCell {
+#parentTableCell {
   border: 1px solid #ddd;
   padding: 12px;
 }
 
-#patientTableHeader {
+#parentTableHeader {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
   text-align: center;
   background-color: #4caf50;
-  color: white;
 }
+
+
