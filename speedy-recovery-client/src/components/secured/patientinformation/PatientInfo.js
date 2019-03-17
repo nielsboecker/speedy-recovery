@@ -25,6 +25,7 @@ import PatientConditionPane from "./PatientConditionPane";
 import PatientCarePlanPane from "./PatientCarePlanPane";
 import PatientMedicationDispensePane from "./PatientMedicationDispensePane";
 import PatientBasicPane from "./PatientBasicPane";
+import {isBrowser, isTablet} from 'react-device-detect';
 
 class PatientInfo extends Component {
   render() {
@@ -36,7 +37,7 @@ class PatientInfo extends Component {
         menuItem: (
           <Menu.Item key={"basic"}>
             <Icon fitted name="id card outline" />
-            Basic
+              {isBrowser || isTablet ? "Basic" : ""}
           </Menu.Item>
         ),
 
@@ -46,7 +47,7 @@ class PatientInfo extends Component {
         menuItem: (
           <Menu.Item key={"medication"}>
             <Icon fitted name="pills" />
-            Dispensed Medication
+              {isBrowser || isTablet ? "Dispensed Medication" : ""}
           </Menu.Item>
         ),
         render: () => (
@@ -59,7 +60,7 @@ class PatientInfo extends Component {
         menuItem: (
           <Menu.Item key={"condition"}>
             <Icon fitted name="heartbeat" />
-            Condition
+              {isBrowser || isTablet ? "Condition" : ""}
           </Menu.Item>
         ),
         render: () => <PatientConditionPane conditions={conditions} />
@@ -68,7 +69,7 @@ class PatientInfo extends Component {
         menuItem: (
           <Menu.Item key={"carePlan"}>
             <Icon fitted name="unordered list" />
-            Care Plan
+              {isBrowser || isTablet ? "Care Plan" : ""}
           </Menu.Item>
         ),
         render: () => <PatientCarePlanPane carePlans={carePlans} />

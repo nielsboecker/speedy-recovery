@@ -72,7 +72,7 @@ class PatientCalendar extends React.Component {
     };
 
     return (
-      <Grid columns={2} divided>
+      <Grid stackable columns={2} divided>
         <Grid.Row stretched>
           <Grid.Column color={"green"}>
             <h2 align="center">My Appointments</h2>

@@ -26,21 +26,33 @@ class StartPage extends Component {
   render() {
     return (
       <div id="start-page" className="full-height">
-        <Image src="/images/gosh_logo.png" id="gosh-logo" />
+
+
+          <Grid>
+              <Grid.Row columns={1} only='mobile'>
+                  <Grid.Column>
+                  </Grid.Column>
+              </Grid.Row>
+              <Grid.Row columns={1} only='computer tablet'>
+                  <Grid.Column>
+                      <Image src="/images/gosh_logo.png" id="gosh-logo" />
+                  </Grid.Column>
+              </Grid.Row>
+          </Grid>
 
         <Grid
+            stackable
           verticalAlign="middle"
-          columns={3}
-          centered
+          columns={1}
+          // centered
           className="full-height"
         >
-          <Grid.Row>
+          <Grid.Row centered>
             <Grid.Column>
               <WelcomeBox onLogin={this.props.onLogin} />
             </Grid.Column>
           </Grid.Row>
         </Grid>
-
         <Footer />
       </div>
     );

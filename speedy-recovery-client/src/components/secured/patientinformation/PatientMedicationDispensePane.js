@@ -21,6 +21,7 @@ displays all medication information regarding the patient
 import React, { Component } from "react";
 import { Icon, Label, Tab, Table } from "semantic-ui-react";
 import "./PatientInfo.css";
+import {isBrowser, isTablet} from 'react-device-detect';
 
 class PatientMedicationDispensePane extends Component {
   render() {
@@ -40,9 +41,14 @@ class PatientMedicationDispensePane extends Component {
             </Table.HeaderCell>
           </Table.Row>
         ];
+        const mobileHeader = [
+          <Table.Row key={"medicationDRow"}>
+            <Table.HeaderCell id="patientTableCell">Name</Table.HeaderCell>
+          </Table.Row>
+        ];
         table.push(
           <Table.Header id="patientTableHeader" key="medicationDTableHeader">
-            {header}
+            {isBrowser || isTablet ? header : mobileHeader}
           </Table.Header>
         );
       }
@@ -52,16 +58,19 @@ class PatientMedicationDispensePane extends Component {
         const name = medicationDispenses[i].name;
         const searchQuery = "https://www.google.com/search?q=" + name;
 
-        children.push(
-          <Table.Cell key={"medicationDOrderCell" + i}>
-            <Label ribbon>{`${i + 1}`} </Label>
-          </Table.Cell>
-        );
+        if (isTablet || isBrowser) {
+          children.push(
+              <Table.Cell key={"medicationDOrderCell" + i}>
+                <Label ribbon>{`${i + 1}`} </Label>
+              </Table.Cell>
+          );
+        }
         children.push(
           <Table.Cell key={"medicationDNameCell" + i} id="patientTableCell">
             {<h4>{name}</h4>}
           </Table.Cell>
         );
+
         children.push(
           <Table.Cell key={"medicationDSearchCell" + i} id="patientTableCell">
             {
@@ -73,16 +82,18 @@ class PatientMedicationDispensePane extends Component {
             }
           </Table.Cell>
         );
-        children.push(
-          <Table.Cell key={"medicationDQuantityCell" + i} id="patientTableCell">
-            {<h4>{medicationDispenses[i].quantity}</h4>}
-          </Table.Cell>
-        );
-        children.push(
-          <Table.Cell key={"medicationDSupplyCell" + i} id="patientTableCell">
-            {<h4>{medicationDispenses[i].daysSupply}</h4>}
-          </Table.Cell>
-        );
+        if (isBrowser || isTablet) {
+          children.push(
+              <Table.Cell key={"medicationDQuantityCell" + i} id="patientTableCell">
+                {<h4>{medicationDispenses[i].quantity}</h4>}
+              </Table.Cell>
+          );
+          children.push(
+              <Table.Cell key={"medicationDSupplyCell" + i} id="patientTableCell">
+                {<h4>{medicationDispenses[i].daysSupply}</h4>}
+              </Table.Cell>
+          );
+        }
         body.push(
           <Table.Row key={"medicationDRow2" + i} id="patientTableRow">
             {children}
