@@ -37,7 +37,10 @@ import {
   getChildID
 } from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
-import {filterPatientResource, filterPractitionerResource} from "../../service/FhirDataFilteringService";
+import {
+  filterPersonResource,
+  filterPractitionerResource
+} from "../../service/FhirDataFilteringService";
 import {removeArrayDuplicates} from "../../service/Utils";
 
 

@@ -43,7 +43,7 @@ class PatientCalendar extends React.Component {
       practitionerList: this.props.patientPractitioners
     });
   };
-  
+
   // Retrieve extra practitioner info from the back-end
   getBackendInfo =  (practitionerID) => {
     getPractitionerInfo(practitionerID)
