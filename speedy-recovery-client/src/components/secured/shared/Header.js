@@ -19,14 +19,7 @@
 
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import {
-  Container,
-  Dropdown,
-  Icon,
-  Image,
-  Label,
-  Menu
-} from "semantic-ui-react";
+import { Container, Dropdown, Icon, Image, Label, Menu } from "semantic-ui-react";
 import "./Header.css";
 
 class Header extends Component {

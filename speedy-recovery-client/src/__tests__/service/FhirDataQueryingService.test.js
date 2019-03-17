@@ -17,7 +17,8 @@
 /* This file tests the extraction of data from a resource bundle when querying a FHIR server for resources*/
 
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
-import FhirExampleAppointmentsBundleSTU3 from "../test_input/fhir_resources_stu3/FhirExampleAppointmentsBundleSTU3.json";
+import FhirExampleAppointmentsBundleSTU3
+  from "../test_input/fhir_resources_stu3/FhirExampleAppointmentsBundleSTU3.json";
 
 test("extracting data from bundle works for valid data", () => {
   // given

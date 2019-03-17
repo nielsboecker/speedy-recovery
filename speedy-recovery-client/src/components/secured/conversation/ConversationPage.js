@@ -21,13 +21,9 @@ them to send and receive messages between them and another user.
 import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { MessageList } from "react-chat-elements";
-import { Form, Grid, Button } from "semantic-ui-react";
+import { Button, Form, Grid } from "semantic-ui-react";
 import { getMessages, postMessages } from "../../../service/BackendService";
-import {
-  messageMap,
-  setupMessages,
-  getSenderMessageNum
-} from "../../../service/BackendMapping";
+import { getSenderMessageNum, messageMap, setupMessages } from "../../../service/BackendMapping";
 import "./ConversationPage.css";
 
 class ConversationPage extends Component {
@@ -53,7 +49,7 @@ class ConversationPage extends Component {
       this.props.location.state.id2,
       this.state.message
     );
-    const message = setupMessages(this.state.message);
+    const message = setupMessages(this.state.message, this.props.location.state.name);
     this.setState({ messages: [...this.state.messages, message] });
     this.setState({ message: "" });
   };
@@ -69,7 +65,7 @@ class ConversationPage extends Component {
           <MessageList
             className="message-list"
             lockable={true}
-            toBottomHeight={"100%"}
+            toBottomHeight={"300"}
             dataSource={this.state.messages}
           />
           <Grid textAlign="center">
@@ -85,7 +81,7 @@ class ConversationPage extends Component {
                 </Form>
               </Grid.Column>
               <Grid.Column>
-                <Button color="red" onClick={this.handleSubmit}>
+                <Button color="red" className="large" onClick={this.handleSubmit}>
                   Send
                 </Button>
               </Grid.Column>
@@ -116,7 +112,8 @@ class ConversationPage extends Component {
       getMessages(this.props.location.state.id, this.props.location.state.id2)
         .then(messagesResource => {
           const messages = messagesResource.map(message =>
-            messageMap(message, this.props.location.state.id, this.state.dbType)
+            messageMap(message, this.props.location.state.id, this.state.dbType, this.props.location.state.role,
+              this.props.location.state.name, this.state.title)
           );
           if (
             getSenderMessageNum(messages) >=

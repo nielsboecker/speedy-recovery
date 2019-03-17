@@ -19,12 +19,13 @@
 
 import {
   getbodySite,
+  getFirstName,
   getForm,
   getLocation,
   getMedName,
   getName,
-  getFirstName,
   getPatient,
+  getPatientId,
   getPhone,
   getPractitioner,
   getPractitionerId,
@@ -34,26 +35,24 @@ import {
 } from "./FhirDataMappingExtractionUtils";
 
 const missingField = "Unknown";
-const mapPatientToUserSTU3 = fhirPatientResource => ({
-  id: fhirPatientResource.id ? fhirPatientResource.id : missingField,
+const mapPersonToUserSTU3 = fhirPersonResource => ({
+  id: fhirPersonResource.id ? fhirPersonResource.id : missingField,
   // This is a temporary hard-code fix as the SMART sandbox does not support logging in as a patients' parent
   role:
-    fhirPatientResource.id === "220041"
+    fhirPersonResource.id === "220093"
       ? "Parent"
-      : fhirPatientResource.resourceType,
+      : fhirPersonResource.resourceType,
 
-  name: getName(fhirPatientResource.name),
-  firstName: getFirstName(fhirPatientResource.name),
-  birthDate: fhirPatientResource.birthDate
-    ? formatBirthDate(fhirPatientResource.birthDate)
+  name: getName(fhirPersonResource.name),
+  firstName: getFirstName(fhirPersonResource.name),
+  birthDate: fhirPersonResource.birthDate
+    ? formatBirthDate(fhirPersonResource.birthDate)
     : missingField,
-  gender: fhirPatientResource.gender
-    ? fhirPatientResource.gender
-    : missingField,
-  careProvider: getGP(fhirPatientResource.generalPractitioner),
-  address: getAddress(fhirPatientResource.address),
-  phone: getPhone(fhirPatientResource.telecom),
-  email: getEmail(fhirPatientResource.telecom)
+  gender: fhirPersonResource.gender ? fhirPersonResource.gender : missingField,
+  careProvider: getGP(fhirPersonResource.generalPractitioner),
+  address: getAddress(fhirPersonResource.address),
+  phone: getPhone(fhirPersonResource.telecom),
+  email: getEmail(fhirPersonResource.telecom)
 });
 
 const mapAppointmentSTU3 = fhirAppointmentResource => ({
@@ -86,6 +85,7 @@ const mapAppointmentSTU3 = fhirAppointmentResource => ({
     ? fhirAppointmentResource.comment
     : missingField,
   patient: getPatient(fhirAppointmentResource.participant),
+  patientId: getPatientId(fhirAppointmentResource.participant),
   practitioner: getPractitioner(fhirAppointmentResource.participant),
   practitionerId: getPractitionerId(fhirAppointmentResource.participant),
   location: getLocation(fhirAppointmentResource.participant)
@@ -380,7 +380,7 @@ const getChildIDSTU3 = currentUserResource => {
 };
 
 export {
-  mapPatientToUserSTU3,
+  mapPersonToUserSTU3,
   mapAppointmentSTU3,
   mapConditionSTU3,
   mapMedicationSTU3,

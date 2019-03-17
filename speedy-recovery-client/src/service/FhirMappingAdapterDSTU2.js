@@ -19,40 +19,38 @@
 
 import {
   getbodySite,
+  getFirstName,
   getForm,
   getLocation,
   getMedName,
   getName,
-  getFirstName,
   getPatient,
   getPatientId,
   getPhone,
   getPractitioner,
+  getPractitionerId,
   getSeverity,
-  getSummary,
-  getPractitionerId
+  getSummary
 } from "./FhirDataMappingExtractionUtils";
 
 const missingField = "Unknown";
-const mapPatientToUserSTU2 = fhirPatientResource => ({
-  id: fhirPatientResource.id ? fhirPatientResource.id : missingField,
+const mapPersonToUserSTU2 = fhirPersonResource => ({
+  id: fhirPersonResource.id ? fhirPersonResource.id : missingField,
   // This is a temporary hard-code fix as the SMART sandbox does not support logging in as a patients' parent
   role:
-    fhirPatientResource.id === "220041"
+    fhirPersonResource.id === "220093"
       ? "Parent"
-      : fhirPatientResource.resourceType,
+      : fhirPersonResource.resourceType,
 
-  name: getName(fhirPatientResource.name),
-  firstName: getFirstName(fhirPatientResource.name),
-  birthDate: fhirPatientResource.birthDate
-    ? formatBirthDate(fhirPatientResource.birthDate)
+  name: getName(fhirPersonResource.name),
+  firstName: getFirstName(fhirPersonResource.name),
+  birthDate: fhirPersonResource.birthDate
+    ? formatBirthDate(fhirPersonResource.birthDate)
     : missingField,
-  gender: fhirPatientResource.gender
-    ? fhirPatientResource.gender
-    : missingField,
+  gender: fhirPersonResource.gender ? fhirPersonResource.gender : missingField,
   careProvider: "Undefined in STU2",
-  address: getAddress(fhirPatientResource.address),
-  phone: getPhone(fhirPatientResource.telecom),
+  address: getAddress(fhirPersonResource.address),
+  phone: getPhone(fhirPersonResource.telecom),
   email: "Undefined in STU2"
 });
 
@@ -292,7 +290,7 @@ const getChildIDSTU2 = currentUserResource => {
 };
 
 export {
-  mapPatientToUserSTU2,
+  mapPersonToUserSTU2,
   mapAppointmentSTU2,
   mapConditionSTU2,
   mapMedicationSTU2,

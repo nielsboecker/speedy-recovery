@@ -22,7 +22,7 @@ import BigCalendar from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
 import "../CalendarPages.css";
-import { Grid, Segment, Dropdown } from "semantic-ui-react";
+import { Dropdown, Grid, Segment } from "semantic-ui-react";
 import PatientPractitionerCard from "./PatientPractitionerCard";
 import { getPractitionerInfo } from "../../../../service/BackendService";
 import {removeArrayDuplicates} from "../../../../service/Utils";
@@ -43,21 +43,21 @@ class PatientCalendar extends React.Component {
       practitionerList: this.props.patientPractitioners
     });
   };
-
+  
   // Retrieve extra practitioner info from the back-end
   getBackendInfo =  (practitionerID) => {
     getPractitionerInfo(practitionerID)
-        .then(response =>
-            this.setState({backendInfo: response.data[0]})
-        )
-        .catch(error => console.log(error))
+      .then(response =>
+        this.setState({backendInfo: response.data[0]})
+      )
+      .catch(error => console.log(error))
   };
 
   onDropdownChange = (e, data) => {
     this.getBackendInfo(data.value);
     this.setState({ selectedPractitioner:
-          this.state.practitionerList.find(element => element.id ===
-              data.value)});
+        this.state.practitionerList.find(element => element.id ===
+          data.value)});
   };
 
   componentWillMount = () => {
