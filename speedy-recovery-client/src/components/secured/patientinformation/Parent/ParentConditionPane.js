@@ -56,7 +56,7 @@ class ParentConditionPane extends Component {
 
         children.push(
           <Table.Cell key={"conditionOrderCell" + i}>
-            <Label color='red' ribbon>{`${i + 1}`} </Label>
+            <Label color='blue' ribbon>{`${i + 1}`} </Label>
           </Table.Cell>
         );
         children.push(
@@ -67,7 +67,7 @@ class ParentConditionPane extends Component {
         children.push(
           <Table.Cell key={"conditionSummarySearchCell" + i} id="parentTableCell">
             {<h4> 
-              <a href = {searchQuery}> <Icon color ="red" fitted name ="search"/> </a>
+              <a href = {searchQuery}> <Icon color ="blue" fitted name ="search"/> </a>
             </h4>}
           </Table.Cell>
         );
@@ -103,7 +103,7 @@ class ParentConditionPane extends Component {
         </Table.Body>
       );
       const conditionTable = [];
-      conditionTable.push(<Table key="conditionTable" color="red" c>{table}</Table>);
+      conditionTable.push(<Table key="conditionTable" color="blue">{table}</Table>);
       return conditionTable;
     };
 

@@ -51,7 +51,7 @@ class ParentBasicPane extends Component {
   
     return (
       <div>
-        <Tab.Pane color="purple">
+        <Tab.Pane color="blue">
           <h4>Name: {childResource.name}</h4>
           <h4>
             Gender: {showGenderText()}

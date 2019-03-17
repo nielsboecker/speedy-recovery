@@ -23,6 +23,7 @@ import ParentConditionPane from "./ParentConditionPane";
 import ParentCarePlanPane from "./ParentCarePlanPane";
 import ParentMedicationPane from "./ParentMedicationPane";
 import ParentBasicPane from "./ParentBasicPane";
+import ParentDrPane from "./ParentDrPane"
 
 class ParentInfo extends Component {
   render() {
@@ -31,8 +32,8 @@ class ParentInfo extends Component {
     const panes = [
       {
         menuItem: (
-          <Menu.Item key={"basic"} color="purple">
-            <Icon fitted name="id card outline" color ="purple"/>
+          <Menu.Item key={"basic"} color="blue">
+            <Icon fitted name="id card outline" color ="blue" size = "large"/>
             Basic
           </Menu.Item>
         ),
@@ -41,7 +42,7 @@ class ParentInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"medication"} color="blue">
-            <Icon fitted name="pills" color="blue" />
+            <Icon fitted name="pills" color="purple" size = "large"/>
             Dispensed Medication
           </Menu.Item>
         ),
@@ -53,8 +54,8 @@ class ParentInfo extends Component {
       },
       {
         menuItem: (
-          <Menu.Item key={"condition"} color="red">
-            <Icon fitted name="heartbeat" color="red"/>
+          <Menu.Item key={"condition"} color="blue">
+            <Icon fitted name="heartbeat" color="red" size = "large"/>
             Condition
           </Menu.Item>
         ),
@@ -62,12 +63,21 @@ class ParentInfo extends Component {
       },
       {
         menuItem: (
-          <Menu.Item key={"carePlan"} color="orange">
-            <Icon fitted name="unordered list" color = "orange"/>
+          <Menu.Item key={"carePlan"} color="blue">
+            <Icon fitted name="unordered list" color = "orange" size = "large"/>
             Care Plan
           </Menu.Item>
         ),
         render: () => <ParentCarePlanPane carePlans={carePlans} childResource={childResource}/>
+      },
+      {
+        menuItem: (
+          <Menu.Item key={"practitionerInfo"} color="blue">
+            <Icon fitted name="doctor" color = "violet" size = "large"/>
+            Practitioner Information
+          </Menu.Item>
+        ),
+        render: () => <ParentDrPane childResource={childResource}/>
       }
     ];
 
