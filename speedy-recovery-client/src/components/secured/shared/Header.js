@@ -19,7 +19,7 @@
 
 import React, { Component } from "react";
 import "./Header.css";
-import {Container, Icon, Image, Menu, Dropdown} from "semantic-ui-react";
+import {Container, Icon, Image, Menu, Dropdown, Label} from "semantic-ui-react";
 import {Link} from "react-router-dom";
 import {isBrowser, isTablet} from 'react-device-detect';
 
@@ -30,13 +30,12 @@ class Header extends Component {
       showMessage = (
           <Menu.Item as={Link} to="/secured/messaging">
             <Icon name="mail" />
-            {isBrowser || isTablet ? "Messages"
-            // (
-            //    {/*<Label color="teal" circular>*/}
-               //     {/*2*/}
-              //  {/*</Label>*/}
-            // )
-              : ""}
+            {isBrowser || isTablet ? "Messages" : ""}
+            {isBrowser || isTablet ?
+            <Label color="teal" circular>
+              2
+            </Label>
+                : ""}
           </Menu.Item>
       );
     }
@@ -62,7 +61,7 @@ class Header extends Component {
 
               <Menu.Menu position="right">
                 <Dropdown
-                    text={isBrowser || isTablet ? this.props.username : ""}
+                    text={isBrowser ? this.props.username : ""}
                     pointing
                     className="link item"
                 >
