@@ -18,10 +18,10 @@ import React, { Component } from "react";
 import FhirDataQueryingService from "../../../service/FhirDataQueryingService";
 import { Icon, Menu, Tab } from "semantic-ui-react";
 import "./PatientInfo.css";
-import PatientConditionPane from "./PatientConditionPane";
+import PractitionerConditionPane from "./PractitionerConditionPane";
 import PatientCarePlanPane from "./PatientCarePlanPane";
-import PatientMedicationDispensePane from "./PatientMedicationDispensePane";
-import PatientBasicPane from "./PatientBasicPane";
+import PractitionerMedicationDispensePane from "./PatientMedicationDispensePane";
+import PractitionerBasicPane from "./PractitionerBasicPane";
 import {
   fhirMapCarePlan,
   fhirMapCondition,
@@ -50,7 +50,7 @@ class practitionerPatientInfo extends Component {
         ),
 
         render: () => (
-          <PatientBasicPane user={this.props.location.state.patient} />
+          <PractitionerBasicPane user={this.props.location.state.patient} />
         )
       },
       {
@@ -61,7 +61,7 @@ class practitionerPatientInfo extends Component {
           </Menu.Item>
         ),
         render: () => (
-          <PatientMedicationDispensePane
+          <PractitionerMedicationDispensePane
             medicationDispenses={this.state.medicationDispenses}
           />
         )
@@ -74,7 +74,7 @@ class practitionerPatientInfo extends Component {
           </Menu.Item>
         ),
         render: () => (
-          <PatientConditionPane conditions={this.state.conditions} />
+          <PractitionerConditionPane conditions={this.state.conditions} />
         )
       },
       {
@@ -149,6 +149,7 @@ class practitionerPatientInfo extends Component {
         console.error(error);
       });
   }
+
 }
 
 export default practitionerPatientInfo;
