@@ -28,8 +28,7 @@ import ParentDrPane from "./ParentDrPane"
 class ParentInfo extends Component {
   render() {
     const {conditions, medicationDispenses, carePlans, childResource, patientPractitioners} = this.props;
-    console.log("DDD")
-    console.log(this.props)
+
     // Builds up table of panes, each containing different pieces of info about patient
     const panes = [
       {

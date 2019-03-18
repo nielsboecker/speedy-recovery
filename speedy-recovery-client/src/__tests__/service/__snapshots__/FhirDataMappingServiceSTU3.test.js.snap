@@ -103,6 +103,7 @@ Object {
   "gender": "female",
   "id": "f007",
   "name": "Simone Heps",
+  "phone": "020556936",
   "photo": "Unknown",
 }
 `;

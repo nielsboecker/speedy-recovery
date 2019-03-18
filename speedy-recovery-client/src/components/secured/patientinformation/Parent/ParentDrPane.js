@@ -19,21 +19,77 @@
  */
 
 import React, { Component } from "react";
-import { Tab } from "semantic-ui-react";
+import { Label, Tab, Table} from "semantic-ui-react";
+import "./Parent.css";
 
 class ParentDrPane extends Component {
   render() {
-    const { childResource, patientPractitioners } = this.props;
-    console.log("CCC")
-    console.log(this.props)
-      return (
+    const {patientPractitioners, childResource} = this.props;
+    const practitionersNum = patientPractitioners.length;
+    const childName = childResource.name.split(" ");
+
+    const createPractitionerTable = () => {
+      const table = [];
+      if (practitionersNum) {
+        const header = [
+          <Table.Row key={"practitionerRow"}>
+            <Table.HeaderCell id="parentTableCell">#</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">Name</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">Gender</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">Contact Number</Table.HeaderCell>
+          </Table.Row>
+        ];
+        table.push(
+          <Table.Header id="parentTableHeader" key="practitionerTableHeader">
+            {header}
+          </Table.Header>
+        );
+      }
+      const body = [];
+      for (let i = 0; i < practitionersNum; i++) {
+        const children = [];
+
+        children.push(
+          <Table.Cell key={"practitionerOrderCell" + i}>
+            <Label color='blue' ribbon>{`${i + 1}`} </Label>
+          </Table.Cell>
+        );
+        children.push(
+          <Table.Cell key={"practitionerNameCell" + i} id="parentTableCell">
+            {<h4>{patientPractitioners[i].name}</h4>}
+          </Table.Cell>
+        );
+        children.push(
+          <Table.Cell key={"practitionerGenderCell" + i} id="parentTableCell">
+            {<h4>{patientPractitioners[i].gender}</h4>}
+          </Table.Cell>
+        );
+        children.push(
+          <Table.Cell key={"practitionerPhoneCell" + i} id="parentTableCell">
+            {<h4>{patientPractitioners[i].phone}</h4>}
+          </Table.Cell>
+        );
+        body.push(
+          <Table.Row id="parentTableRow" key={"practitionerRow2" + i}>
+            {children}
+          </Table.Row>
+        );
+      }
+      table.push(
+        <Table.Body key="practitionerTableBody" id="parentTableBody">
+          {body}
+        </Table.Body>
+      );
+      const practitionerTable = [];
+      practitionerTable.push(<Table key="practitionerTable" color="blue">{table}</Table>);
+      return practitionerTable;
+    };
+
+    return (
       <div>
-        <Tab.Pane color="blue">
-          <h4>TODO</h4>
-          // <h4>{childResource.name}'s practitioner info </h4>
-          <h4>
-            {patientPractitioners}
-          </h4>
+        <Tab.Pane>
+          <h4>You have {practitionersNum} recorded Practitioners for {childName[0]}</h4>
+          {createPractitionerTable()}
         </Tab.Pane>
       </div>
     );

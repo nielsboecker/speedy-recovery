@@ -226,6 +226,7 @@ const mapPractitionerSTU2 = fhirPractResource => ({
   id: fhirPractResource.id ? fhirPractResource.id : missingField,
   gender: "Undefined in STU2",
   birthDate: "Undefined in STU2",
+  phone: getPhone(fhirPractResource.telecom),
   photo: "Undefined in STU2"
 });
 

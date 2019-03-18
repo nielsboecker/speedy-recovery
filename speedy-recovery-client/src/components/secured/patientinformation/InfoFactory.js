@@ -26,8 +26,6 @@ import ParentInfo from "./Parent/ParentInfo"
 class InfoFactory extends Component {
   render() {
     const {user, patient, childResource, conditions, medicationDispenses, carePlans, patientPractitioners} = this.props;
-    console.log("AAA")
-    console.log(this.props)
 
     switch (user.role) {
       case "Patient":

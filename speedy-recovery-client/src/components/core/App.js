@@ -192,8 +192,6 @@ class App extends Component {
             this.updateStateMedicationDispense(this.state.childID);
             this.updateStateCarePlan(this.state.childID);
             this.updateStateChildInfo(this.state.childID);
-            console.log("BBB");
-            console.log(this.state)
             break;
           case "Practitioner":
             this.updateStateAppointment(user.id, user.role);
@@ -372,7 +370,7 @@ class App extends Component {
       .then(practitionerResource => {
         const filteredPractitionerResource = filterPractitionerResource(practitionerResource.resource);
         if (filteredPractitionerResource) {
-
+    
           const practitioner = fhirMapPractitioner(
             filteredPractitionerResource,
             this.state.fhirVersion

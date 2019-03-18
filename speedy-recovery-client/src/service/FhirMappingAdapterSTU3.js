@@ -156,6 +156,7 @@ const mapPractitionerSTU3 = fhirPractResource => ({
   birthDate: fhirPractResource.birthDate
     ? fhirPractResource.birthDate
     : missingField,
+  phone: getPhone(fhirPractResource.telecom),
   photo: getPhoto(fhirPractResource.photo)
 });
 
