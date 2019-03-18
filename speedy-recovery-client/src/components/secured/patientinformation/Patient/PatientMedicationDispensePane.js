@@ -19,7 +19,7 @@ displays all medication information regarding the patient
  */
 
 import React, { Component } from "react";
-import { Icon, Label, Tab, Table } from "semantic-ui-react";
+import { Label, Tab, Table } from "semantic-ui-react";
 import "./PatientInfo.css"
 
 class PatientMedicationDispensePane extends Component {
@@ -49,7 +49,6 @@ class PatientMedicationDispensePane extends Component {
       for (let i = 0; i < medicationDispensesNum; i++) {
         const children = [];
         const name = medicationDispenses[i].name;
-        const searchQuery = "https://www.google.com/search?q=" + name;
 
         children.push(
           <Table.Cell key={"medicationDOrderCell" + i}>

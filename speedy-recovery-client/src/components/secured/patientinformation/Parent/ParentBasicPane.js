@@ -42,7 +42,7 @@ class ParentBasicPane extends Component {
     }  
 
     const showGenderIcon = () => {
-      let genderIcon = <Icon fitted name="smile outline" size="large" />;
+      let genderIcon;
       switch(childResource.gender){
         case "female":
           genderIcon = <Icon color="pink" fitted name="woman" size="large"/>;
@@ -50,6 +50,8 @@ class ParentBasicPane extends Component {
         case "male":
           genderIcon = <Icon color="blue" fitted name="man" size="large"/>;
           break;
+        default: 
+          genderIcon = <Icon fitted name="smile outline" size="large"/>
       }
       return genderIcon;
     };

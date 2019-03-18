@@ -40,10 +40,10 @@ class PatientBasicPane extends Component {
           genderStr = gender;
       }
       return genderStr;
-    }  
-
+    } 
+    
     const showGenderIcon = () => {
-      let genderIcon = <Icon fitted name="smile outline" />;
+      let genderIcon;
       switch(user.gender){
         case "female":
           genderIcon = <Icon color="pink" fitted name="woman" size="large"/>;
@@ -51,6 +51,8 @@ class PatientBasicPane extends Component {
         case "male":
           genderIcon = <Icon color="blue" fitted name="man" size="large"/>;
           break;
+        default: 
+          genderIcon = <Icon fitted name="smile outline" size="large"/>
       }
       return genderIcon;
     };
