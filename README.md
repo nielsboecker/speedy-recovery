@@ -6,10 +6,6 @@
   <a href="https://github.com/nbckr/speedy-recovery/pulls" alt="Pull Requests Welcome">
     <img src="https://camo.githubusercontent.com/7509b1327eb1be79c73071b83001358349629e81/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5052732d77656c636f6d652d6666363962342e737667" />
   </a>
-  
-  <a href="https://donate.gosh.org/" alt="Donate to Charity">
-    <img src="https://camo.githubusercontent.com/ff07592344dc21c343e4180648b2155a6a899ad7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446f6e6174652d436861726974792d6f72616e67652e737667" />
-  </a>
 </p>
 
 <p align="center">
@@ -22,7 +18,7 @@
 ## About
 [Speedy Recovery](https://speedyrecovery.z6.web.core.windows.net) is a SMART on FHIR enabled web application providing clinical information, a calendars displaying medical appointment, and messaging to paediatric patients, as well as their parents and the relevant healthcare providers. It is developed in a cooperation between University College London (UCL) and Great Ormond Street Hospital (GOSH).
 
-[GOSH](https://www.gosh.nhs.uk/) and their digital unit [GOSH DRIVE (Digital Research Informatics and Virtual Environments)](https://www.gosh.nhs.uk/news/latest-press-releases/new-unit-opening-great-ormond-street-hospital-set-revolutionise-how-technology-used-hospitals) are committed to making young patients’ hospital stays as tolerable as possible. Inherently, this goal can only be achieved if parents are assured and confident, and hospital staff is well-informed and approachable. 
+[GOSH](https://www.gosh.nhs.uk/) and their digital unit [GOSH DRIVE (Digital Research Informatics and Virtual Environments)](https://www.goshdrive.com) are committed to making young patients’ hospital stays as tolerable as possible. Inherently, this goal can only be achieved if parents are assured and confident, and hospital staff is well-informed and approachable. 
 
 We aim to use modern technology to help GOSH in their pursuit of their goals and generally explore the potential of patient-centred software in healthcare. Therefore, we will develop a web app that serves three different user groups: patient, parent and proviider. The app will display a calendar that is tailored to the respective user’s needs. 
 
