@@ -29,37 +29,42 @@ class PatientBasicPane extends Component {
     const showGenderText = () => {
       let genderStr = "";
       const gender = user.gender;
-      if (gender === "female") {
-        genderStr = "Girl";
-      } else if (gender === "male") {
-        genderStr = "Boy";
-      } else {
-        genderStr = gender;
+      switch(gender){
+        case "female":
+          genderStr = "Girl";
+          break;
+        case "male":
+          genderStr = "Boy";
+          break;
+        default:
+          genderStr = gender;
       }
       return genderStr;
-    };
+    }  
 
     const showGenderIcon = () => {
       let genderIcon = <Icon fitted name="smile outline" />;
-      const gender = user.gender;
-      if (gender === "female") {
-        genderIcon = <Icon color="pink" fitted name="woman" />;
-      } else if (gender === "male") {
-        genderIcon = <Icon color="blue" fitted name="man" />;
+      switch(user.gender){
+        case "female":
+          genderIcon = <Icon color="pink" fitted name="woman" size="large"/>;
+          break;
+        case "male":
+          genderIcon = <Icon color="blue" fitted name="man" size="large"/>;
+          break;
       }
       return genderIcon;
     };
 
     return (
       <div>
-        <Tab.Pane>
+        <Tab.Pane color="blue">
           <h4>Name: {user.name}</h4>
           <h4>
             Gender: {showGenderText()}
-            {showGenderIcon()}
+             {showGenderIcon()}
           </h4>
           <h4>
-            Birthday: {user.birthDate} <Icon fitted name="birthday" />
+            Birthday: {user.birthDate}  <Icon fitted name="birthday" size="large" color="olive"/>
           </h4>
         </Tab.Pane>
       </div>

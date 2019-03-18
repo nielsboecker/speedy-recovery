@@ -33,7 +33,6 @@ class PatientConditionPane extends Component {
           <Table.Row key={"conditionRow"}>
             <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">Summary</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell" />
             <Table.HeaderCell id="patientTableCell">Time</Table.HeaderCell>
           </Table.Row>
         ];
@@ -50,7 +49,7 @@ class PatientConditionPane extends Component {
 
         children.push(
           <Table.Cell key={"conditionOrderCell" + i}>
-            <Label ribbon>{`${i + 1}`} </Label>
+            <Label color = "blue" ribbon>{`${i + 1}`} </Label>
           </Table.Cell>
         );
         children.push(
@@ -75,7 +74,7 @@ class PatientConditionPane extends Component {
         </Table.Body>
       );
       const conditionTable = [];
-      conditionTable.push(<Table key="conditionTable">{table}</Table>);
+      conditionTable.push(<Table key="conditionTable" color="blue">{table}</Table>);
       return conditionTable;
     };
 

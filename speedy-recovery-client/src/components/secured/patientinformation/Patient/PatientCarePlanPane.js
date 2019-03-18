@@ -51,7 +51,7 @@ class PatientCarePlanPane extends Component {
 
         children.push(
           <Table.Cell key={"carePlanOrderCell" + i}>
-            <Label ribbon>{`${i + 1}`} </Label>
+            <Label color = "blue" ribbon>{`${i + 1}`} </Label>
           </Table.Cell>
         );
         children.push(
@@ -82,7 +82,7 @@ class PatientCarePlanPane extends Component {
         </Table.Body>
       );
       const carePlanTable = [];
-      carePlanTable.push(<Table key="carePlanTable">{table}</Table>);
+      carePlanTable.push(<Table key="carePlanTable" color="blue">{table}</Table>);
       return carePlanTable;
     };
 

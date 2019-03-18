@@ -33,7 +33,6 @@ class PatientMedicationDispensePane extends Component {
           <Table.Row key={"medicationDRow"}>
             <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">Name</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell" />
             <Table.HeaderCell id="patientTableCell">Quantity</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">
               Supply Time Length
@@ -54,23 +53,12 @@ class PatientMedicationDispensePane extends Component {
 
         children.push(
           <Table.Cell key={"medicationDOrderCell" + i}>
-            <Label ribbon>{`${i + 1}`} </Label>
+            <Label color = "blue" ribbon>{`${i + 1}`} </Label>
           </Table.Cell>
         );
         children.push(
           <Table.Cell key={"medicationDNameCell" + i} id="patientTableCell">
             {<h4>{name}</h4>}
-          </Table.Cell>
-        );
-        children.push(
-          <Table.Cell key={"medicationDSearchCell" + i} id="patientTableCell">
-            {
-              <h4>
-                <a href={searchQuery}>
-                  <Icon fitted name="search" />
-                </a>
-              </h4>
-            }
           </Table.Cell>
         );
         children.push(
@@ -95,7 +83,7 @@ class PatientMedicationDispensePane extends Component {
         </Table.Body>
       );
       const medicationDTable = [];
-      medicationDTable.push(<Table key="medicationDTable">{table}</Table>);
+      medicationDTable.push(<Table key="medicationDTable" color="blue">{table}</Table>);
       return medicationDTable;
     };
 

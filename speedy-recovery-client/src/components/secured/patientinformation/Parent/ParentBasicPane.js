@@ -28,27 +28,32 @@ class ParentBasicPane extends Component {
     const showGenderText = () => {
       let genderStr = "";
       const gender = childResource.gender;
-      if (gender === "female") {
-        genderStr = "Girl";
-      } else if (gender === "male") {
-        genderStr = "Boy";
-      } else {
-        genderStr = gender;
+      switch(gender){
+        case "female":
+          genderStr = "Girl";
+          break;
+        case "male":
+          genderStr = "Boy";
+          break;
+        default:
+          genderStr = gender;
       }
       return genderStr;
-    };
+    }  
 
     const showGenderIcon = () => {
-      let genderIcon = <Icon fitted name="smile outline" />;
-      const gender = childResource.gender;
-      if (gender === "female") {
-        genderIcon = <Icon color="pink" fitted name="woman" />;
-      } else if (gender === "male") {
-        genderIcon = <Icon color="blue" fitted name="man" />;
+      let genderIcon = <Icon fitted name="smile outline" size="large" />;
+      switch(childResource.gender){
+        case "female":
+          genderIcon = <Icon color="pink" fitted name="woman" size="large"/>;
+          break;
+        case "male":
+          genderIcon = <Icon color="blue" fitted name="man" size="large"/>;
+          break;
       }
       return genderIcon;
     };
-  
+ 
     return (
       <div>
         <Tab.Pane color="blue">
