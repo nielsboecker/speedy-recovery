@@ -136,9 +136,9 @@ const mapMedicationDispenseSTU3 = fhirMedResource => ({
   daysSupply: fhirMedResource.daysSupply.value
     ? fhirMedResource.daysSupply.value
     : missingField,
-  intakeMethod : getIntakeMethod(fhirMedResource.dosageInstruction),
-  dosageFrequency : getDosageFrequency(fhirMedResource.dosageInstruction), 
-  dosagePeriod : getDosagePeriod(fhirMedResource.dosageInstruction), 
+  intakeMethod: getIntakeMethod(fhirMedResource.dosageInstruction),
+  dosageFrequency: getDosageFrequency(fhirMedResource.dosageInstruction),
+  dosagePeriod: getDosagePeriod(fhirMedResource.dosageInstruction),
   whenHandedOver:
     fhirMedResource.whenHandedOver !== undefined
       ? fhirMedResource.whenHandedOver
@@ -230,24 +230,39 @@ const getCarePlanEnd = period => {
 };
 
 const getIntakeMethod = dosageInstruction => {
-  if(dosageInstruction && dosageInstruction[0] && dosageInstruction[0].route
-    && dosageInstruction[0].route.coding && dosageInstruction[0].route.coding[0] &&
-    dosageInstruction[0].route.coding[0].display){
-      return dosageInstruction[0].route.coding[0].display;
-    }
+  if (
+    dosageInstruction &&
+    dosageInstruction[0] &&
+    dosageInstruction[0].route &&
+    dosageInstruction[0].route.coding &&
+    dosageInstruction[0].route.coding[0] &&
+    dosageInstruction[0].route.coding[0].display
+  ) {
+    return dosageInstruction[0].route.coding[0].display;
+  }
 };
 
 const getDosageFrequency = dosageInstruction => {
-  if(dosageInstruction && dosageInstruction[0] && dosageInstruction[0].timing
-    && dosageInstruction[0].timing.repeat && dosageInstruction[0].timing.repeat.frequency){
-      return dosageInstruction[0].timing.repeat.frequency;
-    }
+  if (
+    dosageInstruction &&
+    dosageInstruction[0] &&
+    dosageInstruction[0].timing &&
+    dosageInstruction[0].timing.repeat &&
+    dosageInstruction[0].timing.repeat.frequency
+  ) {
+    return dosageInstruction[0].timing.repeat.frequency;
+  }
 };
 const getDosagePeriod = dosageInstruction => {
-  if(dosageInstruction && dosageInstruction[0] && dosageInstruction[0].timing
-    && dosageInstruction[0].timing.repeat && dosageInstruction[0].timing.repeat.period){
-      return dosageInstruction[0].timing.repeat.period;
-    }
+  if (
+    dosageInstruction &&
+    dosageInstruction[0] &&
+    dosageInstruction[0].timing &&
+    dosageInstruction[0].timing.repeat &&
+    dosageInstruction[0].timing.repeat.period
+  ) {
+    return dosageInstruction[0].timing.repeat.period;
+  }
 };
 
 const getPhoto = photo => {

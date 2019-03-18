@@ -44,7 +44,8 @@ class SecuredMainPage extends Component {
     }
 
     const { match } = this.props;
-
+    console.log("AAA");
+    console.log(this.props);
     return (
       //  Routes the user to their selected page
       <div>
@@ -55,6 +56,7 @@ class SecuredMainPage extends Component {
               onLogout={this.props.onLogout}
               role={this.props.user.role}
               userid={this.props.childID}
+              practitionerid={this.props.user.id}
             />
 
             <Container>

@@ -28,7 +28,8 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      unreadNum: 0
+      unreadNum: 0,
+      id: ''
     };
   }
 
@@ -89,19 +90,39 @@ class Header extends Component {
   }
 
   componentDidMount() {
+    if (this.props.role === "Practitioner"){
+      let id = this.props.practitionerid;
+      this.setState({ id });
+    }
+    if (this.props.role === "Parent"){
+      let id = this.props.userid;
+      this.setState({ id });
+
+    }
+    this.setMessageNum();
+    this.timer = setInterval(() => {
+      this.setMessageNum();
+    }, 3000);
+  }
+
+  componentWillUnmount() {
+    this.timer && clearTimeout(this.timer);
+  }
+
+  setMessageNum = () => {
     if (this.props.role !== "Patient") {
-      getConversation(this.props.userid)
-            .then(value => {
-              let unreadNum = 0;
-              for (let conversation of value){
-                unreadNum += conversation.unread;
-              }
-              this.setState({ unreadNum });
-            })
-            .catch(error => {
-              console.error(error);
-            });
-        }
+      getConversation(this.state.id)
+        .then(value => {
+          let unreadNum = 0;
+          for (let conversation of value){
+            unreadNum += conversation.unread;
+          }
+          this.setState({ unreadNum });
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
   }
 
 }
