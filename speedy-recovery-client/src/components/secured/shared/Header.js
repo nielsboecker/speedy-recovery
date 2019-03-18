@@ -90,12 +90,11 @@ class Header extends Component {
 
   componentDidMount() {
     if (this.props.role !== "Patient") {
-      let id = this.props.userid;
-      getConversation(id)
+      getConversation(this.props.userid)
             .then(value => {
-              var unreadNum = 0;
-              for (let i = 0; i < value.length; i ++){
-                unreadNum += value[i].unread;
+              let unreadNum = 0;
+              for (let conversation of value){
+                unreadNum += conversation.unread;
               }
               this.setState({ unreadNum });
             })
