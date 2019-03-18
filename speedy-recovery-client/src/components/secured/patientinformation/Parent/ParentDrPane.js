@@ -23,13 +23,17 @@ import { Tab } from "semantic-ui-react";
 
 class ParentDrPane extends Component {
   render() {
-    const { childResource } = this.props;
-
+    const { childResource, patientPractitioners } = this.props;
+    console.log("CCC")
+    console.log(this.props)
       return (
       <div>
         <Tab.Pane color="blue">
           <h4>TODO</h4>
-          <h4>{childResource.name}'s practitioner info </h4>
+          // <h4>{childResource.name}'s practitioner info </h4>
+          <h4>
+            {patientPractitioners}
+          </h4>
         </Tab.Pane>
       </div>
     );

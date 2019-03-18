@@ -27,7 +27,9 @@ import ParentDrPane from "./ParentDrPane"
 
 class ParentInfo extends Component {
   render() {
-    const {conditions, medicationDispenses, carePlans, childResource} = this.props;
+    const {conditions, medicationDispenses, carePlans, childResource, patientPractitioners} = this.props;
+    console.log("DDD")
+    console.log(this.props)
     // Builds up table of panes, each containing different pieces of info about patient
     const panes = [
       {
@@ -77,7 +79,7 @@ class ParentInfo extends Component {
             Practitioner Information
           </Menu.Item>
         ),
-        render: () => <ParentDrPane childResource={childResource}/>
+        render: () => <ParentDrPane patientPractitioners={patientPractitioners} childResource={childResource}/>
       }
     ];
 

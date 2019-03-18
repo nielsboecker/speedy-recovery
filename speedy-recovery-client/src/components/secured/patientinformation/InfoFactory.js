@@ -25,7 +25,9 @@ import ParentInfo from "./Parent/ParentInfo"
 
 class InfoFactory extends Component {
   render() {
-    const {user, patient, childResource, conditions, medicationDispenses, carePlans} = this.props;
+    const {user, patient, childResource, conditions, medicationDispenses, carePlans, patientPractitioners} = this.props;
+    console.log("AAA")
+    console.log(this.props)
 
     switch (user.role) {
       case "Patient":
@@ -35,11 +37,12 @@ class InfoFactory extends Component {
             conditions={conditions}
             medicationDispenses={medicationDispenses}
             carePlans={carePlans}
+            patientPractitioners={patientPractitioners}
           />
         );
       case "Parent":
         return <ParentInfo childResource={childResource} conditions={conditions} 
-        medicationDispenses={medicationDispenses} carePlans={carePlans}/>;
+        medicationDispenses={medicationDispenses} carePlans={carePlans} patientPractitioners={patientPractitioners}/>;
       case "Practitioner":
         return <PractitionerInfo user={user} patient={patient} />;
       default:
