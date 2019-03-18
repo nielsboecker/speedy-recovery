@@ -15,79 +15,86 @@
 * */
 
 /* This file defines the PatientCarePlanPane which creates a pane used in the PatientInfo component which displays all
-condition information regarding the patient.
+care plan information regarding the patient
  */
 
 import React, { Component } from "react";
 import { Label, Tab, Table } from "semantic-ui-react";
 import "./PatientInfo.css";
 
-class PatientConditionPane extends Component {
+class PatientCarePlanPane extends Component {
   render() {
-    const { conditions } = this.props;
-    const conditionsNum = conditions.length;
-    const createConditionTable = () => {
+    const { carePlans } = this.props;
+    const carePlansNum = carePlans.length;
+    const createCarePlanTable = () => {
       const table = [];
-      if (conditionsNum) {
+      if (carePlansNum) {
         const header = [
-          <Table.Row key={"conditionRow"}>
+          <Table.Row key={"carePlanRow"}>
             <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">Summary</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell" />
-            <Table.HeaderCell id="patientTableCell">Time</Table.HeaderCell>
+            <Table.HeaderCell id="patientTableCell">Category</Table.HeaderCell>
+            <Table.HeaderCell id="patientTableCell">
+              Activities
+            </Table.HeaderCell>
+            <Table.HeaderCell id="patientTableCell">Period</Table.HeaderCell>
           </Table.Row>
         ];
         table.push(
-          <Table.Header id="patientTableHeader" key="conditionTableHeader">
+          <Table.Header key="carePlanTableHeader" id="patientTableHeader">
             {header}
           </Table.Header>
         );
       }
       const body = [];
-      for (let i = 0; i < conditionsNum; i++) {
+      for (let i = 0; i < carePlansNum; i++) {
         const children = [];
-        const summary = conditions[i].summary;
 
         children.push(
-          <Table.Cell key={"conditionOrderCell" + i}>
-            <Label ribbon>{`${i + 1}`} </Label>
+          <Table.Cell key={"carePlanOrderCell" + i}>
+            <Label color = "blue" ribbon>{`${i + 1}`} </Label>
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"conditionSummaryCell" + i} id="patientTableCell">
-            {<h4>{summary}</h4>}
+          <Table.Cell key={"carePlanCategoryCell" + i} id="patientTableCell">
+            {<h4>{carePlans[i].category}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"conditionTimeCell" + i} id="patientTableCell">
-            {<h4>{conditions[i].onsetDateTime.toString()}</h4>}
+          <Table.Cell key={"carePlanActCell" + i} id="patientTableCell">
+            {<h4>{carePlans[i].activities}</h4>}
           </Table.Cell>
         );
+        children.push(
+          <Table.Cell key={"carePlanPeriodCell" + i} id="patientTableCell">
+            {<h4>{carePlans[i].period}</h4>}
+          </Table.Cell>
+        );
+
         body.push(
-          <Table.Row id="patientTableRow" key={"conditionRow2" + i}>
+          <Table.Row key={"carePlanRow2" + i} id="patientTableRow">
             {children}
           </Table.Row>
         );
       }
       table.push(
-        <Table.Body key="conditionTableBody" id="patientTableBody">
+        <Table.Body key="carePlanTableBody" id="patientTableBody">
           {body}
         </Table.Body>
       );
-      const conditionTable = [];
-      conditionTable.push(<Table key="conditionTable">{table}</Table>);
-      return conditionTable;
+      const carePlanTable = [];
+      carePlanTable.push(<Table key="carePlanTable" color="blue">{table}</Table>);
+      return carePlanTable;
     };
 
     return (
       <div>
         <Tab.Pane>
-          <h4>You have {conditionsNum} recorded conditions.</h4>
-          {createConditionTable()}
+          <h4>You have {carePlansNum} recorded care plans.</h4>
+          {createCarePlanTable()}
         </Tab.Pane>
       </div>
     );
   }
 }
 
-export default PatientConditionPane;
+export default PatientCarePlanPane;

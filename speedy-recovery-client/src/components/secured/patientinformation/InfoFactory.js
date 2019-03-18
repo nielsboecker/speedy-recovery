@@ -19,26 +19,28 @@ information page to be displayed based on the user's role.
  */
 
 import React, { Component } from "react";
-import PatientInfo from "./PatientInfo";
-import PractitionerInfo from "./PractitionerInfo";
-import ParentInfo from "./ParentInfo";
+import PatientInfo from "./Patient/PatientInfo";
+import PractitionerInfo from "./Practitioner/PractitionerInfo";
+import ParentInfo from "./Parent/ParentInfo"
 
 class InfoFactory extends Component {
   render() {
-    const { user, patient } = this.props;
+    const {user, patient, childResource, conditions, medicationDispenses, carePlans, patientPractitioners} = this.props;
 
     switch (user.role) {
       case "Patient":
         return (
           <PatientInfo
             user={user}
-            conditions={this.props.conditions}
-            medicationDispenses={this.props.medicationDispenses}
-            carePlans={this.props.carePlans}
+            conditions={conditions}
+            medicationDispenses={medicationDispenses}
+            carePlans={carePlans}
+            patientPractitioners={patientPractitioners}
           />
         );
       case "Parent":
-        return <ParentInfo user={user} />;
+        return <ParentInfo childResource={childResource} conditions={conditions} 
+        medicationDispenses={medicationDispenses} carePlans={carePlans} patientPractitioners={patientPractitioners}/>;
       case "Practitioner":
         return <PractitionerInfo user={user} patient={patient} />;
       default:

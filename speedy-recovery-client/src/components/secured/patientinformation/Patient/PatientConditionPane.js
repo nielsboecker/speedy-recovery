@@ -15,86 +15,78 @@
 * */
 
 /* This file defines the PatientCarePlanPane which creates a pane used in the PatientInfo component which displays all
-care plan information regarding the patient
+condition information regarding the patient.
  */
 
 import React, { Component } from "react";
 import { Label, Tab, Table } from "semantic-ui-react";
 import "./PatientInfo.css";
 
-class PatientCarePlanPane extends Component {
+class PatientConditionPane extends Component {
   render() {
-    const { carePlans } = this.props;
-    const carePlansNum = carePlans.length;
-    const createCarePlanTable = () => {
+    const { conditions } = this.props;
+    const conditionsNum = conditions.length;
+    const createConditionTable = () => {
       const table = [];
-      if (carePlansNum) {
+      if (conditionsNum) {
         const header = [
-          <Table.Row key={"carePlanRow"}>
+          <Table.Row key={"conditionRow"}>
             <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">Category</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">
-              Activities
-            </Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">Period</Table.HeaderCell>
+            <Table.HeaderCell id="patientTableCell">Summary</Table.HeaderCell>
+            <Table.HeaderCell id="patientTableCell">Time</Table.HeaderCell>
           </Table.Row>
         ];
         table.push(
-          <Table.Header key="carePlanTableHeader" id="patientTableHeader">
+          <Table.Header id="patientTableHeader" key="conditionTableHeader">
             {header}
           </Table.Header>
         );
       }
       const body = [];
-      for (let i = 0; i < carePlansNum; i++) {
+      for (let i = 0; i < conditionsNum; i++) {
         const children = [];
+        const summary = conditions[i].summary;
 
         children.push(
-          <Table.Cell key={"carePlanOrderCell" + i}>
-            <Label ribbon>{`${i + 1}`} </Label>
+          <Table.Cell key={"conditionOrderCell" + i}>
+            <Label color = "blue" ribbon>{`${i + 1}`} </Label>
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"carePlanCategoryCell" + i} id="patientTableCell">
-            {<h4>{carePlans[i].category}</h4>}
+          <Table.Cell key={"conditionSummaryCell" + i} id="patientTableCell">
+            {<h4>{summary}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"carePlanActCell" + i} id="patientTableCell">
-            {<h4>{carePlans[i].activities}</h4>}
+          <Table.Cell key={"conditionTimeCell" + i} id="patientTableCell">
+            {<h4>{conditions[i].onsetDateTime.toString()}</h4>}
           </Table.Cell>
         );
-        children.push(
-          <Table.Cell key={"carePlanPeriodCell" + i} id="patientTableCell">
-            {<h4>{carePlans[i].period}</h4>}
-          </Table.Cell>
-        );
-
         body.push(
-          <Table.Row key={"carePlanRow2" + i} id="patientTableRow">
+          <Table.Row id="patientTableRow" key={"conditionRow2" + i}>
             {children}
           </Table.Row>
         );
       }
       table.push(
-        <Table.Body key="carePlanTableBody" id="patientTableBody">
+        <Table.Body key="conditionTableBody" id="patientTableBody">
           {body}
         </Table.Body>
       );
-      const carePlanTable = [];
-      carePlanTable.push(<Table key="carePlanTable">{table}</Table>);
-      return carePlanTable;
+      const conditionTable = [];
+      conditionTable.push(<Table key="conditionTable" color="blue">{table}</Table>);
+      return conditionTable;
     };
 
     return (
       <div>
         <Tab.Pane>
-          <h4>You have {carePlansNum} recorded care plans.</h4>
-          {createCarePlanTable()}
+          <h4>You have {conditionsNum} recorded conditions.</h4>
+          {createConditionTable()}
         </Tab.Pane>
       </div>
     );
   }
 }
 
-export default PatientCarePlanPane;
+export default PatientConditionPane;
