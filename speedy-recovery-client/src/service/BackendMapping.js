@@ -18,8 +18,8 @@
  */
 
 import {
-  mapMessagesGOSH,
-  mapConversationsGOSH
+  mapConversationsGOSH,
+  mapMessagesGOSH
 } from "./BackendMappingAdapterGOSH";
 
 // Based on the type of the back-end data a different mapping function is used

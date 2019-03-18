@@ -104,6 +104,8 @@ class SecuredMainPage extends Component {
                     conditions={this.props.conditions}
                     medicationDispenses={this.props.medicationDispenses}
                     carePlans={this.props.carePlans}
+                    childResource={this.props.childResource}
+                    patientPractitioners={this.props.patientPractitioners}
                   />
                 )}
               />

@@ -21,13 +21,9 @@ them to send and receive messages between them and another user.
 import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { MessageList } from "react-chat-elements";
-import { Form, Grid, Button } from "semantic-ui-react";
+import { Button, Form, Grid } from "semantic-ui-react";
 import { getMessages, postMessages } from "../../../service/BackendService";
-import {
-  messageMap,
-  setupMessages,
-  getSenderMessageNum
-} from "../../../service/BackendMapping";
+import { getSenderMessageNum, messageMap, setupMessages } from "../../../service/BackendMapping";
 import "./ConversationPage.css";
 
 class ConversationPage extends Component {
@@ -117,7 +113,7 @@ class ConversationPage extends Component {
         .then(messagesResource => {
           const messages = messagesResource.map(message =>
             messageMap(message, this.props.location.state.id, this.state.dbType, this.props.location.state.role,
-              this.props.location.state.name, this.state.title,)
+              this.props.location.state.name, this.state.title)
           );
           if (
             getSenderMessageNum(messages) >=

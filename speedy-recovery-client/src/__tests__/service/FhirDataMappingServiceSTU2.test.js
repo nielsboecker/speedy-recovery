@@ -18,11 +18,11 @@
 
 import {
   fhirMapAppointment,
+  fhirMapCarePlan,
   fhirMapCondition,
   fhirMapMedication,
   fhirMapMedicationDispense,
-  fhirMapPatient,
-  fhirMapCarePlan,
+  fhirMapPerson,
   fhirMapPractitioner
 } from "../../service/FhirDataMappingService";
 import fhirExamplePatient from "../test_input/fhir_resources_stu2/FhirExamplePatientSTU2.json";
@@ -34,7 +34,7 @@ import fhirExampleMedicationDispense from "../test_input/fhir_resources_stu2/Fhi
 import fhirExamplePractitioner from "../test_input/fhir_resources_stu2/FhirExamplePractitionerSTU2.json";
 
 test("map FHIR Patient resource to internal user data model", () => {
-  const user = fhirMapPatient(fhirExamplePatient, "2");
+  const user = fhirMapPerson(fhirExamplePatient, "2");
   expect(user).toMatchSnapshot();
 });
 

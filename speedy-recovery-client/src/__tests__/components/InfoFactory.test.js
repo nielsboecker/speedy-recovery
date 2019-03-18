@@ -20,9 +20,9 @@ import React from "react";
 import Enzyme, { mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import InfoFactory from "../../components/secured/patientinformation/InfoFactory";
-import PatientInfo from "../../components/secured/patientinformation/PatientInfo";
-import ParentInfo from "../../components/secured/patientinformation/ParentInfo";
-import PractitionerInfo from "../../components/secured/patientinformation/PractitionerInfo";
+import PatientInfo from "../../components/secured/patientinformation/Patient/PatientInfo";
+import ParentInfo from "../../components/secured/patientinformation/Parent/ParentInfo";
+import PractitionerInfo from "../../components/secured/patientinformation/Practitioner/PractitionerInfo";
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -37,6 +37,7 @@ test("InfoFactory renders without crashing", () => {
       conditions={[]}
       medicationDispenses={[]}
       carePlans={[]}
+      childResource={{}}
     />
   );
 });
@@ -56,7 +57,14 @@ test("InfoFactory renders patient info for patient users", () => {
 });
 
 test("InfoFactory renders parent info for parent users", () => {
-  const wrapper = mount(<InfoFactory user={{ role: "Parent" }} patient={{}} />);
+  const wrapper = mount
+  (<InfoFactory 
+    user={{ role: "Parent" }}
+    conditions={[]}
+    medicationDispenses={[]}
+    carePlans={[]}
+    childResource={{}}  
+  />);
   expect(wrapper.children().length).toBe(1);
   expect(wrapper.children().type().name).toEqual("ParentInfo");
 });

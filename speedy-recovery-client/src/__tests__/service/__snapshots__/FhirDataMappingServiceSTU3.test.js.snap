@@ -24,7 +24,7 @@ Object {
 
 exports[`map FHIR CarePlan resource to internal data model 1`] = `
 Object {
-  "activities": "1. Antenatal education; 2. Stress management; 3. Pregnancy diet education; ",
+  "activities": "1. Antenatal education;2. Stress management;3. Pregnancy diet education;",
   "category": "Routine antenatal care",
   "id": "RES47187",
   "period": "from 1960-09-13 to 1961-04-11",
@@ -58,10 +58,13 @@ Object {
 
 exports[`map FHIR MedicationDispense resource to internal data model 1`] = `
 Object {
-  "daysSupply": "30 days",
+  "daysSupply": 30,
+  "dosageFrequency": undefined,
+  "dosagePeriod": undefined,
   "id": "smart-MedicationDispense-313",
+  "intakeMethod": undefined,
   "name": "clopidogrel 75 MG Oral Tablet [Plavix]",
-  "quantity": "30 tablets",
+  "quantity": 30,
   "status": "completed",
   "whenHandedOver": "2009-07-08",
 }
@@ -100,9 +103,11 @@ Object {
 exports[`map FHIR Practitioner resource to internal data model 1`] = `
 Object {
   "birthDate": "1971-11-07",
+  "email": "S.M.Heps@bmc.nl",
   "gender": "female",
   "id": "f007",
   "name": "Simone Heps",
+  "phone": "020556936",
   "photo": "Unknown",
 }
 `;

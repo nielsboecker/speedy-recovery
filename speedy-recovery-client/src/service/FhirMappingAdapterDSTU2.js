@@ -19,40 +19,38 @@
 
 import {
   getbodySite,
+  getFirstName,
   getForm,
   getLocation,
   getMedName,
   getName,
-  getFirstName,
   getPatient,
   getPatientId,
   getPhone,
   getPractitioner,
+  getPractitionerId,
   getSeverity,
-  getSummary,
-  getPractitionerId
+  getSummary
 } from "./FhirDataMappingExtractionUtils";
 
 const missingField = "Unknown";
-const mapPatientToUserSTU2 = fhirPatientResource => ({
-  id: fhirPatientResource.id ? fhirPatientResource.id : missingField,
+const mapPersonToUserSTU2 = fhirPersonResource => ({
+  id: fhirPersonResource.id ? fhirPersonResource.id : missingField,
   // This is a temporary hard-code fix as the SMART sandbox does not support logging in as a patients' parent
   role:
-    fhirPatientResource.id === "220093"
+    fhirPersonResource.id === "220119"
       ? "Parent"
-      : fhirPatientResource.resourceType,
+      : fhirPersonResource.resourceType,
 
-  name: getName(fhirPatientResource.name),
-  firstName: getFirstName(fhirPatientResource.name),
-  birthDate: fhirPatientResource.birthDate
-    ? formatBirthDate(fhirPatientResource.birthDate)
+  name: getName(fhirPersonResource.name),
+  firstName: getFirstName(fhirPersonResource.name),
+  birthDate: fhirPersonResource.birthDate
+    ? formatBirthDate(fhirPersonResource.birthDate)
     : missingField,
-  gender: fhirPatientResource.gender
-    ? fhirPatientResource.gender
-    : missingField,
+  gender: fhirPersonResource.gender ? fhirPersonResource.gender : missingField,
   careProvider: "Undefined in STU2",
-  address: getAddress(fhirPatientResource.address),
-  phone: getPhone(fhirPatientResource.telecom),
+  address: getAddress(fhirPersonResource.address),
+  phone: getPhone(fhirPersonResource.telecom),
   email: "Undefined in STU2"
 });
 
@@ -114,7 +112,6 @@ const mapMedicationSTU2 = fhirMedResource => ({
   content: "Undefined in STU2",
   imageURL: "Undefined in STU2"
 });
-
 const mapMedicationDispenseSTU2 = fhirMedResource => ({
   id: fhirMedResource.id ? fhirMedResource.id : missingField,
   status:
@@ -122,8 +119,15 @@ const mapMedicationDispenseSTU2 = fhirMedResource => ({
       ? fhirMedResource.status
       : missingField,
   name: getMedDispenseName(fhirMedResource.medicationCodeableConcept),
-  quantity: getMedDispenseQuantity(fhirMedResource.quantity),
-  daysSupply: getMedDispenseDaysSupply(fhirMedResource.daysSupply),
+  quantity: fhirMedResource.quantity.value
+    ? fhirMedResource.quantity.value
+    : missingField,
+  daysSupply: fhirMedResource.daysSupply.value
+    ? fhirMedResource.daysSupply.value
+    : missingField,
+  intakeMethod : getIntakeMethod(fhirMedResource.dosageInstruction),
+  dosageFrequency : getDosageFrequency(fhirMedResource.dosageInstruction), 
+  dosagePeriod : getDosagePeriod(fhirMedResource.dosageInstruction), 
   whenHandedOver:
     fhirMedResource.whenHandedOver !== undefined
       ? fhirMedResource.whenHandedOver
@@ -202,18 +206,25 @@ const getCarePlanEnd = period => {
   return missingField;
 };
 
-const getMedDispenseDaysSupply = daysSupply => {
-  if (daysSupply && daysSupply.value && daysSupply.unit) {
-    return daysSupply.value + " " + daysSupply.unit;
-  }
-  return missingField;
+const getIntakeMethod = dosageInstruction => {
+  if(dosageInstruction && dosageInstruction[0] && dosageInstruction[0].route
+    && dosageInstruction[0].route.coding && dosageInstruction[0].route.coding[0] &&
+    dosageInstruction[0].route.coding[0].display){
+      return dosageInstruction[0].route.coding[0].display;
+    }
 };
 
-const getMedDispenseQuantity = quantity => {
-  if (quantity && quantity.value && quantity.unit) {
-    return quantity.value + " " + quantity.unit;
-  }
-  return missingField;
+const getDosageFrequency = dosageInstruction => {
+  if(dosageInstruction && dosageInstruction[0] && dosageInstruction[0].timing
+    && dosageInstruction[0].timing.repeat && dosageInstruction[0].timing.repeat.frequency){
+      return dosageInstruction[0].timing.repeat.frequency;
+    }
+};
+const getDosagePeriod = dosageInstruction => {
+  if(dosageInstruction && dosageInstruction[0] && dosageInstruction[0].timing
+    && dosageInstruction[0].timing.repeat && dosageInstruction[0].timing.repeat.period){
+      return dosageInstruction[0].timing.repeat.period;
+    }
 };
 
 const getMedDispenseName = medicationCodeableConcept => {
@@ -228,6 +239,7 @@ const mapPractitionerSTU2 = fhirPractResource => ({
   id: fhirPractResource.id ? fhirPractResource.id : missingField,
   gender: "Undefined in STU2",
   birthDate: "Undefined in STU2",
+  phone: getPhone(fhirPractResource.telecom),
   photo: "Undefined in STU2"
 });
 
@@ -292,7 +304,7 @@ const getChildIDSTU2 = currentUserResource => {
 };
 
 export {
-  mapPatientToUserSTU2,
+  mapPersonToUserSTU2,
   mapAppointmentSTU2,
   mapConditionSTU2,
   mapMedicationSTU2,

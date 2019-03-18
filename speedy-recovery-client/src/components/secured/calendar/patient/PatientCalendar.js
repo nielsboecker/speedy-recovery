@@ -22,7 +22,7 @@ import BigCalendar from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
 import "../CalendarPages.css";
-import { Grid, Segment, Dropdown } from "semantic-ui-react";
+import { Dropdown, Grid, Segment } from "semantic-ui-react";
 import PatientPractitionerCard from "./PatientPractitionerCard";
 import { getPractitionerInfo } from "../../../../service/BackendService";
 
@@ -46,28 +46,28 @@ class PatientCalendar extends React.Component {
   removeArrayDuplicates = array =>
     array !== undefined
       ? array.reduce(
-          (prev, curr) =>
-            prev.find(a => a["text"] === curr["text"])
-              ? prev
-              : prev.push(curr) && prev,
-          []
-        )
+      (prev, curr) =>
+        prev.find(a => a["text"] === curr["text"])
+          ? prev
+          : prev.push(curr) && prev,
+      []
+      )
       : array;
 
   // Retrieve extra practitioner info from the back-end
   getBackendInfo =  (practitionerID) => {
     getPractitionerInfo(practitionerID)
-        .then(response =>
-            this.setState({backendInfo: response.data[0]})
-        )
-        .catch(error => console.log(error))
+      .then(response =>
+        this.setState({backendInfo: response.data[0]})
+      )
+      .catch(error => console.log(error))
   };
 
   onDropdownChange = (e, data) => {
     this.getBackendInfo(data.value);
     this.setState({ selectedPractitioner:
-          this.state.practitionerList.find(element => element.id ===
-              data.value)});
+        this.state.practitionerList.find(element => element.id ===
+          data.value)});
   };
 
   componentWillMount = () => {

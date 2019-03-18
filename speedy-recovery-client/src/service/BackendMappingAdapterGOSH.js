@@ -22,12 +22,12 @@ import {
   getAvatar,
   getDate,
   getId,
+  getMessageTitle,
   getPosition,
   getSubtitle,
   getText,
   getTime,
   getTitle,
-  getMessageTitle,
   getUnread,
   getUserId
 } from "./BackendMappingExtractionUtils";

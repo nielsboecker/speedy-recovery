@@ -9,6 +9,7 @@
     "fhirclient": "^0.1.15",
     "jest-mock-axios": "^2.1.11",
     "moment": "latest",
+    "node": "11.0.0",
     "react": "^16.7.0",
     "react-big-calendar": "latest",
     "react-chat-elements": "^10.2.0",
