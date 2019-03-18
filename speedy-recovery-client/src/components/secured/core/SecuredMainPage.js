@@ -54,6 +54,7 @@ class SecuredMainPage extends Component {
               username={this.props.user.name}
               onLogout={this.props.onLogout}
               role={this.props.user.role}
+              userid={this.props.childID}
             />
 
             <Container>

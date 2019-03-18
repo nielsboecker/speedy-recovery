@@ -22,8 +22,16 @@ import { Link } from "react-router-dom";
 
 import { Container, Dropdown, Icon, Image, Label, Menu } from "semantic-ui-react";
 import "./Header.css";
+import { getConversation } from "../../../service/BackendService";
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      unreadNum: 0
+    };
+  }
+
   render() {
     let showMessage;
     if (this.props.role !== "Patient") {
@@ -31,7 +39,9 @@ class Header extends Component {
         <Menu.Item as={Link} to="/secured/messaging">
           <Icon name="mail" />
           Messages
-          
+          <Label color="teal" circular floating>
+          {this.state.unreadNum}
+          </Label>
         </Menu.Item>
       );
     }
@@ -77,6 +87,24 @@ class Header extends Component {
       </header>
     );
   }
+
+  componentDidMount() {
+    if (this.props.role !== "Patient") {
+      let id = this.props.userid;
+      getConversation(id)
+            .then(value => {
+              var unreadNum = 0;
+              for (let i = 0; i < value.length; i ++){
+                unreadNum += value[i].unread;
+              }
+              this.setState({ unreadNum });
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        }
+  }
+
 }
 
 export default Header;
