@@ -35,11 +35,14 @@ class ParentMedicationPane extends Component {
           <Table.Row key={"medicationDRow"}>
             <Table.HeaderCell id="parentTableCell">#</Table.HeaderCell>
             <Table.HeaderCell id="parentTableCell">Name</Table.HeaderCell>
-            <Table.HeaderCell id="parentTableCell" />
+            <Table.HeaderCell id="parentTableCell">Search</Table.HeaderCell>
             <Table.HeaderCell id="parentTableCell">Quantity</Table.HeaderCell>
             <Table.HeaderCell id="parentTableCell">
-              Supply Time Length
+              Days Supply
             </Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">Intake Form</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">Intake Number</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">Status</Table.HeaderCell>
           </Table.Row>
         ];
         table.push(
@@ -55,17 +58,17 @@ class ParentMedicationPane extends Component {
         const searchQuery = "https://www.google.com/search?q=" + name;
 
         children.push(
-          <Table.Cell key={"medicationDOrderCell" + i}>
+          <Table.Cell key={"medicationOrderCell" + i}>
             <Label ribbon color="blue">{`${i + 1}`} </Label>
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDNameCell" + i} id="parentTableCell">
-            {<h4>{name}</h4>}
+          <Table.Cell key={"medicationNameCell" + i} id="parentTableCell">
+           {name}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDSearchCell" + i} id="parentTableCell">
+          <Table.Cell key={"medicationSearchCell" + i} id="parentTableCell">
             {
               <h4>
                 <a href={searchQuery}>
@@ -76,28 +79,43 @@ class ParentMedicationPane extends Component {
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDQuantityCell" + i} id="parentTableCell">
+          <Table.Cell key={"medicationQuantityCell" + i} id="parentTableCell">
             {<h4>{medicationDispenses[i].quantity}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDSupplyCell" + i} id="parentTableCell">
+          <Table.Cell key={"medicationSupplyCell" + i} id="parentTableCell">
             {<h4>{medicationDispenses[i].daysSupply}</h4>}
           </Table.Cell>
         );
+        children.push(
+          <Table.Cell key={"medicationIntakeMethodCell" + i} id="parentTableCell">
+            {<h4>{medicationDispenses[i].intakeMethod}</h4>}
+          </Table.Cell>
+        );
+        children.push(
+          <Table.Cell key={"medicationTimeCell" + i} id="parentTableCell">
+            {<h4>{medicationDispenses[i].dosageFrequency} times for {medicationDispenses[i].dosagePeriod} days</h4>}
+          </Table.Cell>
+        );
+        children.push(
+          <Table.Cell key={"medicationStatusCell" + i} id="parentTableCell">
+            {<h4>{medicationDispenses[i].status}</h4>}
+          </Table.Cell>
+        );
         body.push(
-          <Table.Row key={"medicationDRow2" + i} id="parentTableRow">
+          <Table.Row key={"medicationRow2" + i} id="parentTableRow">
             {children}
           </Table.Row>
         );
       }
       table.push(
-        <Table.Body key="medicationDTableBody" id="parentTableBody">
+        <Table.Body key="medicationTableBody" id="parentTableBody">
           {body}
         </Table.Body>
       );
       const medicationDTable = [];
-      medicationDTable.push(<Table key="medicationDTable" color="blue">{table}</Table>);
+      medicationDTable.push(<Table key="medicationTable" color="blue">{table}</Table>);
       return medicationDTable;
     };
 

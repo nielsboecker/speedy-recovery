@@ -370,12 +370,10 @@ class App extends Component {
       .then(practitionerResource => {
         const filteredPractitionerResource = filterPractitionerResource(practitionerResource.resource);
         if (filteredPractitionerResource) {
-    
           const practitioner = fhirMapPractitioner(
             filteredPractitionerResource,
             this.state.fhirVersion
           );
-
           this.state.patientPractitioners.push(practitioner);
         } else {
           console.error(

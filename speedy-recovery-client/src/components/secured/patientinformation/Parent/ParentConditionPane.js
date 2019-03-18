@@ -39,6 +39,7 @@ class ParentConditionPane extends Component {
             <Table.HeaderCell id="parentTableCell">Time</Table.HeaderCell>
             <Table.HeaderCell id="parentTableCell">Severity</Table.HeaderCell>
             <Table.HeaderCell id="parentTableCell">VerfiedStatus</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">ClinicalStatus</Table.HeaderCell>
             <Table.HeaderCell id="parentTableCell">BodySite</Table.HeaderCell>
           </Table.Row>
         ];
@@ -82,8 +83,13 @@ class ParentConditionPane extends Component {
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"conditionStatusCell" + i} id="parentTableCell">
+          <Table.Cell key={"conditionVerificationStatusCell" + i} id="parentTableCell">
             {<h4>{conditions[i].verificationStatus}</h4>}
+          </Table.Cell>
+        );
+        children.push(
+          <Table.Cell key={"conditionClinicalStatusCell" + i} id="parentTableCell">
+            {<h4>{conditions[i].clinicalStatus}</h4>}
           </Table.Cell>
         );
         children.push(

@@ -37,6 +37,7 @@ class ParentDrPane extends Component {
             <Table.HeaderCell id="parentTableCell">Name</Table.HeaderCell>
             <Table.HeaderCell id="parentTableCell">Gender</Table.HeaderCell>
             <Table.HeaderCell id="parentTableCell">Contact Number</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">Email</Table.HeaderCell>
           </Table.Row>
         ];
         table.push(
@@ -67,6 +68,11 @@ class ParentDrPane extends Component {
         children.push(
           <Table.Cell key={"practitionerPhoneCell" + i} id="parentTableCell">
             {<h4>{patientPractitioners[i].phone}</h4>}
+          </Table.Cell>
+        );
+        children.push(
+          <Table.Cell key={"practitionerEmailCell" + i} id="parentTableCell">
+            {<h4>{patientPractitioners[i].email}</h4>}
           </Table.Cell>
         );
         body.push(

@@ -9,7 +9,6 @@
   background-color: #f2f2f2;
 }
 
-
 #parentTableRow:hover {
   background-color: lightblue;
 }
@@ -25,7 +24,4 @@
   width: 100%;
   text-align: center;
   background-color: lightblue;
-
 }
-
-

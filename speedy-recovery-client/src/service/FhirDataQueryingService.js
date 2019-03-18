@@ -42,7 +42,10 @@ const getUserAppointments = userID => {
           .done(appointmentsBundle => {
             console.log("User appointment response: ", appointmentsBundle);
             const appointments = extractResourcesFromBundle(appointmentsBundle);
-            console.log("Appointments Resource after extracting: ", appointments);
+            console.log(
+              "Appointments Resource after extracting: ",
+              appointments
+            );
             return resolve(appointments);
           });
       },
@@ -163,7 +166,9 @@ const getChildInfo = childID => {
           .search({ type: "Patient", query: { _id: childID } })
           .done(childResourceBundle => {
             console.log("Child resource response: ", childResourceBundle);
-            const childResource = extractResourcesFromBundle(childResourceBundle);
+            const childResource = extractResourcesFromBundle(
+              childResourceBundle
+            );
             console.log("Child Resource after extracting: ", childResource);
             return resolve(childResource);
           });
@@ -175,8 +180,6 @@ const getChildInfo = childID => {
     );
   });
 };
-
-
 
 export default {
   getPractitioner,

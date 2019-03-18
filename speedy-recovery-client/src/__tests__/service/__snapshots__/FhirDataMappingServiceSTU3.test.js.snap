@@ -58,10 +58,13 @@ Object {
 
 exports[`map FHIR MedicationDispense resource to internal data model 1`] = `
 Object {
-  "daysSupply": "30 days",
+  "daysSupply": 30,
+  "dosageFrequency": undefined,
+  "dosagePeriod": undefined,
   "id": "smart-MedicationDispense-313",
+  "intakeMethod": undefined,
   "name": "clopidogrel 75 MG Oral Tablet [Plavix]",
-  "quantity": "30 tablets",
+  "quantity": 30,
   "status": "completed",
   "whenHandedOver": "2009-07-08",
 }
@@ -100,6 +103,7 @@ Object {
 exports[`map FHIR Practitioner resource to internal data model 1`] = `
 Object {
   "birthDate": "1971-11-07",
+  "email": "S.M.Heps@bmc.nl",
   "gender": "female",
   "id": "f007",
   "name": "Simone Heps",

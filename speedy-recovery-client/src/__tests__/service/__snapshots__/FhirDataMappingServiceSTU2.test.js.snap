@@ -58,10 +58,13 @@ Object {
 
 exports[`map FHIR MedicationDispense resource to internal data model 1`] = `
 Object {
-  "daysSupply": "30 days",
+  "daysSupply": 30,
+  "dosageFrequency": undefined,
+  "dosagePeriod": undefined,
   "id": "smart-MedicationDispense-332",
+  "intakeMethod": undefined,
   "name": "Lisinopril 5 MG Oral Tablet",
-  "quantity": "30 tablets",
+  "quantity": 30,
   "status": "completed",
   "whenHandedOver": "2009-04-09",
 }
