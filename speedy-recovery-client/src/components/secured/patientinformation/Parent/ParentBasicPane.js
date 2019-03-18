@@ -61,7 +61,7 @@ class ParentBasicPane extends Component {
             Birthday: {childResource.birthDate}
           </h4>
           <h4>
-            Phone: {childResource.phone}
+            Contact Number: {childResource.phone}
           </h4>
           <h4>
             Address: {childResource.address}

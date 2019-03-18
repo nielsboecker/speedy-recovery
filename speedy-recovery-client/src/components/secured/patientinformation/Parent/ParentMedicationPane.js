@@ -40,9 +40,10 @@ class ParentMedicationPane extends Component {
             <Table.HeaderCell id="parentTableCell">
               Days Supply
             </Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">Status</Table.HeaderCell>
             <Table.HeaderCell id="parentTableCell">Intake Form</Table.HeaderCell>
             <Table.HeaderCell id="parentTableCell">Intake Number</Table.HeaderCell>
-            <Table.HeaderCell id="parentTableCell">Status</Table.HeaderCell>
+            
           </Table.Row>
         ];
         table.push(
@@ -89,20 +90,20 @@ class ParentMedicationPane extends Component {
           </Table.Cell>
         );
         children.push(
+          <Table.Cell key={"medicationStatusCell" + i} id="parentTableCell">
+            {<h4>{medicationDispenses[i].status}</h4>}
+          </Table.Cell>
+        );
+        children.push(
           <Table.Cell key={"medicationIntakeMethodCell" + i} id="parentTableCell">
             {<h4>{medicationDispenses[i].intakeMethod}</h4>}
           </Table.Cell>
         );
         children.push(
           <Table.Cell key={"medicationTimeCell" + i} id="parentTableCell">
-            {<h4>{medicationDispenses[i].dosageFrequency} times for {medicationDispenses[i].dosagePeriod} days</h4>}
+            {<h4>{medicationDispenses[i].dosageFrequency} time for {medicationDispenses[i].dosagePeriod} days</h4>}
           </Table.Cell>
-        );
-        children.push(
-          <Table.Cell key={"medicationStatusCell" + i} id="parentTableCell">
-            {<h4>{medicationDispenses[i].status}</h4>}
-          </Table.Cell>
-        );
+        ); 
         body.push(
           <Table.Row key={"medicationRow2" + i} id="parentTableRow">
             {children}

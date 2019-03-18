@@ -57,7 +57,7 @@ class ParentDrPane extends Component {
         );
         children.push(
           <Table.Cell key={"practitionerNameCell" + i} id="parentTableCell">
-            {<h4>{patientPractitioners[i].name}</h4>}
+            {<h4>Dr {patientPractitioners[i].name}</h4>}
           </Table.Cell>
         );
         children.push(
