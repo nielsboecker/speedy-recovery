@@ -299,5 +299,9 @@ export {
   mapMedicationDispenseSTU2,
   mapCarePlanSTU2,
   mapPractitionerSTU2,
-  getChildIDSTU2
+  getChildIDSTU2,
+  getCarePlanActivities,
+  getCarePlanStart,
+  getCarePlanEnd,
+  formatBirthDate
 };
