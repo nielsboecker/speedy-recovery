@@ -80,7 +80,16 @@ class MessagingPage extends Component {
           : this.props.user.id;
       this.setState({ id });
       this.fetchConversation(id);
+
+
+      this.timer = setInterval(() => {
+        this.fetchConversation(id);
+      }, 1000);
     }
+  }
+
+  componentWillUnmount() {
+    this.timer && clearTimeout(this.timer);
   }
 
   // Fetch all of the conversations that this id has been part of
