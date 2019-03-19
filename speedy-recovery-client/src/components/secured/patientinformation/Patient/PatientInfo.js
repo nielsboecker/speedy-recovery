@@ -35,8 +35,8 @@ class PatientInfo extends Component {
     const panes = [
       {
         menuItem: (
-          <Menu.Item key={"basic"}>
-            <Icon fitted name="id card outline" />
+          <Menu.Item key={"basic"} color="blue">
+            <Icon fitted name="id card outline" color="blue" size={isBrowser || isTablet ? "large" : "small"}/>
               {isBrowser || isTablet ? "Basic" : ""}
           </Menu.Item>
         ),
@@ -45,8 +45,8 @@ class PatientInfo extends Component {
       },
       {
         menuItem: (
-          <Menu.Item key={"medication"}>
-            <Icon fitted name="pills" />
+          <Menu.Item key={"medication"} color="blue">
+            <Icon fitted name="pills" color="purple" size={isBrowser || isTablet ? "large" : "small"}/>
               {isBrowser || isTablet ? "Dispensed Medication" : ""}
           </Menu.Item>
         ),
@@ -58,8 +58,8 @@ class PatientInfo extends Component {
       },
       {
         menuItem: (
-          <Menu.Item key={"condition"}>
-            <Icon fitted name="heartbeat" />
+          <Menu.Item key={"condition"} color="blue">
+            <Icon fitted name="heartbeat" color="red" size={isBrowser || isTablet ? "large" : "small"}/>
               {isBrowser || isTablet ? "Condition" : ""}
           </Menu.Item>
         ),
@@ -67,8 +67,8 @@ class PatientInfo extends Component {
       },
       {
         menuItem: (
-          <Menu.Item key={"carePlan"}>
-            <Icon fitted name="unordered list" />
+          <Menu.Item key={"carePlan"} color="blue">
+            <Icon fitted name="unordered list" color="orange" size={isBrowser || isTablet ? "large" : "small"}/>
               {isBrowser || isTablet ? "Care Plan" : ""}
           </Menu.Item>
         ),

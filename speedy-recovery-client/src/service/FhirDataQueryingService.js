@@ -42,7 +42,10 @@ const getUserAppointments = userID => {
           .done(appointmentsBundle => {
             console.log("User appointment response: ", appointmentsBundle);
             const appointments = extractResourcesFromBundle(appointmentsBundle);
-            console.log("Appointments Resource after mapping: ", appointments);
+            console.log(
+              "Appointments Resource after extracting: ",
+              appointments
+            );
             return resolve(appointments);
           });
       },
@@ -63,7 +66,7 @@ const getUserConditions = userID => {
           .done(conditionBundle => {
             console.log("User condition response: ", conditionBundle);
             const conditions = extractResourcesFromBundle(conditionBundle);
-            console.log("Conditions Resource after mapping: ", conditions);
+            console.log("Conditions Resource after extracting: ", conditions);
             return resolve(conditions);
           });
       },
@@ -88,7 +91,7 @@ const getUserMedicationDispense = userID => {
             );
             const medications = extractResourcesFromBundle(medicationBundle);
             console.log(
-              "MedicationDispenses Resource after mapping: ",
+              "MedicationDispenses Resource after extracting: ",
               medications
             );
             return resolve(medications);
@@ -143,12 +146,35 @@ const getUserCarePlan = userID => {
           .done(carePlanBundle => {
             console.log("User care plan response: ", carePlanBundle);
             const carePlans = extractResourcesFromBundle(carePlanBundle);
-            console.log("CarePlans Resource after mapping: ", carePlans);
+            console.log("CarePlan Resource after extracting: ", carePlans);
             return resolve(carePlans);
           });
       },
       error => {
         console.error("CarePlan fetching error: ", error);
+        return reject(error);
+      }
+    );
+  });
+};
+
+const getChildInfo = childID => {
+  return new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      smart => {
+        smart.api
+          .search({ type: "Patient", query: { _id: childID } })
+          .done(childResourceBundle => {
+            console.log("Child resource response: ", childResourceBundle);
+            const childResource = extractResourcesFromBundle(
+              childResourceBundle
+            );
+            console.log("Child Resource after extracting: ", childResource);
+            return resolve(childResource);
+          });
+      },
+      error => {
+        console.error("Child resource fetching error: ", error);
         return reject(error);
       }
     );
@@ -161,5 +187,6 @@ export default {
   getUserConditions,
   getUserMedicationDispense,
   getUserCarePlan,
-  extractResourcesFromBundle
+  extractResourcesFromBundle,
+  getChildInfo
 };

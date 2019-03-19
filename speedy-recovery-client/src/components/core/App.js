@@ -59,7 +59,8 @@ class App extends Component {
       fhirVersion: null,
       patientPractitioners: [],
       userList:[],
-      childID: null
+      childID: null,
+      mapChildResource:{}
     }
   }
 
@@ -115,6 +116,7 @@ class App extends Component {
                 userList={this.state.userList}
                 fhirVersion={this.state.fhirVersion}
                 childID={this.state.childID}
+                childResource = {this.state.mapChildResource}
               />
             )}
           />
@@ -191,12 +193,19 @@ class App extends Component {
           case "Parent":
             this.updateStateChildID(currentUserResource);
             this.updateStateAppointment(this.state.childID, user.role);
+            this.updateStateCondition(this.state.childID);
+            this.updateStateMedicationDispense(this.state.childID);
+            this.updateStateCarePlan(this.state.childID);
+            this.updateStateChildInfo(this.state.childID);
             break;
           case "Practitioner":
             this.updateStateAppointment(user.id, user.role);
             break;
           case "Patient":
             this.updateStateAppointment(user.id, user.role);
+            this.updateStateCondition(user.id);
+            this.updateStateMedicationDispense(user.id);
+            this.updateStateCarePlan(user.id);
             break;
           default:
             console.log("Invalid user role: ", user.role);
@@ -215,10 +224,6 @@ class App extends Component {
             })
             .catch(error => console.error(error));
         }
-        this.updateStateCondition(user.id);
-        this.updateStateMedicationDispense(user.id);
-        this.updateStateCarePlan(user.id);
-
         this.setState({ user });
       })
       .catch(errorMessage => {
@@ -238,7 +243,9 @@ class App extends Component {
       .then(appointmentResource => {
         const appointments = appointmentResource.map(appointment =>
           fhirMapAppointment(appointment, this.state.fhirVersion)
+          
         );
+        console.log("APPOINTMENTS after mapping:",appointments );
         const practitioners = removeArrayDuplicates(
           appointments.map(appointment => ({
             name: appointment.practitioner,
@@ -287,6 +294,7 @@ class App extends Component {
         const conditions = conditionResource.map(condition =>
           fhirMapCondition(condition, this.state.fhirVersion)
         );
+        console.log("CONDITIONS AFTER MAPPING:",conditions);
         this.setState({ conditions });
       })
       .catch(error => {
@@ -294,12 +302,24 @@ class App extends Component {
       });
   }
 
+  updateStateChildInfo(childID){
+    FhirDataQueryingService.getChildInfo(childID)
+      .then(childResource => {
+        const mapChildResource = fhirMapPerson(childResource[0], this.state.fhirVersion);
+        this.setState({ mapChildResource });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+  
   updateStateMedicationDispense(userId) {
     FhirDataQueryingService.getUserMedicationDispense(userId)
       .then(medicationResource => {
         const medicationDispenses = medicationResource.map(medication =>
           fhirMapMedicationDispense(medication, this.state.fhirVersion)
         );
+        console.log("MEDICATION RESOURCE AFTER MAPPING:",medicationDispenses);
         this.setState({ medicationDispenses });
       })
       .catch(error => {
@@ -313,6 +333,7 @@ class App extends Component {
         const carePlans = carePlanResource.map(carePlan =>
           fhirMapCarePlan(carePlan, this.state.fhirVersion)
         );
+        console.log("CAREPLAN RESOURCE AFTER MAPPING:",carePlans);
         this.setState({carePlans});
       })
       .catch(error => {
@@ -354,12 +375,10 @@ class App extends Component {
       .then(practitionerResource => {
         const filteredPractitionerResource = filterPractitionerResource(practitionerResource.resource);
         if (filteredPractitionerResource) {
-
           const practitioner = fhirMapPractitioner(
             filteredPractitionerResource,
             this.state.fhirVersion
           );
-
           this.state.patientPractitioners.push(practitioner);
         } else {
           console.error(

@@ -19,7 +19,7 @@ displays all medication information regarding the patient
  */
 
 import React, { Component } from "react";
-import { Icon, Label, Tab, Table } from "semantic-ui-react";
+import { Label, Tab, Table } from "semantic-ui-react";
 import "./PatientInfo.css";
 import {isBrowser, isTablet} from 'react-device-detect';
 
@@ -32,23 +32,15 @@ class PatientMedicationDispensePane extends Component {
       if (medicationDispensesNum) {
         const header = [
           <Table.Row key={"medicationDRow"}>
-            <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">Name</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell" />
-            <Table.HeaderCell id="patientTableCell">Quantity</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">
-              Supply Time Length
-            </Table.HeaderCell>
-          </Table.Row>
-        ];
-        const mobileHeader = [
-          <Table.Row key={"medicationDRow"}>
-            <Table.HeaderCell id="patientTableCell">Name</Table.HeaderCell>
+            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell> : null}
+            <Table.HeaderCell id="patientTableCell">Medication</Table.HeaderCell>
+            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">Quantity</Table.HeaderCell> : null}
+            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">Supply Time</Table.HeaderCell> : null}
           </Table.Row>
         ];
         table.push(
           <Table.Header id="patientTableHeader" key="medicationDTableHeader">
-            {isBrowser || isTablet ? header : mobileHeader}
+            {header}
           </Table.Header>
         );
       }
@@ -56,7 +48,6 @@ class PatientMedicationDispensePane extends Component {
       for (let i = 0; i < medicationDispensesNum; i++) {
         const children = [];
         const name = medicationDispenses[i].name;
-        const searchQuery = "https://www.google.com/search?q=" + name;
 
         if (isTablet || isBrowser) {
           children.push(
@@ -71,17 +62,6 @@ class PatientMedicationDispensePane extends Component {
           </Table.Cell>
         );
 
-        children.push(
-          <Table.Cell key={"medicationDSearchCell" + i} id="patientTableCell">
-            {
-              <h4>
-                <a href={searchQuery}>
-                  <Icon fitted name="search" />
-                </a>
-              </h4>
-            }
-          </Table.Cell>
-        );
         if (isBrowser || isTablet) {
           children.push(
               <Table.Cell key={"medicationDQuantityCell" + i} id="patientTableCell">
@@ -106,7 +86,7 @@ class PatientMedicationDispensePane extends Component {
         </Table.Body>
       );
       const medicationDTable = [];
-      medicationDTable.push(<Table key="medicationDTable">{table}</Table>);
+      medicationDTable.push(<Table key="medicationDTable" color="blue">{table}</Table>);
       return medicationDTable;
     };
 
