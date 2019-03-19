@@ -48,3 +48,9 @@ test("extracting data from bundle works for empty data", () => {
   // then
   expect(result).toEqual([]);
 });
+
+test("get practitioner data", () => {
+  const practId = "mock";
+  const familyName = "mock";
+  FhirDataQueryingService.getPractitioner(practId, familyName);
+});
