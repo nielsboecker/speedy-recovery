@@ -23,7 +23,8 @@ import {
   fhirMapMedicationDispense,
   fhirMapCarePlan,
   fhirMapPractitioner,
-  fhirMapPatient
+  fhirMapPatient,
+  getChildID
 } from "../../service/FhirDataMappingService";
 import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatientSTU3.json";
 import fhirExamplePatientMissingField from "../test_input/fhir_resources_stu3/FhirExamplePatientMissingFieldSTU3.json";
@@ -75,4 +76,8 @@ test("map FHIR MedicationDispense resource to internal data model", () => {
 test("map FHIR Practitioner resource to internal data model", () => {
   const practitioner = fhirMapPractitioner(fhirExamplePractitioner, "3");
   expect(practitioner).toMatchSnapshot();
+});
+
+test("getChildID", () => {
+  getChildID(fhirExamplePatient, "3");
 });

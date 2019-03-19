@@ -172,6 +172,7 @@ const getChildID = (resource, version) => {
     }
   }
   console.log("No FHIR version has been supplied");
+  return null;
 };
 
 export {

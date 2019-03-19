@@ -23,7 +23,8 @@ import {
   fhirMapMedicationDispense,
   fhirMapCarePlan,
   fhirMapPractitioner,
-  fhirMapPatient
+  fhirMapPatient,
+  getChildID
 } from "../../service/FhirDataMappingService";
 import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatientSTU3.json";
 import fhirShortApp from "../test_input/fhir_resources_stu3/FhirSingleExampleAppointmentSTU3.json";
@@ -71,6 +72,11 @@ test("map FHIR Practitioner resource version 0 return null", () => {
   expect(practitioner).toEqual(null);
 });
 
+test("getChildID version 0 return null", () => {
+  const id = getChildID(fhirExamplePatient, "0");
+  expect(id).toEqual(null);
+});
+
 test("map FHIR Patient resource version 1 return null", () => {
   const user = fhirMapPatient(fhirExamplePatient, "1");
   expect(user).toEqual(null);
@@ -107,4 +113,9 @@ test("map FHIR MedicationDispense resource version 1 return null", () => {
 test("map FHIR Practitioner resource version 1 return null", () => {
   const practitioner = fhirMapPractitioner(fhirExamplePractitioner, "1");
   expect(practitioner).toEqual(null);
+});
+
+test("getChildID version 1 return null", () => {
+  const id = getChildID(fhirExamplePatient, "1");
+  expect(id).toEqual(null);
 });
