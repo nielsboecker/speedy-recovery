@@ -14,7 +14,7 @@
  * see http://www.gnu.org/license/.
  * */
 
-/* This file defines the Patient's family History which creates a pane used in the Practitioner's PatientInfo component which displays all
+/* This file defines the Patient's Goal which creates a pane used in the Practitioner's PatientInfo component which displays all
    goal information regarding the patient
  */
 

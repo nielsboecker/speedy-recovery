@@ -22,7 +22,7 @@ import FhirDataQueryingService from "../../../../service/FhirDataQueryingService
 import { Icon, Menu, Tab } from "semantic-ui-react";
 import "./PractitionerInfo.css";
 import PractitionerConditionPane from "./PractitionerConditionPane";
-import PatientCarePlanPane from "../Patient/PatientCarePlanPane";
+import PractitionerCarePlanPane from "./PractitionerCarePlanPane";
 import PractitionerMedicationDispensePane from "./PractitionerMedicationDispensePane";
 import PractitionerBasicPane from "./PractitionerBasicPane";
 import PractitionerFamilyHistory from "./PractitionerFamilyHistory";
@@ -93,7 +93,7 @@ class PractitionerPatientInfo extends Component {
             Care Plan
           </Menu.Item>
         ),
-        render: () => <PatientCarePlanPane carePlans={this.state.carePlans} />
+        render: () => <PractitionerCarePlanPane carePlans={this.state.carePlans} />
       },
 
       {

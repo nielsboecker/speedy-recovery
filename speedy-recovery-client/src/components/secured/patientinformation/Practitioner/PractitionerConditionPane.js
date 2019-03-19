@@ -14,105 +14,137 @@
  * see http://www.gnu.org/license/.
  * */
 
-/* This file defines the PatientCarePlanPane which creates a pane used in the PatientInfo component which displays all
-condition information regarding the patient.
+/* This file defines the PractitionerConditionPane which creates a pane used in the PractitionerInfo component which displays all
+care plan information regarding the Patient
  */
 
 import React, { Component } from "react";
-import { Label, Tab, Table } from "semantic-ui-react";
+import {Icon, Label, Tab, Table} from "semantic-ui-react";
 import "./PractitionerInfo.css";
 
 class PractitionerConditionPane extends Component {
   render() {
     const { conditions } = this.props;
     const conditionsNum = conditions.length;
+
     const createConditionTable = () => {
       const table = [];
       if (conditionsNum) {
         const header = [
           <Table.Row key={"conditionRow"}>
-            <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">Summary</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">Severity</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">
-              Clinical Status
+            <Table.HeaderCell id="parentTableCell">#</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">Summary</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">Search</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">Time</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">Severity</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">
+              VerfiedStatus
             </Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">
-              Verification status
+            <Table.HeaderCell id="parentTableCell">
+              ClinicalStatus
             </Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">Time</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">BodySite</Table.HeaderCell>
           </Table.Row>
         ];
         table.push(
-          <Table.Header id="patientTableHeader" key="conditionTableHeader">
-            {header}
-          </Table.Header>
+            <Table.Header id="parentTableHeader" key="conditionTableHeader">
+              {header}
+            </Table.Header>
         );
       }
       const body = [];
       for (let i = 0; i < conditionsNum; i++) {
         const children = [];
         const summary = conditions[i].summary;
+        const searchQuery = "https://www.google.com/search?q=" + summary;
 
         children.push(
-          <Table.Cell key={"conditionOrderCell0" + i}>
-            <Label color="blue" ribbon>
-              {`${i + 1}`}{" "}
-            </Label>
-          </Table.Cell>
+            <Table.Cell key={"conditionOrderCell" + i}>
+              <Label color="blue" ribbon>
+                {`${i + 1}`}{" "}
+              </Label>
+            </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"conditionSummaryCell1" + i} id="patientTableCell">
-            {<h4>{summary}</h4>}
-          </Table.Cell>
+            <Table.Cell key={"conditionSummaryCell" + i} id="parentTableCell">
+              {<h4>{summary}</h4>}
+            </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"conditionSummaryCell2" + i} id="patientTableCell">
-            {<h4>{conditions[i].severity}</h4>}
-          </Table.Cell>
+            <Table.Cell
+                key={"conditionSummarySearchCell" + i}
+                id="parentTableCell"
+            >
+              {
+                <h4>
+                  <a href={searchQuery}>
+                    {" "}
+                    <Icon color="blue" fitted name="search" />{" "}
+                  </a>
+                </h4>
+              }
+            </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"conditionSummaryCell3" + i} id="patientTableCell">
-            {<h4>{conditions[i].clinicalStatus}</h4>}
-          </Table.Cell>
+            <Table.Cell key={"conditionTimeCell" + i} id="parentTableCell">
+              {<h4>{conditions[i].onsetDateTime.toString()}</h4>}
+            </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"conditionSummaryCell" + i} id="patientTableCell">
-            {<h4>{conditions[i].verificationStatus}</h4>}
-          </Table.Cell>
+            <Table.Cell key={"conditionSeverityCell" + i} id="parentTableCell">
+              {<h4>{conditions[i].severity}</h4>}
+            </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"conditionTimeCell" + i} id="patientTableCell">
-            {<h4>{conditions[i].onsetDateTime.toString()}</h4>}
-          </Table.Cell>
+            <Table.Cell
+                key={"conditionVerificationStatusCell" + i}
+                id="parentTableCell"
+            >
+              {<h4>{conditions[i].verificationStatus}</h4>}
+            </Table.Cell>
+        );
+        children.push(
+            <Table.Cell
+                key={"conditionClinicalStatusCell" + i}
+                id="parentTableCell"
+            >
+              {<h4>{conditions[i].clinicalStatus}</h4>}
+            </Table.Cell>
+        );
+        children.push(
+            <Table.Cell key={"conditionBodySiteCell" + i} id="parentTableCell">
+              {<h4>{conditions[i].bodySite}</h4>}
+            </Table.Cell>
         );
         body.push(
-          <Table.Row id="patientTableRow" key={"conditionRow2" + i}>
-            {children}
-          </Table.Row>
+            <Table.Row id="parentTableRow" key={"conditionRow2" + i}>
+              {children}
+            </Table.Row>
         );
       }
       table.push(
-        <Table.Body key="conditionTableBody" id="patientTableBody">
-          {body}
-        </Table.Body>
+          <Table.Body key="conditionTableBody" id="parentTableBody">
+            {body}
+          </Table.Body>
       );
       const conditionTable = [];
       conditionTable.push(
-        <Table key="conditionTable" color="blue">
-          {table}
-        </Table>
+          <Table key="conditionTable" color="blue">
+            {table}
+          </Table>
       );
       return conditionTable;
     };
 
     return (
-      <div>
-        <Tab.Pane>
-          <h4>You have {conditionsNum} recorded conditions.</h4>
-          {createConditionTable()}
-        </Tab.Pane>
-      </div>
+        <div>
+          <Tab.Pane>
+            <h4>
+              You have {conditionsNum} recorded conditions.
+            </h4>
+            {createConditionTable()}
+          </Tab.Pane>
+        </div>
     );
   }
 }
