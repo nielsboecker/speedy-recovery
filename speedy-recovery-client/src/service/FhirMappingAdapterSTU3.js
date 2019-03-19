@@ -387,5 +387,9 @@ export {
   mapMedicationDispenseSTU3,
   mapCarePlanSTU3,
   mapPractitionerSTU3,
-  getChildIDSTU3
+  getChildIDSTU3,
+  getCarePlanStart,
+  getCarePlanEnd,
+  getPhoto,
+  formatBirthDate
 };
