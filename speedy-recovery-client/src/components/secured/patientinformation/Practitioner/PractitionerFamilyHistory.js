@@ -15,32 +15,31 @@
  * */
 
 /* This file defines the Patient's family History which creates a pane used in the Practitioner's PatientInfo component which displays all
-   goal information regarding the patient
+   Goal information regarding the patient
  */
 
 import React, { Component } from "react";
 import { Label, Tab, Table } from "semantic-ui-react";
-import "./PatientInfo.css";
+import "./PractitionerInfo.css";
 
-class PractitionerGoal extends Component {
+class PractitionerFamilyHistory extends Component {
   render() {
-    const { goal } = this.props;
-    const goalNum = goal.length;
-    const createGoalTable = () => {
+    const { histories } = this.props;
+    const historiesNum = histories.length;
+    const createFamilyHistoryTable = () => {
       const table = [];
-      if (goalNum) {
+      if (historiesNum) {
         const header = [
           <Table.Row key={"historiesRow"}>
             <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">Goal</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">Priority</Table.HeaderCell>
+            <Table.HeaderCell id="patientTableCell">Name</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">
-              Description
+              Relationship
             </Table.HeaderCell>
+            <Table.HeaderCell id="patientTableCell">Condition</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">
-              Start date
+              Death date
             </Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">Due date</Table.HeaderCell>
           </Table.Row>
         ];
         table.push(
@@ -50,65 +49,60 @@ class PractitionerGoal extends Component {
         );
       }
       const body = [];
-      for (let i = 0; i < goalNum; i++) {
+      for (let i = 0; i < historiesNum; i++) {
         const children = [];
 
         children.push(
-          <Table.Cell key={"goalCell" + i}>
+          <Table.Cell key={"historiesCell" + i}>
             <Label ribbon>{`${i + 1}`} </Label>
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"goalCell" + i} id="patientTableCell">
-            {<h4>{goal[i].goal}</h4>}
+          <Table.Cell key={"historiesCell" + i} id="patientTableCell">
+            {<h4>{histories[i].name}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"goalCell" + i} id="patientTableCell">
-            {<h4>{goal[i].priority}</h4>}
+          <Table.Cell key={"historyCell" + i} id="patientTableCell">
+            {<h4>{histories[i].relationship}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"goalCell" + i} id="patientTableCell">
-            {<h4>{goal[i].description}</h4>}
+          <Table.Cell key={"historyCell" + i} id="patientTableCell">
+            {<h4>{histories[i].condition}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"goalCell" + i} id="patientTableCell">
-            {<h4>{goal[i].startDate}</h4>}
-          </Table.Cell>
-        );
-        children.push(
-          <Table.Cell key={"goalCell" + i} id="patientTableCell">
-            {<h4>{goal[i].dueDate}</h4>}
+          <Table.Cell key={"historyCell" + i} id="patientTableCell">
+            {<h4>{histories[i].date}</h4>}
           </Table.Cell>
         );
 
         body.push(
-          <Table.Row key={"goalRow2" + i} id="patientTableRow">
+          <Table.Row key={"historyRow2" + i} id="patientTableRow">
             {children}
           </Table.Row>
         );
       }
       table.push(
-        <Table.Body key="goalTableBody" id="patientTableBody">
+        <Table.Body key="historiesTableBody" id="patientTableBody">
           {body}
         </Table.Body>
       );
-      const goalTable = [];
-      goalTable.push(<Table key="goalTable">{table}</Table>);
-      return goalTable;
+      const historiesTable = [];
+      historiesTable.push(<Table key="historiesTable">{table}</Table>);
+      return historiesTable;
     };
 
     return (
       <div>
         <Tab.Pane>
-          <h4>You have {goalNum} goal.</h4>
-          {createGoalTable()}
+          <h4>You have {historiesNum} family history.</h4>
+          {createFamilyHistoryTable()}
         </Tab.Pane>
       </div>
     );
   }
 }
 
-export default PractitionerGoal;
+export default PractitionerFamilyHistory;

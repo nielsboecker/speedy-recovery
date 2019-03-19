@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Icon, Tab } from "semantic-ui-react";
-import "./PatientInfo.css";
+import "./PractitionerInfo.css";
 
 class PractitionerBasicPane extends Component {
   render() {

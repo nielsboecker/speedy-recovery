@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Label, Tab, Table } from "semantic-ui-react";
-import "./PatientInfo.css";
+import "./PractitionerInfo.css";
 
 class PractitionerConditionPane extends Component {
   render() {

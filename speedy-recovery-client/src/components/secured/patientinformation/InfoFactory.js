@@ -20,7 +20,7 @@ information page to be displayed based on the user's role.
 
 import React, { Component } from "react";
 import PatientInfo from "./PatientInfo";
-import PractitionerInfo from "./PractitionerInfo";
+import PractitionerInfo from "./Practitioner/PractitionerInfo";
 import ParentInfo from "./ParentInfo";
 
 class InfoFactory extends Component {

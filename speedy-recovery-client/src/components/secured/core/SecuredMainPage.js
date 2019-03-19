@@ -29,7 +29,7 @@ import ConversationPage from "../conversation/ConversationPage";
 import InfoFactory from "../patientinformation/InfoFactory";
 import CalendarFactory from "../calendar/CalendarFactory";
 import HomePageFactory from "../home/HomePageFactory";
-import practitionerPatientInfo from "../patientinformation/practitionerPatientInfo";
+import PractitionerPatientInfo from "../patientinformation/Practitioner/PractitionerPatientInfo";
 
 class SecuredMainPage extends Component {
   constructor(props) {
@@ -114,7 +114,7 @@ class SecuredMainPage extends Component {
               />
               <Route
                 path={`${match.url}/information`}
-                component={practitionerPatientInfo}
+                component={PractitionerPatientInfo}
               />
             </Container>
             <Footer />
