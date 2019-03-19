@@ -38,6 +38,7 @@ const getFirstName = name => {
     }
     return firstName.toString();
   }
+  return missingField;
 };
 
 const getPhone = telecom => {
