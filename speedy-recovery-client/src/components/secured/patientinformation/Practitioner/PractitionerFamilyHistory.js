@@ -36,14 +36,16 @@ class PractitionerFamilyHistory extends Component {
             <Table.HeaderCell id="patientTableCell">
               Relationship
             </Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">Condition</Table.HeaderCell>
+            <Table.HeaderCell id="patientTableCell">
+              Cause of Death
+            </Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">
               Death date
             </Table.HeaderCell>
           </Table.Row>
         ];
         table.push(
-          <Table.Header key="carePlanTableHeader" id="patientTableHeader">
+          <Table.Header key="HistoriesTableHeader" id="patientTableHeader">
             {header}
           </Table.Header>
         );
@@ -53,29 +55,29 @@ class PractitionerFamilyHistory extends Component {
         const children = [];
 
         children.push(
-          <Table.Cell key={"historiesCell" + i}>
+          <Table.Cell key={"historiesCell0" + i}>
             <Label ribbon color="blue">
               {`${i + 1}`}{" "}
             </Label>
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"historiesCell" + i} id="patientTableCell">
+          <Table.Cell key={"historiesCell1" + i} id="patientTableCell">
             {<h4>{histories[i].name}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"historyCell" + i} id="patientTableCell">
+          <Table.Cell key={"historyCell2" + i} id="patientTableCell">
             {<h4>{histories[i].relationship}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"historyCell" + i} id="patientTableCell">
-            {<h4>{histories[i].condition}</h4>}
+          <Table.Cell key={"historyCell3" + i} id="patientTableCell">
+            {<h4>{histories[i].causeOfDeath}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"historyCell" + i} id="patientTableCell">
+          <Table.Cell key={"historyCell4" + i} id="patientTableCell">
             {<h4>{histories[i].date}</h4>}
           </Table.Cell>
         );

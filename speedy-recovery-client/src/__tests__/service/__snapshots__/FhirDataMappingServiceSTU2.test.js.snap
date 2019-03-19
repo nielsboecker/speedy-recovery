@@ -45,7 +45,7 @@ Object {
 
 exports[`map FHIR Family Hisotry resource to internal data model 1`] = `
 Object {
-  "condition": "Heart Attack",
+  "causeOfDeath": "Heart Attack",
   "date": "2011-03-18",
   "name": "Alex Von",
   "onsetAge": "74 yr",

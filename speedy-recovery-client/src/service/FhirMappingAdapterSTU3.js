@@ -32,7 +32,8 @@ import {
   getPractName,
   getSeverity,
   getSummary,
-  getOnSetAge
+  getOnSetAge,
+  getCauseOfDeath
 } from "./FhirDataMappingExtractionUtils";
 
 const missingField = "Unknown";
@@ -129,9 +130,7 @@ const mapFamilyHistorySTU3 = fhirFamilyResource => ({
   relationship: fhirFamilyResource.relationship.coding[0].display
     ? fhirFamilyResource.relationship.coding[0].display
     : missingField,
-  condition: fhirFamilyResource.condition[0].code.text
-    ? fhirFamilyResource.condition[0].code.text
-    : missingField,
+  causeOfDeath: getCauseOfDeath(fhirFamilyResource),
   onsetAge: getOnSetAge(fhirFamilyResource),
   date: fhirFamilyResource.date ? fhirFamilyResource.date : missingField
 });

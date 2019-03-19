@@ -44,7 +44,7 @@ class PractitionerGoal extends Component {
           </Table.Row>
         ];
         table.push(
-          <Table.Header key="carePlanTableHeader" id="patientTableHeader">
+          <Table.Header key="goalTableHeader" id="patientTableHeader">
             {header}
           </Table.Header>
         );
@@ -54,34 +54,34 @@ class PractitionerGoal extends Component {
         const children = [];
 
         children.push(
-          <Table.Cell key={"goalCell" + i}>
+          <Table.Cell key={"goalCell0" + i}>
             <Label ribbon color="blue">
               {`${i + 1}`}{" "}
             </Label>
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"goalCell" + i} id="patientTableCell">
+          <Table.Cell key={"goalCell1" + i} id="patientTableCell">
             {<h4>{goal[i].goal}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"goalCell" + i} id="patientTableCell">
+          <Table.Cell key={"goalCell2" + i} id="patientTableCell">
             {<h4>{goal[i].priority}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"goalCell" + i} id="patientTableCell">
+          <Table.Cell key={"goalCell3" + i} id="patientTableCell">
             {<h4>{goal[i].description}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"goalCell" + i} id="patientTableCell">
+          <Table.Cell key={"goalCell4" + i} id="patientTableCell">
             {<h4>{goal[i].startDate}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"goalCell" + i} id="patientTableCell">
+          <Table.Cell key={"goalCell5" + i} id="patientTableCell">
             {<h4>{goal[i].dueDate}</h4>}
           </Table.Cell>
         );

@@ -70,7 +70,7 @@ class PractitionerBasicPane extends Component {
           </h4>
           <h4>
             email: {user.email}
-            <Icon fitted name="email" size="large" color="olive" />
+            <Icon fitted name="mail" size="large" color="olive" />
           </h4>
           <h4>
             Address: {user.address}

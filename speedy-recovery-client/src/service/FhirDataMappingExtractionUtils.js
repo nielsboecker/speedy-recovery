@@ -175,6 +175,18 @@ const getOnSetAge = resource => {
   }
 };
 
+const getCauseOfDeath = fhirFamilyResource => {
+  if (
+    fhirFamilyResource.condition &&
+    fhirFamilyResource.condition[0] &&
+    fhirFamilyResource.condition[0].code &&
+    fhirFamilyResource.condition[0].code.text
+  ) {
+    return fhirFamilyResource.condition[0].code.text;
+  }
+  return missingField;
+};
+
 export {
   getName,
   getFirstName,
@@ -190,5 +202,6 @@ export {
   getMedName,
   getForm,
   getPractName,
-  getOnSetAge
+  getOnSetAge,
+  getCauseOfDeath
 };

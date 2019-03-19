@@ -55,24 +55,24 @@ class PractitionerConditionPane extends Component {
         const summary = conditions[i].summary;
 
         children.push(
-          <Table.Cell key={"conditionOrderCell" + i}>
+          <Table.Cell key={"conditionOrderCell0" + i}>
             <Label color="blue" ribbon>
               {`${i + 1}`}{" "}
             </Label>
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"conditionSummaryCell" + i} id="patientTableCell">
+          <Table.Cell key={"conditionSummaryCell1" + i} id="patientTableCell">
             {<h4>{summary}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"conditionSummaryCell" + i} id="patientTableCell">
+          <Table.Cell key={"conditionSummaryCell2" + i} id="patientTableCell">
             {<h4>{conditions[i].severity}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"conditionSummaryCell" + i} id="patientTableCell">
+          <Table.Cell key={"conditionSummaryCell3" + i} id="patientTableCell">
             {<h4>{conditions[i].clinicalStatus}</h4>}
           </Table.Cell>
         );

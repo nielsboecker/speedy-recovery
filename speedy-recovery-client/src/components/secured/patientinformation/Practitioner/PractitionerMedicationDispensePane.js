@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU Affero General Public License along with this program. If not,
  * see http://www.gnu.org/license/.
  * */
-/* This file defines the PatientMedicationDispensePane which creates a pane used in the PatientInfo component which
+/* This file defines the PatientMedicationDispensePane which creates a pane used in the PractitionerInfo component which
 displays all medication information regarding the patient
  */
 import React, { Component } from "react";
@@ -55,19 +55,19 @@ class PractitionerMedicationDispensePane extends Component {
         const searchQuery = "https://www.google.com/search?q=" + name;
 
         children.push(
-          <Table.Cell key={"medicationDOrderCell" + i}>
+          <Table.Cell key={"medicationDOrderCell0" + i}>
             <Label ribbon color="blue">
               {`${i + 1}`}{" "}
             </Label>
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDNameCell" + i} id="patientTableCell">
+          <Table.Cell key={"medicationDNameCell1" + i} id="patientTableCell">
             {<h4>{name}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDSearchCell" + i} id="patientTableCell">
+          <Table.Cell key={"medicationDSearchCell2" + i} id="patientTableCell">
             {
               <h4>
                 <a href={searchQuery}>
@@ -78,22 +78,25 @@ class PractitionerMedicationDispensePane extends Component {
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDQuantityCell" + i} id="patientTableCell">
+          <Table.Cell
+            key={"medicationDQuantityCell0" + i}
+            id="patientTableCell"
+          >
             {<h4>{medicationDispenses[i].quantity}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDSupplyCell" + i} id="patientTableCell">
+          <Table.Cell key={"medicationDSupplyCell1" + i} id="patientTableCell">
             {<h4>{medicationDispenses[i].daysSupply}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDSupplyCell" + i} id="patientTableCell">
+          <Table.Cell key={"medicationDSupplyCell2" + i} id="patientTableCell">
             {<h4>{medicationDispenses[i].whenHandedOver}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDSupplyCell" + i} id="patientTableCell">
+          <Table.Cell key={"medicationDSupplyCell3" + i} id="patientTableCell">
             {<h4>{medicationDispenses[i].status}</h4>}
           </Table.Cell>
         );

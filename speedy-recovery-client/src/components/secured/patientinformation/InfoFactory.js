@@ -27,7 +27,6 @@ class InfoFactory extends Component {
   render() {
     const {
       user,
-      patient,
       childResource,
       conditions,
       medicationDispenses,

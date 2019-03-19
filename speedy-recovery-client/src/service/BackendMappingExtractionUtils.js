@@ -121,22 +121,6 @@ const getUnread = conversationResource => {
   return missingField;
 };
 
-const getOnSetAge = resource => {
-  if (
-    resource &&
-    resource.condition &&
-    resource.condition[0] &&
-    resource.condition[0].onsetAge.value &&
-    resource.condition[0].onsetAge.unit
-  ) {
-    return (
-      resource.condition[0].onsetAge.value +
-      " " +
-      resource.condition[0].onsetAge.unit
-    );
-  }
-};
-
 const getDate = conversationResource => {
   if (conversationResource && conversationResource.date) {
     return new Date(conversationResource.date);
@@ -156,6 +140,5 @@ export {
   getSubtitle,
   getUnread,
   getUserId,
-  getMessageTitle,
-  getOnSetAge
+  getMessageTitle
 };
