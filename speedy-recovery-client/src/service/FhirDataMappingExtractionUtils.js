@@ -159,6 +159,22 @@ const getPractName = name => {
   return missingField;
 };
 
+const getOnSetAge = resource => {
+  if (
+    resource &&
+    resource.condition &&
+    resource.condition[0] &&
+    resource.condition[0].onsetAge.value &&
+    resource.condition[0].onsetAge.unit
+  ) {
+    return (
+      resource.condition[0].onsetAge.value +
+      " " +
+      resource.condition[0].onsetAge.unit
+    );
+  }
+};
+
 export {
   getName,
   getFirstName,
@@ -173,5 +189,6 @@ export {
   getbodySite,
   getMedName,
   getForm,
-  getPractName
+  getPractName,
+  getOnSetAge
 };

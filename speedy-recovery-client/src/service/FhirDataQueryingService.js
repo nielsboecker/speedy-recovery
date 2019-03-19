@@ -155,6 +155,52 @@ const getUserCarePlan = userID => {
   });
 };
 
+const getFamilyMemberHistory = userID => {
+  return new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      smart => {
+        smart.api
+          .search({ type: "FamilyMemberHistory", query: { patient: userID } })
+          .done(FamilyMemberHistory => {
+            console.log("Family member history Bundle:", FamilyMemberHistory);
+            const familyMemberHistory = extractResourcesFromBundle(
+              FamilyMemberHistory
+            );
+            console.log(
+              "Family member history after mapping:",
+              familyMemberHistory
+            );
+            return resolve(familyMemberHistory);
+          });
+      },
+      error => {
+        console.error("FamilyMemberHistory fetching error: ", error);
+        return reject(error);
+      }
+    );
+  });
+};
+const getGoal = userID => {
+  return new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      smart => {
+        smart.api
+          .search({ type: "Goal", query: { subject: userID } })
+          .done(goals => {
+            console.log("Goals Bundle:", goals);
+            const goal = extractResourcesFromBundle(goals);
+            console.log("Goals after mapping:", goal);
+            return resolve(goal);
+          });
+      },
+      error => {
+        console.error("FamilyMemberHistory fetching error: ", error);
+        return reject(error);
+      }
+    );
+  });
+};
+
 const getPatient = userID => {
   return new Promise((resolve, reject) => {
     FHIR.oauth2.ready(
@@ -182,5 +228,7 @@ export default {
   getUserMedicationDispense,
   getUserCarePlan,
   extractResourcesFromBundle,
-  getPatient
+  getPatient,
+  getFamilyMemberHistory,
+  getGoal
 };

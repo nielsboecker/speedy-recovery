@@ -22,10 +22,14 @@ import PractitionerConditionPane from "./PractitionerConditionPane";
 import PatientCarePlanPane from "./PatientCarePlanPane";
 import PractitionerMedicationDispensePane from "./PatientMedicationDispensePane";
 import PractitionerBasicPane from "./PractitionerBasicPane";
+import PractitionerFamilyHistory from "./PractitionerFamilyHistory";
+import PractitionerGoal from "./PractitionerGoal";
 import {
   fhirMapCarePlan,
   fhirMapCondition,
-  fhirMapMedicationDispense
+  fhirMapMedicationDispense,
+  fhirMapFamilyResource,
+  fhirMapGoal
 } from "../../../service/FhirDataMappingService";
 
 class practitionerPatientInfo extends Component {
@@ -35,7 +39,9 @@ class practitionerPatientInfo extends Component {
       patient: {},
       conditions: [],
       medicationDispenses: [],
-      carePlans: []
+      carePlans: [],
+      histories: [],
+      goal: []
     };
   }
 
@@ -85,6 +91,29 @@ class practitionerPatientInfo extends Component {
           </Menu.Item>
         ),
         render: () => <PatientCarePlanPane carePlans={this.state.carePlans} />
+      },
+
+      {
+        menuItem: (
+          <Menu.Item key={"histories"}>
+            <Icon fitted name="book" />
+            Family History
+          </Menu.Item>
+        ),
+        render: () => (
+          <PractitionerFamilyHistory histories={this.state.histories} />
+        )
+      },
+
+      {
+        menuItem: (
+          <Menu.Item key={"goal"}>
+            <Icon fitted name="trophy" />
+            Goal
+          </Menu.Item>
+        ),
+
+        render: () => <PractitionerGoal goal={this.state.goal} />
       }
     ];
 
@@ -105,9 +134,36 @@ class practitionerPatientInfo extends Component {
       this.updateStateCondition(this.props.location.state.patient.id);
       this.updateStateMedicationDispense(this.props.location.state.patient.id);
       this.updateStateCarePlan(this.props.location.state.patient.id);
+      this.updateStateFamilyHistory(this.props.location.state.patient.id);
+      this.updateGoal(this.props.location.state.patient.id);
     }
   }
 
+  updateGoal(userId) {
+    FhirDataQueryingService.getGoal(userId)
+      .then(GoalResource => {
+        const goal = GoalResource.map(Goal =>
+          fhirMapGoal(Goal, this.props.location.state.fhirVersion)
+        );
+        this.setState({ goal });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
+
+  updateStateFamilyHistory(userId) {
+    FhirDataQueryingService.getFamilyMemberHistory(userId)
+      .then(FamilyResource => {
+        const histories = FamilyResource.map(history =>
+          fhirMapFamilyResource(history, this.props.location.state.fhirVersion)
+        );
+        this.setState({ histories });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
   updateStateCondition(userId) {
     FhirDataQueryingService.getUserConditions(userId)
       .then(conditionResource => {
@@ -149,7 +205,6 @@ class practitionerPatientInfo extends Component {
         console.error(error);
       });
   }
-
 }
 
 export default practitionerPatientInfo;
