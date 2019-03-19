@@ -102,7 +102,7 @@ class Header extends Component {
     this.setMessageNum();
     this.timer = setInterval(() => {
       this.setMessageNum();
-    }, 3000);
+    }, 1000);
   }
 
   componentWillUnmount() {
@@ -112,9 +112,9 @@ class Header extends Component {
   setMessageNum = () => {
     if (this.props.role !== "Patient") {
       getConversation(this.state.id)
-        .then(value => {
+        .then(conversationResource => {
           let unreadNum = 0;
-          for (let conversation of value){
+          for (let conversation of conversationResource){
             unreadNum += conversation.unread;
           }
           this.setState({ unreadNum });
