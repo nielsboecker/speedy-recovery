@@ -13,37 +13,44 @@
  * You should have received a copy of the GNU Affero General Public License along with this program. If not,
  * see http://www.gnu.org/license/.
  * */
-/* This file defines the PatientMedicationDispensePane which creates a pane used in the PatientInfo component which
-displays all medication information regarding the patient
+
+/* This file defines the ParentMedicationDispensePane which creates a pane used in the ParentInfo component which
+displays all medication information regarding the Parent's child
  */
+
 import React, { Component } from "react";
 import { Icon, Label, Tab, Table } from "semantic-ui-react";
-import "./PractitionerInfo.css";
+import "./Parent.css";
 
-class PractitionerMedicationDispensePane extends Component {
+class ParentMedicationPane extends Component {
   render() {
-    const { medicationDispenses } = this.props;
+    const { medicationDispenses, childResource } = this.props;
     const medicationDispensesNum = medicationDispenses.length;
+    const childName = childResource.name.split(" ");
+
     const createMedicationDispenseTable = () => {
       const table = [];
       if (medicationDispensesNum) {
         const header = [
           <Table.Row key={"medicationDRow"}>
-            <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">Name</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell" />
-            <Table.HeaderCell id="patientTableCell">Quantity</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">
-              Supply days
+            <Table.HeaderCell id="parentTableCell">#</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">Name</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">Search</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">Quantity</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">
+              Days Supply
             </Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">
-              When handed over
+            <Table.HeaderCell id="parentTableCell">Status</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">
+              Intake Form
             </Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">Status</Table.HeaderCell>
+            <Table.HeaderCell id="parentTableCell">
+              Intake Number
+            </Table.HeaderCell>
           </Table.Row>
         ];
         table.push(
-          <Table.Header id="patientTableHeader" key="medicationDTableHeader">
+          <Table.Header id="parentTableHeader" key="medicationDTableHeader">
             {header}
           </Table.Header>
         );
@@ -55,19 +62,19 @@ class PractitionerMedicationDispensePane extends Component {
         const searchQuery = "https://www.google.com/search?q=" + name;
 
         children.push(
-          <Table.Cell key={"medicationDOrderCell" + i}>
+          <Table.Cell key={"medicationOrderCell" + i}>
             <Label ribbon color="blue">
               {`${i + 1}`}{" "}
             </Label>
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDNameCell" + i} id="patientTableCell">
-            {<h4>{name}</h4>}
+          <Table.Cell key={"medicationNameCell" + i} id="parentTableCell">
+            {name}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDSearchCell" + i} id="patientTableCell">
+          <Table.Cell key={"medicationSearchCell" + i} id="parentTableCell">
             {
               <h4>
                 <a href={searchQuery}>
@@ -78,39 +85,52 @@ class PractitionerMedicationDispensePane extends Component {
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDQuantityCell" + i} id="patientTableCell">
+          <Table.Cell key={"medicationQuantityCell" + i} id="parentTableCell">
             {<h4>{medicationDispenses[i].quantity}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDSupplyCell" + i} id="patientTableCell">
+          <Table.Cell key={"medicationSupplyCell" + i} id="parentTableCell">
             {<h4>{medicationDispenses[i].daysSupply}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDSupplyCell" + i} id="patientTableCell">
-            {<h4>{medicationDispenses[i].whenHandedOver}</h4>}
-          </Table.Cell>
-        );
-        children.push(
-          <Table.Cell key={"medicationDSupplyCell" + i} id="patientTableCell">
+          <Table.Cell key={"medicationStatusCell" + i} id="parentTableCell">
             {<h4>{medicationDispenses[i].status}</h4>}
           </Table.Cell>
         );
+        children.push(
+          <Table.Cell
+            key={"medicationIntakeMethodCell" + i}
+            id="parentTableCell"
+          >
+            {<h4>{medicationDispenses[i].intakeMethod}</h4>}
+          </Table.Cell>
+        );
+        children.push(
+          <Table.Cell key={"medicationTimeCell" + i} id="parentTableCell">
+            {
+              <h4>
+                {medicationDispenses[i].dosageFrequency} time for{" "}
+                {medicationDispenses[i].dosagePeriod} days
+              </h4>
+            }
+          </Table.Cell>
+        );
         body.push(
-          <Table.Row key={"medicationDRow2" + i} id="patientTableRow">
+          <Table.Row key={"medicationRow2" + i} id="parentTableRow">
             {children}
           </Table.Row>
         );
       }
       table.push(
-        <Table.Body key="medicationDTableBody" id="patientTableBody">
+        <Table.Body key="medicationTableBody" id="parentTableBody">
           {body}
         </Table.Body>
       );
       const medicationDTable = [];
       medicationDTable.push(
-        <Table key="medicationDTable" color="blue">
+        <Table key="medicationTable" color="blue">
           {table}
         </Table>
       );
@@ -121,8 +141,8 @@ class PractitionerMedicationDispensePane extends Component {
       <div>
         <Tab.Pane>
           <h4>
-            You have {medicationDispensesNum} dispensed medications in the
-            records.
+            You have {medicationDispensesNum} dispensed medication records for{" "}
+            {childName[0]}
           </h4>
           {createMedicationDispenseTable()}
         </Tab.Pane>
@@ -131,4 +151,4 @@ class PractitionerMedicationDispensePane extends Component {
   }
 }
 
-export default PractitionerMedicationDispensePane;
+export default ParentMedicationPane;

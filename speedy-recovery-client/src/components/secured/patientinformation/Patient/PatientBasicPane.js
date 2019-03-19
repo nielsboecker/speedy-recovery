@@ -13,26 +13,31 @@
  * You should have received a copy of the GNU Affero General Public License along with this program. If not,
  * see http://www.gnu.org/license/.
  * */
+
 /* This file defines the PatientBasicPane which creates a pane used in the PatientInfo component which displays basic
 information about the patient
  */
+
 import React, { Component } from "react";
 import { Icon, Tab } from "semantic-ui-react";
-import "./PractitionerInfo.css";
+import "./PatientInfo.css";
 
-class PractitionerBasicPane extends Component {
+class PatientBasicPane extends Component {
   render() {
     const { user } = this.props;
 
     const showGenderText = () => {
       let genderStr = "";
       const gender = user.gender;
-      if (gender === "female") {
-        genderStr = "Girl";
-      } else if (gender === "male") {
-        genderStr = "Boy";
-      } else {
-        genderStr = gender;
+      switch (gender) {
+        case "female":
+          genderStr = "Girl";
+          break;
+        case "male":
+          genderStr = "Boy";
+          break;
+        default:
+          genderStr = gender;
       }
       return genderStr;
     };
@@ -64,22 +69,10 @@ class PractitionerBasicPane extends Component {
             Birthday: {user.birthDate}{" "}
             <Icon fitted name="birthday" size="large" color="olive" />
           </h4>
-          <h4>
-            Phone: {user.phone}
-            <Icon fitted name="phone" size="large" color="olive" />
-          </h4>
-          <h4>
-            email: {user.email}
-            <Icon fitted name="email" size="large" color="olive" />
-          </h4>
-          <h4>
-            Address: {user.address}
-            <Icon fitted name="home" size="large" color="olive" />
-          </h4>
         </Tab.Pane>
       </div>
     );
   }
 }
 
-export default PractitionerBasicPane;
+export default PatientBasicPane;

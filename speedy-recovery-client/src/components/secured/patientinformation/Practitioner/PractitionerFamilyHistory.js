@@ -54,7 +54,9 @@ class PractitionerFamilyHistory extends Component {
 
         children.push(
           <Table.Cell key={"historiesCell" + i}>
-            <Label ribbon>{`${i + 1}`} </Label>
+            <Label ribbon color="blue">
+              {`${i + 1}`}{" "}
+            </Label>
           </Table.Cell>
         );
         children.push(
@@ -90,7 +92,11 @@ class PractitionerFamilyHistory extends Component {
         </Table.Body>
       );
       const historiesTable = [];
-      historiesTable.push(<Table key="historiesTable">{table}</Table>);
+      historiesTable.push(
+        <Table key="historiesTable" color="blue">
+          {table}
+        </Table>
+      );
       return historiesTable;
     };
 

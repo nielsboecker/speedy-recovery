@@ -55,7 +55,9 @@ class PractitionerGoal extends Component {
 
         children.push(
           <Table.Cell key={"goalCell" + i}>
-            <Label ribbon>{`${i + 1}`} </Label>
+            <Label ribbon color="blue">
+              {`${i + 1}`}{" "}
+            </Label>
           </Table.Cell>
         );
         children.push(
@@ -96,7 +98,11 @@ class PractitionerGoal extends Component {
         </Table.Body>
       );
       const goalTable = [];
-      goalTable.push(<Table key="goalTable">{table}</Table>);
+      goalTable.push(
+        <Table key="goalTable" color="blue">
+          {table}
+        </Table>
+      );
       return goalTable;
     };
 

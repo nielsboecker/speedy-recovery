@@ -20,9 +20,9 @@ condition information regarding the patient.
 
 import React, { Component } from "react";
 import { Label, Tab, Table } from "semantic-ui-react";
-import "./PractitionerInfo.css";
+import "./PatientInfo.css";
 
-class PractitionerConditionPane extends Component {
+class PatientConditionPane extends Component {
   render() {
     const { conditions } = this.props;
     const conditionsNum = conditions.length;
@@ -33,13 +33,6 @@ class PractitionerConditionPane extends Component {
           <Table.Row key={"conditionRow"}>
             <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">Summary</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">Severity</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">
-              Clinical Status
-            </Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">
-              Verification status
-            </Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">Time</Table.HeaderCell>
           </Table.Row>
         ];
@@ -64,21 +57,6 @@ class PractitionerConditionPane extends Component {
         children.push(
           <Table.Cell key={"conditionSummaryCell" + i} id="patientTableCell">
             {<h4>{summary}</h4>}
-          </Table.Cell>
-        );
-        children.push(
-          <Table.Cell key={"conditionSummaryCell" + i} id="patientTableCell">
-            {<h4>{conditions[i].severity}</h4>}
-          </Table.Cell>
-        );
-        children.push(
-          <Table.Cell key={"conditionSummaryCell" + i} id="patientTableCell">
-            {<h4>{conditions[i].clinicalStatus}</h4>}
-          </Table.Cell>
-        );
-        children.push(
-          <Table.Cell key={"conditionSummaryCell" + i} id="patientTableCell">
-            {<h4>{conditions[i].verificationStatus}</h4>}
           </Table.Cell>
         );
         children.push(
@@ -117,4 +95,4 @@ class PractitionerConditionPane extends Component {
   }
 }
 
-export default PractitionerConditionPane;
+export default PatientConditionPane;

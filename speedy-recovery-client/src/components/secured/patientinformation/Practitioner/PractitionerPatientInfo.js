@@ -13,14 +13,17 @@
  * You should have received a copy of the GNU Affero General Public License along with this program. If not,
  * see http://www.gnu.org/license/.
  * */
+/* This file defines the PatientInfo component which creates an information page for the patient describing several
+different aspects of their hospitalisation.
+ */
 
 import React, { Component } from "react";
 import FhirDataQueryingService from "../../../../service/FhirDataQueryingService";
 import { Icon, Menu, Tab } from "semantic-ui-react";
 import "./PractitionerInfo.css";
 import PractitionerConditionPane from "./PractitionerConditionPane";
-import PatientCarePlanPane from "../PatientCarePlanPane";
-import PractitionerMedicationDispensePane from "../PatientMedicationDispensePane";
+import PatientCarePlanPane from "../Patient/PatientCarePlanPane";
+import PractitionerMedicationDispensePane from "./PractitionerMedicationDispensePane";
 import PractitionerBasicPane from "./PractitionerBasicPane";
 import PractitionerFamilyHistory from "./PractitionerFamilyHistory";
 import PractitionerGoal from "./PractitionerGoal";
@@ -50,7 +53,7 @@ class PractitionerPatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"basic"}>
-            <Icon fitted name="id card outline" />
+            <Icon fitted name="id card outline" color="blue" size="large" />
             Basic
           </Menu.Item>
         ),
@@ -62,7 +65,7 @@ class PractitionerPatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"medication"}>
-            <Icon fitted name="pills" />
+            <Icon fitted name="pills" color="purple" size="large" />
             Dispensed Medication
           </Menu.Item>
         ),
@@ -75,7 +78,7 @@ class PractitionerPatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"condition"}>
-            <Icon fitted name="heartbeat" />
+            <Icon fitted name="heartbeat" color="red" size="large" />
             Condition
           </Menu.Item>
         ),
@@ -86,7 +89,7 @@ class PractitionerPatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"carePlan"}>
-            <Icon fitted name="unordered list" />
+            <Icon fitted name="unordered list" color="orange" size="large" />
             Care Plan
           </Menu.Item>
         ),
@@ -96,7 +99,7 @@ class PractitionerPatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"histories"}>
-            <Icon fitted name="book" />
+            <Icon fitted name="book" color="green" size="large" />
             Family History
           </Menu.Item>
         ),
@@ -108,7 +111,7 @@ class PractitionerPatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"goal"}>
-            <Icon fitted name="trophy" />
+            <Icon fitted name="trophy" color="yellow" size="large" />
             Goal
           </Menu.Item>
         ),

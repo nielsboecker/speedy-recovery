@@ -14,57 +14,63 @@
  * see http://www.gnu.org/license/.
  * */
 
-/* This file defines the PatientBasicPane which creates a pane used in the PatientInfo component which displays basic
-information about the patient
+/* This file defines the ParentBasicPane which creates a pane used in the ParentInfo component which displays basic
+information about the Parent's child
  */
 
 import React, { Component } from "react";
 import { Icon, Tab } from "semantic-ui-react";
-import "./PatientInfo.css";
 
-class PatientBasicPane extends Component {
+class ParentBasicPane extends Component {
   render() {
-    const { user } = this.props;
+    const { childResource } = this.props;
 
     const showGenderText = () => {
       let genderStr = "";
-      const gender = user.gender;
-      if (gender === "female") {
-        genderStr = "Girl";
-      } else if (gender === "male") {
-        genderStr = "Boy";
-      } else {
-        genderStr = gender;
+      const gender = childResource.gender;
+      switch (gender) {
+        case "female":
+          genderStr = "Girl";
+          break;
+        case "male":
+          genderStr = "Boy";
+          break;
+        default:
+          genderStr = gender;
       }
       return genderStr;
     };
 
     const showGenderIcon = () => {
-      let genderIcon = <Icon fitted name="smile outline" />;
-      const gender = user.gender;
-      if (gender === "female") {
-        genderIcon = <Icon color="pink" fitted name="woman" />;
-      } else if (gender === "male") {
-        genderIcon = <Icon color="blue" fitted name="man" />;
+      let genderIcon;
+      switch (childResource.gender) {
+        case "female":
+          genderIcon = <Icon color="pink" fitted name="woman" size="large" />;
+          break;
+        case "male":
+          genderIcon = <Icon color="blue" fitted name="man" size="large" />;
+          break;
+        default:
+          genderIcon = <Icon fitted name="smile outline" size="large" />;
       }
       return genderIcon;
     };
 
     return (
       <div>
-        <Tab.Pane>
-          <h4>Name: {user.name}</h4>
+        <Tab.Pane color="blue">
+          <h4>Name: {childResource.name}</h4>
           <h4>
             Gender: {showGenderText()}
             {showGenderIcon()}
           </h4>
-          <h4>
-            Birthday: {user.birthDate} <Icon fitted name="birthday" />
-          </h4>
+          <h4>Birthday: {childResource.birthDate}</h4>
+          <h4>Contact Number: {childResource.phone}</h4>
+          <h4>Address: {childResource.address}</h4>
         </Tab.Pane>
       </div>
     );
   }
 }
 
-export default PatientBasicPane;
+export default ParentBasicPane;
