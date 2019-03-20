@@ -24,8 +24,8 @@ import "./PractitionerInfo.css";
 
 class PractitionerFamilyHistory extends Component {
   render() {
-    const { histories } = this.props;
-    const historiesNum = histories.length;
+    const { familyHistories } = this.props;
+    const historiesNum = familyHistories.length;
     const createFamilyHistoryTable = () => {
       const table = [];
       if (historiesNum) {
@@ -63,22 +63,22 @@ class PractitionerFamilyHistory extends Component {
         );
         children.push(
           <Table.Cell key={"historiesCell1" + i} id="patientTableCell">
-            {<h4>{histories[i].name}</h4>}
+            {<h4>{familyHistories[i].name}</h4>}
           </Table.Cell>
         );
         children.push(
           <Table.Cell key={"historyCell2" + i} id="patientTableCell">
-            {<h4>{histories[i].relationship}</h4>}
+            {<h4>{familyHistories[i].relationship}</h4>}
           </Table.Cell>
         );
         children.push(
           <Table.Cell key={"historyCell3" + i} id="patientTableCell">
-            {<h4>{histories[i].causeOfDeath}</h4>}
+            {<h4>{familyHistories[i].causeOfDeath}</h4>}
           </Table.Cell>
         );
         children.push(
           <Table.Cell key={"historyCell4" + i} id="patientTableCell">
-            {<h4>{histories[i].date}</h4>}
+            {<h4>{familyHistories[i].date}</h4>}
           </Table.Cell>
         );
 

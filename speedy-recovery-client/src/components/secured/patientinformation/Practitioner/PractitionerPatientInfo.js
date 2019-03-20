@@ -43,7 +43,7 @@ class PractitionerPatientInfo extends Component {
       conditions: [],
       medicationDispenses: [],
       carePlans: [],
-      histories: [],
+      familyHistories: [],
       goal: []
     };
   }
@@ -104,7 +104,7 @@ class PractitionerPatientInfo extends Component {
           </Menu.Item>
         ),
         render: () => (
-          <PractitionerFamilyHistory histories={this.state.histories} />
+          <PractitionerFamilyHistory familyHistories={this.state.familyHistories } />
         )
       },
 
@@ -157,10 +157,10 @@ class PractitionerPatientInfo extends Component {
   updateStateFamilyHistory(userId) {
     FhirDataQueryingService.getFamilyMemberHistory(userId)
       .then(familyResource => {
-        const histories = familyResource.map(history =>
+        const familyHistories = familyResource.map(history =>
           fhirMapFamilyResource(history, this.props.location.state.fhirVersion)
         );
-        this.setState({ histories });
+        this.setState({ familyHistories });
       })
       .catch(error => {
         console.error(error);

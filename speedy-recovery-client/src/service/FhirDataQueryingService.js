@@ -123,7 +123,7 @@ const getPractitioner = (practId, familyName) => {
               practId
             );
             console.log(
-              "Practitioner response Resource after mapping: ",
+              "Practitioner response Resource after extracting: ",
               practitioner
             );
             return resolve(practitioner[0]);
@@ -188,12 +188,12 @@ const getFamilyMemberHistory = userID => {
         smart.api
           .search({ type: "FamilyMemberHistory", query: { patient: userID } })
           .done(FamilyMemberHistory => {
-            console.log("Family member history Bundle:", FamilyMemberHistory);
+            console.log("Family member history response:", FamilyMemberHistory);
             const familyMemberHistory = extractResourcesFromBundle(
               FamilyMemberHistory
             );
             console.log(
-              "Family member history after mapping:",
+              "Family member history after extracting:",
               familyMemberHistory
             );
             return resolve(familyMemberHistory);
@@ -213,9 +213,9 @@ const getGoal = userID => {
         smart.api
           .search({ type: "Goal", query: { subject: userID } })
           .done(goals => {
-            console.log("Goals Bundle:", goals);
+            console.log("Goals response:", goals);
             const goal = extractResourcesFromBundle(goals);
-            console.log("Goals after mapping:", goal);
+            console.log("Goals after extracting:", goal);
             return resolve(goal);
           });
       },
