@@ -59,7 +59,7 @@ class PractitionerPatientInfo extends Component {
         ),
 
         render: () => (
-          <PractitionerBasicPane user={this.props.location.state.patient} />
+          <PractitionerBasicPane patient={this.props.location.state.patient} />
         )
       },
       {
@@ -122,8 +122,7 @@ class PractitionerPatientInfo extends Component {
 
     return (
       <div>
-        <h1>Patient Information For Practitioner View</h1>
-        <h4>Name: {this.props.location.state.patient.name}</h4>
+        <h1> Information For  {this.props.location.state.patient.name}</h1>
         <Tab
           menu={{ fluid: true, vertical: true, tabular: true }}
           panes={panes}
@@ -145,8 +144,8 @@ class PractitionerPatientInfo extends Component {
   updateGoal(userId) {
     FhirDataQueryingService.getGoal(userId)
       .then(GoalResource => {
-        const goal = GoalResource.map(Goal =>
-          fhirMapGoal(Goal, this.props.location.state.fhirVersion)
+        const goal = GoalResource.map(goal =>
+          fhirMapGoal(goal, this.props.location.state.fhirVersion)
         );
         this.setState({ goal });
       })
@@ -157,8 +156,8 @@ class PractitionerPatientInfo extends Component {
 
   updateStateFamilyHistory(userId) {
     FhirDataQueryingService.getFamilyMemberHistory(userId)
-      .then(FamilyResource => {
-        const histories = FamilyResource.map(history =>
+      .then(familyResource => {
+        const histories = familyResource.map(history =>
           fhirMapFamilyResource(history, this.props.location.state.fhirVersion)
         );
         this.setState({ histories });

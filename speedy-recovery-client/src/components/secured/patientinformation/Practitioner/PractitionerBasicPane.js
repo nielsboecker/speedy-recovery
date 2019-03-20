@@ -22,24 +22,27 @@ import "./PractitionerInfo.css";
 
 class PractitionerBasicPane extends Component {
   render() {
-    const { user } = this.props;
+    const { patient } = this.props;
 
     const showGenderText = () => {
       let genderStr = "";
-      const gender = user.gender;
-      if (gender === "female") {
-        genderStr = "Girl";
-      } else if (gender === "male") {
-        genderStr = "Boy";
-      } else {
-        genderStr = gender;
+      const gender = patient.gender;
+      switch(gender){
+        case "female":
+          genderStr = "Girl";
+          break;
+        case "male":
+          genderStr = "Boy";
+          break;
+        default:
+          genderStr = gender;
       }
       return genderStr;
     };
 
     const showGenderIcon = () => {
       let genderIcon;
-      switch (user.gender) {
+      switch (patient.gender) {
         case "female":
           genderIcon = <Icon color="pink" fitted name="woman" size="large" />;
           break;
@@ -55,25 +58,25 @@ class PractitionerBasicPane extends Component {
     return (
       <div>
         <Tab.Pane color="blue">
-          <h4>Name: {user.name}</h4>
+          <h4>Name: {patient.name}</h4>
           <h4>
             Gender: {showGenderText()}
             {showGenderIcon()}
           </h4>
           <h4>
-            Birthday: {user.birthDate}{" "}
+            Birthday: {patient.birthDate}{" "}
             <Icon fitted name="birthday" size="large" color="olive" />
           </h4>
           <h4>
-            Phone: {user.phone}
+            Phone: {patient.phone}
             <Icon fitted name="phone" size="large" color="olive" />
           </h4>
           <h4>
-            email: {user.email}
+            email: {patient.email}
             <Icon fitted name="mail" size="large" color="olive" />
           </h4>
           <h4>
-            Address: {user.address}
+            Address: {patient.address}
             <Icon fitted name="home" size="large" color="olive" />
           </h4>
         </Tab.Pane>

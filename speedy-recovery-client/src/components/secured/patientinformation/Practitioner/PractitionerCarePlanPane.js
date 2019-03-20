@@ -101,7 +101,7 @@ class PractitionerCarePlanPane extends Component {
             <div>
                 <Tab.Pane>
                     <h4>
-                        You have {carePlansNum} recorded care plan.
+                        There are {carePlansNum} recorded care plan for this patient.
                     </h4>
                     {createCarePlanTable()}
                 </Tab.Pane>

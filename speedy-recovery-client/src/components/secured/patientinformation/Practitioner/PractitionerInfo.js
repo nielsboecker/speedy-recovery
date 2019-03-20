@@ -14,8 +14,8 @@
  * see http://www.gnu.org/license/.
  * */
 
-/* This file defines the PractitionerInfo component which creates an information page containing detailed information
-about each of the practitioners' patients.
+/* This file defines the PractitionerInfo component which creates a list of related patients for the practitioner, once
+user click one of the patient, it will jump to the patient's detail page
  */
 
 import React, { Component } from "react";

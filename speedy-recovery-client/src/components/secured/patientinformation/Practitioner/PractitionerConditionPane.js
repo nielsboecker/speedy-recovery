@@ -140,7 +140,7 @@ class PractitionerConditionPane extends Component {
         <div>
           <Tab.Pane>
             <h4>
-              You have {conditionsNum} recorded conditions.
+                There are {conditionsNum} recorded conditions for this patient.
             </h4>
             {createConditionTable()}
           </Tab.Pane>

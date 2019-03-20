@@ -138,7 +138,7 @@ class PractitionerMedicationDispensePane extends Component {
         <div>
           <Tab.Pane>
             <h4>
-              You have {medicationDispensesNum} dispensed medication records
+              There are {medicationDispensesNum} dispensed medication records
             </h4>
             {createMedicationDispenseTable()}
           </Tab.Pane>

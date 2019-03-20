@@ -210,20 +210,6 @@ class App extends Component {
           default:
             console.log("Invalid user role: ", user.role);
         }
-
-        if (user.role === "Practitioner") {
-          // Retrieve the practitioner's patients information
-          this.state.fhirClient.patient
-            .read()
-            .then(patientResource => {
-              console.log(
-                "Patient Resource for practitioner: ",
-                patientResource
-              );
-              this.updateStatePatient(patientResource);
-            })
-            .catch(error => console.error(error));
-        }
         this.setState({ user });
       })
       .catch(errorMessage => {

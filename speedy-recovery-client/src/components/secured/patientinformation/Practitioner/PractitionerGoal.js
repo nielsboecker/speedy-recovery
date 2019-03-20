@@ -109,7 +109,7 @@ class PractitionerGoal extends Component {
     return (
       <div>
         <Tab.Pane>
-          <h4>You have {goalNum} goal.</h4>
+          <h4>There are {goalNum} recorded goals for this patient.</h4>
           {createGoalTable()}
         </Tab.Pane>
       </div>
