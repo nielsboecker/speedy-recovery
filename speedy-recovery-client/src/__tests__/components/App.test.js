@@ -79,7 +79,7 @@ test("handleLoginSuccess() sets state appropriately", () => {
   // expect(wrapper.state().user).toEqual(mockUser);
 });
 
-test("handleLoginSuccess() sets state appropriately when user is patient", () => {
+test("handleLoginSuccess() sets state appropriately", () => {
   // given
   const mockUser = exampleUser;
   const mockFhirClient = {
@@ -94,7 +94,7 @@ test("handleLoginSuccess() sets state appropriately when user is patient", () =>
   expect(wrapper.state().fhirClient).toEqual(mockFhirClient);
 });
 
-test("updateStateCondition()", () => {
+test("App triggers updateStateCondition without crashing", () => {
   // given
   const mockUserId = "mockId";
   // when
@@ -103,7 +103,7 @@ test("updateStateCondition()", () => {
   expect(wrapper.state().conditions).toEqual([]);
 });
 
-test("updateStateMedicationDispense()", () => {
+test("App triggers updateStateMedicationDispense() without crashing", () => {
   // given
   const mockUserId = "mockId";
   // when
@@ -112,7 +112,7 @@ test("updateStateMedicationDispense()", () => {
   expect(wrapper.state().medicationDispenses).toEqual([]);
 });
 
-test("updateStateCarePlan()", () => {
+test("App triggers updateStateCarePlan() without crashing", () => {
   // given
   const mockUserId = "mockId";
   // when
@@ -121,12 +121,12 @@ test("updateStateCarePlan()", () => {
   expect(wrapper.state().carePlans).toEqual([]);
 });
 
-test("updateStatePatient()", () => {
+test("App triggers updateStatePatient without crashing", () => {
   const mockPatientResource = {};
   underTest.updateStatePatient(mockPatientResource);
 });
 
-test("updateStateAppointment()", () => {
+test("App triggers updateStateAppointment without crashing", () => {
   // given
   const mockUserId = "mockId";
   const mockRole = "mockRole";
@@ -136,8 +136,38 @@ test("updateStateAppointment()", () => {
   expect(wrapper.state().appointments).toEqual([]);
 });
 
-test("setUserList()", () => {
+test("App triggers setUserList without crashing", () => {
   underTest.setUserList();
+});
+
+test("App triggers updateStatePractitioner without crashing", () => {
+  underTest.updateStatePractitioner();
+});
+
+test("App triggers setUserList without crashing", () => {
+  underTest.setUserList();
+});
+
+test("App triggers handleFhirServerError without crashing", () => {
+  underTest.handleFhirServerError();
+});
+
+test("App triggers resetError without crashing", () => {
+  underTest.resetError();
+});
+
+test("App triggers removeArrayDuplicates without crashing", () => {
+  underTest.removeArrayDuplicates(["mock", "mock"]);
+});
+
+test("App triggers removeArrayDuplicates without crashing", () => {
+  underTest.removeArrayDuplicates();
+});
+
+test("App triggers handleLoginError without crashing", () => {
+  underTest.handleLoginError(
+    "No 'state' parameter found in authorization response."
+  );
 });
 
 test("App renders without crashing", () => {
