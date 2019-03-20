@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU Affero General Public License along with this program. If not,
  * see http://www.gnu.org/license/.
  * */
-/* This file defines the PatientBasicPane which creates a pane used in the PatientInfo component which displays basic
+/* This file defines the PatientBasicPane which creates a pane used in the PractitionerInfo component which displays basic
 information about the patient
  */
 import React, { Component } from "react";
