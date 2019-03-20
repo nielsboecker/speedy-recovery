@@ -26,6 +26,8 @@ import { getConversation } from "../../../service/BackendService";
 import { conversationMap } from "../../../service/BackendMapping";
 
 class MessagingPage extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -73,6 +75,7 @@ class MessagingPage extends Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     if (this.props.user && this.props.userList) {
       const id =
         this.props.user.role === "Parent"
@@ -81,14 +84,16 @@ class MessagingPage extends Component {
       this.setState({ id });
       this.fetchConversation(id);
 
-
-      this.timer = setInterval(() => {
-        this.fetchConversation(id);
-      }, 1000);
+      if (this._isMounted){
+        this.timer = setInterval(() => {
+          this.fetchConversation(id);
+        }, 3000);  
+      }
     }
   }
 
   componentWillUnmount() {
+    this._isMounted = false;
     this.timer && clearTimeout(this.timer);
   }
 
