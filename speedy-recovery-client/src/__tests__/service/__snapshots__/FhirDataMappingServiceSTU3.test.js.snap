@@ -43,6 +43,26 @@ Object {
 }
 `;
 
+exports[`map FHIR Family Hisotry resource to internal data model 1`] = `
+Object {
+  "causeOfDeath": "Heart Attack",
+  "date": "2011-03-18",
+  "name": "Alex Von",
+  "onsetAge": "74 yr",
+  "relationship": "Grandfather",
+}
+`;
+
+exports[`map FHIR Goal resource to internal data model 1`] = `
+Object {
+  "description": "Target weight is 160 to 180 lbs.",
+  "dueDate": "2019-03-25",
+  "goal": "dietary",
+  "priority": "high",
+  "startDate": "2019-03-15",
+}
+`;
+
 exports[`map FHIR Medication resource to internal data model 1`] = `
 Object {
   "content": "Vancomycin 500mg powder for infusion solution vial (product)",

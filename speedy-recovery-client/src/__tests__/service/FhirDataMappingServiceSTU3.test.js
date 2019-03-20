@@ -1,18 +1,18 @@
 /*
-* Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
-* patients, parents and hospital staff
-*
-* Copyright (C) 2019 University College London
-*
-* This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
-* Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-* any later version.
-* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-* warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-* details.
-* You should have received a copy of the GNU Affero General Public License along with this program. If not,
-* see http://www.gnu.org/license/.
-* */
+ * Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
+ * patients, parents and hospital staff
+ *
+ * Copyright (C) 2019 University College London
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+ * Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ * You should have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see http://www.gnu.org/license/.
+ * */
 
 /* This file tests the mapping from FHIR STU3 resources to our internal format*/
 
@@ -23,7 +23,9 @@ import {
   fhirMapMedication,
   fhirMapMedicationDispense,
   fhirMapPerson,
-  fhirMapPractitioner
+  fhirMapPractitioner,
+  fhirMapGoal,
+  fhirMapFamilyResource
 } from "../../service/FhirDataMappingService";
 import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatientSTU3.json";
 import fhirExamplePatientMissingField from "../test_input/fhir_resources_stu3/FhirExamplePatientMissingFieldSTU3.json";
@@ -33,6 +35,8 @@ import fhirExampleMedication from "../test_input/fhir_resources_stu3/FhirExample
 import fhirExampleCarePlan from "../test_input/fhir_resources_stu3/FhirExampleCarePlanSTU3.json";
 import fhirExampleMedicationDispense from "../test_input/fhir_resources_stu3/FhirExampleMedicationDispenseSTU3.json";
 import fhirExamplePractitioner from "../test_input/fhir_resources_stu3/FhirExamplePractitionerSTU3.json";
+import fhirExampleGoal from "../test_input/fhir_resources_stu3/FhirGoalSTU3.json";
+import fhirExampleFamilyHistory from "../test_input/fhir_resources_stu3/FhirFamilyHistorySTU3.json";
 
 test("map FHIR Patient resource to internal user data model", () => {
   const user = fhirMapPerson(fhirExamplePatient, "3");
@@ -75,4 +79,14 @@ test("map FHIR MedicationDispense resource to internal data model", () => {
 test("map FHIR Practitioner resource to internal data model", () => {
   const practitioner = fhirMapPractitioner(fhirExamplePractitioner, "3");
   expect(practitioner).toMatchSnapshot();
+});
+
+test("map FHIR Goal resource to internal data model", () => {
+  const goal = fhirMapGoal(fhirExampleGoal, "3");
+  expect(goal).toMatchSnapshot();
+});
+
+test("map FHIR Family Hisotry resource to internal data model", () => {
+  const history = fhirMapFamilyResource(fhirExampleFamilyHistory, "3");
+  expect(history).toMatchSnapshot();
 });

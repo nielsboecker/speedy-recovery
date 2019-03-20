@@ -1,18 +1,18 @@
 /*
-* Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
-* patients, parents and hospital staff
-*
-* Copyright (C) 2019 University College London
-*
-* This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
-* Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-* any later version.
-* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-* warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-* details.
-* You should have received a copy of the GNU Affero General Public License along with this program. If not,
-* see http://www.gnu.org/license/.
-* */
+ * Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
+ * patients, parents and hospital staff
+ *
+ * Copyright (C) 2019 University College London
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+ * Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ * You should have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see http://www.gnu.org/license/.
+ * */
 
 /* This file defines the ParentInfo component which creates an patient info page tailored to parents
  */
@@ -23,18 +23,24 @@ import ParentConditionPane from "./ParentConditionPane";
 import ParentCarePlanPane from "./ParentCarePlanPane";
 import ParentMedicationPane from "./ParentMedicationPane";
 import ParentBasicPane from "./ParentBasicPane";
-import ParentDrPane from "./ParentDrPane"
+import ParentDrPane from "./ParentDrPane";
 
 class ParentInfo extends Component {
   render() {
-    const {conditions, medicationDispenses, carePlans, childResource, patientPractitioners} = this.props;
+    const {
+      conditions,
+      medicationDispenses,
+      carePlans,
+      childResource,
+      patientPractitioners
+    } = this.props;
 
     // Builds up table of panes, each containing different pieces of info about patient
     const panes = [
       {
         menuItem: (
           <Menu.Item key={"basic"} color="blue">
-            <Icon fitted name="id card outline" color ="blue" size = "large"/>
+            <Icon fitted name="id card outline" color="blue" size="large" />
             Basic
           </Menu.Item>
         ),
@@ -43,42 +49,58 @@ class ParentInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"medication"} color="blue">
-            <Icon fitted name="pills" color="purple" size = "large"/>
+            <Icon fitted name="pills" color="purple" size="large" />
             Dispensed Medication
           </Menu.Item>
         ),
         render: () => (
           <ParentMedicationPane
-            medicationDispenses={medicationDispenses} childResource={childResource}
+            medicationDispenses={medicationDispenses}
+            childResource={childResource}
           />
         )
       },
       {
         menuItem: (
           <Menu.Item key={"condition"} color="blue">
-            <Icon fitted name="heartbeat" color="red" size = "large"/>
+            <Icon fitted name="heartbeat" color="red" size="large" />
             Condition
           </Menu.Item>
         ),
-        render: () => <ParentConditionPane conditions={conditions} childResource={childResource}/>
+        render: () => (
+          <ParentConditionPane
+            conditions={conditions}
+            childResource={childResource}
+          />
+        )
       },
       {
         menuItem: (
           <Menu.Item key={"carePlan"} color="blue">
-            <Icon fitted name="unordered list" color = "orange" size = "large"/>
+            <Icon fitted name="unordered list" color="orange" size="large" />
             Care Plan
           </Menu.Item>
         ),
-        render: () => <ParentCarePlanPane carePlans={carePlans} childResource={childResource}/>
+        render: () => (
+          <ParentCarePlanPane
+            carePlans={carePlans}
+            childResource={childResource}
+          />
+        )
       },
       {
         menuItem: (
           <Menu.Item key={"practitionerInfo"} color="blue">
-            <Icon fitted name="doctor" color = "violet" size = "large"/>
+            <Icon fitted name="doctor" color="violet" size="large" />
             Practitioner Information
           </Menu.Item>
         ),
-        render: () => <ParentDrPane patientPractitioners={patientPractitioners} childResource={childResource}/>
+        render: () => (
+          <ParentDrPane
+            patientPractitioners={patientPractitioners}
+            childResource={childResource}
+          />
+        )
       }
     ];
 

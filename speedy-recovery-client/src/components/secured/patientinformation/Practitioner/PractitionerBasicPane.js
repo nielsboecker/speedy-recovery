@@ -13,22 +13,21 @@
  * You should have received a copy of the GNU Affero General Public License along with this program. If not,
  * see http://www.gnu.org/license/.
  * */
-
-/* This file defines the ParentBasicPane which creates a pane used in the ParentInfo component which displays basic
-information about the Parent's child
+/* This file defines the PatientBasicPane which creates a pane used in the PractitionerInfo component which displays basic
+information about the patient
  */
-
 import React, { Component } from "react";
 import { Icon, Tab } from "semantic-ui-react";
+import "./PractitionerInfo.css";
 
-class ParentBasicPane extends Component {
+class PractitionerBasicPane extends Component {
   render() {
-    const { childResource } = this.props;
+    const { patient } = this.props;
 
     const showGenderText = () => {
       let genderStr = "";
-      const gender = childResource.gender;
-      switch (gender) {
+      const gender = patient.gender;
+      switch(gender){
         case "female":
           genderStr = "Girl";
           break;
@@ -43,7 +42,7 @@ class ParentBasicPane extends Component {
 
     const showGenderIcon = () => {
       let genderIcon;
-      switch (childResource.gender) {
+      switch (patient.gender) {
         case "female":
           genderIcon = <Icon color="pink" fitted name="woman" size="large" />;
           break;
@@ -59,18 +58,31 @@ class ParentBasicPane extends Component {
     return (
       <div>
         <Tab.Pane color="blue">
-          <h4>Name: {childResource.name}</h4>
+          <h4>Name: {patient.name}</h4>
           <h4>
             Gender: {showGenderText()}
             {showGenderIcon()}
           </h4>
-          <h4>Birthday: {childResource.birthDate}</h4>
-          <h4>Contact Number: {childResource.phone}</h4>
-          <h4>Address: {childResource.address}</h4>
+          <h4>
+            Birthday: {patient.birthDate}{" "}
+            <Icon fitted name="birthday" size="large" color="olive" />
+          </h4>
+          <h4>
+            Phone: {patient.phone}
+            <Icon fitted name="phone" size="large" color="olive" />
+          </h4>
+          <h4>
+            email: {patient.email}
+            <Icon fitted name="mail" size="large" color="olive" />
+          </h4>
+          <h4>
+            Address: {patient.address}
+            <Icon fitted name="home" size="large" color="olive" />
+          </h4>
         </Tab.Pane>
       </div>
     );
   }
 }
 
-export default ParentBasicPane;
+export default PractitionerBasicPane;

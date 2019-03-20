@@ -14,96 +14,103 @@
  * see http://www.gnu.org/license/.
  * */
 
-/* This file defines the PatientMedicationDispensePane which creates a pane used in the PatientInfo component which
-displays all medication information regarding the patient
+/* This file defines the Patient's family History which creates a pane used in the Practitioner's PatientInfo component which displays all
+   Goal information regarding the patient
  */
 
 import React, { Component } from "react";
 import { Label, Tab, Table } from "semantic-ui-react";
-import "./PatientInfo.css";
+import "./PractitionerInfo.css";
 
-class PatientMedicationDispensePane extends Component {
+class PractitionerFamilyHistory extends Component {
   render() {
-    const { medicationDispenses } = this.props;
-    const medicationDispensesNum = medicationDispenses.length;
-    const createMedicationDispenseTable = () => {
+    const { familyHistories } = this.props;
+    const historiesNum = familyHistories.length;
+    const createFamilyHistoryTable = () => {
       const table = [];
-      if (medicationDispensesNum) {
+      if (historiesNum) {
         const header = [
-          <Table.Row key={"medicationDRow"}>
+          <Table.Row key={"historiesRow"}>
             <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">Name</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">Quantity</Table.HeaderCell>
             <Table.HeaderCell id="patientTableCell">
-              Supply Time Length
+              Relationship
+            </Table.HeaderCell>
+            <Table.HeaderCell id="patientTableCell">
+              Cause of Death
+            </Table.HeaderCell>
+            <Table.HeaderCell id="patientTableCell">
+              Death date
             </Table.HeaderCell>
           </Table.Row>
         ];
         table.push(
-          <Table.Header id="patientTableHeader" key="medicationDTableHeader">
+          <Table.Header key="HistoriesTableHeader" id="patientTableHeader">
             {header}
           </Table.Header>
         );
       }
       const body = [];
-      for (let i = 0; i < medicationDispensesNum; i++) {
+      for (let i = 0; i < historiesNum; i++) {
         const children = [];
-        const name = medicationDispenses[i].name;
 
         children.push(
-          <Table.Cell key={"medicationDOrderCell" + i}>
-            <Label color="blue" ribbon>
+          <Table.Cell key={"historiesCell0" + i}>
+            <Label ribbon color="blue">
               {`${i + 1}`}{" "}
             </Label>
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDNameCell" + i} id="patientTableCell">
-            {<h4>{name}</h4>}
+          <Table.Cell key={"historiesCell1" + i} id="patientTableCell">
+            {<h4>{familyHistories[i].name}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDQuantityCell" + i} id="patientTableCell">
-            {<h4>{medicationDispenses[i].quantity}</h4>}
+          <Table.Cell key={"historyCell2" + i} id="patientTableCell">
+            {<h4>{familyHistories[i].relationship}</h4>}
           </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"medicationDSupplyCell" + i} id="patientTableCell">
-            {<h4>{medicationDispenses[i].daysSupply}</h4>}
+          <Table.Cell key={"historyCell3" + i} id="patientTableCell">
+            {<h4>{familyHistories[i].causeOfDeath}</h4>}
           </Table.Cell>
         );
+        children.push(
+          <Table.Cell key={"historyCell4" + i} id="patientTableCell">
+            {<h4>{familyHistories[i].date}</h4>}
+          </Table.Cell>
+        );
+
         body.push(
-          <Table.Row key={"medicationDRow2" + i} id="patientTableRow">
+          <Table.Row key={"historyRow2" + i} id="patientTableRow">
             {children}
           </Table.Row>
         );
       }
       table.push(
-        <Table.Body key="medicationDTableBody" id="patientTableBody">
+        <Table.Body key="historiesTableBody" id="patientTableBody">
           {body}
         </Table.Body>
       );
-      const medicationDTable = [];
-      medicationDTable.push(
-        <Table key="medicationDTable" color="blue">
+      const historiesTable = [];
+      historiesTable.push(
+        <Table key="historiesTable" color="blue">
           {table}
         </Table>
       );
-      return medicationDTable;
+      return historiesTable;
     };
 
     return (
       <div>
         <Tab.Pane>
-          <h4>
-            You have {medicationDispensesNum} dispensed medications in the
-            records.
-          </h4>
-          {createMedicationDispenseTable()}
+          <h4>There are {historiesNum} recorded family history for this patient.</h4>
+          {createFamilyHistoryTable()}
         </Tab.Pane>
       </div>
     );
   }
 }
 
-export default PatientMedicationDispensePane;
+export default PractitionerFamilyHistory;

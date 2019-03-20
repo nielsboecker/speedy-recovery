@@ -123,7 +123,7 @@ const getPractitioner = (practId, familyName) => {
               practId
             );
             console.log(
-              "Practitioner response Resource after mapping: ",
+              "Practitioner response Resource after extracting: ",
               practitioner
             );
             return resolve(practitioner[0]);
@@ -131,27 +131,6 @@ const getPractitioner = (practId, familyName) => {
       },
       error => {
         console.error("Practitioner fetching error: ", error);
-        return reject(error);
-      }
-    );
-  });
-};
-
-const getUserCarePlan = userID => {
-  return new Promise((resolve, reject) => {
-    FHIR.oauth2.ready(
-      smart => {
-        smart.api
-          .search({ type: "CarePlan", query: { subject: userID } })
-          .done(carePlanBundle => {
-            console.log("User care plan response: ", carePlanBundle);
-            const carePlans = extractResourcesFromBundle(carePlanBundle);
-            console.log("CarePlan Resource after extracting: ", carePlans);
-            return resolve(carePlans);
-          });
-      },
-      error => {
-        console.error("CarePlan fetching error: ", error);
         return reject(error);
       }
     );
@@ -181,6 +160,93 @@ const getChildInfo = childID => {
   });
 };
 
+const getUserCarePlan = userID => {
+  return new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      smart => {
+        smart.api
+          .search({ type: "CarePlan", query: { subject: userID } })
+          .done(carePlanBundle => {
+            console.log("User care plan response: ", carePlanBundle);
+            const carePlans = extractResourcesFromBundle(carePlanBundle);
+            console.log("CarePlan Resource after extracting: ", carePlans);
+            return resolve(carePlans);
+          });
+      },
+      error => {
+        console.error("CarePlan fetching error: ", error);
+        return reject(error);
+      }
+    );
+  });
+};
+
+const getFamilyMemberHistory = userID => {
+  return new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      smart => {
+        smart.api
+          .search({ type: "FamilyMemberHistory", query: { patient: userID } })
+          .done(FamilyMemberHistory => {
+            console.log("Family member history response:", FamilyMemberHistory);
+            const familyMemberHistory = extractResourcesFromBundle(
+              FamilyMemberHistory
+            );
+            console.log(
+              "Family member history after extracting:",
+              familyMemberHistory
+            );
+            return resolve(familyMemberHistory);
+          });
+      },
+      error => {
+        console.error("FamilyMemberHistory fetching error: ", error);
+        return reject(error);
+      }
+    );
+  });
+};
+const getGoal = userID => {
+  return new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      smart => {
+        smart.api
+          .search({ type: "Goal", query: { subject: userID } })
+          .done(goals => {
+            console.log("Goals response:", goals);
+            const goal = extractResourcesFromBundle(goals);
+            console.log("Goals after extracting:", goal);
+            return resolve(goal);
+          });
+      },
+      error => {
+        console.error("FamilyMemberHistory fetching error: ", error);
+        return reject(error);
+      }
+    );
+  });
+};
+
+const getPatient = userID => {
+  return new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      smart => {
+        smart.api
+          .search({ type: "Patient", query: { _id: userID } })
+          .done(patientInformation => {
+            console.log("Patient response: ", patientInformation);
+            const patient = extractResourcesFromBundle(patientInformation);
+            return resolve(patient);
+          });
+      },
+      error => {
+        console.error("Patient fetching error: ", error);
+        return reject(error);
+      }
+    );
+  });
+};
+
 export default {
   getPractitioner,
   getUserAppointments,
@@ -188,5 +254,8 @@ export default {
   getUserMedicationDispense,
   getUserCarePlan,
   extractResourcesFromBundle,
+  getPatient,
+  getFamilyMemberHistory,
+  getGoal,
   getChildInfo
 };
