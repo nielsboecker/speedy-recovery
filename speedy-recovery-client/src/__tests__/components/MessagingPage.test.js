@@ -20,6 +20,7 @@ import React from "react";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import MessagingPage from "../../components/secured/messaging/MessagingPage";
+import ConversationPage from "../../components/secured/conversation/ConversationPage";
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -30,4 +31,20 @@ it("renders without crashing", () => {
 it("renders without crashing", () => {
   const wrapper = shallow(<MessagingPage />);
   wrapper.setState({ conversations: [{ userId: "foo" }] });
+});
+
+it("MessagingPage triggers componentDidMount without crashing", () => {
+  const wrapper = shallow(<MessagingPage />);
+  wrapper.setProps({ user: { role: "Parent" } });
+  wrapper.setProps({ userList: "mock" });
+  const instance = wrapper.instance();
+  instance.componentDidMount();
+});
+
+it("MessagingPage triggers componentDidMount without crashing", () => {
+  const wrapper = shallow(<MessagingPage />);
+  wrapper.setProps({ user: { role: "mock" } });
+  wrapper.setProps({ userList: "mock" });
+  const instance = wrapper.instance();
+  instance.componentDidMount();
 });
