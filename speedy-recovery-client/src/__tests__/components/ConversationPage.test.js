@@ -20,9 +20,30 @@ import React from "react";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import ConversationPage from "../../components/secured/conversation/ConversationPage";
+import PractitionerCalendar from "../../components/secured/calendar/practitioner/PractitionerCalendar";
+import exampleAppointment from "../test_input/internal/ExampleAppointment";
 
 Enzyme.configure({ adapter: new Adapter() });
 
 it("renders without crashing", () => {
   shallow(<ConversationPage />);
+});
+
+it("ConversationPage triggers handleChange without crashing", () => {
+  const wrapper = shallow(<ConversationPage />);
+  const instance = wrapper.instance();
+  instance.handleChange({ target: { value: "mock" } });
+});
+
+it("ConversationPage triggers componentWillUnmount without crashing", () => {
+  const wrapper = shallow(<ConversationPage />);
+  const instance = wrapper.instance();
+  instance.componentWillUnmount();
+});
+
+it("ConversationPage triggers setMessageList without crashing", () => {
+  const wrapper = shallow(<ConversationPage />);
+  wrapper.setProps({ location: { state: { title: "mock" } } });
+  const instance = wrapper.instance();
+  instance.setMessageList();
 });
