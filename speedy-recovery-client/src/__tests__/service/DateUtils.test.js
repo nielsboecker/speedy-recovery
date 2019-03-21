@@ -17,9 +17,15 @@
 /* This file tests functions in DateUtils*/
 import { formatDate } from "../../service/DateUtils";
 
-test("formatDate", () => {
+test("formatDate(mockDate)", () => {
   const mockDate = "2222-12-12";
-  formatDate(mockDate);
-  const mockDate2 = "";
-  formatDate(mockDate2);
+  const result = formatDate(mockDate);
+  const expected = new Date(mockDate).toLocaleString("en-uk");
+  expect(result).toEqual(expected);
+});
+
+test("formatDate(missingDate)", () => {
+  const mockDate = "";
+  const result = formatDate(mockDate);
+  expect(result).toEqual("Invalid date");
 });

@@ -23,11 +23,7 @@ import MessagingPage from "../../components/secured/messaging/MessagingPage";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-it("renders without crashing 1", () => {
-  shallow(<MessagingPage />);
-});
-
-it("renders without crashing 2", () => {
+it("renders without crashing", () => {
   const wrapper = shallow(<MessagingPage />);
   wrapper.setProps({ user: { role: "Practitioner" } });
   wrapper.setState({ conversations: [{ userId: "foo" }] });
