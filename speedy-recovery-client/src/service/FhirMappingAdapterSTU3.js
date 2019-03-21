@@ -451,5 +451,9 @@ export {
   mapPractitionerSTU3,
   mapFamilyHistorySTU3,
   mapGoalSTU3,
-  getChildIDSTU3
+  getChildIDSTU3,
+  getCarePlanStart,
+  getCarePlanEnd,
+  getPhoto,
+  formatBirthDate
 };

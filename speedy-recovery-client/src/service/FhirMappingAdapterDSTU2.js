@@ -356,5 +356,9 @@ export {
   mapPractitionerSTU2,
   getChildIDSTU2,
   mapFamilyHistorySTU2,
-  mapGoalSTU2
+  mapGoalSTU2,
+  getCarePlanStart,
+  getCarePlanEnd,
+  formatBirthDate,
+  getCarePlanActivities
 };

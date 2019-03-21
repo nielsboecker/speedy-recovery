@@ -16,7 +16,7 @@
 
 /* This file tests the functions in FhirMappingAdapterDSTU2*/
 import {
-  mapPatientToUserSTU2,
+  mapPersonToUserSTU2,
   mapAppointmentSTU2,
   mapConditionSTU2,
   mapMedicationSTU2,
@@ -32,9 +32,9 @@ import {
 
 const missingField = "Unknown";
 
-test("mapPatientToUserSTU2(missingResource)", () => {
+test("mapPersonToUserSTU2(missingResource)", () => {
   const mockResource = {};
-  mapPatientToUserSTU2(mockResource);
+  mapPersonToUserSTU2(mockResource);
 });
 
 test("mapAppointmentSTU2(missingResource)", () => {
@@ -52,8 +52,11 @@ test("mapMedicationSTU2(missingResource)", () => {
   mapMedicationSTU2(mockResource);
 });
 
-test("mapMedicationDispenseSTU2(missingResource)", () => {
-  const mockResource = {};
+test("mapMedicationDispenseSTU2(mockResource)", () => {
+  const mockResource = {
+    quantity: { value: "mock" },
+    daysSupply: { value: "mock" }
+  };
   mapMedicationDispenseSTU2(mockResource);
 });
 

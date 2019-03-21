@@ -20,10 +20,10 @@ import React from "react";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import exampleUser from "../test_input/internal/ExampleUser.json";
-import PatientBasicPane from "../../components/secured/patientinformation/PatientBasicPane";
-import PatientCarePlanPane from "../../components/secured/patientinformation/PatientCarePlanPane";
-import PatientConditionPane from "../../components/secured/patientinformation/PatientConditionPane";
-import PatientMedicationDispensePane from "../../components/secured/patientinformation/PatientMedicationDispensePane";
+import PatientBasicPane from "../../components/secured/patientinformation/Patient/PatientBasicPane";
+import PatientCarePlanPane from "../../components/secured/patientinformation/Patient/PatientCarePlanPane";
+import PatientConditionPane from "../../components/secured/patientinformation/Patient/PatientConditionPane";
+import PatientMedicationDispensePane from "../../components/secured/patientinformation/Patient/PatientMedicationDispensePane";
 import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatientSTU3.json";
 import fhirExamplePractitioner from "../test_input/fhir_resources_stu3/FhirExamplePractitionerSTU3.json";
 

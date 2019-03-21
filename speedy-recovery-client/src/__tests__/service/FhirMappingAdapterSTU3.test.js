@@ -16,7 +16,7 @@
 
 /* This file tests the functions in FhirMappingAdapterSTU3*/
 import {
-  mapPatientToUserSTU3,
+  mapPersonToUserSTU3,
   mapAppointmentSTU3,
   mapConditionSTU3,
   mapMedicationSTU3,
@@ -32,9 +32,9 @@ import {
 
 const missingField = "Unknown";
 
-test("mapPatientToUserSTU3(missingResource)", () => {
+test("mapPersonToUserSTU3(missingResource)", () => {
   const mockResource = {};
-  mapPatientToUserSTU3(mockResource);
+  mapPersonToUserSTU3(mockResource);
 });
 
 test("mapAppointmentSTU3(missingResource)", () => {
@@ -47,13 +47,13 @@ test("mapConditionSTU3(missingResource)", () => {
   mapConditionSTU3(mockResource);
 });
 
-test("mapMedicationSTU3(missingResource)", () => {
+test("mapMedicationSTU3()", () => {
   const mockResource = { product: { form: "mock" } };
   mapMedicationSTU3(mockResource);
 });
 
-test("mapMedicationDispenseSTU3(missingResource)", () => {
-  const mockResource = {};
+test("mapMedicationDispenseSTU3()", () => {
+  const mockResource = { quantity: { value: "mock" }, daysSupply: "mock" };
   mapMedicationDispenseSTU3(mockResource);
 });
 
@@ -65,6 +65,12 @@ test("mapCarePlanSTU3(missingResource)", () => {
 test("mapPractitionerSTU3(missingResource)", () => {
   const mockResource = {};
   mapPractitionerSTU3(mockResource);
+});
+
+test("getCarePlanStart(mockResource)", () => {
+  const mockStart = "mock";
+  const start = getCarePlanStart({ start: mockStart });
+  expect(start).toEqual(mockStart);
 });
 
 test("getCarePlanStart(missingResource)", () => {

@@ -101,20 +101,6 @@ test("getTitle(missingResource,mockId,mockList)", () => {
 test("getTitle(mockConversationResource,mockId,mockList)", () => {
   const mockResource = { userid1: "mockId", userid2: "mockId2" };
   const mockId = "mockId";
-  const mockList = [{}];
-  getTitle(mockResource, mockId, mockList);
-});
-
-test("getTitle(mockConversationResource,mockId,mockList)", () => {
-  const mockResource = { userid1: "mockId1", userid2: "mockId2" };
-  const mockId = "mockId";
-  const mockList = [{}];
-  getTitle(mockResource, mockId, mockList);
-});
-
-test("getTitle(mockConversationResource,mockId,mockList)", () => {
-  const mockResource = { userid1: "mockId", userid2: "mockId2" };
-  const mockId = "mockId";
   const mockList = [{ id: "mockId2" }];
   getTitle(mockResource, mockId, mockList);
 });
