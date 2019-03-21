@@ -27,7 +27,7 @@ class PractitionerBasicPane extends Component {
     const showGenderText = () => {
       let genderStr = "";
       const gender = patient.gender;
-      switch(gender){
+      switch (gender) {
         case "female":
           genderStr = "Girl";
           break;

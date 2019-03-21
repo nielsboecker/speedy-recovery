@@ -93,7 +93,9 @@ class PractitionerPatientInfo extends Component {
             Care Plan
           </Menu.Item>
         ),
-        render: () => <PractitionerCarePlanPane carePlans={this.state.carePlans} />
+        render: () => (
+          <PractitionerCarePlanPane carePlans={this.state.carePlans} />
+        )
       },
 
       {
@@ -104,7 +106,9 @@ class PractitionerPatientInfo extends Component {
           </Menu.Item>
         ),
         render: () => (
-          <PractitionerFamilyHistory familyHistories={this.state.familyHistories } />
+          <PractitionerFamilyHistory
+            familyHistories={this.state.familyHistories}
+          />
         )
       },
 
@@ -122,7 +126,7 @@ class PractitionerPatientInfo extends Component {
 
     return (
       <div>
-        <h1> Information For  {this.props.location.state.patient.name}</h1>
+        <h1> Information For {this.props.location.state.patient.name}</h1>
         <Tab
           menu={{ fluid: true, vertical: true, tabular: true }}
           panes={panes}

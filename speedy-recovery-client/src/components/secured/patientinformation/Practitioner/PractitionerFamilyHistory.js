@@ -105,7 +105,9 @@ class PractitionerFamilyHistory extends Component {
     return (
       <div>
         <Tab.Pane>
-          <h4>There are {historiesNum} recorded family history for this patient.</h4>
+          <h4>
+            There are {historiesNum} recorded family history for this patient.
+          </h4>
           {createFamilyHistoryTable()}
         </Tab.Pane>
       </div>
