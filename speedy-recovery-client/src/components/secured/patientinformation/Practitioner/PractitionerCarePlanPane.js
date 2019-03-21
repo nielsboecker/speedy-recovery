@@ -21,6 +21,7 @@ care plan information regarding the patient
 import React, { Component } from "react";
 import { Label, Tab, Table } from "semantic-ui-react";
 import "./PractitionerInfo.css";
+import { isTablet, isBrowser } from "react-device-detect"
 
 class PractitionerCarePlanPane extends Component {
     render() {
@@ -32,11 +33,14 @@ class PractitionerCarePlanPane extends Component {
             if (carePlansNum) {
                 const header = [
                     <Table.Row key={"carePlanRow"}>
-                        <Table.HeaderCell id="parentTableCell">#</Table.HeaderCell>
-                        <Table.HeaderCell id="parentTableCell">Category</Table.HeaderCell>
-                        <Table.HeaderCell id="parentTableCell">Activities</Table.HeaderCell>
-                        <Table.HeaderCell id="parentTableCell">Status</Table.HeaderCell>
-                        <Table.HeaderCell id="parentTableCell">Period</Table.HeaderCell>
+                        {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">#</Table.HeaderCell> : null}
+                        {isBrowser || isTablet ?
+                            <Table.HeaderCell id="parentTableCell">Category</Table.HeaderCell> : null}
+                        <Table.HeaderCell id="parentTableCell">Care Plans</Table.HeaderCell>
+                        {isBrowser || isTablet ?
+                            <Table.HeaderCell id="parentTableCell">Status</Table.HeaderCell> : null}
+                        {isBrowser || isTablet ?
+                            <Table.HeaderCell id="parentTableCell">Period</Table.HeaderCell> : null}
                     </Table.Row>
                 ];
                 table.push(
@@ -49,34 +53,38 @@ class PractitionerCarePlanPane extends Component {
             for (let i = 0; i < carePlansNum; i++) {
                 const children = [];
 
-                children.push(
-                    <Table.Cell key={"carePlanOrderCell" + i}>
-                        <Label color="blue" ribbon>
-                            {`${i + 1}`}{" "}
-                        </Label>
-                    </Table.Cell>
-                );
-                children.push(
-                    <Table.Cell key={"carePlanCategoryCell" + i} id="parentTableCell">
-                        {<h4>{carePlans[i].category}</h4>}
-                    </Table.Cell>
-                );
+
+                    children.push(
+                        <Table.Cell key={"carePlanOrderCell" + i}>
+                            <Label color="blue" ribbon>
+                                {`${i + 1}`}{" "}
+                            </Label>
+                        </Table.Cell>
+                    );
+                if (isTablet || isBrowser) {
+                    children.push(
+                        <Table.Cell key={"carePlanCategoryCell" + i} id="parentTableCell">
+                            {<h4>{carePlans[i].category}</h4>}
+                        </Table.Cell>
+                    );
+                }
                 children.push(
                     <Table.Cell key={"carePlanActCell" + i} id="parentTableCell">
                         {<h4>{carePlans[i].activities}</h4>}
                     </Table.Cell>
                 );
-                children.push(
-                    <Table.Cell key={"carePlanStatusCell" + i} id="parentTableCell">
-                        {<h4>{carePlans[i].status}</h4>}
-                    </Table.Cell>
-                );
-                children.push(
-                    <Table.Cell key={"carePlanPeriodCell" + i} id="parentTableCell">
-                        {<h4>{carePlans[i].period}</h4>}
-                    </Table.Cell>
-                );
-
+                if (isTablet || isBrowser) {
+                    children.push(
+                        <Table.Cell key={"carePlanStatusCell" + i} id="parentTableCell">
+                            {<h4>{carePlans[i].status}</h4>}
+                        </Table.Cell>
+                    );
+                    children.push(
+                        <Table.Cell key={"carePlanPeriodCell" + i} id="parentTableCell">
+                            {<h4>{carePlans[i].period}</h4>}
+                        </Table.Cell>
+                    );
+                }
                 body.push(
                     <Table.Row key={"carePlanRow2" + i} id="parentTableRow">
                         {children}

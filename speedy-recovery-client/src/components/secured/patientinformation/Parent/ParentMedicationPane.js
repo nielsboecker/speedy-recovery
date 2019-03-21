@@ -57,13 +57,11 @@ class ParentMedicationPane extends Component {
         const name = medicationDispenses[i].name;
         const searchQuery = "https://www.google.com/search?q=" + name;
 
-        if (isTablet || isBrowser) {
-          children.push(
-              <Table.Cell key={"medicationOrderCell" + i}>
-                <Label ribbon color="blue">{`${i + 1}`} </Label>
-              </Table.Cell>
-          );
-        }
+        children.push(
+            <Table.Cell key={"medicationOrderCell" + i}>
+              <Label ribbon color="blue">{`${i + 1}`} </Label>
+            </Table.Cell>
+        );
         children.push(
             <Table.Cell key={"medicationNameCell" + i} id="parentTableCell">
               {name}

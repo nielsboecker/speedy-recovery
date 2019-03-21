@@ -23,7 +23,7 @@ import { Icon, Menu, Tab } from "semantic-ui-react";
 import "./PatientInfo.css";
 import PatientConditionPane from "./PatientConditionPane";
 import PatientCarePlanPane from "./PatientCarePlanPane";
-import PatientMedicationDispensePane from "./PatientMedicationDispensePane";
+import PatientMedicationPane from "./PatientMedicationPane";
 import PatientBasicPane from "./PatientBasicPane";
 import {isBrowser, isTablet} from 'react-device-detect';
 
@@ -51,7 +51,7 @@ class PatientInfo extends Component {
           </Menu.Item>
         ),
         render: () => (
-          <PatientMedicationDispensePane
+          <PatientMedicationPane
             medicationDispenses={medicationDispenses}
           />
         )

@@ -56,27 +56,25 @@ class ParentConditionPane extends Component {
         const summary = conditions[i].summary;
         const searchQuery = "https://www.google.com/search?q=" + summary;
 
-        if (isBrowser || isTablet) {
-          children.push(
-              <Table.Cell key={"conditionOrderCell" + i}>
-                  <Label color="blue" ribbon>
-                      {`${i + 1}`}{" "}
-                  </Label>
-              </Table.Cell>
-          );
-        }
         children.push(
-          <Table.Cell key={"conditionSummaryCell" + i} id="parentTableCell">
-            {<h4>{summary}</h4>}
-          </Table.Cell>
+            <Table.Cell key={"conditionOrderCell" + i}>
+              <Label color="blue" ribbon>
+                {`${i + 1}`}{" "}
+              </Label>
+            </Table.Cell>
         );
         children.push(
-          <Table.Cell key={"conditionSummarySearchCell" + i} id="parentTableCell">
-            {<h4> 
-              <a href = {searchQuery} target="_blank" rel="noopener noreferrer">
-                <Icon color ="blue" fitted name ="search"/> </a>
-            </h4>}
-          </Table.Cell>
+            <Table.Cell key={"conditionSummaryCell" + i} id="parentTableCell">
+              {<h4>{summary}</h4>}
+            </Table.Cell>
+        );
+        children.push(
+            <Table.Cell key={"conditionSummarySearchCell" + i} id="parentTableCell">
+              {<h4>
+                <a href={searchQuery} target="_blank" rel="noopener noreferrer">
+                  <Icon color="blue" fitted name="search"/> </a>
+              </h4>}
+            </Table.Cell>
         );
         if (isBrowser || isTablet) {
           children.push(
@@ -108,9 +106,9 @@ class ParentConditionPane extends Component {
           );
         }
         body.push(
-          <Table.Row id="parentTableRow" key={"conditionRow2" + i}>
-            {children}
-          </Table.Row>
+            <Table.Row id="parentTableRow" key={"conditionRow2" + i}>
+              {children}
+            </Table.Row>
         );
       }
       table.push(

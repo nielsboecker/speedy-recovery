@@ -39,33 +39,32 @@ class PatientCarePlanPane extends Component {
           </Table.Row>
         ];
         table.push(
-          <Table.Header key="carePlanTableHeader" id="patientTableHeader">
-            {header}
-          </Table.Header>
+            <Table.Header key="carePlanTableHeader" id="patientTableHeader">
+              {header}
+            </Table.Header>
         );
       }
       const body = [];
       for (let i = 0; i < carePlansNum; i++) {
         const children = [];
 
-        if (isBrowser || isTablet) {
-                children.push(
-                    <Table.Cell key={"carePlanOrderCell" + i}>
-                        <Label color="blue" ribbon>
-                            {`${i + 1}`}{" "}
-                        </Label>
-                    </Table.Cell>
-                );
-            children.push(
-                <Table.Cell key={"carePlanCategoryCell" + i} id="patientTableCell">
-                    {<h4>{carePlans[i].category}</h4>}
-                </Table.Cell>
-            );
-        }
         children.push(
-          <Table.Cell key={"carePlanActCell" + i} id="patientTableCell">
-            {<h4>{carePlans[i].activities}</h4>}
-          </Table.Cell>
+            <Table.Cell key={"carePlanOrderCell" + i}>
+              <Label color="blue" ribbon>
+                {`${i + 1}`}{" "}
+              </Label>
+            </Table.Cell>
+        );
+        children.push(
+            <Table.Cell key={"carePlanCategoryCell" + i} id="patientTableCell">
+              {<h4>{carePlans[i].category}</h4>}
+            </Table.Cell>
+        );
+
+        children.push(
+            <Table.Cell key={"carePlanActCell" + i} id="patientTableCell">
+              {<h4>{carePlans[i].activities}</h4>}
+            </Table.Cell>
         );
         if (isBrowser || isTablet) {
           children.push(
@@ -76,21 +75,21 @@ class PatientCarePlanPane extends Component {
         }
 
         body.push(
-          <Table.Row key={"carePlanRow2" + i} id="patientTableRow">
-            {children}
-          </Table.Row>
+            <Table.Row key={"carePlanRow2" + i} id="patientTableRow">
+              {children}
+            </Table.Row>
         );
       }
       table.push(
-        <Table.Body key="carePlanTableBody" id="patientTableBody">
-          {body}
-        </Table.Body>
+          <Table.Body key="carePlanTableBody" id="patientTableBody">
+            {body}
+          </Table.Body>
       );
       const carePlanTable = [];
       carePlanTable.push(
-        <Table key="carePlanTable" color="blue">
-          {table}
-        </Table>
+          <Table key="carePlanTable" color="blue">
+            {table}
+          </Table>
       );
       return carePlanTable;
     };

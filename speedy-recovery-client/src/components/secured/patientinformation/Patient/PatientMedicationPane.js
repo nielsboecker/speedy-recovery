@@ -14,7 +14,7 @@
  * see http://www.gnu.org/license/.
  * */
 
-/* This file defines the PatientMedicationDispensePane which creates a pane used in the PatientInfo component which
+/* This file defines the PatientMedicationPane which creates a pane used in the PatientInfo component which
 displays all medication information regarding the patient
  */
 
@@ -23,7 +23,7 @@ import { Label, Tab, Table } from "semantic-ui-react";
 import "./PatientInfo.css";
 import {isBrowser, isTablet} from 'react-device-detect';
 
-class PatientMedicationDispensePane extends Component {
+class PatientMedicationPane extends Component {
   render() {
     const { medicationDispenses } = this.props;
     const medicationDispensesNum = medicationDispenses.length;
@@ -39,9 +39,9 @@ class PatientMedicationDispensePane extends Component {
           </Table.Row>
         ];
         table.push(
-          <Table.Header id="patientTableHeader" key="medicationDTableHeader">
-            {header}
-          </Table.Header>
+            <Table.Header id="patientTableHeader" key="medicationDTableHeader">
+              {header}
+            </Table.Header>
         );
       }
       const body = [];
@@ -49,19 +49,17 @@ class PatientMedicationDispensePane extends Component {
         const children = [];
         const name = medicationDispenses[i].name;
 
-        if (isTablet || isBrowser) {
-            children.push(
-                <Table.Cell key={"medicationDOrderCell" + i}>
-                    <Label color="blue" ribbon>
-                        {`${i + 1}`}{" "}
-                    </Label>
-                </Table.Cell>
-            );
-        }
         children.push(
-          <Table.Cell key={"medicationDNameCell" + i} id="patientTableCell">
-            {<h4>{name}</h4>}
-          </Table.Cell>
+            <Table.Cell key={"medicationDOrderCell" + i}>
+              <Label color="blue" ribbon>
+                {`${i + 1}`}{" "}
+              </Label>
+            </Table.Cell>
+        );
+        children.push(
+            <Table.Cell key={"medicationDNameCell" + i} id="patientTableCell">
+              {<h4>{name}</h4>}
+            </Table.Cell>
         );
 
         if (isBrowser || isTablet) {
@@ -77,21 +75,21 @@ class PatientMedicationDispensePane extends Component {
           );
         }
         body.push(
-          <Table.Row key={"medicationDRow2" + i} id="patientTableRow">
-            {children}
-          </Table.Row>
+            <Table.Row key={"medicationDRow2" + i} id="patientTableRow">
+              {children}
+            </Table.Row>
         );
       }
       table.push(
-        <Table.Body key="medicationDTableBody" id="patientTableBody">
-          {body}
-        </Table.Body>
+          <Table.Body key="medicationDTableBody" id="patientTableBody">
+            {body}
+          </Table.Body>
       );
       const medicationDTable = [];
       medicationDTable.push(
-        <Table key="medicationDTable" color="blue">
-          {table}
-        </Table>
+          <Table key="medicationDTable" color="blue">
+            {table}
+          </Table>
       );
       return medicationDTable;
     };
@@ -110,4 +108,4 @@ class PatientMedicationDispensePane extends Component {
   }
 }
 
-export default PatientMedicationDispensePane;
+export default PatientMedicationPane;
