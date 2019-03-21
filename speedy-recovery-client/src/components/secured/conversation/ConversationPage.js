@@ -1,18 +1,18 @@
 /*
-* Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
-* patients, parents and hospital staff
-*
-* Copyright (C) 2019 University College London
-*
-* This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
-* Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-* any later version.
-* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-* warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-* details.
-* You should have received a copy of the GNU Affero General Public License along with this program. If not,
-* see http://www.gnu.org/license/.
-* */
+ * Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
+ * patients, parents and hospital staff
+ *
+ * Copyright (C) 2019 University College London
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+ * Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ * You should have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see http://www.gnu.org/license/.
+ * */
 
 /* This file defines the ConversationPage component which displays the messaging functionality to the user, allowing
 them to send and receive messages between them and another user.
@@ -23,7 +23,11 @@ import "react-chat-elements/dist/main.css";
 import { MessageList } from "react-chat-elements";
 import { Button, Form, Grid } from "semantic-ui-react";
 import { getMessages, postMessages } from "../../../service/BackendService";
-import { getSenderMessageNum, messageMap, setupMessages } from "../../../service/BackendMapping";
+import {
+  getSenderMessageNum,
+  messageMap,
+  setupMessages
+} from "../../../service/BackendMapping";
 import "./ConversationPage.css";
 
 class ConversationPage extends Component {
@@ -49,7 +53,10 @@ class ConversationPage extends Component {
       this.props.location.state.id2,
       this.state.message
     );
-    const message = setupMessages(this.state.message, this.props.location.state.name);
+    const message = setupMessages(
+      this.state.message,
+      this.props.location.state.name
+    );
     this.setState({ messages: [...this.state.messages, message] });
     this.setState({ message: "" });
   };
@@ -81,7 +88,11 @@ class ConversationPage extends Component {
                 </Form>
               </Grid.Column>
               <Grid.Column>
-                <Button color="red" className="large" onClick={this.handleSubmit}>
+                <Button
+                  color="red"
+                  className="large"
+                  onClick={this.handleSubmit}
+                >
                   Send
                 </Button>
               </Grid.Column>
@@ -112,8 +123,14 @@ class ConversationPage extends Component {
       getMessages(this.props.location.state.id, this.props.location.state.id2)
         .then(messagesResource => {
           const messages = messagesResource.map(message =>
-            messageMap(message, this.props.location.state.id, this.state.dbType, this.props.location.state.role,
-              this.props.location.state.name, this.state.title)
+            messageMap(
+              message,
+              this.props.location.state.id,
+              this.state.dbType,
+              this.props.location.state.role,
+              this.props.location.state.name,
+              this.state.title
+            )
           );
           if (
             getSenderMessageNum(messages) >=
