@@ -25,6 +25,8 @@ import "./Header.css";
 import { getConversation } from "../../../service/BackendService";
 
 class Header extends Component {
+    // _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -90,6 +92,7 @@ class Header extends Component {
   }
 
   componentDidMount() {
+    // this._isMounted = true;
     if (this.props.role === "Practitioner"){
       let id = this.props.practitionerid;
       this.setState({ id });
@@ -106,6 +109,7 @@ class Header extends Component {
   }
 
   componentWillUnmount() {
+    // this._isMounted = false;
     this.timer && clearTimeout(this.timer);
   }
 

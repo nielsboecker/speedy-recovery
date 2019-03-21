@@ -44,8 +44,17 @@ class SecuredMainPage extends Component {
     }
 
     const { match } = this.props;
-    console.log("AAA");
-    console.log(this.props);
+    
+    const { data, error } = this.state;
+
+    if (error) {
+      return (
+        <div className="error">
+          There was an error fetching data: {error} {data}
+        </div>
+      );
+    }
+
     return (
       //  Routes the user to their selected page
       <div>

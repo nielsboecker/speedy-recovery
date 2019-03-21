@@ -75,21 +75,20 @@ const getTitle = (conversationResource, id, userList) => {
       const user = userList.find(user => {
         return user.id === conversationResource.userid2;
       });
-      if(user && user.name){
+      if (user && user.name) {
         return user.name;
       }
- 
     } else {
       const user = userList.find(user => {
         return user.id === conversationResource.userid1;
       });
-      if(user && user.name){
+      if (user && user.name) {
         return user.name;
       }
     }
   }
   return missingField;
- };
+};
 
 const getId = conversationResource => {
   if (conversationResource && conversationResource.Conversation_Id) {
