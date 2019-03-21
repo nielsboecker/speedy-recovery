@@ -69,6 +69,7 @@ test("handleLoginSuccess() sets state appropriately", () => {
     }
   };
 
+  wrapper.setState({ fhirClient: mockFhirClient });
   // when
   underTest.handleLoginSuccess(mockFhirClient);
 

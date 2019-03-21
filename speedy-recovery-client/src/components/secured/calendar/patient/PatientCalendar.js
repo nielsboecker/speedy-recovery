@@ -22,7 +22,7 @@ import BigCalendar from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
 import "../CalendarPages.css";
-import { Grid, Segment, Dropdown } from "semantic-ui-react";
+import { Dropdown, Grid, Segment } from "semantic-ui-react";
 import PatientPractitionerCard from "./PatientPractitionerCard";
 import { getPractitionerInfo } from "../../../../service/BackendService";
 

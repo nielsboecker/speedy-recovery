@@ -19,35 +19,39 @@ being used.
  */
 
 import {
+  getChildIDSTU2,
   mapAppointmentSTU2,
-  mapConditionSTU2,
-  mapMedicationSTU2,
-  mapMedicationDispenseSTU2,
   mapCarePlanSTU2,
-  mapPatientToUserSTU2,
+  mapConditionSTU2,
+  mapMedicationDispenseSTU2,
+  mapMedicationSTU2,
+  mapPersonToUserSTU2,
   mapPractitionerSTU2,
-  getChildIDSTU2
+  mapFamilyHistorySTU2,
+  mapGoalSTU2
 } from "./FhirMappingAdapterDSTU2";
 import {
+  getChildIDSTU3,
   mapAppointmentSTU3,
-  mapConditionSTU3,
-  mapMedicationSTU3,
-  mapMedicationDispenseSTU3,
   mapCarePlanSTU3,
-  mapPatientToUserSTU3,
+  mapConditionSTU3,
+  mapMedicationDispenseSTU3,
+  mapMedicationSTU3,
+  mapPersonToUserSTU3,
   mapPractitionerSTU3,
-  getChildIDSTU3
+  mapFamilyHistorySTU3,
+  mapGoalSTU3
 } from "./FhirMappingAdapterSTU3";
 
-const fhirMapPatient = (resource, version) => {
+const fhirMapPerson = (resource, version) => {
   if (version) {
     switch (version[0]) {
       case "1":
         return null;
       case "2":
-        return mapPatientToUserSTU2(resource);
+        return mapPersonToUserSTU2(resource);
       case "3":
-        return mapPatientToUserSTU3(resource);
+        return mapPersonToUserSTU3(resource);
       default:
         console.log("Invalid version of FHIR resource provided: ", version);
     }
@@ -158,6 +162,38 @@ const fhirMapCarePlan = (resource, version) => {
   return null;
 };
 
+const fhirMapFamilyResource = (resource, version) => {
+  if (version) {
+    switch (version[0]) {
+      case "1":
+      case "2":
+        return mapFamilyHistorySTU2(resource);
+      case "3":
+        return mapFamilyHistorySTU3(resource);
+      default:
+        console.log("Invalid version of FHIR resource provided: ", version);
+    }
+  }
+  console.log("No FHIR version has been supplied");
+  return null;
+};
+
+const fhirMapGoal = (resource, version) => {
+  if (version) {
+    switch (version[0]) {
+      case "1":
+      case "2":
+        return mapGoalSTU2(resource);
+      case "3":
+        return mapGoalSTU3(resource);
+      default:
+        console.log("Invalid version of FHIR resource provided: ", version);
+    }
+  }
+  console.log("No FHIR version has been supplied");
+  return null;
+};
+
 const getChildID = (resource, version) => {
   if (version) {
     switch (version[0]) {
@@ -176,12 +212,14 @@ const getChildID = (resource, version) => {
 };
 
 export {
-  fhirMapPatient,
+  fhirMapPerson,
   fhirMapAppointment,
   fhirMapCondition,
   fhirMapMedication,
   fhirMapMedicationDispense,
   fhirMapCarePlan,
   fhirMapPractitioner,
+  fhirMapFamilyResource,
+  fhirMapGoal,
   getChildID
 };

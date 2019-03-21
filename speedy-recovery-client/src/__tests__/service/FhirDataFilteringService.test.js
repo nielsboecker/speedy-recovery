@@ -36,13 +36,13 @@ import {
   filterConditionResource,
   filterMedicationDispenseResource,
   filterMedicationResource,
-  filterPatientResource,
+  filterPersonResource,
   filterPractitionerResource
 } from "../../service/FhirDataFilteringService";
 
 test("filter out patient resource with missing info only", () => {
-  expect(filterPatientResource(fhirBrokenPatient)).toBeFalsy();
-  expect(filterPatientResource(fhirExamplePatient)).toEqual(fhirExamplePatient);
+  expect(filterPersonResource(fhirBrokenPatient)).toBeFalsy();
+  expect(filterPersonResource(fhirExamplePatient)).toEqual(fhirExamplePatient);
 });
 
 test("filter out appointment resource with missing info only", () => {

@@ -1,0 +1,27 @@
+#patientTableBody {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  text-align: left;
+}
+
+#patientTableRow:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#patientTableRow:hover {
+  background-color: lightblue;
+}
+
+#patientTableCell {
+  border: 1px solid #ddd;
+  padding: 12px;
+}
+
+#patientTableHeader {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  background-color: lightblue;
+}

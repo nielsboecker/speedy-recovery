@@ -17,7 +17,7 @@
 /* This file defines the ParentModal component which creates a modal with extra information for each appointment
  */
 
-import { Button, Modal, Table, Grid } from "semantic-ui-react";
+import { Button, Grid, Modal, Table } from "semantic-ui-react";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
