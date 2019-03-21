@@ -24,7 +24,7 @@ import SecuredMainPage from "../../components/secured/core/SecuredMainPage";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-it("renders without crashing", () => {
+test("SecuredMainPage renders with props.user", () => {
   mount(
     <MemoryRouter>
       <SecuredMainPage user={{}} match={{ url: "foo" }} />
@@ -32,7 +32,7 @@ it("renders without crashing", () => {
   );
 });
 
-test("SecuredMainPage renders without crashing", () => {
+test("SecuredMainPage renders without props.user", () => {
   mount(
     <MemoryRouter>
       <SecuredMainPage />
