@@ -153,14 +153,6 @@ test("App triggers resetError without crashing", () => {
   underTest.resetError();
 });
 
-test("App triggers removeArrayDuplicates without crashing", () => {
-  underTest.removeArrayDuplicates(["mock", "mock"]);
-});
-
-test("App triggers removeArrayDuplicates without crashing", () => {
-  underTest.removeArrayDuplicates();
-});
-
 test("App triggers handleLoginError without crashing", () => {
   underTest.handleLoginError(
     "No 'state' parameter found in authorization response."

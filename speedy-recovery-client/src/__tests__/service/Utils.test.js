@@ -15,17 +15,25 @@
  * */
 
 /* This file tests functions in DateUtils*/
-import { formatDate } from "../../service/DateUtils";
+import { formatDate, removeArrayDuplicates } from "../../service/Utils";
 
-test("formatDate(mockDate)", () => {
+test("trigger formatDate(mockDate)", () => {
   const mockDate = "2222-12-12";
   const result = formatDate(mockDate);
   const expected = new Date(mockDate).toLocaleString("en-uk");
   expect(result).toEqual(expected);
 });
 
-test("formatDate(missingDate)", () => {
+test("trigger formatDate(missingDate)", () => {
   const mockDate = "";
   const result = formatDate(mockDate);
   expect(result).toEqual("Invalid date");
+});
+
+test("trigger removeArrayDuplicates without crashing", () => {
+  removeArrayDuplicates(["mock", "mock"]);
+});
+
+test("trigger removeArrayDuplicates(missingResource) without crashing", () => {
+  removeArrayDuplicates();
 });

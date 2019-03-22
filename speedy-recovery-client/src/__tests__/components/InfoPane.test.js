@@ -23,7 +23,7 @@ import exampleUser from "../test_input/internal/ExampleUser.json";
 import PatientBasicPane from "../../components/secured/patientinformation/Patient/PatientBasicPane";
 import PatientCarePlanPane from "../../components/secured/patientinformation/Patient/PatientCarePlanPane";
 import PatientConditionPane from "../../components/secured/patientinformation/Patient/PatientConditionPane";
-import PatientMedicationDispensePane from "../../components/secured/patientinformation/Patient/PatientMedicationDispensePane";
+import PatientMedicationDispensePane from "../../components/secured/patientinformation/Patient/PatientMedicationPane";
 import ParentBasicPane from "../../components/secured/patientinformation/Parent/ParentBasicPane";
 import ParentCarePlanPane from "../../components/secured/patientinformation/Parent/ParentCarePlanPane";
 import ParentConditionPane from "../../components/secured/patientinformation/Parent/ParentConditionPane";

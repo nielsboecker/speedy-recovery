@@ -56,20 +56,6 @@ it("patientCalendar renders without crashing", () => {
   );
 });
 
-it("patientCalendar triggers removeArrayDuplicates without crashing", () => {
-  const wrapper = shallow(
-    <PatientCalendar
-      onChange={jest.fn()}
-      events={exampleAppointments}
-      localizer={localizer}
-      updateStatePractitioner={jest.fn()}
-      patientPractitioner={[]}
-    />
-  );
-  const instance = wrapper.instance();
-  instance.removeArrayDuplicates();
-});
-
 it("patientCalendar triggers getBackendInfo without crashing", () => {
   const wrapper = shallow(
     <PatientCalendar
