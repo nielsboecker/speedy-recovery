@@ -35,8 +35,6 @@ import PractitionerConditionPane from "../../components/secured/patientinformati
 import PractitionerFamilyHistoryPane from "../../components/secured/patientinformation/Practitioner/PractitionerFamilyHistoryPane";
 import PractitionerGoalPane from "../../components/secured/patientinformation/Practitioner/PractitionerGoalPane";
 import PractitionerMedicationDispensePane from "../../components/secured/patientinformation/Practitioner/PractitionerMedicationPane";
-import PractitionerPatientInfo from "../../components/secured/patientinformation/Practitioner/PractitionerPatientInfo";
-import PractitionerInfo from "../../components/secured/patientinformation/Practitioner/PractitionerInfo";
 import fhirExamplePractitioner from "../test_input/fhir_resources_stu3/FhirExamplePractitionerSTU3.json";
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -130,13 +128,4 @@ it("PractitionerGoalPane renders without crashing", () => {
 
 it("PractitionerMedicationDispensePane renders without crashing", () => {
   mount(<PractitionerMedicationDispensePane medicationDispenses={["foo"]} />);
-});
-
-it("PractitionerPatientInfo renders without crashing", () => {
-  const mockLocation = { state: { patient: { name: "foo" } } };
-  mount(<PractitionerPatientInfo location={mockLocation} />);
-});
-
-it("PractitionerInfo renders without crashing", () => {
-  shallow(<PractitionerInfo />);
 });
