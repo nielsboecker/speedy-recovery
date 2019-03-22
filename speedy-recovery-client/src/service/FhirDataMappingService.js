@@ -16,7 +16,9 @@
 
 /* This file controls the mapping of fhir resources to our internal format and differs depending on the version of FHIR
 being used.
- */
+ *
+ * The FHIR DSTU2 standard, somewhat misleadingly is actually the version number 1.0.2.
+ * */
 
 import {
   getChildIDSTU2,
@@ -47,7 +49,6 @@ const fhirMapPerson = (resource, version) => {
   if (version) {
     switch (version[0]) {
       case "1":
-        return null;
       case "2":
         return mapPersonToUserSTU2(resource);
       case "3":
@@ -64,7 +65,6 @@ const fhirMapAppointment = (resource, version) => {
   if (version) {
     switch (version[0]) {
       case "1":
-        return null;
       case "2":
         return mapAppointmentSTU2(resource);
       case "3":
@@ -81,7 +81,6 @@ const fhirMapCondition = (resource, version) => {
   if (version) {
     switch (version[0]) {
       case "1":
-        return null;
       case "2":
         return mapConditionSTU2(resource);
       case "3":
@@ -98,7 +97,6 @@ const fhirMapMedication = (resource, version) => {
   if (version) {
     switch (version[0]) {
       case "1":
-        return null;
       case "2":
         return mapMedicationSTU2(resource);
       case "3":
@@ -115,7 +113,6 @@ const fhirMapMedicationDispense = (resource, version) => {
   if (version) {
     switch (version[0]) {
       case "1":
-        return null;
       case "2":
         return mapMedicationDispenseSTU2(resource);
       case "3":
@@ -132,7 +129,6 @@ const fhirMapPractitioner = (resource, version) => {
   if (version) {
     switch (version[0]) {
       case "1":
-        return null;
       case "2":
         return mapPractitionerSTU2(resource);
       case "3":
@@ -149,7 +145,6 @@ const fhirMapCarePlan = (resource, version) => {
   if (version) {
     switch (version[0]) {
       case "1":
-        return null;
       case "2":
         return mapCarePlanSTU2(resource);
       case "3":
@@ -198,7 +193,6 @@ const getChildID = (resource, version) => {
   if (version) {
     switch (version[0]) {
       case "1":
-        return null;
       case "2":
         return getChildIDSTU2(resource);
       case "3":
