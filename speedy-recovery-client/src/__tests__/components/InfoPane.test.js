@@ -24,6 +24,11 @@ import PatientBasicPane from "../../components/secured/patientinformation/Patien
 import PatientCarePlanPane from "../../components/secured/patientinformation/Patient/PatientCarePlanPane";
 import PatientConditionPane from "../../components/secured/patientinformation/Patient/PatientConditionPane";
 import PatientMedicationDispensePane from "../../components/secured/patientinformation/Patient/PatientMedicationDispensePane";
+import ParentBasicPane from "../../components/secured/patientinformation/Parent/ParentBasicPane";
+import ParentCarePlanPane from "../../components/secured/patientinformation/Parent/ParentCarePlanPane";
+import ParentConditionPane from "../../components/secured/patientinformation/Parent/ParentConditionPane";
+import ParentMedicationDispensePane from "../../components/secured/patientinformation/Parent/ParentMedicationPane";
+import ParentDrPane from "../../components/secured/patientinformation/Parent/ParentDrPane";
 import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatientSTU3.json";
 import fhirExamplePractitioner from "../test_input/fhir_resources_stu3/FhirExamplePractitionerSTU3.json";
 
@@ -60,6 +65,54 @@ it("PatientMedicationDispensePane renders without crashing", () => {
     <PatientMedicationDispensePane
       user={exampleUser}
       medicationDispenses={["foo"]}
+    />
+  );
+});
+
+it("ParentBasicPane renders without crashing", () => {
+  shallow(
+    <ParentBasicPane
+      childResource={fhirExamplePractitioner}
+      patient={fhirExamplePatient}
+    />
+  );
+});
+
+it("ParentBasicPane renders without crashing", () => {
+  shallow(
+    <ParentBasicPane childResource={exampleUser} patient={fhirExamplePatient} />
+  );
+});
+
+it("ParentCarePlanPane renders without crashing", () => {
+  shallow(
+    <ParentCarePlanPane childResource={exampleUser} carePlans={["foo"]} />
+  );
+});
+
+it("ParentConditionPane renders without crashing", () => {
+  shallow(
+    <ParentConditionPane
+      childResource={exampleUser}
+      conditions={[{ onsetDateTime: "foo" }]}
+    />
+  );
+});
+
+it("ParentMedicationDispensePane renders without crashing", () => {
+  shallow(
+    <ParentMedicationDispensePane
+      childResource={exampleUser}
+      medicationDispenses={["foo"]}
+    />
+  );
+});
+
+it("ParentDrPane renders without crashing", () => {
+  shallow(
+    <ParentDrPane
+      childResource={exampleUser}
+      patientPractitioners={[fhirExamplePractitioner]}
     />
   );
 });

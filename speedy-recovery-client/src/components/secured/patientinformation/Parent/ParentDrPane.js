@@ -26,7 +26,7 @@ class ParentDrPane extends Component {
   render() {
     const { patientPractitioners, childResource } = this.props;
     const practitionersNum = patientPractitioners.length;
-    const childName = childResource.name.split(" ");
+    const childName = (childResource.name + " ").split(" ");
 
     const createPractitionerTable = () => {
       const table = [];

@@ -26,7 +26,7 @@ class ParentCarePlanPane extends Component {
   render() {
     const { carePlans, childResource } = this.props;
     const carePlansNum = carePlans.length;
-    const childName = childResource.name.split(" ");
+    const childName = (childResource.name + " ").split(" ");
 
     const createCarePlanTable = () => {
       const table = [];

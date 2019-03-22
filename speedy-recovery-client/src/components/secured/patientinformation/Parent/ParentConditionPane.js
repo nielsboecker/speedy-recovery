@@ -26,7 +26,7 @@ class ParentConditionPane extends Component {
   render() {
     const { conditions, childResource } = this.props;
     const conditionsNum = conditions.length;
-    const childName = childResource.name.split(" ");
+    const childName = (childResource.name + " ").split(" ");
 
     const createConditionTable = () => {
       const table = [];
