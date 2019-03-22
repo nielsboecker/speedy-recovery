@@ -24,7 +24,6 @@ import PatientInfo from "../../components/secured/patientinformation/Patient/Pat
 import ParentInfo from "../../components/secured/patientinformation/Parent/ParentInfo";
 import PractitionerInfo from "../../components/secured/patientinformation/Practitioner/PractitionerInfo";
 import fhirExamplePatient from "../test_input/fhir_resources_stu3/FhirExamplePatientSTU3.json";
-import PractitionerPatientInfo from "../../components/secured/patientinformation/Practitioner/PractitionerPatientInfo";
 
 Enzyme.configure({ adapter: new Adapter() });
 
