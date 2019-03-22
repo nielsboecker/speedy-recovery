@@ -21,8 +21,9 @@
 import React, { Component } from "react";
 import { Label, Tab, Table } from "semantic-ui-react";
 import "./PractitionerInfo.css";
+import { isTablet, isBrowser} from "react-device-detect";
 
-class PractitionerFamilyHistory extends Component {
+class PractitionerFamilyHistoryPane extends Component {
   render() {
     const { familyHistories } = this.props;
     const historiesNum = familyHistories.length;
@@ -31,23 +32,17 @@ class PractitionerFamilyHistory extends Component {
       if (historiesNum) {
         const header = [
           <Table.Row key={"historiesRow"}>
-            <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">Name</Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">
-              Relationship
-            </Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">
-              Cause of Death
-            </Table.HeaderCell>
-            <Table.HeaderCell id="patientTableCell">
-              Death date
-            </Table.HeaderCell>
+            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell> : null}
+            <Table.HeaderCell id="patientTableCell">Family Member</Table.HeaderCell>
+            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">Relationship</Table.HeaderCell> : null}
+            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">Cause of Death</Table.HeaderCell> : null}
+            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">Death date</Table.HeaderCell> : null}
           </Table.Row>
         ];
         table.push(
-          <Table.Header key="HistoriesTableHeader" id="patientTableHeader">
-            {header}
-          </Table.Header>
+            <Table.Header key="HistoriesTableHeader" id="patientTableHeader">
+              {header}
+            </Table.Header>
         );
       }
       const body = [];
@@ -76,12 +71,13 @@ class PractitionerFamilyHistory extends Component {
             {<h4>{familyHistories[i].causeOfDeath}</h4>}
           </Table.Cell>
         );
-        children.push(
-          <Table.Cell key={"historyCell4" + i} id="patientTableCell">
-            {<h4>{familyHistories[i].date}</h4>}
-          </Table.Cell>
-        );
-
+        if (isBrowser || isTablet) {
+          children.push(
+              <Table.Cell key={"historyCell4" + i} id="patientTableCell">
+                {<h4>{familyHistories[i].date}</h4>}
+              </Table.Cell>
+          );
+        }
         body.push(
           <Table.Row key={"historyRow2" + i} id="patientTableRow">
             {children}
@@ -113,4 +109,4 @@ class PractitionerFamilyHistory extends Component {
   }
 }
 
-export default PractitionerFamilyHistory;
+export default PractitionerFamilyHistoryPane;

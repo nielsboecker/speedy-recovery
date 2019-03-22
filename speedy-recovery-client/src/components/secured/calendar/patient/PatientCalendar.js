@@ -25,6 +25,7 @@ import "../CalendarPages.css";
 import { Dropdown, Grid, Segment } from "semantic-ui-react";
 import PatientPractitionerCard from "./PatientPractitionerCard";
 import { getPractitionerInfo } from "../../../../service/BackendService";
+import {removeArrayDuplicates} from "../../../../service/Utils";
 
 class PatientCalendar extends React.Component {
   constructor(...args) {
@@ -42,17 +43,6 @@ class PatientCalendar extends React.Component {
       practitionerList: this.props.patientPractitioners
     });
   };
-
-  removeArrayDuplicates = array =>
-    array !== undefined
-      ? array.reduce(
-          (prev, curr) =>
-            prev.find(a => a["text"] === curr["text"])
-              ? prev
-              : prev.push(curr) && prev,
-          []
-        )
-      : array;
 
   // Retrieve extra practitioner info from the back-end
   getBackendInfo = practitionerID => {
@@ -82,7 +72,7 @@ class PatientCalendar extends React.Component {
     };
 
     return (
-      <Grid columns={2} divided>
+      <Grid stackable columns={2} divided>
         <Grid.Row stretched>
           <Grid.Column color={"green"}>
             <h2 align="center">My Appointments</h2>
@@ -110,14 +100,14 @@ class PatientCalendar extends React.Component {
               placeholder="Select Doctor"
               fluid
               selection
-              options={this.removeArrayDuplicates(
+              options={removeArrayDuplicates(
                 this.props.events.map(event => {
                   return {
                     text: event.practitioner,
                     value: event.practitionerId
                   };
-                })
-              )}
+                }),
+              'text')}
               onChange={this.onDropdownChange}
             />
             <PatientPractitionerCard

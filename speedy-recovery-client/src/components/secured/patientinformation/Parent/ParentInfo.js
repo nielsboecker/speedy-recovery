@@ -23,7 +23,8 @@ import ParentConditionPane from "./ParentConditionPane";
 import ParentCarePlanPane from "./ParentCarePlanPane";
 import ParentMedicationPane from "./ParentMedicationPane";
 import ParentBasicPane from "./ParentBasicPane";
-import ParentDrPane from "./ParentDrPane";
+import ParentDrPane from "./ParentDrPane"
+import {isBrowser, isTablet} from 'react-device-detect';
 
 class ParentInfo extends Component {
   render() {
@@ -40,8 +41,8 @@ class ParentInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"basic"} color="blue">
-            <Icon fitted name="id card outline" color="blue" size="large" />
-            Basic
+            <Icon fitted name="id card outline" color ="blue" size={isBrowser || isTablet ? "large" : "small"}/>
+            {isBrowser || isTablet ? "Basic" : ""}
           </Menu.Item>
         ),
         render: () => <ParentBasicPane childResource={childResource} />
@@ -49,8 +50,8 @@ class ParentInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"medication"} color="blue">
-            <Icon fitted name="pills" color="purple" size="large" />
-            Dispensed Medication
+            <Icon fitted name="pills" color="purple" size={isBrowser || isTablet ? "large" : "small"}/>
+              {isBrowser || isTablet ? "Dispensed Medication" : ""}
           </Menu.Item>
         ),
         render: () => (
@@ -63,8 +64,8 @@ class ParentInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"condition"} color="blue">
-            <Icon fitted name="heartbeat" color="red" size="large" />
-            Condition
+            <Icon fitted name="heartbeat" color="red" size={isBrowser || isTablet ? "large" : "small"}/>
+              {isBrowser || isTablet ? "Condition" : ""}
           </Menu.Item>
         ),
         render: () => (
@@ -77,8 +78,8 @@ class ParentInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"carePlan"} color="blue">
-            <Icon fitted name="unordered list" color="orange" size="large" />
-            Care Plan
+            <Icon fitted name="unordered list" color="orange" size={isBrowser || isTablet ? "large" : "small"}/>
+              {isBrowser || isTablet ? "Care Plan" : ""}
           </Menu.Item>
         ),
         render: () => (
@@ -91,8 +92,9 @@ class ParentInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"practitionerInfo"} color="blue">
-            <Icon fitted name="doctor" color="violet" size="large" />
-            Practitioner Information
+            <Icon fitted name="doctor" color="violet" size={isBrowser || isTablet ? "large" : "small"}/>
+              {isBrowser || isTablet ? "Practitioner Information" : ""}
+
           </Menu.Item>
         ),
         render: () => (

@@ -21,6 +21,7 @@
 import React, { Component } from "react";
 import { Label, Tab, Table } from "semantic-ui-react";
 import "./Parent.css";
+import {isBrowser, isTablet} from 'react-device-detect';
 
 class ParentDrPane extends Component {
   render() {
@@ -33,13 +34,11 @@ class ParentDrPane extends Component {
       if (practitionersNum) {
         const header = [
           <Table.Row key={"practitionerRow"}>
-            <Table.HeaderCell id="parentTableCell">#</Table.HeaderCell>
-            <Table.HeaderCell id="parentTableCell">Name</Table.HeaderCell>
-            <Table.HeaderCell id="parentTableCell">Gender</Table.HeaderCell>
-            <Table.HeaderCell id="parentTableCell">
-              Contact Number
-            </Table.HeaderCell>
-            <Table.HeaderCell id="parentTableCell">Email</Table.HeaderCell>
+            {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">#</Table.HeaderCell> : null}
+            <Table.HeaderCell id="parentTableCell">Practitioner</Table.HeaderCell>
+            {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">Gender</Table.HeaderCell> : null}
+            {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">Contact Number</Table.HeaderCell> : null}
+            {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">Email</Table.HeaderCell> : null}
           </Table.Row>
         ];
         table.push(
