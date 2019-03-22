@@ -21,7 +21,7 @@
 import React, { Component } from "react";
 import { Label, Tab, Table } from "semantic-ui-react";
 import "./PractitionerInfo.css";
-import {isTablet, isBrowser} from "react-device-detect";
+import { isTablet, isBrowser } from "react-device-detect";
 
 class PractitionerGoalPane extends Component {
   render() {
@@ -32,12 +32,28 @@ class PractitionerGoalPane extends Component {
       if (goalNum) {
         const header = [
           <Table.Row key={"historiesRow"}>
-            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell> : null}
-            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">Goal</Table.HeaderCell> : null}
-            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">Priority</Table.HeaderCell> : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
+            ) : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="patientTableCell">Goal</Table.HeaderCell>
+            ) : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="patientTableCell">
+                Priority
+              </Table.HeaderCell>
+            ) : null}
             <Table.HeaderCell id="patientTableCell">Goal</Table.HeaderCell>
-            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">Start date</Table.HeaderCell> : null}
-            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">Due date</Table.HeaderCell> : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="patientTableCell">
+                Start date
+              </Table.HeaderCell>
+            ) : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="patientTableCell">
+                Due date
+              </Table.HeaderCell>
+            ) : null}
           </Table.Row>
         ];
         table.push(
@@ -59,14 +75,14 @@ class PractitionerGoalPane extends Component {
         );
         if (isBrowser || isTablet) {
           children.push(
-              <Table.Cell key={"goalCell1" + i} id="patientTableCell">
-                {<h4>{goal[i].goal}</h4>}
-              </Table.Cell>
+            <Table.Cell key={"goalCell1" + i} id="patientTableCell">
+              {<h4>{goal[i].goal}</h4>}
+            </Table.Cell>
           );
           children.push(
-              <Table.Cell key={"goalCell2" + i} id="patientTableCell">
-                {<h4>{goal[i].priority}</h4>}
-              </Table.Cell>
+            <Table.Cell key={"goalCell2" + i} id="patientTableCell">
+              {<h4>{goal[i].priority}</h4>}
+            </Table.Cell>
           );
         }
         children.push(
@@ -76,14 +92,14 @@ class PractitionerGoalPane extends Component {
         );
         if (isBrowser || isTablet) {
           children.push(
-              <Table.Cell key={"goalCell4" + i} id="patientTableCell">
-                {<h4>{goal[i].startDate}</h4>}
-              </Table.Cell>
+            <Table.Cell key={"goalCell4" + i} id="patientTableCell">
+              {<h4>{goal[i].startDate}</h4>}
+            </Table.Cell>
           );
           children.push(
-              <Table.Cell key={"goalCell5" + i} id="patientTableCell">
-                {<h4>{goal[i].dueDate}</h4>}
-              </Table.Cell>
+            <Table.Cell key={"goalCell5" + i} id="patientTableCell">
+              {<h4>{goal[i].dueDate}</h4>}
+            </Table.Cell>
           );
         }
         body.push(

@@ -24,7 +24,7 @@ import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
 import "../CalendarPages.css";
 import { Grid, Segment } from "semantic-ui-react";
 import PractitionerModal from "./PractitionerModal";
-import {isBrowser, isTablet} from 'react-device-detect';
+import { isBrowser, isTablet } from "react-device-detect";
 
 // list of all possible calendar views
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
@@ -49,7 +49,6 @@ class PractitionerCalendar extends React.Component {
   };
 
   render() {
-
     return (
       <Grid divided="vertically">
         <Grid.Column>
@@ -59,7 +58,11 @@ class PractitionerCalendar extends React.Component {
                 localizer={this.props.localizer}
                 events={this.props.events}
                 onSelectEvent={this.toggleEditModal}
-                defaultView={isBrowser || isTablet ? BigCalendar.Views.MONTH : BigCalendar.Views.AGENDA }
+                defaultView={
+                  isBrowser || isTablet
+                    ? BigCalendar.Views.MONTH
+                    : BigCalendar.Views.AGENDA
+                }
                 defaultDate={new Date()}
                 views={isBrowser || isTablet ? allViews : mobileView}
                 ref={node => {

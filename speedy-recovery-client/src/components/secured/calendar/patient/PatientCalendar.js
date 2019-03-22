@@ -25,7 +25,7 @@ import "../CalendarPages.css";
 import { Dropdown, Grid, Segment } from "semantic-ui-react";
 import PatientPractitionerCard from "./PatientPractitionerCard";
 import { getPractitionerInfo } from "../../../../service/BackendService";
-import {removeArrayDuplicates} from "../../../../service/Utils";
+import { removeArrayDuplicates } from "../../../../service/Utils";
 
 class PatientCalendar extends React.Component {
   constructor(...args) {
@@ -107,7 +107,8 @@ class PatientCalendar extends React.Component {
                     value: event.practitionerId
                   };
                 }),
-              'text')}
+                "text"
+              )}
               onChange={this.onDropdownChange}
             />
             <PatientPractitionerCard

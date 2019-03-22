@@ -44,21 +44,11 @@ class PractitionerBasicPane extends Component {
       <div>
         <Tab.Pane color="blue">
           <h4>Name: {patient.name}</h4>
-          <h4>
-            Gender: {showGenderText()}
-          </h4>
-          <h4>
-            Birthday: {patient.birthDate}{" "}
-          </h4>
-          <h4>
-            Phone: {patient.phone}
-          </h4>
-          <h4>
-            email: {patient.email}
-          </h4>
-          <h4>
-            Address: {patient.address}
-          </h4>
+          <h4>Gender: {showGenderText()}</h4>
+          <h4>Birthday: {patient.birthDate} </h4>
+          <h4>Phone: {patient.phone}</h4>
+          <h4>email: {patient.email}</h4>
+          <h4>Address: {patient.address}</h4>
         </Tab.Pane>
       </div>
     );

@@ -26,22 +26,19 @@ class StartPage extends Component {
   render() {
     return (
       <div id="start-page" className="full-height">
-
-
-          <Grid>
-              <Grid.Row columns={1} only='mobile'>
-                  <Grid.Column>
-                  </Grid.Column>
-              </Grid.Row>
-              <Grid.Row columns={1} only='computer tablet'>
-                  <Grid.Column>
-                      <Image src="/images/gosh_logo.png" id="gosh-logo" />
-                  </Grid.Column>
-              </Grid.Row>
-          </Grid>
+        <Grid>
+          <Grid.Row columns={1} only="mobile">
+            <Grid.Column />
+          </Grid.Row>
+          <Grid.Row columns={1} only="computer tablet">
+            <Grid.Column>
+              <Image src="/images/gosh_logo.png" id="gosh-logo" />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
 
         <Grid
-            stackable
+          stackable
           verticalAlign="middle"
           columns={1}
           // centered

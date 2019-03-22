@@ -34,8 +34,7 @@ import {
   fhirMapFamilyResource,
   fhirMapGoal
 } from "../../../../service/FhirDataMappingService";
-import {isBrowser, isTablet} from 'react-device-detect';
-
+import { isBrowser, isTablet } from "react-device-detect";
 
 class PractitionerPatientInfo extends Component {
   constructor(props) {
@@ -55,8 +54,13 @@ class PractitionerPatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"basic"}>
-            <Icon fitted name="id card outline" color="blue" size={isBrowser || isTablet ? "large" : "small"} />
-              {isTablet || isBrowser ? "Basic" : ""}
+            <Icon
+              fitted
+              name="id card outline"
+              color="blue"
+              size={isBrowser || isTablet ? "large" : "small"}
+            />
+            {isTablet || isBrowser ? "Basic" : ""}
           </Menu.Item>
         ),
 
@@ -67,8 +71,13 @@ class PractitionerPatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"medication"}>
-            <Icon fitted name="pills" color="purple" size={isBrowser || isTablet ? "large" : "small"} />
-              {isTablet || isBrowser ? "Dispensed Medication" : ""}
+            <Icon
+              fitted
+              name="pills"
+              color="purple"
+              size={isBrowser || isTablet ? "large" : "small"}
+            />
+            {isTablet || isBrowser ? "Dispensed Medication" : ""}
           </Menu.Item>
         ),
         render: () => (
@@ -80,8 +89,13 @@ class PractitionerPatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"condition"}>
-            <Icon fitted name="heartbeat" color="red" size={isBrowser || isTablet ? "large" : "small"} />
-              {isTablet || isBrowser ? "Condition" : ""}
+            <Icon
+              fitted
+              name="heartbeat"
+              color="red"
+              size={isBrowser || isTablet ? "large" : "small"}
+            />
+            {isTablet || isBrowser ? "Condition" : ""}
           </Menu.Item>
         ),
         render: () => (
@@ -91,30 +105,49 @@ class PractitionerPatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"carePlan"}>
-            <Icon fitted name="unordered list" color="orange" size={isBrowser || isTablet ? "large" : "small"} />
-                {isTablet || isBrowser ? "Care Plan" : ""}
+            <Icon
+              fitted
+              name="unordered list"
+              color="orange"
+              size={isBrowser || isTablet ? "large" : "small"}
+            />
+            {isTablet || isBrowser ? "Care Plan" : ""}
           </Menu.Item>
         ),
-        render: () => <PractitionerCarePlanPane carePlans={this.state.carePlans} />
+        render: () => (
+          <PractitionerCarePlanPane carePlans={this.state.carePlans} />
+        )
       },
 
       {
         menuItem: (
           <Menu.Item key={"histories"}>
-            <Icon fitted name="book" color="green" size={isBrowser || isTablet ? "large" : "small"} />
-                {isTablet || isBrowser ? "Family History" : ""}
+            <Icon
+              fitted
+              name="book"
+              color="green"
+              size={isBrowser || isTablet ? "large" : "small"}
+            />
+            {isTablet || isBrowser ? "Family History" : ""}
           </Menu.Item>
         ),
         render: () => (
-          <PractitionerFamilyHistoryPane familyHistories={this.state.familyHistories } />
+          <PractitionerFamilyHistoryPane
+            familyHistories={this.state.familyHistories}
+          />
         )
       },
 
       {
         menuItem: (
           <Menu.Item key={"goal"}>
-            <Icon fitted name="trophy" color="yellow" size={isBrowser || isTablet ? "large" : "small"} />
-                {isTablet || isBrowser ? "Goal" : ""}
+            <Icon
+              fitted
+              name="trophy"
+              color="yellow"
+              size={isBrowser || isTablet ? "large" : "small"}
+            />
+            {isTablet || isBrowser ? "Goal" : ""}
           </Menu.Item>
         ),
 
@@ -124,7 +157,7 @@ class PractitionerPatientInfo extends Component {
 
     return (
       <div>
-        <h1> Information For  {this.props.location.state.patient.name}</h1>
+        <h1> Information For {this.props.location.state.patient.name}</h1>
         <Tab
           menu={{ fluid: true, vertical: true, tabular: true }}
           panes={panes}

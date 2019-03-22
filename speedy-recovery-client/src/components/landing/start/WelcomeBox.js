@@ -59,8 +59,14 @@ class WelcomeBox extends Component {
 
               <Card.Content>
                 <Message>
-                  Need help? <a href="https://github.com/nbckr/speedy-recovery" target="_blank"
-                                rel="noopener noreferrer">Click here!</a>
+                  Need help?{" "}
+                  <a
+                    href="https://github.com/nbckr/speedy-recovery"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Click here!
+                  </a>
                 </Message>
               </Card.Content>
             </Card>
