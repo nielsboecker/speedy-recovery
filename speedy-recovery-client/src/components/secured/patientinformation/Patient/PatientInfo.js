@@ -23,8 +23,9 @@ import { Icon, Menu, Tab } from "semantic-ui-react";
 import "./PatientInfo.css";
 import PatientConditionPane from "./PatientConditionPane";
 import PatientCarePlanPane from "./PatientCarePlanPane";
-import PatientMedicationDispensePane from "./PatientMedicationDispensePane";
+import PatientMedicationPane from "./PatientMedicationPane";
 import PatientBasicPane from "./PatientBasicPane";
+import {isBrowser, isTablet} from 'react-device-detect';
 
 class PatientInfo extends Component {
   render() {
@@ -35,8 +36,8 @@ class PatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"basic"} color="blue">
-            <Icon fitted name="id card outline" color="blue" size="large" />
-            Basic
+            <Icon fitted name="id card outline" color="blue" size={isBrowser || isTablet ? "large" : "small"}/>
+              {isBrowser || isTablet ? "Basic" : ""}
           </Menu.Item>
         ),
 
@@ -45,12 +46,12 @@ class PatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"medication"} color="blue">
-            <Icon fitted name="pills" color="purple" size="large" />
-            Dispensed Medication
+            <Icon fitted name="pills" color="purple" size={isBrowser || isTablet ? "large" : "small"}/>
+              {isBrowser || isTablet ? "Dispensed Medication" : ""}
           </Menu.Item>
         ),
         render: () => (
-          <PatientMedicationDispensePane
+          <PatientMedicationPane
             medicationDispenses={medicationDispenses}
           />
         )
@@ -58,8 +59,8 @@ class PatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"condition"} color="blue">
-            <Icon fitted name="heartbeat" color="red" size="large" />
-            Condition
+            <Icon fitted name="heartbeat" color="red" size={isBrowser || isTablet ? "large" : "small"}/>
+              {isBrowser || isTablet ? "Condition" : ""}
           </Menu.Item>
         ),
         render: () => <PatientConditionPane conditions={conditions} />
@@ -67,8 +68,8 @@ class PatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"carePlan"} color="blue">
-            <Icon fitted name="unordered list" color="orange" size="large" />
-            Care Plan
+            <Icon fitted name="unordered list" color="orange" size={isBrowser || isTablet ? "large" : "small"}/>
+              {isBrowser || isTablet ? "Care Plan" : ""}
           </Menu.Item>
         ),
         render: () => <PatientCarePlanPane carePlans={carePlans} />

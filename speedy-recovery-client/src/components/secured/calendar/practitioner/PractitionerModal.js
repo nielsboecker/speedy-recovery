@@ -160,7 +160,6 @@ class PractitionerModal extends Component {
                     Chat with this patient
                   </Link>
                 </Button>
-                <Button>Patient Info</Button>
               </Grid.Row>
             </Grid>
           </Modal.Description>

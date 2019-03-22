@@ -75,7 +75,7 @@ class ConversationPage extends Component {
             toBottomHeight={"300"}
             dataSource={this.state.messages}
           />
-          <Grid textAlign="center">
+          <Grid stackable textAlign="center">
             <Grid.Row />
             <Grid.Row>
               <Grid.Column width={12}>

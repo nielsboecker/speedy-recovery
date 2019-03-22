@@ -17,7 +17,7 @@
 information about the patient
  */
 import React, { Component } from "react";
-import { Icon, Tab } from "semantic-ui-react";
+import { Tab } from "semantic-ui-react";
 import "./PractitionerInfo.css";
 
 class PractitionerBasicPane extends Component {
@@ -40,44 +40,24 @@ class PractitionerBasicPane extends Component {
       return genderStr;
     };
 
-    const showGenderIcon = () => {
-      let genderIcon;
-      switch (patient.gender) {
-        case "female":
-          genderIcon = <Icon color="pink" fitted name="woman" size="large" />;
-          break;
-        case "male":
-          genderIcon = <Icon color="blue" fitted name="man" size="large" />;
-          break;
-        default:
-          genderIcon = <Icon fitted name="smile outline" size="large" />;
-      }
-      return genderIcon;
-    };
-
     return (
       <div>
         <Tab.Pane color="blue">
           <h4>Name: {patient.name}</h4>
           <h4>
             Gender: {showGenderText()}
-            {showGenderIcon()}
           </h4>
           <h4>
             Birthday: {patient.birthDate}{" "}
-            <Icon fitted name="birthday" size="large" color="olive" />
           </h4>
           <h4>
             Phone: {patient.phone}
-            <Icon fitted name="phone" size="large" color="olive" />
           </h4>
           <h4>
             email: {patient.email}
-            <Icon fitted name="mail" size="large" color="olive" />
           </h4>
           <h4>
             Address: {patient.address}
-            <Icon fitted name="home" size="large" color="olive" />
           </h4>
         </Tab.Pane>
       </div>

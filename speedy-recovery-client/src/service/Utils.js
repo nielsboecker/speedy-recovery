@@ -14,17 +14,29 @@
  * see http://www.gnu.org/license/.
  * */
 
-/* This file contains functions to help verify that a given date is in a valid format.
+/* This file contains various utility functions used throughout the codebase.
  */
 
-export function formatDate(date) {
+export const formatDate = date => {
   if (date) {
     return new Date(date).toLocaleString("en-uk");
   }
   return "Invalid date";
-}
+};
 
 // Source: https://stackoverflow.com/questions/1353684/detecting-an-invalid-date-date-instance-in-javascript
-export function isValidDate(date) {
+export const isValidDate = date => {
   return date instanceof Date && !isNaN(date);
-}
+};
+
+// Adapted from: https://stackoverflow.com/a/54563488/9858344
+export const removeArrayDuplicates = (array, field) =>
+  array !== undefined
+    ? array.reduce(
+        (prev, curr) =>
+          prev.find(a => a[field] === curr[field])
+            ? prev
+            : prev.push(curr) && prev,
+        []
+      )
+    : array;

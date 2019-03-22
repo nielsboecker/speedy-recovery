@@ -23,10 +23,10 @@ import { Icon, Menu, Tab } from "semantic-ui-react";
 import "./PractitionerInfo.css";
 import PractitionerConditionPane from "./PractitionerConditionPane";
 import PractitionerCarePlanPane from "./PractitionerCarePlanPane";
-import PractitionerMedicationDispensePane from "./PractitionerMedicationDispensePane";
+import PractitionerMedicationPane from "./PractitionerMedicationPane";
 import PractitionerBasicPane from "./PractitionerBasicPane";
-import PractitionerFamilyHistory from "./PractitionerFamilyHistory";
-import PractitionerGoal from "./PractitionerGoal";
+import PractitionerFamilyHistoryPane from "./PractitionerFamilyHistoryPane";
+import PractitionerGoalPane from "./PractitionerGoalPane";
 import {
   fhirMapCarePlan,
   fhirMapCondition,
@@ -34,6 +34,8 @@ import {
   fhirMapFamilyResource,
   fhirMapGoal
 } from "../../../../service/FhirDataMappingService";
+import {isBrowser, isTablet} from 'react-device-detect';
+
 
 class PractitionerPatientInfo extends Component {
   constructor(props) {
@@ -53,8 +55,8 @@ class PractitionerPatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"basic"}>
-            <Icon fitted name="id card outline" color="blue" size="large" />
-            Basic
+            <Icon fitted name="id card outline" color="blue" size={isBrowser || isTablet ? "large" : "small"} />
+              {isTablet || isBrowser ? "Basic" : ""}
           </Menu.Item>
         ),
 
@@ -65,12 +67,12 @@ class PractitionerPatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"medication"}>
-            <Icon fitted name="pills" color="purple" size="large" />
-            Dispensed Medication
+            <Icon fitted name="pills" color="purple" size={isBrowser || isTablet ? "large" : "small"} />
+              {isTablet || isBrowser ? "Dispensed Medication" : ""}
           </Menu.Item>
         ),
         render: () => (
-          <PractitionerMedicationDispensePane
+          <PractitionerMedicationPane
             medicationDispenses={this.state.medicationDispenses}
           />
         )
@@ -78,8 +80,8 @@ class PractitionerPatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"condition"}>
-            <Icon fitted name="heartbeat" color="red" size="large" />
-            Condition
+            <Icon fitted name="heartbeat" color="red" size={isBrowser || isTablet ? "large" : "small"} />
+              {isTablet || isBrowser ? "Condition" : ""}
           </Menu.Item>
         ),
         render: () => (
@@ -89,44 +91,40 @@ class PractitionerPatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"carePlan"}>
-            <Icon fitted name="unordered list" color="orange" size="large" />
-            Care Plan
+            <Icon fitted name="unordered list" color="orange" size={isBrowser || isTablet ? "large" : "small"} />
+                {isTablet || isBrowser ? "Care Plan" : ""}
           </Menu.Item>
         ),
-        render: () => (
-          <PractitionerCarePlanPane carePlans={this.state.carePlans} />
-        )
+        render: () => <PractitionerCarePlanPane carePlans={this.state.carePlans} />
       },
 
       {
         menuItem: (
           <Menu.Item key={"histories"}>
-            <Icon fitted name="book" color="green" size="large" />
-            Family History
+            <Icon fitted name="book" color="green" size={isBrowser || isTablet ? "large" : "small"} />
+                {isTablet || isBrowser ? "Family History" : ""}
           </Menu.Item>
         ),
         render: () => (
-          <PractitionerFamilyHistory
-            familyHistories={this.state.familyHistories}
-          />
+          <PractitionerFamilyHistoryPane familyHistories={this.state.familyHistories } />
         )
       },
 
       {
         menuItem: (
           <Menu.Item key={"goal"}>
-            <Icon fitted name="trophy" color="yellow" size="large" />
-            Goal
+            <Icon fitted name="trophy" color="yellow" size={isBrowser || isTablet ? "large" : "small"} />
+                {isTablet || isBrowser ? "Goal" : ""}
           </Menu.Item>
         ),
 
-        render: () => <PractitionerGoal goal={this.state.goal} />
+        render: () => <PractitionerGoalPane goal={this.state.goal} />
       }
     ];
 
     return (
       <div>
-        <h1> Information For {this.props.location.state.patient.name}</h1>
+        <h1> Information For  {this.props.location.state.patient.name}</h1>
         <Tab
           menu={{ fluid: true, vertical: true, tabular: true }}
           panes={panes}
@@ -145,6 +143,7 @@ class PractitionerPatientInfo extends Component {
     }
   }
 
+  //TODO: Move these to App.js
   updateGoal(userId) {
     FhirDataQueryingService.getGoal(userId)
       .then(GoalResource => {
