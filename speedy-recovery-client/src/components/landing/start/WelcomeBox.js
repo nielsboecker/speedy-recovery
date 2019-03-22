@@ -19,7 +19,6 @@
 
 import React, { Component } from "react";
 import {
-  Button,
   Card,
   Container,
   Form,
@@ -54,25 +53,14 @@ class WelcomeBox extends Component {
                 <Form size="large">
                   <Segment>
                     <UserModal onLogin={this.props.onLogin} />
-                    <Button
-                      color="teal"
-                      fluid
-                      size="large"
-                      name="button2"
-                      className="button"
-                      onClick={() =>
-                        alert("This functionality is not supported yet")
-                      }
-                    >
-                      Sign up
-                    </Button>
                   </Segment>
                 </Form>
               </Card.Content>
 
               <Card.Content>
                 <Message>
-                  Need help? <a href="/TODO">Click here!</a>
+                  Need help? <a href="https://github.com/nbckr/speedy-recovery" target="_blank"
+                                rel="noopener noreferrer">Click here!</a>
                 </Message>
               </Card.Content>
             </Card>
