@@ -29,27 +29,81 @@ import {
   getChildIDSTU2,
   formatBirthDate
 } from "../../service/FhirMappingAdapterDSTU2";
+import { getChildIDSTU3 } from "../../service/FhirMappingAdapterSTU3";
 
 const missingField = "Unknown";
 
 test("mapPersonToUserSTU2(missingResource)", () => {
   const mockResource = {};
-  mapPersonToUserSTU2(mockResource);
+  const result = mapPersonToUserSTU2(mockResource);
+  const expected = {
+    address: "Unknown",
+    birthDate: "Unknown",
+    careProvider: "Undefined in STU2",
+    email: "Undefined in STU2",
+    firstName: "Unknown",
+    gender: "Unknown",
+    id: "Unknown",
+    name: "Unknown",
+    phone: "Unknown",
+    role: undefined
+  };
+  expect(result).toEqual(expected);
 });
 
 test("mapAppointmentSTU2(missingResource)", () => {
   const mockResource = {};
-  mapAppointmentSTU2(mockResource);
+  const result = mapAppointmentSTU2(mockResource);
+  const expected = {
+    appType: "Undefined in STU2",
+    comment: "Unknown",
+    created: "Undefined in STU2",
+    description: "Unknown",
+    end: "Unknown",
+    id: "Unknown",
+    indication: "Undefined in STU2",
+    location: "Unknown",
+    patient: "Unknown",
+    patientId: "Unknown",
+    practitioner: "Unknown",
+    practitionerId: "Unknown",
+    priority: "Unknown",
+    start: "Unknown",
+    status: "Unknown",
+    supportingInfo: "Undefined in STU2",
+    title: "Unknown"
+  };
+  expect(result).toEqual(expected);
 });
 
 test("mapConditionSTU2(missingResource)", () => {
   const mockResource = {};
-  mapConditionSTU2(mockResource);
+  const result = mapConditionSTU2(mockResource);
+  const expected = {
+    bodySite: "Unknown",
+    clinicalStatus: "Undefined in STU2",
+    onsetDateTime: "Unknown",
+    severity: "Unknown",
+    summary: "Unknown",
+    verificationStatus: "Unknown"
+  };
+  expect(result).toEqual(expected);
 });
 
 test("mapMedicationSTU2(missingResource)", () => {
   const mockResource = { product: { form: "mock" } };
-  mapMedicationSTU2(mockResource);
+  const result = mapMedicationSTU2(mockResource);
+  const expected = {
+    content: "Undefined in STU2",
+    form: "Unknown",
+    id: "Unknown",
+    imageURL: "Undefined in STU2",
+    isBrand: "Unknown",
+    isOverTheCounter: "Undefined in STU2",
+    name: "Unknown",
+    producer: "Undefined in STU2"
+  };
+  expect(result).toEqual(expected);
 });
 
 test("mapMedicationDispenseSTU2(mockResource)", () => {
@@ -57,17 +111,46 @@ test("mapMedicationDispenseSTU2(mockResource)", () => {
     quantity: { value: "mock" },
     daysSupply: { value: "mock" }
   };
-  mapMedicationDispenseSTU2(mockResource);
+  const result = mapMedicationDispenseSTU2(mockResource);
+  const expected = {
+    daysSupply: "mock",
+    dosageFrequency: undefined,
+    dosagePeriod: undefined,
+    id: "Unknown",
+    intakeMethod: undefined,
+    name: "Unknown",
+    quantity: "mock",
+    status: "Unknown",
+    whenHandedOver: "Unknown"
+  };
+  expect(result).toEqual(expected);
 });
 
 test("mapCarePlanSTU2(missingResource)", () => {
   const mockResource = {};
-  mapCarePlanSTU2(mockResource);
+  const result = mapCarePlanSTU2(mockResource);
+  const expected = {
+    activities: "Unknown",
+    category: "Unknown",
+    id: "Unknown",
+    period: "Unknown",
+    status: "Unknown"
+  };
+  expect(result).toEqual(expected);
 });
 
 test("mapPractitionerSTU2(missingResource)", () => {
   const mockResource = {};
-  mapPractitionerSTU2(mockResource);
+  const result = mapPractitionerSTU2(mockResource);
+  const expected = {
+    birthDate: "Undefined in STU2",
+    gender: "Undefined in STU2",
+    id: "Unknown",
+    name: "Unknown",
+    phone: "Unknown",
+    photo: "Undefined in STU2"
+  };
+  expect(result).toEqual(expected);
 });
 
 test("getCarePlanActivities(missingResource)", () => {
@@ -92,5 +175,12 @@ test("formatBirthDate(missingResource)", () => {
 
 test("getChildIDSTU2(mockResource)", () => {
   const mockResource = { link: [{ other: { reference: "mock" } }] };
-  getChildIDSTU2(mockResource);
+  const id = getChildIDSTU2(mockResource);
+  expect(id).toEqual(undefined);
+});
+
+test("getChildIDSTU2(mockResource)", () => {
+  const mockResource = { link: [{ other: { reference: "mock/10086" } }] };
+  const id = getChildIDSTU2(mockResource);
+  expect(id).toEqual("10086");
 });
