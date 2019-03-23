@@ -105,7 +105,7 @@ class Header extends Component {
     this.setMessageNum();
     this.timer = setInterval(() => {
       this.setMessageNum();
-    }, 3000);
+    }, 5000);
   }
 
   componentWillUnmount() {

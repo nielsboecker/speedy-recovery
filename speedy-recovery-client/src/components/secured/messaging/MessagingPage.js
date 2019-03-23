@@ -87,7 +87,7 @@ class MessagingPage extends Component {
       if (this._isMounted){
         this.timer = setInterval(() => {
           this.fetchConversation(id);
-        }, 3000);  
+        }, 5000);  
       }
     }
   }
