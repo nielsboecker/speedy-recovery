@@ -109,7 +109,9 @@ class MessagingPage extends Component {
             this.state.dbType
           )
         );
-        this.setState({ conversations });
+        if (this._isMounted){
+          this.setState({ conversations });  
+        }
       })
       .catch(error => {
         console.error(error);

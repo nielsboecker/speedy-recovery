@@ -25,7 +25,7 @@ import "./Header.css";
 import { getConversation } from "../../../service/BackendService";
 
 class Header extends Component {
-    // _isMounted = false;
+    _isMounted = false;
 
   constructor(props) {
     super(props);
@@ -92,7 +92,7 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    // this._isMounted = true;
+    this._isMounted = true;
     if (this.props.role === "Practitioner"){
       let id = this.props.practitionerid;
       this.setState({ id });
@@ -105,11 +105,11 @@ class Header extends Component {
     this.setMessageNum();
     this.timer = setInterval(() => {
       this.setMessageNum();
-    }, 1000);
+    }, 3000);
   }
 
   componentWillUnmount() {
-    // this._isMounted = false;
+    this._isMounted = false;
     this.timer && clearTimeout(this.timer);
   }
 
@@ -121,7 +121,9 @@ class Header extends Component {
           for (let conversation of conversationResource){
             unreadNum += conversation.unread;
           }
-          this.setState({ unreadNum });
+          if (this._isMounted){
+            this.setState({ unreadNum });
+          }
         })
         .catch(error => {
           console.error(error);
