@@ -36,6 +36,14 @@ it("parentCalendar renders without crashing", () => {
   shallow(<ParentCalendar onChange={jest.fn()} events={exampleAppointment} />);
 });
 
+it("parentCalendar triggers toggleEditModal without crashing", () => {
+  const wrapper = shallow(
+    <ParentCalendar onChange={jest.fn()} events={exampleAppointment} />
+  );
+  const instance = wrapper.instance();
+  instance.toggleEditModal();
+});
+
 it("patientCalendar renders without crashing", () => {
   shallow(
     <PatientCalendar
@@ -48,10 +56,32 @@ it("patientCalendar renders without crashing", () => {
   );
 });
 
+it("patientCalendar triggers getBackendInfo without crashing", () => {
+  const wrapper = shallow(
+    <PatientCalendar
+      onChange={jest.fn()}
+      events={exampleAppointments}
+      localizer={localizer}
+      updateStatePractitioner={jest.fn()}
+      patientPractitioner={[]}
+    />
+  );
+  const instance = wrapper.instance();
+  instance.getBackendInfo();
+});
+
 it("practitionerCalendar renders without crashing", () => {
   shallow(
     <PractitionerCalendar onChange={jest.fn()} events={exampleAppointment} />
   );
+});
+
+it("practitionerCalendar triggers toggleEditModal without crashing", () => {
+  const wrapper = shallow(
+    <PractitionerCalendar onChange={jest.fn()} events={exampleAppointment} />
+  );
+  const instance = wrapper.instance();
+  instance.toggleEditModal();
 });
 
 it("test modals on calendar", () => {

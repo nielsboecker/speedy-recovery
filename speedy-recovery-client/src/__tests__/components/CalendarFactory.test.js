@@ -56,3 +56,14 @@ test("CalendarFactory renders practitioner calendar for practitioner users", () 
   expect(wrapper.children().length).toBe(1);
   expect(wrapper.children().type().name).toEqual("PractitionerCalendar");
 });
+
+test("CalendarFactory renders nothing for unexpected role name", () => {
+  const wrapper = mount(
+    <CalendarFactory
+      onChange={jest.fn()}
+      events={[]}
+      role="unexpectedRoleNameForTest"
+    />
+  );
+  expect(wrapper.children().length).toBe(0);
+});

@@ -21,101 +21,103 @@ care plan information regarding the patient
 import React, { Component } from "react";
 import { Label, Tab, Table } from "semantic-ui-react";
 import "./PractitionerInfo.css";
-import { isTablet, isBrowser } from "react-device-detect"
+import { isTablet, isBrowser } from "react-device-detect";
 
 class PractitionerCarePlanPane extends Component {
-    render() {
-        const { carePlans } = this.props;
-        const carePlansNum = carePlans.length;
+  render() {
+    const { carePlans } = this.props;
+    const carePlansNum = carePlans.length;
 
-        const createCarePlanTable = () => {
-            const table = [];
-            if (carePlansNum) {
-                const header = [
-                    <Table.Row key={"carePlanRow"}>
-                        {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">#</Table.HeaderCell> : null}
-                        {isBrowser || isTablet ?
-                            <Table.HeaderCell id="parentTableCell">Category</Table.HeaderCell> : null}
-                        <Table.HeaderCell id="parentTableCell">Care Plans</Table.HeaderCell>
-                        {isBrowser || isTablet ?
-                            <Table.HeaderCell id="parentTableCell">Status</Table.HeaderCell> : null}
-                        {isBrowser || isTablet ?
-                            <Table.HeaderCell id="parentTableCell">Period</Table.HeaderCell> : null}
-                    </Table.Row>
-                ];
-                table.push(
-                    <Table.Header key="carePlanTableHeader" id="parentTableHeader">
-                        {header}
-                    </Table.Header>
-                );
-            }
-            const body = [];
-            for (let i = 0; i < carePlansNum; i++) {
-                const children = [];
-
-
-                    children.push(
-                        <Table.Cell key={"carePlanOrderCell" + i}>
-                            <Label color="blue" ribbon>
-                                {`${i + 1}`}{" "}
-                            </Label>
-                        </Table.Cell>
-                    );
-                if (isTablet || isBrowser) {
-                    children.push(
-                        <Table.Cell key={"carePlanCategoryCell" + i} id="parentTableCell">
-                            {<h4>{carePlans[i].category}</h4>}
-                        </Table.Cell>
-                    );
-                }
-                children.push(
-                    <Table.Cell key={"carePlanActCell" + i} id="parentTableCell">
-                        {<h4>{carePlans[i].activities}</h4>}
-                    </Table.Cell>
-                );
-                if (isTablet || isBrowser) {
-                    children.push(
-                        <Table.Cell key={"carePlanStatusCell" + i} id="parentTableCell">
-                            {<h4>{carePlans[i].status}</h4>}
-                        </Table.Cell>
-                    );
-                    children.push(
-                        <Table.Cell key={"carePlanPeriodCell" + i} id="parentTableCell">
-                            {<h4>{carePlans[i].period}</h4>}
-                        </Table.Cell>
-                    );
-                }
-                body.push(
-                    <Table.Row key={"carePlanRow2" + i} id="parentTableRow">
-                        {children}
-                    </Table.Row>
-                );
-            }
-            table.push(
-                <Table.Body key="carePlanTableBody" id="parentTableBody">
-                    {body}
-                </Table.Body>
-            );
-            const carePlanTable = [];
-            carePlanTable.push(
-                <Table key="carePlanTable" color="blue">
-                    {table}
-                </Table>
-            );
-            return carePlanTable;
-        };
-
-        return (
-            <div>
-                <Tab.Pane>
-                    <h4>
-                        There are {carePlansNum} recorded care plan for this patient.
-                    </h4>
-                    {createCarePlanTable()}
-                </Tab.Pane>
-            </div>
+    const createCarePlanTable = () => {
+      const table = [];
+      if (carePlansNum) {
+        const header = [
+          <Table.Row key={"carePlanRow"}>
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="parentTableCell">#</Table.HeaderCell>
+            ) : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="parentTableCell">Category</Table.HeaderCell>
+            ) : null}
+            <Table.HeaderCell id="parentTableCell">Care Plans</Table.HeaderCell>
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="parentTableCell">Status</Table.HeaderCell>
+            ) : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="parentTableCell">Period</Table.HeaderCell>
+            ) : null}
+          </Table.Row>
+        ];
+        table.push(
+          <Table.Header key="carePlanTableHeader" id="parentTableHeader">
+            {header}
+          </Table.Header>
         );
-    }
+      }
+      const body = [];
+      for (let i = 0; i < carePlansNum; i++) {
+        const children = [];
+
+        children.push(
+          <Table.Cell key={"carePlanOrderCell" + i}>
+            <Label color="blue" ribbon>
+              {`${i + 1}`}{" "}
+            </Label>
+          </Table.Cell>
+        );
+        if (isTablet || isBrowser) {
+          children.push(
+            <Table.Cell key={"carePlanCategoryCell" + i} id="parentTableCell">
+              {<h4>{carePlans[i].category}</h4>}
+            </Table.Cell>
+          );
+        }
+        children.push(
+          <Table.Cell key={"carePlanActCell" + i} id="parentTableCell">
+            {<h4>{carePlans[i].activities}</h4>}
+          </Table.Cell>
+        );
+        if (isTablet || isBrowser) {
+          children.push(
+            <Table.Cell key={"carePlanStatusCell" + i} id="parentTableCell">
+              {<h4>{carePlans[i].status}</h4>}
+            </Table.Cell>
+          );
+          children.push(
+            <Table.Cell key={"carePlanPeriodCell" + i} id="parentTableCell">
+              {<h4>{carePlans[i].period}</h4>}
+            </Table.Cell>
+          );
+        }
+        body.push(
+          <Table.Row key={"carePlanRow2" + i} id="parentTableRow">
+            {children}
+          </Table.Row>
+        );
+      }
+      table.push(
+        <Table.Body key="carePlanTableBody" id="parentTableBody">
+          {body}
+        </Table.Body>
+      );
+      const carePlanTable = [];
+      carePlanTable.push(
+        <Table key="carePlanTable" color="blue">
+          {table}
+        </Table>
+      );
+      return carePlanTable;
+    };
+
+    return (
+      <div>
+        <Tab.Pane>
+          <h4>There are {carePlansNum} recorded care plan for this patient.</h4>
+          {createCarePlanTable()}
+        </Tab.Pane>
+      </div>
+    );
+  }
 }
 
 export default PractitionerCarePlanPane;

@@ -55,3 +55,14 @@ test("HomePageFactory renders practitioner's home page for practitioner users", 
   expect(wrapper.children().length).toBe(1);
   expect(wrapper.children().type().name).toEqual("PractitionerHomePage");
 });
+
+test("HomePageFactory renders nothing for unexpected role name", () => {
+  const wrapper = mount(
+    <HomePageFactory
+      user={{ role: "unexpectedRoleNameForTest" }}
+      patient={{}}
+      events={[]}
+    />
+  );
+  expect(wrapper.children().length).toBe(0);
+});

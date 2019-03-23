@@ -24,7 +24,7 @@ import "react-big-calendar/lib/addons/dragAndDrop/styles.less";
 import "../CalendarPages.css";
 import { Grid, Segment } from "semantic-ui-react";
 import ParentModal from "./ParentModal";
-import {isBrowser, isTablet} from 'react-device-detect';
+import { isBrowser, isTablet } from "react-device-detect";
 
 let allViews = Object.keys(BigCalendar.Views).map(k => BigCalendar.Views[k]);
 let mobileView = ["agenda"];
@@ -55,7 +55,11 @@ class ParentCalendar extends React.Component {
                 localizer={this.props.localizer}
                 events={this.props.events}
                 onSelectEvent={this.toggleEditModal}
-                defaultView={isBrowser || isTablet ? BigCalendar.Views.MONTH : BigCalendar.Views.AGENDA }
+                defaultView={
+                  isBrowser || isTablet
+                    ? BigCalendar.Views.MONTH
+                    : BigCalendar.Views.AGENDA
+                }
                 defaultDate={new Date()}
                 views={isBrowser || isTablet ? allViews : mobileView}
                 ref={node => {

@@ -17,7 +17,7 @@
 /* This file tests the InfoPage component*/
 
 import React from "react";
-import Enzyme, { shallow } from "enzyme";
+import Enzyme, { mount, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import exampleUser from "../test_input/internal/ExampleUser.json";
 import PatientInfo from "../../components/secured/patientinformation/Patient/PatientInfo";
@@ -52,4 +52,9 @@ it("ParentInfo renders without crashing", () => {
       carePlans={[]}
     />
   );
+});
+
+it("PractitionerPatientInfo renders without crashing", () => {
+  const mockLocation = { state: { patient: { name: "foo" } } };
+  mount(<PractitionerPatientInfo location={mockLocation} />);
 });

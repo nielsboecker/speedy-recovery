@@ -19,7 +19,7 @@
 import "jest-localstorage-mock";
 import SmartAuthService from "../../service/SmartAuthService";
 
-test("start smart authenticated session", () => {
+test("start smart authenticated session as Practitioner", () => {
   // Mock SMART on FHIR auth
   const mockFhirAuthCall = jest.fn();
   global.FHIR.oauth2.authorize = mockFhirAuthCall;
@@ -30,6 +30,45 @@ test("start smart authenticated session", () => {
   const configParam = mockFhirAuthCall.mock.calls[0][0]; // First param of first function call
   expect(configParam).toHaveProperty("client");
   expect(configParam).toHaveProperty("server");
+});
+
+test("start smart authenticated session as Parent", () => {
+  // Mock SMART on FHIR auth
+  const mockFhirAuthCall = jest.fn();
+  global.FHIR.oauth2.authorize = mockFhirAuthCall;
+
+  SmartAuthService.startSmartAuthenticatedSession("Parent");
+
+  expect(mockFhirAuthCall.mock.calls.length).toBe(1);
+  const configParam = mockFhirAuthCall.mock.calls[0][0]; // First param of first function call
+  expect(configParam).toHaveProperty("client");
+  expect(configParam).toHaveProperty("server");
+});
+
+test("start smart authenticated session as Patient", () => {
+  // Mock SMART on FHIR auth
+  const mockFhirAuthCall = jest.fn();
+  global.FHIR.oauth2.authorize = mockFhirAuthCall;
+
+  SmartAuthService.startSmartAuthenticatedSession("Patient");
+
+  expect(mockFhirAuthCall.mock.calls.length).toBe(1);
+  const configParam = mockFhirAuthCall.mock.calls[0][0]; // First param of first function call
+  expect(configParam).toHaveProperty("client");
+  expect(configParam).toHaveProperty("server");
+});
+
+test("start smart authenticated session using unexpected role name", () => {
+  // Mock SMART on FHIR auth
+  const mockFhirAuthCall = jest.fn();
+  global.FHIR.oauth2.authorize = mockFhirAuthCall;
+
+  SmartAuthService.startSmartAuthenticatedSession("unexpectedRoleNameForTest");
+
+  expect(mockFhirAuthCall.mock.calls.length).toBe(1);
+  const configParam = mockFhirAuthCall.mock.calls[0][0]; // First param of first function call
+  expect(configParam).toEqual(undefined);
+  expect(configParam).toEqual(undefined);
 });
 
 test("on start authetication session callback is registered", () => {

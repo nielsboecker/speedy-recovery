@@ -17,10 +17,12 @@
 /* This file tests the App.js component*/
 
 import React from "react";
-import Enzyme, { shallow } from "enzyme";
+import Enzyme, { mount, shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import App from "../../components/core/App";
 import SmartAuthService from "../../service/SmartAuthService";
+import { BrowserRouter, Router, Route, Switch } from "react-router-dom";
+import exampleUser from "../test_input/internal/ExampleUser.json";
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -76,4 +78,109 @@ test("handleLoginSuccess() sets state appropriately", () => {
 
   // This should work, but there seems to be a bug, Promise.resolve executes too late
   // expect(wrapper.state().user).toEqual(mockUser);
+});
+
+test("handleLoginSuccess() sets state appropriately", () => {
+  // given
+  const mockUser = exampleUser;
+  const mockFhirClient = {
+    user: {
+      read: jest.fn().mockImplementation(() => Promise.resolve(mockUser))
+    }
+  };
+
+  // when
+  underTest.handleLoginSuccess(mockFhirClient);
+  // then
+  // expect(wrapper.state().fhirClient).toEqual(mockFhirClient);
+});
+
+test("App triggers updateStateCondition without crashing", () => {
+  // given
+  const mockUserId = "mockId";
+  // when
+  underTest.updateStateCondition(mockUserId);
+  // then
+  expect(wrapper.state().conditions).toEqual([]);
+});
+
+test("App triggers updateStateMedicationDispense() without crashing", () => {
+  // given
+  const mockUserId = "mockId";
+  // when
+  underTest.updateStateMedicationDispense(mockUserId);
+  // then
+  expect(wrapper.state().medicationDispenses).toEqual([]);
+});
+
+test("App triggers updateStateCarePlan() without crashing", () => {
+  // given
+  const mockUserId = "mockId";
+  // when
+  underTest.updateStateCarePlan(mockUserId);
+  // then
+  expect(wrapper.state().carePlans).toEqual([]);
+});
+
+test("App triggers updateStatePatient without crashing", () => {
+  const mockPatientResource = {};
+  underTest.updateStatePatient(mockPatientResource);
+});
+
+test("App triggers updateStateAppointment without crashing", () => {
+  // given
+  const mockUserId = "mockId";
+  const mockRole = "mockRole";
+  // when
+  underTest.updateStateAppointment(mockUserId, mockRole);
+  // then
+  expect(wrapper.state().appointments).toEqual([]);
+});
+
+test("App triggers setUserList without crashing", () => {
+  underTest.setUserList();
+});
+
+test("App triggers setUserList without crashing", () => {
+  underTest.setUserList();
+});
+
+test("App triggers handleFhirServerError without crashing", () => {
+  underTest.handleFhirServerError();
+});
+
+test("App triggers resetError without crashing", () => {
+  underTest.resetError();
+});
+
+test("App triggers handleLoginError without crashing", () => {
+  underTest.handleLoginError(
+    "No 'state' parameter found in authorization response."
+  );
+});
+
+test("App renders without crashing", () => {
+  const wrapper = mount(<App />);
+  expect(wrapper.children().type().name).toEqual("BrowserRouter");
+  expect(
+    wrapper
+      .children()
+      .children()
+      .type().name
+  ).toEqual("Router");
+  expect(
+    wrapper
+      .children()
+      .children()
+      .children()
+      .type().name
+  ).toEqual("Switch");
+  expect(
+    wrapper
+      .children()
+      .children()
+      .children()
+      .children()
+      .type().name
+  ).toEqual("Route");
 });

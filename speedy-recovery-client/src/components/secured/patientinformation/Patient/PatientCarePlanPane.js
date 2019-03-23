@@ -21,7 +21,7 @@ care plan information regarding the patient
 import React, { Component } from "react";
 import { Label, Tab, Table } from "semantic-ui-react";
 import "./PatientInfo.css";
-import {isBrowser, isTablet} from 'react-device-detect';
+import { isBrowser, isTablet } from "react-device-detect";
 
 class PatientCarePlanPane extends Component {
   render() {
@@ -32,16 +32,26 @@ class PatientCarePlanPane extends Component {
       if (carePlansNum) {
         const header = [
           <Table.Row key={"carePlanRow"}>
-            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell> : null}
-            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">Category</Table.HeaderCell> : null}
-            <Table.HeaderCell id="patientTableCell">Care Plans</Table.HeaderCell>
-            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">Period</Table.HeaderCell> : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
+            ) : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="patientTableCell">
+                Category
+              </Table.HeaderCell>
+            ) : null}
+            <Table.HeaderCell id="patientTableCell">
+              Care Plans
+            </Table.HeaderCell>
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="patientTableCell">Period</Table.HeaderCell>
+            ) : null}
           </Table.Row>
         ];
         table.push(
-            <Table.Header key="carePlanTableHeader" id="patientTableHeader">
-              {header}
-            </Table.Header>
+          <Table.Header key="carePlanTableHeader" id="patientTableHeader">
+            {header}
+          </Table.Header>
         );
       }
       const body = [];
@@ -49,47 +59,47 @@ class PatientCarePlanPane extends Component {
         const children = [];
 
         children.push(
-            <Table.Cell key={"carePlanOrderCell" + i}>
-              <Label color="blue" ribbon>
-                {`${i + 1}`}{" "}
-              </Label>
-            </Table.Cell>
+          <Table.Cell key={"carePlanOrderCell" + i}>
+            <Label color="blue" ribbon>
+              {`${i + 1}`}{" "}
+            </Label>
+          </Table.Cell>
         );
         children.push(
-            <Table.Cell key={"carePlanCategoryCell" + i} id="patientTableCell">
-              {<h4>{carePlans[i].category}</h4>}
-            </Table.Cell>
+          <Table.Cell key={"carePlanCategoryCell" + i} id="patientTableCell">
+            {<h4>{carePlans[i].category}</h4>}
+          </Table.Cell>
         );
 
         children.push(
-            <Table.Cell key={"carePlanActCell" + i} id="patientTableCell">
-              {<h4>{carePlans[i].activities}</h4>}
-            </Table.Cell>
+          <Table.Cell key={"carePlanActCell" + i} id="patientTableCell">
+            {<h4>{carePlans[i].activities}</h4>}
+          </Table.Cell>
         );
         if (isBrowser || isTablet) {
           children.push(
-              <Table.Cell key={"carePlanPeriodCell" + i} id="patientTableCell">
-                {<h4>{carePlans[i].period}</h4>}
-              </Table.Cell>
+            <Table.Cell key={"carePlanPeriodCell" + i} id="patientTableCell">
+              {<h4>{carePlans[i].period}</h4>}
+            </Table.Cell>
           );
         }
 
         body.push(
-            <Table.Row key={"carePlanRow2" + i} id="patientTableRow">
-              {children}
-            </Table.Row>
+          <Table.Row key={"carePlanRow2" + i} id="patientTableRow">
+            {children}
+          </Table.Row>
         );
       }
       table.push(
-          <Table.Body key="carePlanTableBody" id="patientTableBody">
-            {body}
-          </Table.Body>
+        <Table.Body key="carePlanTableBody" id="patientTableBody">
+          {body}
+        </Table.Body>
       );
       const carePlanTable = [];
       carePlanTable.push(
-          <Table key="carePlanTable" color="blue">
-            {table}
-          </Table>
+        <Table key="carePlanTable" color="blue">
+          {table}
+        </Table>
       );
       return carePlanTable;
     };

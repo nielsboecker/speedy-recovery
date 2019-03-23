@@ -21,33 +21,51 @@ condition information regarding the Parent's child.
 import React, { Component } from "react";
 import { Label, Tab, Table, Icon } from "semantic-ui-react";
 import "./Parent.css";
-import {isBrowser, isTablet} from 'react-device-detect';
+import { isBrowser, isTablet } from "react-device-detect";
 
 class ParentConditionPane extends Component {
   render() {
     const { conditions, childResource } = this.props;
     const conditionsNum = conditions.length;
-    const childName = childResource.name.split(" ");
+    const childName = (childResource.name + " ").split(" ");
 
     const createConditionTable = () => {
       const table = [];
       if (conditionsNum) {
         const header = [
           <Table.Row key={"conditionRow"}>
-            {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">#</Table.HeaderCell> : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="parentTableCell">#</Table.HeaderCell>
+            ) : null}
             <Table.HeaderCell id="parentTableCell">Conditions</Table.HeaderCell>
-            {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">Search</Table.HeaderCell> : null}
-            {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">Time</Table.HeaderCell> : null}
-            {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">Severity</Table.HeaderCell> : null}
-            {isBrowser ? <Table.HeaderCell id="parentTableCell">VerfiedStatus</Table.HeaderCell> : null}
-            {isBrowser ? <Table.HeaderCell id="parentTableCell">ClinicalStatus</Table.HeaderCell> : null}
-            {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">BodySite</Table.HeaderCell> : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="parentTableCell">Search</Table.HeaderCell>
+            ) : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="parentTableCell">Time</Table.HeaderCell>
+            ) : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="parentTableCell">Severity</Table.HeaderCell>
+            ) : null}
+            {isBrowser ? (
+              <Table.HeaderCell id="parentTableCell">
+                VerfiedStatus
+              </Table.HeaderCell>
+            ) : null}
+            {isBrowser ? (
+              <Table.HeaderCell id="parentTableCell">
+                ClinicalStatus
+              </Table.HeaderCell>
+            ) : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="parentTableCell">BodySite</Table.HeaderCell>
+            ) : null}
           </Table.Row>
         ];
         table.push(
-            <Table.Header id="parentTableHeader" key="conditionTableHeader">
-              {header}
-            </Table.Header>
+          <Table.Header id="parentTableHeader" key="conditionTableHeader">
+            {header}
+          </Table.Header>
         );
       }
       const body = [];
@@ -57,58 +75,70 @@ class ParentConditionPane extends Component {
         const searchQuery = "https://www.google.com/search?q=" + summary;
 
         children.push(
-            <Table.Cell key={"conditionOrderCell" + i}>
-              <Label color="blue" ribbon>
-                {`${i + 1}`}{" "}
-              </Label>
-            </Table.Cell>
+          <Table.Cell key={"conditionOrderCell" + i}>
+            <Label color="blue" ribbon>
+              {`${i + 1}`}{" "}
+            </Label>
+          </Table.Cell>
         );
         children.push(
-            <Table.Cell key={"conditionSummaryCell" + i} id="parentTableCell">
-              {<h4>{summary}</h4>}
-            </Table.Cell>
+          <Table.Cell key={"conditionSummaryCell" + i} id="parentTableCell">
+            {<h4>{summary}</h4>}
+          </Table.Cell>
         );
         children.push(
-            <Table.Cell key={"conditionSummarySearchCell" + i} id="parentTableCell">
-              {<h4>
+          <Table.Cell
+            key={"conditionSummarySearchCell" + i}
+            id="parentTableCell"
+          >
+            {
+              <h4>
                 <a href={searchQuery} target="_blank" rel="noopener noreferrer">
-                  <Icon color="blue" fitted name="search"/> </a>
-              </h4>}
-            </Table.Cell>
+                  <Icon color="blue" fitted name="search" />{" "}
+                </a>
+              </h4>
+            }
+          </Table.Cell>
         );
         if (isBrowser || isTablet) {
           children.push(
-              <Table.Cell key={"conditionTimeCell" + i} id="parentTableCell">
-                {<h4>{conditions[i].onsetDateTime.toString()}</h4>}
-              </Table.Cell>
+            <Table.Cell key={"conditionTimeCell" + i} id="parentTableCell">
+              {<h4>{conditions[i].onsetDateTime.toString()}</h4>}
+            </Table.Cell>
           );
           children.push(
-              <Table.Cell key={"conditionSeverityCell" + i} id="parentTableCell">
-                {<h4>{conditions[i].severity}</h4>}
-              </Table.Cell>
+            <Table.Cell key={"conditionSeverityCell" + i} id="parentTableCell">
+              {<h4>{conditions[i].severity}</h4>}
+            </Table.Cell>
           );
           if (!isTablet) {
             children.push(
-                <Table.Cell key={"conditionVerificationStatusCell" + i} id="parentTableCell">
-                  {<h4>{conditions[i].verificationStatus}</h4>}
-                </Table.Cell>
+              <Table.Cell
+                key={"conditionVerificationStatusCell" + i}
+                id="parentTableCell"
+              >
+                {<h4>{conditions[i].verificationStatus}</h4>}
+              </Table.Cell>
             );
             children.push(
-                <Table.Cell key={"conditionClinicalStatusCell" + i} id="parentTableCell">
-                  {<h4>{conditions[i].clinicalStatus}</h4>}
-                </Table.Cell>
+              <Table.Cell
+                key={"conditionClinicalStatusCell" + i}
+                id="parentTableCell"
+              >
+                {<h4>{conditions[i].clinicalStatus}</h4>}
+              </Table.Cell>
             );
           }
           children.push(
-              <Table.Cell key={"conditionBodySiteCell" + i} id="parentTableCell">
-                {<h4>{conditions[i].bodySite}</h4>}
-              </Table.Cell>
+            <Table.Cell key={"conditionBodySiteCell" + i} id="parentTableCell">
+              {<h4>{conditions[i].bodySite}</h4>}
+            </Table.Cell>
           );
         }
         body.push(
-            <Table.Row id="parentTableRow" key={"conditionRow2" + i}>
-              {children}
-            </Table.Row>
+          <Table.Row id="parentTableRow" key={"conditionRow2" + i}>
+            {children}
+          </Table.Row>
         );
       }
       table.push(

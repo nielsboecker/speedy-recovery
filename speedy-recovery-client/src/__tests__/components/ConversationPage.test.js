@@ -26,3 +26,22 @@ Enzyme.configure({ adapter: new Adapter() });
 it("renders without crashing", () => {
   shallow(<ConversationPage />);
 });
+
+it("ConversationPage triggers handleChange without crashing", () => {
+  const wrapper = shallow(<ConversationPage />);
+  const instance = wrapper.instance();
+  instance.handleChange({ target: { value: "mock" } });
+});
+
+it("ConversationPage triggers componentWillUnmount without crashing", () => {
+  const wrapper = shallow(<ConversationPage />);
+  const instance = wrapper.instance();
+  instance.componentWillUnmount();
+});
+
+it("ConversationPage triggers setMessageList without crashing", () => {
+  const wrapper = shallow(<ConversationPage />);
+  wrapper.setProps({ location: { state: { title: "mock" } } });
+  const instance = wrapper.instance();
+  instance.setMessageList();
+});

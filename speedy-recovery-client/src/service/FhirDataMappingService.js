@@ -16,7 +16,9 @@
 
 /* This file controls the mapping of fhir resources to our internal format and differs depending on the version of FHIR
 being used.
- */
+ *
+ * The FHIR DSTU2 standard, somewhat misleadingly is actually the version number 1.0.2.
+ * */
 
 import {
   getChildIDSTU2,
@@ -200,6 +202,7 @@ const getChildID = (resource, version) => {
     }
   }
   console.log("No FHIR version has been supplied");
+  return null;
 };
 
 export {

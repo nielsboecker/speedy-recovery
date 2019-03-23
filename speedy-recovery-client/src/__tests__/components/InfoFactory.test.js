@@ -77,3 +77,10 @@ test("InfoFactory renders practitioner info for practitioner users", () => {
   expect(wrapper.children().length).toBe(1);
   expect(wrapper.children().type().name).toEqual("PractitionerInfo");
 });
+
+test("InfoFactory renders nothing for unexpected role name", () => {
+  const wrapper = mount(
+    <InfoFactory user={{ role: "unexpectedRoleNameForTest" }} patient={{}} />
+  );
+  expect(wrapper.children().length).toBe(0);
+});

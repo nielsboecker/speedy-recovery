@@ -14,7 +14,10 @@
  * see http://www.gnu.org/license/.
  * */
 
-/* This file tests the mapping from FHIR DSTU2 resources to our internal format*/
+/* This file tests the mapping from FHIR DSTU2 resources to our internal format.
+ *
+ * The FHIR DSTU2 standard, somewhat misleadingly is actually the version number 1.0.2.
+ * */
 
 import {
   fhirMapAppointment,
@@ -25,7 +28,8 @@ import {
   fhirMapPerson,
   fhirMapPractitioner,
   fhirMapGoal,
-  fhirMapFamilyResource
+  fhirMapFamilyResource,
+  getChildID
 } from "../../service/FhirDataMappingService";
 import fhirExamplePatient from "../test_input/fhir_resources_stu2/FhirExamplePatientSTU2.json";
 import fhirShortApp from "../test_input/fhir_resources_stu2/FhirExampleAppointmentSTU2.json";
@@ -70,4 +74,47 @@ test("map FHIR Goal resource to internal data model", () => {
 test("map FHIR Family Hisotry resource to internal data model", () => {
   const history = fhirMapFamilyResource(fhirExampleFamilyHistory, "2");
   expect(history).toMatchSnapshot();
+});
+
+test("map FHIR Person resource to internal data model", () => {
+  const user = fhirMapPerson(fhirExamplePatient, "1");
+  expect(user).toMatchSnapshot();
+});
+
+test("map FHIR Appointment resource to internal data model", () => {
+  const appointment = fhirMapAppointment(fhirShortApp, "1");
+  expect(appointment).toMatchSnapshot();
+});
+
+test("map FHIR Condition resource to internal data model", () => {
+  const condition = fhirMapCondition(fhirExampleCondition, "1");
+  expect(condition).toMatchSnapshot();
+});
+
+test("map FHIR Medication resource to internal data model", () => {
+  const medication = fhirMapMedication(fhirExampleMedication, "1");
+  expect(medication).toMatchSnapshot();
+});
+
+test("map FHIR CarePlan resource to internal data model", () => {
+  const carePlan = fhirMapCarePlan(fhirExampleCarePlan, "1");
+  expect(carePlan).toMatchSnapshot();
+});
+
+test("map FHIR MedicationDispense resource to internal data model", () => {
+  const medicationDispense = fhirMapMedicationDispense(
+    fhirExampleMedicationDispense,
+    "1"
+  );
+  expect(medicationDispense).toMatchSnapshot();
+});
+
+test("map FHIR Practitioner resource to internal data model", () => {
+  const practitioner = fhirMapPractitioner(fhirExamplePractitioner, "1");
+  expect(practitioner).toMatchSnapshot();
+});
+
+test("getChildID version 1 to internal data model", () => {
+  const id = getChildID(fhirExamplePatient, "1");
+  expect(id).toMatchSnapshot();
 });

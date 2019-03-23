@@ -25,7 +25,7 @@ import PatientConditionPane from "./PatientConditionPane";
 import PatientCarePlanPane from "./PatientCarePlanPane";
 import PatientMedicationPane from "./PatientMedicationPane";
 import PatientBasicPane from "./PatientBasicPane";
-import {isBrowser, isTablet} from 'react-device-detect';
+import { isBrowser, isTablet } from "react-device-detect";
 
 class PatientInfo extends Component {
   render() {
@@ -36,8 +36,13 @@ class PatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"basic"} color="blue">
-            <Icon fitted name="id card outline" color="blue" size={isBrowser || isTablet ? "large" : "small"}/>
-              {isBrowser || isTablet ? "Basic" : ""}
+            <Icon
+              fitted
+              name="id card outline"
+              color="blue"
+              size={isBrowser || isTablet ? "large" : "small"}
+            />
+            {isBrowser || isTablet ? "Basic" : ""}
           </Menu.Item>
         ),
 
@@ -46,21 +51,29 @@ class PatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"medication"} color="blue">
-            <Icon fitted name="pills" color="purple" size={isBrowser || isTablet ? "large" : "small"}/>
-              {isBrowser || isTablet ? "Dispensed Medication" : ""}
+            <Icon
+              fitted
+              name="pills"
+              color="purple"
+              size={isBrowser || isTablet ? "large" : "small"}
+            />
+            {isBrowser || isTablet ? "Dispensed Medication" : ""}
           </Menu.Item>
         ),
         render: () => (
-          <PatientMedicationPane
-            medicationDispenses={medicationDispenses}
-          />
+          <PatientMedicationPane medicationDispenses={medicationDispenses} />
         )
       },
       {
         menuItem: (
           <Menu.Item key={"condition"} color="blue">
-            <Icon fitted name="heartbeat" color="red" size={isBrowser || isTablet ? "large" : "small"}/>
-              {isBrowser || isTablet ? "Condition" : ""}
+            <Icon
+              fitted
+              name="heartbeat"
+              color="red"
+              size={isBrowser || isTablet ? "large" : "small"}
+            />
+            {isBrowser || isTablet ? "Condition" : ""}
           </Menu.Item>
         ),
         render: () => <PatientConditionPane conditions={conditions} />
@@ -68,8 +81,13 @@ class PatientInfo extends Component {
       {
         menuItem: (
           <Menu.Item key={"carePlan"} color="blue">
-            <Icon fitted name="unordered list" color="orange" size={isBrowser || isTablet ? "large" : "small"}/>
-              {isBrowser || isTablet ? "Care Plan" : ""}
+            <Icon
+              fitted
+              name="unordered list"
+              color="orange"
+              size={isBrowser || isTablet ? "large" : "small"}
+            />
+            {isBrowser || isTablet ? "Care Plan" : ""}
           </Menu.Item>
         ),
         render: () => <PatientCarePlanPane carePlans={carePlans} />

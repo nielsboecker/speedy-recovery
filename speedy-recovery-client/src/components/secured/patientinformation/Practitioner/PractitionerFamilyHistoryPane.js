@@ -21,7 +21,7 @@
 import React, { Component } from "react";
 import { Label, Tab, Table } from "semantic-ui-react";
 import "./PractitionerInfo.css";
-import { isTablet, isBrowser} from "react-device-detect";
+import { isTablet, isBrowser } from "react-device-detect";
 
 class PractitionerFamilyHistoryPane extends Component {
   render() {
@@ -32,17 +32,33 @@ class PractitionerFamilyHistoryPane extends Component {
       if (historiesNum) {
         const header = [
           <Table.Row key={"historiesRow"}>
-            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell> : null}
-            <Table.HeaderCell id="patientTableCell">Family Member</Table.HeaderCell>
-            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">Relationship</Table.HeaderCell> : null}
-            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">Cause of Death</Table.HeaderCell> : null}
-            {isBrowser || isTablet ? <Table.HeaderCell id="patientTableCell">Death date</Table.HeaderCell> : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="patientTableCell">#</Table.HeaderCell>
+            ) : null}
+            <Table.HeaderCell id="patientTableCell">
+              Family Member
+            </Table.HeaderCell>
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="patientTableCell">
+                Relationship
+              </Table.HeaderCell>
+            ) : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="patientTableCell">
+                Cause of Death
+              </Table.HeaderCell>
+            ) : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="patientTableCell">
+                Death date
+              </Table.HeaderCell>
+            ) : null}
           </Table.Row>
         ];
         table.push(
-            <Table.Header key="HistoriesTableHeader" id="patientTableHeader">
-              {header}
-            </Table.Header>
+          <Table.Header key="HistoriesTableHeader" id="patientTableHeader">
+            {header}
+          </Table.Header>
         );
       }
       const body = [];
@@ -73,9 +89,9 @@ class PractitionerFamilyHistoryPane extends Component {
         );
         if (isBrowser || isTablet) {
           children.push(
-              <Table.Cell key={"historyCell4" + i} id="patientTableCell">
-                {<h4>{familyHistories[i].date}</h4>}
-              </Table.Cell>
+            <Table.Cell key={"historyCell4" + i} id="patientTableCell">
+              {<h4>{familyHistories[i].date}</h4>}
+            </Table.Cell>
           );
         }
         body.push(
@@ -101,7 +117,9 @@ class PractitionerFamilyHistoryPane extends Component {
     return (
       <div>
         <Tab.Pane>
-          <h4>There are {historiesNum} recorded family history for this patient.</h4>
+          <h4>
+            There are {historiesNum} recorded family history for this patient.
+          </h4>
           {createFamilyHistoryTable()}
         </Tab.Pane>
       </div>

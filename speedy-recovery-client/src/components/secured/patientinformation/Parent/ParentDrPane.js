@@ -21,24 +21,36 @@
 import React, { Component } from "react";
 import { Label, Tab, Table } from "semantic-ui-react";
 import "./Parent.css";
-import {isBrowser, isTablet} from 'react-device-detect';
+import { isBrowser, isTablet } from "react-device-detect";
 
 class ParentDrPane extends Component {
   render() {
     const { patientPractitioners, childResource } = this.props;
     const practitionersNum = patientPractitioners.length;
-    const childName = childResource.name.split(" ");
+    const childName = (childResource.name + " ").split(" ");
 
     const createPractitionerTable = () => {
       const table = [];
       if (practitionersNum) {
         const header = [
           <Table.Row key={"practitionerRow"}>
-            {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">#</Table.HeaderCell> : null}
-            <Table.HeaderCell id="parentTableCell">Practitioner</Table.HeaderCell>
-            {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">Gender</Table.HeaderCell> : null}
-            {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">Contact Number</Table.HeaderCell> : null}
-            {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">Email</Table.HeaderCell> : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="parentTableCell">#</Table.HeaderCell>
+            ) : null}
+            <Table.HeaderCell id="parentTableCell">
+              Practitioner
+            </Table.HeaderCell>
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="parentTableCell">Gender</Table.HeaderCell>
+            ) : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="parentTableCell">
+                Contact Number
+              </Table.HeaderCell>
+            ) : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="parentTableCell">Email</Table.HeaderCell>
+            ) : null}
           </Table.Row>
         ];
         table.push(

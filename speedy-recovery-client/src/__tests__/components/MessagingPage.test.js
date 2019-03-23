@@ -24,5 +24,23 @@ import MessagingPage from "../../components/secured/messaging/MessagingPage";
 Enzyme.configure({ adapter: new Adapter() });
 
 it("renders without crashing", () => {
-  shallow(<MessagingPage />);
+  const wrapper = shallow(<MessagingPage />);
+  wrapper.setProps({ user: { role: "Practitioner" } });
+  wrapper.setState({ conversations: [{ userId: "foo" }] });
+});
+
+it("MessagingPage triggers componentDidMount without crashing", () => {
+  const wrapper = shallow(<MessagingPage />);
+  wrapper.setProps({ user: { role: "Parent" } });
+  wrapper.setProps({ userList: "mock" });
+  const instance = wrapper.instance();
+  instance.componentDidMount();
+});
+
+it("MessagingPage triggers componentDidMount without crashing", () => {
+  const wrapper = shallow(<MessagingPage />);
+  wrapper.setProps({ user: { role: "Patient" } });
+  wrapper.setProps({ userList: "mock" });
+  const instance = wrapper.instance();
+  instance.componentDidMount();
 });

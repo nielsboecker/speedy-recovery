@@ -63,7 +63,7 @@ class InfoFactory extends Component {
           />
         );
       default:
-        return undefined;
+        return null;
     }
   }
 }

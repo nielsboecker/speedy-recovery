@@ -26,3 +26,7 @@ Enzyme.configure({ adapter: new Adapter() });
 it("renders without crashing", () => {
   shallow(<LandingMainPage />);
 });
+
+test("LandingMainPage renders without crashing", () => {
+  shallow(<LandingMainPage user={{ role: "Patient" }} />);
+});

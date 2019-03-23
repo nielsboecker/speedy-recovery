@@ -21,30 +21,38 @@ care plan information regarding the Parent's child
 import React, { Component } from "react";
 import { Label, Tab, Table } from "semantic-ui-react";
 import "./Parent.css";
-import {isBrowser, isTablet} from 'react-device-detect';
+import { isBrowser, isTablet } from "react-device-detect";
 
 class ParentCarePlanPane extends Component {
   render() {
     const { carePlans, childResource } = this.props;
     const carePlansNum = carePlans.length;
-    const childName = childResource.name.split(" ");
+    const childName = (childResource.name + " ").split(" ");
 
     const createCarePlanTable = () => {
       const table = [];
       if (carePlansNum) {
         const header = [
           <Table.Row key={"carePlanRow"}>
-            {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">#</Table.HeaderCell> : null}
-            {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">Category</Table.HeaderCell> : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="parentTableCell">#</Table.HeaderCell>
+            ) : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="parentTableCell">Category</Table.HeaderCell>
+            ) : null}
             <Table.HeaderCell id="parentTableCell">Care Plans</Table.HeaderCell>
-            {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">Status</Table.HeaderCell> : null}
-            {isBrowser || isTablet ? <Table.HeaderCell id="parentTableCell">Period</Table.HeaderCell> : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="parentTableCell">Status</Table.HeaderCell>
+            ) : null}
+            {isBrowser || isTablet ? (
+              <Table.HeaderCell id="parentTableCell">Period</Table.HeaderCell>
+            ) : null}
           </Table.Row>
         ];
         table.push(
-            <Table.Header key="carePlanTableHeader" id="parentTableHeader">
-              {header}
-            </Table.Header>
+          <Table.Header key="carePlanTableHeader" id="parentTableHeader">
+            {header}
+          </Table.Header>
         );
       }
       const body = [];
@@ -53,57 +61,56 @@ class ParentCarePlanPane extends Component {
 
         if (isTablet || isBrowser) {
           children.push(
-              <Table.Cell key={"carePlanOrderCell" + i}>
-                <Label color="blue" ribbon>
-                  {`${i + 1}`}{" "}
-                </Label>
-              </Table.Cell>
+            <Table.Cell key={"carePlanOrderCell" + i}>
+              <Label color="blue" ribbon>
+                {`${i + 1}`}{" "}
+              </Label>
+            </Table.Cell>
           );
         }
         children.push(
-            <Table.Cell key={"carePlanCategoryCell" + i} id="parentTableCell">
-              {<h4>{carePlans[i].category}</h4>}
-            </Table.Cell>
+          <Table.Cell key={"carePlanCategoryCell" + i} id="parentTableCell">
+            {<h4>{carePlans[i].category}</h4>}
+          </Table.Cell>
         );
 
         children.push(
-            <Table.Cell key={"carePlanActCell" + i} id="parentTableCell">
-              {<h4>{carePlans[i].activities}</h4>}
-            </Table.Cell>
+          <Table.Cell key={"carePlanActCell" + i} id="parentTableCell">
+            {<h4>{carePlans[i].activities}</h4>}
+          </Table.Cell>
         );
         if (isTablet || isBrowser) {
           children.push(
-              <Table.Cell key={"carePlanStatusCell" + i} id="parentTableCell">
-                {<h4>{carePlans[i].status}</h4>}
-              </Table.Cell>
+            <Table.Cell key={"carePlanStatusCell" + i} id="parentTableCell">
+              {<h4>{carePlans[i].status}</h4>}
+            </Table.Cell>
           );
           children.push(
-              <Table.Cell key={"carePlanPeriodCell" + i} id="parentTableCell">
-                {<h4>{carePlans[i].period}</h4>}
-              </Table.Cell>
+            <Table.Cell key={"carePlanPeriodCell" + i} id="parentTableCell">
+              {<h4>{carePlans[i].period}</h4>}
+            </Table.Cell>
           );
         }
 
         body.push(
-            <Table.Row key={"carePlanRow2" + i} id="parentTableRow">
-              {children}
-            </Table.Row>
+          <Table.Row key={"carePlanRow2" + i} id="parentTableRow">
+            {children}
+          </Table.Row>
         );
       }
       table.push(
-          <Table.Body key="carePlanTableBody" id="parentTableBody">
-            {body}
-          </Table.Body>
+        <Table.Body key="carePlanTableBody" id="parentTableBody">
+          {body}
+        </Table.Body>
       );
       const carePlanTable = [];
       carePlanTable.push(
-          <Table key="carePlanTable" color="blue">
-            {table}
-          </Table>
+        <Table key="carePlanTable" color="blue">
+          {table}
+        </Table>
       );
       return carePlanTable;
     };
-
 
     return (
       <div>

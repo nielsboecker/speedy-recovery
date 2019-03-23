@@ -14,28 +14,26 @@
  * see http://www.gnu.org/license/.
  * */
 
-/* This file tests the SecuredMainPage component*/
+/* This file tests functions in DateUtils*/
+import { formatDate, removeArrayDuplicates } from "../../service/Utils";
 
-import React from "react";
-import Enzyme, { mount } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import { MemoryRouter } from "react-router-dom";
-import SecuredMainPage from "../../components/secured/core/SecuredMainPage";
-
-Enzyme.configure({ adapter: new Adapter() });
-
-test("SecuredMainPage renders with props.user", () => {
-  mount(
-    <MemoryRouter>
-      <SecuredMainPage user={{}} match={{ url: "foo" }} />
-    </MemoryRouter>
-  );
+test("trigger formatDate(mockDate)", () => {
+  const mockDate = "2222-12-12";
+  const result = formatDate(mockDate);
+  const expected = new Date(mockDate).toLocaleString("en-uk");
+  expect(result).toEqual(expected);
 });
 
-test("SecuredMainPage renders without props.user", () => {
-  mount(
-    <MemoryRouter>
-      <SecuredMainPage />
-    </MemoryRouter>
-  );
+test("trigger formatDate(missingDate)", () => {
+  const mockDate = "";
+  const result = formatDate(mockDate);
+  expect(result).toEqual("Invalid date");
+});
+
+test("trigger removeArrayDuplicates without crashing", () => {
+  removeArrayDuplicates(["mock", "mock"]);
+});
+
+test("trigger removeArrayDuplicates(missingResource) without crashing", () => {
+  removeArrayDuplicates();
 });
