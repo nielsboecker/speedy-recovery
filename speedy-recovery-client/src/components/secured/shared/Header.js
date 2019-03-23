@@ -94,11 +94,11 @@ class Header extends Component {
   componentDidMount() {
     this._isMounted = true;
     if (this.props.role === "Practitioner"){
-      let id = this.props.practitionerid;
+      const id = this.props.practitionerid;
       this.setState({ id });
     }
     if (this.props.role === "Parent"){
-      let id = this.props.userid;
+      const id = this.props.userid;
       this.setState({ id });
 
     }
