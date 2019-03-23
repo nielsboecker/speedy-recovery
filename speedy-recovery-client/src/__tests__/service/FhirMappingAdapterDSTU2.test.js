@@ -29,7 +29,6 @@ import {
   getChildIDSTU2,
   formatBirthDate
 } from "../../service/FhirMappingAdapterDSTU2";
-import { getChildIDSTU3 } from "../../service/FhirMappingAdapterSTU3";
 
 const missingField = "Unknown";
 
