@@ -22,56 +22,52 @@ import React, { Component } from "react";
 import "react-chat-elements/dist/main.css";
 import { ChatItem } from "react-chat-elements";
 import { Link } from "react-router-dom";
-import { getConversation } from "../../../service/BackendService";
-import { conversationMap } from "../../../service/BackendMapping";
 
 class MessagingPage extends Component {
   _isMounted = false;
-
   constructor(props) {
     super(props);
     this.state = {
-      conversations: [],
-      id: null,
-      dbType: "MySQL"
+      id: null
     };
   }
 
   render() {
-    const chatItems = this.state.conversations.map(conversation => {
+    if(this.props.conversations) {
+      const chatItems = this.props.conversations.map(conversation => {
+        return (
+          <Link
+            to={{
+              pathname: `/secured/conversation/${conversation.userId}`,
+              state: {
+                id: this.state.id,
+                id2: conversation.userId,
+                title: conversation.title,
+                role: this.props.user.role,
+                name: this.props.user.name
+              }
+            }}
+            key={conversation.userId}
+          >
+            {/*Creates messages summary page*/}
+            <ChatItem
+              avatar={conversation.avatar}
+              alt={conversation.alt}
+              title={conversation.title}
+              subtitle={conversation.subtitle}
+              date={conversation.date}
+              unread={conversation.unread}
+            />
+          </Link>
+        );
+      });
       return (
-        <Link
-          to={{
-            pathname: `/secured/conversation/${conversation.userId}`,
-            state: {
-              id: this.state.id,
-              id2: conversation.userId,
-              title: conversation.title,
-              role: this.props.user.role,
-              name: this.props.user.name
-            }
-          }}
-          key={conversation.userId}
-        >
-          {/*Creates messages summary page*/}
-          <ChatItem
-            avatar={conversation.avatar}
-            alt={conversation.alt}
-            title={conversation.title}
-            subtitle={conversation.subtitle}
-            date={conversation.date}
-            unread={conversation.unread}
-          />
-        </Link>
+        <div>
+          <h1>Messaging </h1>
+          {chatItems}
+        </div>
       );
-    });
-
-    return (
-      <div>
-        <h1>Messaging </h1>
-        {chatItems}
-      </div>
-    );
+    }
   }
 
   componentDidMount() {
@@ -82,13 +78,13 @@ class MessagingPage extends Component {
           ? this.props.childID
           : this.props.user.id;
       this.setState({ id });
-      this.fetchConversation(id);
+      this.getConversations(id, this.props.userList);
 
-      if (this._isMounted){
-        this.timer = setInterval(() => {
-          this.fetchConversation(id);
-        }, 5000);  
-      }
+      this.timer = setInterval(() => {
+        if(this._isMounted){
+          this.getConversations(id, this.props.userList)
+        }
+      }, 3000);  
     }
   }
 
@@ -97,25 +93,10 @@ class MessagingPage extends Component {
     this.timer && clearTimeout(this.timer);
   }
 
-  // Fetch all of the conversations that this id has been part of
-  fetchConversation(id) {
-    getConversation(id)
-      .then(conversationResource => {
-        const conversations = conversationResource.map(conversation =>
-          conversationMap(
-            conversation,
-            id,
-            this.props.userList,
-            this.state.dbType
-          )
-        );
-        if (this._isMounted){
-          this.setState({ conversations });  
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  getConversations(id,userList){
+    if(typeof this.props.fetchConversation ==="function"){
+      this.props.fetchConversation(id, userList);
+    }
   }
 }
 

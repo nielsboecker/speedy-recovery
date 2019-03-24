@@ -38,6 +38,8 @@ import {
 } from "../../service/FhirDataMappingService";
 import FhirDataQueryingService from "../../service/FhirDataQueryingService";
 import { filterPersonResource, filterPractitionerResource } from "../../service/FhirDataFilteringService";
+import { getConversation } from "../../service/BackendService";
+import { conversationMap } from "../../service/BackendMapping";
 
 class App extends Component {
   constructor(props) {
@@ -55,8 +57,12 @@ class App extends Component {
       patientPractitioners: [],
       userList:[],
       childID: null,
-      mapChildResource:{}
+      mapChildResource:{},
+      conversations:[],
+      unreadNum : 0,
+      dbType: "MySQL"
     }
+    this.fetchConversation = this.fetchConversation.bind(this);  
   }
 
   render = () => {
@@ -112,6 +118,9 @@ class App extends Component {
                 fhirVersion={this.state.fhirVersion}
                 childID={this.state.childID}
                 childResource = {this.state.mapChildResource}
+                conversations = {this.state.conversations}
+                unreadNum= {this.state.unreadNum}
+                fetchConversation={this.fetchConversation}
               />
             )}
           />
@@ -258,6 +267,7 @@ class App extends Component {
         this.setState({ appointments });
         const userList = this.setUserList(appointments, role);
         this.setState({ appointments, userList });
+        this.fetchConversation(userId,this.state.userList);
       })
       .catch(error => {
         console.error(error);
@@ -432,6 +442,32 @@ class App extends Component {
       )
       : array;
   };
+
+  fetchConversation(id, userList) {
+    getConversation(id)
+      .then(conversationResource => {
+        const conversations = conversationResource.map(conversation =>
+          conversationMap(
+            conversation,
+            id,
+            userList,
+            this.state.dbType
+          )
+        );
+        this.setState({ conversations });
+        let unreadNum = 0;
+        for (let conversation of this.state.conversations){
+           if(conversation.unread !== "Unknown"){
+             unreadNum += conversation.unread; 
+           }    
+        }
+        this.setState({unreadNum}); 
+
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 }
 
 export default App;

@@ -22,7 +22,6 @@ import { Link } from "react-router-dom";
 
 import { Container, Dropdown, Icon, Image, Label, Menu } from "semantic-ui-react";
 import "./Header.css";
-import { getConversation } from "../../../service/BackendService";
 
 class Header extends Component {
     _isMounted = false;
@@ -43,7 +42,7 @@ class Header extends Component {
           <Icon name="mail" />
           Messages
           <Label color="teal" circular floating>
-          {this.state.unreadNum}
+          {this.props.unreadNum}
           </Label>
         </Menu.Item>
       );
@@ -92,45 +91,35 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    this._isMounted = true;
-    if (this.props.role === "Practitioner"){
-      const id = this.props.practitionerid;
-      this.setState({ id });
-    }
-    if (this.props.role === "Parent"){
-      const id = this.props.userid;
-      this.setState({ id });
-
-    }
-    this.setMessageNum();
-    this.timer = setInterval(() => {
+    if(this.props.role !== "Patient"){
+      this._isMounted = true;
+      if (this.props.role === "Practitioner"){
+        const id = this.props.practitionerid;
+        this.setState({ id });
+      }
+      if (this.props.role === "Parent"){
+        const id = this.props.userId;
+        this.setState({ id });
+      }
       this.setMessageNum();
-    }, 5000);
+      this.timer = setInterval(() => {
+      if(this._isMounted){
+        this.setMessageNum();
+      }
+    }, 3000);
   }
+}
 
   componentWillUnmount() {
     this._isMounted = false;
     this.timer && clearTimeout(this.timer);
   }
 
-  setMessageNum = () => {
-    if (this.props.role !== "Patient") {
-      getConversation(this.state.id)
-        .then(conversationResource => {
-          let unreadNum = 0;
-          for (let conversation of conversationResource){
-            unreadNum += conversation.unread;
-          }
-          if (this._isMounted){
-            this.setState({ unreadNum });
-          }
-        })
-        .catch(error => {
-          console.error(error);
-        });
+  setMessageNum(){
+    if(typeof this.props.fetchConversation ==="function"){
+      this.props.fetchConversation(this.state.id, this.props.userList);
     }
   }
-
 }
 
 export default Header;

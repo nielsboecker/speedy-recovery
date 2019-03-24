@@ -64,10 +64,12 @@ class SecuredMainPage extends Component {
               username={this.props.user.name}
               onLogout={this.props.onLogout}
               role={this.props.user.role}
-              userid={this.props.childID}
+              userId={this.props.childID}
               practitionerid={this.props.user.id}
+              unreadNum= {this.props.unreadNum}
+              fetchConversation={this.props.fetchConversation}
+              userList={this.props.userList}
             />
-
             <Container>
               <Route
                 path={`(${match.url}|${match.url}/home)`}
@@ -100,6 +102,9 @@ class SecuredMainPage extends Component {
                     user={this.props.user}
                     userList={this.props.userList}
                     childID={this.props.childID}
+                    conversations = {this.props.conversations}
+                    unreadNum= {this.props.unreadNum}
+                    fetchConversation={this.props.fetchConversation}
                   />
                 )}
               />
