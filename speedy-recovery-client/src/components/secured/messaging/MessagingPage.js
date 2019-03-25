@@ -78,11 +78,9 @@ class MessagingPage extends Component {
           ? this.props.childID
           : this.props.user.id;
       this.setState({ id });
-      this.getConversations(id, this.props.userList);
-
       this.timer = setInterval(() => {
         if(this._isMounted){
-          this.getConversations(id, this.props.userList)
+          this.getConversations();
         }
       }, 3000);  
     }
@@ -93,9 +91,9 @@ class MessagingPage extends Component {
     this.timer && clearTimeout(this.timer);
   }
 
-  getConversations(id,userList){
+  getConversations() {
     if(typeof this.props.fetchConversation ==="function"){
-      this.props.fetchConversation(id, userList);
+      this.props.fetchConversation();
     }
   }
 }

@@ -42,19 +42,9 @@ class SecuredMainPage extends Component {
     if (!this.props.user) {
       return <Redirect to="/" />;
     }
-
-    const { match } = this.props;
     
-    const { data, error } = this.state;
-
-    if (error) {
-      return (
-        <div className="error">
-          There was an error fetching data: {error} {data}
-        </div>
-      );
-    }
-
+    const { match } = this.props;
+   
     return (
       //  Routes the user to their selected page
       <div>
@@ -103,7 +93,6 @@ class SecuredMainPage extends Component {
                     userList={this.props.userList}
                     childID={this.props.childID}
                     conversations = {this.props.conversations}
-                    unreadNum= {this.props.unreadNum}
                     fetchConversation={this.props.fetchConversation}
                   />
                 )}

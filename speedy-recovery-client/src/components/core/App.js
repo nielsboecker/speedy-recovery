@@ -443,7 +443,15 @@ class App extends Component {
       : array;
   };
 
-  fetchConversation(id, userList) {
+  fetchConversation() {
+    let id = "0";
+    if(this.state.user.role === "Practitioner"){
+      id = this.state.user.id;
+    }
+    else{
+      id = this.state.childID;
+    }
+    const {userList} = this.state;
     getConversation(id)
       .then(conversationResource => {
         const conversations = conversationResource.map(conversation =>

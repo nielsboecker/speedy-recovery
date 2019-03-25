@@ -24,16 +24,8 @@ import { Container, Dropdown, Icon, Image, Label, Menu } from "semantic-ui-react
 import "./Header.css";
 
 class Header extends Component {
-    _isMounted = false;
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      unreadNum: 0,
-      id: ''
-    };
-  }
-
+  _isMounted = false;
+  
   render() {
     let showMessage;
     if (this.props.role !== "Patient") {
@@ -93,15 +85,6 @@ class Header extends Component {
   componentDidMount() {
     if(this.props.role !== "Patient"){
       this._isMounted = true;
-      if (this.props.role === "Practitioner"){
-        const id = this.props.practitionerid;
-        this.setState({ id });
-      }
-      if (this.props.role === "Parent"){
-        const id = this.props.userId;
-        this.setState({ id });
-      }
-      this.setMessageNum();
       this.timer = setInterval(() => {
       if(this._isMounted){
         this.setMessageNum();
@@ -116,8 +99,8 @@ class Header extends Component {
   }
 
   setMessageNum(){
-    if(typeof this.props.fetchConversation ==="function"){
-      this.props.fetchConversation(this.state.id, this.props.userList);
+    if(typeof this.props.fetchConversation === "function"){
+      this.props.fetchConversation();
     }
   }
 }
