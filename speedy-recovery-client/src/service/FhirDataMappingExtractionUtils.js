@@ -38,6 +38,7 @@ const getFirstName = name => {
     }
     return firstName.toString();
   }
+  return missingField;
 };
 
 const getPhone = telecom => {
@@ -159,6 +160,34 @@ const getPractName = name => {
   return missingField;
 };
 
+const getOnSetAge = resource => {
+  if (
+    resource &&
+    resource.condition &&
+    resource.condition[0] &&
+    resource.condition[0].onsetAge.value &&
+    resource.condition[0].onsetAge.unit
+  ) {
+    return (
+      resource.condition[0].onsetAge.value +
+      " " +
+      resource.condition[0].onsetAge.unit
+    );
+  }
+};
+
+const getCauseOfDeath = fhirFamilyResource => {
+  if (
+    fhirFamilyResource.condition &&
+    fhirFamilyResource.condition[0] &&
+    fhirFamilyResource.condition[0].code &&
+    fhirFamilyResource.condition[0].code.text
+  ) {
+    return fhirFamilyResource.condition[0].code.text;
+  }
+  return missingField;
+};
+
 export {
   getName,
   getFirstName,
@@ -173,5 +202,7 @@ export {
   getbodySite,
   getMedName,
   getForm,
-  getPractName
+  getPractName,
+  getOnSetAge,
+  getCauseOfDeath
 };

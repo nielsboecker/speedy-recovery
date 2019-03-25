@@ -4,5 +4,5 @@ header {
   box-shadow: none;
   margin-bottom: 1em;
   margin-top: 4em;
-  transition: box-shadow 0.5s ease, padding 0.5s ease;
+  transition: box-shadow 0.3s ease, padding 0.5s ease;
 }

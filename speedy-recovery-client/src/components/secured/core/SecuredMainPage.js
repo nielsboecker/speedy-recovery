@@ -1,18 +1,18 @@
 /*
-* Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
-* patients, parents and hospital staff
-*
-* Copyright (C) 2019 University College London
-*
-* This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
-* Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-* any later version.
-* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-* warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-* details.
-* You should have received a copy of the GNU Affero General Public License along with this program. If not,
-* see http://www.gnu.org/license/.
-* */
+ * Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
+ * patients, parents and hospital staff
+ *
+ * Copyright (C) 2019 University College London
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+ * Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ * You should have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see http://www.gnu.org/license/.
+ * */
 
 /* This file defines the SecuredMainPage component which controls where the user is routed to once they have entered
 the secure part of the application.
@@ -29,6 +29,7 @@ import ConversationPage from "../conversation/ConversationPage";
 import InfoFactory from "../patientinformation/InfoFactory";
 import CalendarFactory from "../calendar/CalendarFactory";
 import HomePageFactory from "../home/HomePageFactory";
+import PractitionerPatientInfo from "../patientinformation/Practitioner/PractitionerPatientInfo";
 
 class SecuredMainPage extends Component {
   constructor(props) {
@@ -65,7 +66,6 @@ class SecuredMainPage extends Component {
                 render={() => (
                   <HomePageFactory
                     user={this.props.user}
-                    patient={this.props.patient}
                     events={this.props.appointments}
                   />
                 )}
@@ -103,10 +103,11 @@ class SecuredMainPage extends Component {
                 render={() => (
                   <InfoFactory
                     user={this.props.user}
-                    patient={this.props.patient}
+                    patients={this.props.patients}
                     conditions={this.props.conditions}
                     medicationDispenses={this.props.medicationDispenses}
                     carePlans={this.props.carePlans}
+                    fhirVersion={this.props.fhirVersion}
                     childResource={this.props.childResource}
                     patientPractitioners={this.props.patientPractitioners}
                   />
@@ -115,6 +116,10 @@ class SecuredMainPage extends Component {
               <Route
                 path={`${match.url}/conversation`}
                 component={ConversationPage}
+              />
+              <Route
+                path={`${match.url}/information`}
+                component={PractitionerPatientInfo}
               />
             </Container>
             <Footer />

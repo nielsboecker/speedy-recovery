@@ -14,17 +14,26 @@
  * see http://www.gnu.org/license/.
  * */
 
-/* This file contains functions to help verify that a given date is in a valid format.
- */
+/* This file tests functions in DateUtils*/
+import { formatDate, removeArrayDuplicates } from "../../service/Utils";
 
-export function formatDate(date) {
-  if (date) {
-    return new Date(date).toLocaleString("en-uk");
-  }
-  return "Invalid date";
-}
+test("trigger formatDate(mockDate)", () => {
+  const mockDate = "2222-12-12";
+  const result = formatDate(mockDate);
+  const expected = new Date(mockDate).toLocaleString("en-uk");
+  expect(result).toEqual(expected);
+});
 
-// Source: https://stackoverflow.com/questions/1353684/detecting-an-invalid-date-date-instance-in-javascript
-export function isValidDate(date) {
-  return date instanceof Date && !isNaN(date);
-}
+test("trigger formatDate(missingDate)", () => {
+  const mockDate = "";
+  const result = formatDate(mockDate);
+  expect(result).toEqual("Invalid date");
+});
+
+test("trigger removeArrayDuplicates without crashing", () => {
+  removeArrayDuplicates(["mock", "mock"]);
+});
+
+test("trigger removeArrayDuplicates(missingResource) without crashing", () => {
+  removeArrayDuplicates();
+});

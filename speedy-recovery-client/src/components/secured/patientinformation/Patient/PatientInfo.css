@@ -10,7 +10,7 @@
 }
 
 #patientTableRow:hover {
-  background-color: orange;
+  background-color: lightblue;
 }
 
 #patientTableCell {
@@ -23,5 +23,5 @@
   border-collapse: collapse;
   width: 100%;
   text-align: center;
-  background-color: #4caf50;
+  background-color: lightblue;
 }

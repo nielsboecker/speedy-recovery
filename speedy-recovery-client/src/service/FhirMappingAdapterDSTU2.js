@@ -30,7 +30,9 @@ import {
   getPractitioner,
   getPractitionerId,
   getSeverity,
-  getSummary
+  getSummary,
+  getOnSetAge,
+  getCauseOfDeath
 } from "./FhirDataMappingExtractionUtils";
 
 const missingField = "Unknown";
@@ -145,6 +147,16 @@ const mapCarePlanSTU2 = fhirCareResource => ({
   period: getCarePlanPeriod(fhirCareResource.period)
 });
 
+const mapFamilyHistorySTU2 = fhirFamilyResource => ({
+  name: fhirFamilyResource.name ? fhirFamilyResource.name : missingField,
+  relationship: fhirFamilyResource.relationship.coding[0].display
+    ? fhirFamilyResource.relationship.coding[0].display
+    : missingField,
+  causeOfDeath: getCauseOfDeath(fhirFamilyResource),
+  onsetAge: getOnSetAge(fhirFamilyResource),
+  date: fhirFamilyResource.date ? fhirFamilyResource.date : missingField
+});
+
 const getCarePlanCategory = category => {
   if (
     category &&
@@ -249,6 +261,22 @@ const getMedDispenseName = medicationCodeableConcept => {
   return missingField;
 };
 
+const mapGoalSTU2 = fhirGoalResource => ({
+  goal: fhirGoalResource.category[0].coding[0].code
+    ? fhirGoalResource.category[0].coding[0].code
+    : missingField,
+  priority: fhirGoalResource.priority.text
+    ? fhirGoalResource.priority.text
+    : missingField,
+  description: fhirGoalResource.description.text
+    ? fhirGoalResource.description.text
+    : missingField,
+  startDate: fhirGoalResource.startDate
+    ? fhirGoalResource.startDate
+    : missingField,
+  dueDate: "Undefined in STU2"
+});
+
 const mapPractitionerSTU2 = fhirPractResource => ({
   name: getPractName(fhirPractResource.name),
   id: fhirPractResource.id ? fhirPractResource.id : missingField,
@@ -326,5 +354,11 @@ export {
   mapMedicationDispenseSTU2,
   mapCarePlanSTU2,
   mapPractitionerSTU2,
-  getChildIDSTU2
+  getChildIDSTU2,
+  mapFamilyHistorySTU2,
+  mapGoalSTU2,
+  getCarePlanStart,
+  getCarePlanEnd,
+  formatBirthDate,
+  getCarePlanActivities
 };

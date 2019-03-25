@@ -1,18 +1,18 @@
 /*
-* Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
-* patients, parents and hospital staff
-*
-* Copyright (C) 2019 University College London
-*
-* This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
-* Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-* any later version.
-* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-* warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-* details.
-* You should have received a copy of the GNU Affero General Public License along with this program. If not,
-* see http://www.gnu.org/license/.
-* */
+ * Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
+ * patients, parents and hospital staff
+ *
+ * Copyright (C) 2019 University College London
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+ * Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ * You should have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see http://www.gnu.org/license/.
+ * */
 
 /* This file tests the CalendarPages component*/
 
@@ -36,6 +36,14 @@ it("parentCalendar renders without crashing", () => {
   shallow(<ParentCalendar onChange={jest.fn()} events={exampleAppointment} />);
 });
 
+it("parentCalendar triggers toggleEditModal without crashing", () => {
+  const wrapper = shallow(
+    <ParentCalendar onChange={jest.fn()} events={exampleAppointment} />
+  );
+  const instance = wrapper.instance();
+  instance.toggleEditModal();
+});
+
 it("patientCalendar renders without crashing", () => {
   shallow(
     <PatientCalendar
@@ -48,10 +56,32 @@ it("patientCalendar renders without crashing", () => {
   );
 });
 
+it("patientCalendar triggers getBackendInfo without crashing", () => {
+  const wrapper = shallow(
+    <PatientCalendar
+      onChange={jest.fn()}
+      events={exampleAppointments}
+      localizer={localizer}
+      updateStatePractitioner={jest.fn()}
+      patientPractitioner={[]}
+    />
+  );
+  const instance = wrapper.instance();
+  instance.getBackendInfo();
+});
+
 it("practitionerCalendar renders without crashing", () => {
   shallow(
     <PractitionerCalendar onChange={jest.fn()} events={exampleAppointment} />
   );
+});
+
+it("practitionerCalendar triggers toggleEditModal without crashing", () => {
+  const wrapper = shallow(
+    <PractitionerCalendar onChange={jest.fn()} events={exampleAppointment} />
+  );
+  const instance = wrapper.instance();
+  instance.toggleEditModal();
 });
 
 it("test modals on calendar", () => {
