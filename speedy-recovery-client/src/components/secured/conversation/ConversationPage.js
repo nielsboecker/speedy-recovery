@@ -27,7 +27,6 @@ import { getSenderMessageNum, messageMap, setupMessages } from "../../../service
 import "./ConversationPage.css";
 
 class ConversationPage extends Component {
-  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -95,7 +94,6 @@ class ConversationPage extends Component {
   }
 
   componentDidMount() {
-    this._isMounted = true;
     this.setMessageList();
     //Check for new messages every 3 seconds
     this.timer = setInterval(() => {
@@ -104,13 +102,12 @@ class ConversationPage extends Component {
   }
 
   componentWillUnmount() {
-    this._isMounted = false;
     this.timer && clearTimeout(this.timer);
   }
 
   //Populate the history of messages in this conversation on the page
   setMessageList = () => {
-    if (this.props.location && this._isMounted) {
+    if (this.props.location) {
       this.setState({ title: this.props.location.state.title });
       getMessages(this.props.location.state.id, this.props.location.state.id2)
         .then(messagesResource => {
@@ -120,7 +117,7 @@ class ConversationPage extends Component {
           );
           if (
             getSenderMessageNum(messages) >=
-            getSenderMessageNum(this.state.messages) && this._isMounted
+            getSenderMessageNum(this.state.messages)
           ) {
             this.setState({ messages });
           }

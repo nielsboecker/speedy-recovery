@@ -24,7 +24,6 @@ import { ChatItem } from "react-chat-elements";
 import { Link } from "react-router-dom";
 
 class MessagingPage extends Component {
-  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
@@ -71,7 +70,6 @@ class MessagingPage extends Component {
   }
 
   componentDidMount() {
-    this._isMounted = true;
     if (this.props.user && this.props.userList) {
       const id =
         this.props.user.role === "Parent"
@@ -79,15 +77,13 @@ class MessagingPage extends Component {
           : this.props.user.id;
       this.setState({ id });
       this.timer = setInterval(() => {
-        if(this._isMounted){
-          this.getConversations();
-        }
-      }, 3000);  
+        this.getConversations();
+        
+      }, 5000);  
     }
   }
 
   componentWillUnmount() {
-    this._isMounted = false;
     this.timer && clearTimeout(this.timer);
   }
 
