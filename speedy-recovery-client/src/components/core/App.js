@@ -61,8 +61,7 @@ class App extends Component {
       conversations:[],
       unreadNum : 0,
       dbType: "MySQL"
-    }
-    this.fetchConversation = this.fetchConversation.bind(this);  
+    } 
   }
 
   render = () => {
@@ -120,7 +119,6 @@ class App extends Component {
                 childResource = {this.state.mapChildResource}
                 conversations = {this.state.conversations}
                 unreadNum= {this.state.unreadNum}
-                fetchConversation={this.fetchConversation}
               />
             )}
           />
@@ -267,7 +265,12 @@ class App extends Component {
         this.setState({ appointments });
         const userList = this.setUserList(appointments, role);
         this.setState({ appointments, userList });
-        this.fetchConversation(userId,this.state.userList);
+        if(role !== "Patient"){
+          this.fetchConversation(userId,this.state.userList);
+          this.timer = setInterval(() => {
+              this.fetchConversation(userId,this.state.userList);
+          }, 5000);
+        }   
       })
       .catch(error => {
         console.error(error);
@@ -444,38 +447,39 @@ class App extends Component {
   };
 
   fetchConversation() {
-    let id = "0";
-    if(this.state.user.role === "Practitioner"){
-      id = this.state.user.id;
-    }
-    else{
-      id = this.state.childID;
-    }
-    const {userList} = this.state;
-    getConversation(id)
-      .then(conversationResource => {
-        const conversations = conversationResource.map(conversation =>
-          conversationMap(
-            conversation,
-            id,
-            userList,
-            this.state.dbType
-          )
-        );
-        this.setState({ conversations });
-        let unreadNum = 0;
-        for (let conversation of this.state.conversations){
-           if(conversation.unread !== "Unknown"){
-             unreadNum += conversation.unread; 
-           }    
+    if(this.state.user){
+        let id = "0";
+        if(this.state.user.role === "Practitioner"){
+          id = this.state.user.id;
         }
-        this.setState({unreadNum}); 
-
-      })
-      .catch(error => {
-        console.error(error);
-      });
+        else{
+          id = this.state.childID;
+        }
+        const {userList} = this.state;
+        getConversation(id)
+          .then(conversationResource => {
+            const conversations = conversationResource.map(conversation =>
+              conversationMap(
+                conversation,
+                id,
+                userList,
+                this.state.dbType
+              )
+            );
+            this.setState({ conversations });
+            let unreadNum = 0;
+            for (let conversation of this.state.conversations){
+              if(conversation.unread !== "Unknown"){
+                unreadNum += conversation.unread; 
+              }    
+            }
+            this.setState({unreadNum}); 
+          })
+          .catch(error => {
+            console.error(error);
+          });
   }
+}
 }
 
 export default App;

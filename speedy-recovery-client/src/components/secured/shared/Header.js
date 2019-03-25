@@ -23,9 +23,7 @@ import { Link } from "react-router-dom";
 import { Container, Dropdown, Icon, Image, Label, Menu } from "semantic-ui-react";
 import "./Header.css";
 
-class Header extends Component {
-  _isMounted = false;
-  
+class Header extends Component { 
   render() {
     let showMessage;
     if (this.props.role !== "Patient") {
@@ -80,28 +78,6 @@ class Header extends Component {
         </Menu>
       </header>
     );
-  }
-
-  componentDidMount() {
-    if(this.props.role !== "Patient"){
-      this._isMounted = true;
-      this.timer = setInterval(() => {
-      if(this._isMounted){
-        this.setMessageNum();
-      }
-    }, 3000);
-  }
-}
-
-  componentWillUnmount() {
-    this._isMounted = false;
-    this.timer && clearTimeout(this.timer);
-  }
-
-  setMessageNum(){
-    if(typeof this.props.fetchConversation === "function"){
-      this.props.fetchConversation();
-    }
   }
 }
 

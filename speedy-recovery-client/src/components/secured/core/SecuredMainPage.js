@@ -57,8 +57,6 @@ class SecuredMainPage extends Component {
               userId={this.props.childID}
               practitionerid={this.props.user.id}
               unreadNum= {this.props.unreadNum}
-              fetchConversation={this.props.fetchConversation}
-              userList={this.props.userList}
             />
             <Container>
               <Route
@@ -93,7 +91,6 @@ class SecuredMainPage extends Component {
                     userList={this.props.userList}
                     childID={this.props.childID}
                     conversations = {this.props.conversations}
-                    fetchConversation={this.props.fetchConversation}
                   />
                 )}
               />
