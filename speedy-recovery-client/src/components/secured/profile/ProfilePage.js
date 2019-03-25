@@ -18,7 +18,7 @@
 about them.
  */
 
-import React, { Component, Fragment } from "react";
+import React, { Component} from "react";
 import { Grid, Icon, Table } from "semantic-ui-react";
 
 class ProfilePage extends Component {
