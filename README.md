@@ -24,9 +24,11 @@
 
 [GOSH](https://www.gosh.nhs.uk/) and their digital unit [GOSH DRIVE (Digital Research Informatics and Virtual Environments)](https://www.gosh.nhs.uk/news/latest-press-releases/new-unit-opening-great-ormond-street-hospital-set-revolutionise-how-technology-used-hospitals) are committed to making young patients’ hospital stays as tolerable as possible. Inherently, this goal can only be achieved if parents are assured and confident, and hospital staff is well-informed and approachable. 
 
-We aim to use modern technology to help GOSH in their pursuit of their goals and generally explore the potential of patient-centred software in healthcare. Therefore, we will develop a web app that serves three different user groups: patient, parent and proviider. The app will display a calendar that is tailored to the respective user’s needs. 
+We aim to use modern technology to help GOSH in their pursuit of their goals and generally explore the potential of patient-centred software in healthcare. Therefore, we will develop a web app that serves three different user groups: patient, parent and provider. The app will display a calendar that is tailored to the respective user’s needs. 
 
-The project makes use of the cutting-edge healthcare data standard FHIR (Fast Healthcare Interoperability Resources), which is still in its draft phase, but is believed to revolutionise the health IT landscape. The project explores the opportunities of this young, evolving standard, together with the SMART on FHIR technology that builds on top of it. 
+The project makes use of the cutting-edge healthcare data standard FHIR (Fast Healthcare Interoperability Resources), which has only recently left draft phase, and is believed to revolutionise the health IT landscape. The project explores the opportunities of this young, evolving standard, together with the SMART on FHIR technology that builds on top of it.
+
+Within GOSH DRIVE, this is also the first reported usage of the SMART Sandbox in operation. Therefore, this project is also meant as a reference implementation for SMART on FHIR developers looking to implement a web application.
 
 ## Front-End
 The React client application can be found in the `/speedy-recovery-client` directory.
@@ -61,10 +63,10 @@ Currently, we support FHIR DSTU2 and STU3. To add support for a new version, imp
 The app is currently deployed via Azure DevOps pipelines. Merge your changes into the `master` branch and trigger a release.
 
 ## Back-end
-Most back-end services are carries out through the SMART on FHIR sandbox. A distinct  back-end is being implemented to add some features and can be found at [speedy-recovery-server](https://github.com/JustinYaaang/speedy-recovery-server/).
+Most back-end services are carries out through the SMART on FHIR sandbox. A distinct  back-end is being implemented to add some features and can be found at [speedy-recovery-server](https://github.com/JustinYaaang/speedy-recovery-server/). Further information can be found in the README in that repository.
 
 ## Data creation
-In order to create test data on the SMART FHIR server, a helper program is available in the `smart-server-data-creation` package.
+In order to create test data on the SMART FHIR server, a helper program is available in the `smart-server-data-creation` package. It creates and modifies the synthetic patient data on the SMART on FHIR v3 server, which gets wiped on a nightly basis. Therefore the data creation script is scheduled to run every 3 hours. Further information can be found in the README in that directory.
 
 ##  Acknowledgement
 We would like to thank John Booth and Usman Bahadur from GOSH DRIVE as well as Marios Isaakidis for their advice throughout this project.
