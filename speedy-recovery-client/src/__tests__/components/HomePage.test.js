@@ -1,18 +1,18 @@
 /*
-* Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
-* patients, parents and hospital staff
-*
-* Copyright (C) 2019 University College London
-*
-* This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
-* Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-* any later version.
-* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-* warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-* details.
-* You should have received a copy of the GNU Affero General Public License along with this program. If not,
-* see http://www.gnu.org/license/.
-* */
+ * Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
+ * patients, parents and hospital staff
+ *
+ * Copyright (C) 2019 University College London
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+ * Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ * You should have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see http://www.gnu.org/license/.
+ * */
 
 /* This file tests the HomePage component*/
 
@@ -22,6 +22,7 @@ import Adapter from "enzyme-adapter-react-16";
 import PatientHomePage from "../../components/secured/home/PatientHomePage";
 import ParentHomePage from "../../components/secured/home/ParentHomePage";
 import PractitionerHomePage from "../../components/secured/home/PractitionerHomePage";
+import { getNextEvent } from "../../components/secured/home/HomePageDataUtils";
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -35,4 +36,36 @@ it("Parent's home page renders without crashing", () => {
 
 it("Practitioner's home page renders without crashing", () => {
   shallow(<PractitionerHomePage />);
+});
+
+test("When event exist, getNextEvent()", () => {
+  const mockEvents = [{ start: "2222-12-12" }, { start: "2222-12-12" }];
+  getNextEvent(mockEvents);
+});
+
+test("PatientHomePage renders without crashing", () => {
+  const mockEvents = [
+    { patient: "foo", start: "2222-12-12" },
+    { patient: "foo", start: "2222-12-12" }
+  ];
+  const wrapper = shallow(<PatientHomePage />);
+  wrapper.setProps({ events: mockEvents, user: "foo" });
+});
+
+test("ParentHomePage renders without crashing", () => {
+  const mockEvents = [
+    { patient: "foo", start: "2222-12-12" },
+    { patient: "foo", start: "2222-12-12" }
+  ];
+  const wrapper = shallow(<ParentHomePage />);
+  wrapper.setProps({ events: mockEvents, user: "foo" });
+});
+
+test("PractitionerHomePage renders without crashing", () => {
+  const mockEvents = [
+    { patient: "foo", start: "2222-12-12" },
+    { patient: "foo", start: "2222-12-12" }
+  ];
+  const wrapper = shallow(<PractitionerHomePage />);
+  wrapper.setProps({ events: mockEvents, user: "foo" });
 });

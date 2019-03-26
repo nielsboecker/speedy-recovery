@@ -1,24 +1,32 @@
 /*
-* Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
-* patients, parents and hospital staff
-*
-* Copyright (C) 2019 University College London
-*
-* This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
-* Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-* any later version.
-* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-* warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-* details.
-* You should have received a copy of the GNU Affero General Public License along with this program. If not,
-* see http://www.gnu.org/license/.
-* */
+ * Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
+ * patients, parents and hospital staff
+ *
+ * Copyright (C) 2019 University College London
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+ * Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ * You should have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see http://www.gnu.org/license/.
+ * */
 
 /* This file defines the WelcomeBox component that creates the box that the user sees as they log-in/sign-up to the
-* application*/
+ * application*/
 
 import React, { Component } from "react";
-import { Button, Card, Container, Form, Grid, Image, Message, Segment } from "semantic-ui-react";
+import {
+  Card,
+  Container,
+  Form,
+  Grid,
+  Image,
+  Message,
+  Segment
+} from "semantic-ui-react";
 import "./WelcomeBox.css";
 import UserModal from "./UserModal";
 
@@ -45,25 +53,20 @@ class WelcomeBox extends Component {
                 <Form size="large">
                   <Segment>
                     <UserModal onLogin={this.props.onLogin} />
-                    <Button
-                      color="teal"
-                      fluid
-                      size="large"
-                      name="button2"
-                      className="button"
-                      onClick={() =>
-                        alert("This functionality is not supported yet")
-                      }
-                    >
-                      Sign up
-                    </Button>
                   </Segment>
                 </Form>
               </Card.Content>
 
               <Card.Content>
                 <Message>
-                  Need help? <a href="/TODO">Click here!</a>
+                  Need help?{" "}
+                  <a
+                    href="https://github.com/nbckr/speedy-recovery"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Click here!
+                  </a>
                 </Message>
               </Card.Content>
             </Card>

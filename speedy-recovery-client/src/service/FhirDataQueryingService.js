@@ -42,7 +42,10 @@ const getUserAppointments = userID => {
           .done(appointmentsBundle => {
             console.log("User appointment response: ", appointmentsBundle);
             const appointments = extractResourcesFromBundle(appointmentsBundle);
-            console.log("Appointments Resource after mapping: ", appointments);
+            console.log(
+              "Appointments Resource after extracting: ",
+              appointments
+            );
             return resolve(appointments);
           });
       },
@@ -63,7 +66,7 @@ const getUserConditions = userID => {
           .done(conditionBundle => {
             console.log("User condition response: ", conditionBundle);
             const conditions = extractResourcesFromBundle(conditionBundle);
-            console.log("Conditions Resource after mapping: ", conditions);
+            console.log("Conditions Resource after extracting: ", conditions);
             return resolve(conditions);
           });
       },
@@ -88,7 +91,7 @@ const getUserMedicationDispense = userID => {
             );
             const medications = extractResourcesFromBundle(medicationBundle);
             console.log(
-              "MedicationDispenses Resource after mapping: ",
+              "MedicationDispenses Resource after extracting: ",
               medications
             );
             return resolve(medications);
@@ -120,7 +123,7 @@ const getPractitioner = (practId, familyName) => {
               practId
             );
             console.log(
-              "Practitioner response Resource after mapping: ",
+              "Practitioner response Resource after extracting: ",
               practitioner
             );
             return resolve(practitioner[0]);
@@ -128,6 +131,29 @@ const getPractitioner = (practId, familyName) => {
       },
       error => {
         console.error("Practitioner fetching error: ", error);
+        return reject(error);
+      }
+    );
+  });
+};
+
+const getChildInfo = childID => {
+  return new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      smart => {
+        smart.api
+          .search({ type: "Patient", query: { _id: childID } })
+          .done(childResourceBundle => {
+            console.log("Child resource response: ", childResourceBundle);
+            const childResource = extractResourcesFromBundle(
+              childResourceBundle
+            );
+            console.log("Child Resource after extracting: ", childResource);
+            return resolve(childResource);
+          });
+      },
+      error => {
+        console.error("Child resource fetching error: ", error);
         return reject(error);
       }
     );
@@ -143,12 +169,78 @@ const getUserCarePlan = userID => {
           .done(carePlanBundle => {
             console.log("User care plan response: ", carePlanBundle);
             const carePlans = extractResourcesFromBundle(carePlanBundle);
-            console.log("CarePlans Resource after mapping: ", carePlans);
+            console.log("CarePlan Resource after extracting: ", carePlans);
             return resolve(carePlans);
           });
       },
       error => {
         console.error("CarePlan fetching error: ", error);
+        return reject(error);
+      }
+    );
+  });
+};
+
+const getFamilyMemberHistory = userID => {
+  return new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      smart => {
+        smart.api
+          .search({ type: "FamilyMemberHistory", query: { patient: userID } })
+          .done(FamilyMemberHistory => {
+            console.log("Family member history response:", FamilyMemberHistory);
+            const familyMemberHistory = extractResourcesFromBundle(
+              FamilyMemberHistory
+            );
+            console.log(
+              "Family member history after extracting:",
+              familyMemberHistory
+            );
+            return resolve(familyMemberHistory);
+          });
+      },
+      error => {
+        console.error("FamilyMemberHistory fetching error: ", error);
+        return reject(error);
+      }
+    );
+  });
+};
+const getGoal = userID => {
+  return new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      smart => {
+        smart.api
+          .search({ type: "Goal", query: { subject: userID } })
+          .done(goals => {
+            console.log("Goals response:", goals);
+            const goal = extractResourcesFromBundle(goals);
+            console.log("Goals after extracting:", goal);
+            return resolve(goal);
+          });
+      },
+      error => {
+        console.error("FamilyMemberHistory fetching error: ", error);
+        return reject(error);
+      }
+    );
+  });
+};
+
+const getPatient = userID => {
+  return new Promise((resolve, reject) => {
+    FHIR.oauth2.ready(
+      smart => {
+        smart.api
+          .search({ type: "Patient", query: { _id: userID } })
+          .done(patientInformation => {
+            console.log("Patient response: ", patientInformation);
+            const patient = extractResourcesFromBundle(patientInformation);
+            return resolve(patient);
+          });
+      },
+      error => {
+        console.error("Patient fetching error: ", error);
         return reject(error);
       }
     );
@@ -161,5 +253,9 @@ export default {
   getUserConditions,
   getUserMedicationDispense,
   getUserCarePlan,
-  extractResourcesFromBundle
+  extractResourcesFromBundle,
+  getPatient,
+  getFamilyMemberHistory,
+  getGoal,
+  getChildInfo
 };

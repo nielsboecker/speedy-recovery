@@ -1,18 +1,18 @@
 /*
-* Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
-* patients, parents and hospital staff
-*
-* Copyright (C) 2019 University College London
-*
-* This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
-* Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-* any later version.
-* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-* warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-* details.
-* You should have received a copy of the GNU Affero General Public License along with this program. If not,
-* see http://www.gnu.org/license/.
-* */
+ * Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
+ * patients, parents and hospital staff
+ *
+ * Copyright (C) 2019 University College London
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+ * Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ * You should have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see http://www.gnu.org/license/.
+ * */
 
 /* This file defines the PatientCalendar component which creates the patient view of the calendar
  */
@@ -25,6 +25,7 @@ import "../CalendarPages.css";
 import { Dropdown, Grid, Segment } from "semantic-ui-react";
 import PatientPractitionerCard from "./PatientPractitionerCard";
 import { getPractitionerInfo } from "../../../../service/BackendService";
+import { removeArrayDuplicates } from "../../../../service/Utils";
 
 class PatientCalendar extends React.Component {
   constructor(...args) {
@@ -43,31 +44,20 @@ class PatientCalendar extends React.Component {
     });
   };
 
-  removeArrayDuplicates = array =>
-    array !== undefined
-      ? array.reduce(
-      (prev, curr) =>
-        prev.find(a => a["text"] === curr["text"])
-          ? prev
-          : prev.push(curr) && prev,
-      []
-      )
-      : array;
-
   // Retrieve extra practitioner info from the back-end
-  getBackendInfo =  (practitionerID) => {
+  getBackendInfo = practitionerID => {
     getPractitionerInfo(practitionerID)
-      .then(response =>
-        this.setState({backendInfo: response.data[0]})
-      )
-      .catch(error => console.log(error))
+      .then(response => this.setState({ backendInfo: response.data[0] }))
+      .catch(error => console.log(error));
   };
 
   onDropdownChange = (e, data) => {
     this.getBackendInfo(data.value);
-    this.setState({ selectedPractitioner:
-        this.state.practitionerList.find(element => element.id ===
-          data.value)});
+    this.setState({
+      selectedPractitioner: this.state.practitionerList.find(
+        element => element.id === data.value
+      )
+    });
   };
 
   componentWillMount = () => {
@@ -82,7 +72,7 @@ class PatientCalendar extends React.Component {
     };
 
     return (
-      <Grid columns={2} divided>
+      <Grid stackable columns={2} divided>
         <Grid.Row stretched>
           <Grid.Column color={"green"}>
             <h2 align="center">My Appointments</h2>
@@ -110,13 +100,14 @@ class PatientCalendar extends React.Component {
               placeholder="Select Doctor"
               fluid
               selection
-              options={this.removeArrayDuplicates(
+              options={removeArrayDuplicates(
                 this.props.events.map(event => {
                   return {
                     text: event.practitioner,
                     value: event.practitionerId
                   };
-                })
+                }),
+                "text"
               )}
               onChange={this.onDropdownChange}
             />

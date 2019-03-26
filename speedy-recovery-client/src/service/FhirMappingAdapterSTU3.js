@@ -31,7 +31,9 @@ import {
   getPractitionerId,
   getPractName,
   getSeverity,
-  getSummary
+  getSummary,
+  getOnSetAge,
+  getCauseOfDeath
 } from "./FhirDataMappingExtractionUtils";
 
 const missingField = "Unknown";
@@ -39,7 +41,7 @@ const mapPersonToUserSTU3 = fhirPersonResource => ({
   id: fhirPersonResource.id ? fhirPersonResource.id : missingField,
   // This is a temporary hard-code fix as the SMART sandbox does not support logging in as a patients' parent
   role:
-    fhirPersonResource.id === "220093"
+    fhirPersonResource.id === "b1f0365d-f405-45c0-8cbd-da56518e7504"
       ? "Parent"
       : fhirPersonResource.resourceType,
 
@@ -123,6 +125,34 @@ const mapMedicationSTU3 = fhirMedResource => ({
   imageURL: getImageURL(fhirMedResource.image)
 });
 
+const mapFamilyHistorySTU3 = fhirFamilyResource => ({
+  name: fhirFamilyResource.name ? fhirFamilyResource.name : missingField,
+  relationship: fhirFamilyResource.relationship.coding[0].display
+    ? fhirFamilyResource.relationship.coding[0].display
+    : missingField,
+  causeOfDeath: getCauseOfDeath(fhirFamilyResource),
+  onsetAge: getOnSetAge(fhirFamilyResource),
+  date: fhirFamilyResource.date ? fhirFamilyResource.date : missingField
+});
+
+const mapGoalSTU3 = fhirGoalResource => ({
+  goal: fhirGoalResource.category[0].coding[0].code
+    ? fhirGoalResource.category[0].coding[0].code
+    : missingField,
+  priority: fhirGoalResource.priority.text
+    ? fhirGoalResource.priority.text
+    : missingField,
+  description: fhirGoalResource.description.text
+    ? fhirGoalResource.description.text
+    : missingField,
+  startDate: fhirGoalResource.startDate
+    ? fhirGoalResource.startDate
+    : missingField,
+  dueDate: fhirGoalResource.target.dueDate
+    ? fhirGoalResource.target.dueDate
+    : missingField
+});
+
 const mapMedicationDispenseSTU3 = fhirMedResource => ({
   id: fhirMedResource.id ? fhirMedResource.id : missingField,
   status:
@@ -130,8 +160,15 @@ const mapMedicationDispenseSTU3 = fhirMedResource => ({
       ? fhirMedResource.status
       : missingField,
   name: getMedDispenseName(fhirMedResource.medicationCodeableConcept),
-  quantity: getMedDispenseQuantity(fhirMedResource.quantity),
-  daysSupply: getMedDispenseDaysSupply(fhirMedResource.daysSupply),
+  quantity: fhirMedResource.quantity.value
+    ? fhirMedResource.quantity.value
+    : missingField,
+  daysSupply: fhirMedResource.daysSupply.value
+    ? fhirMedResource.daysSupply.value
+    : missingField,
+  intakeMethod: getIntakeMethod(fhirMedResource.dosageInstruction),
+  dosageFrequency: getDosageFrequency(fhirMedResource.dosageInstruction),
+  dosagePeriod: getDosagePeriod(fhirMedResource.dosageInstruction),
   whenHandedOver:
     fhirMedResource.whenHandedOver !== undefined
       ? fhirMedResource.whenHandedOver
@@ -156,6 +193,8 @@ const mapPractitionerSTU3 = fhirPractResource => ({
   birthDate: fhirPractResource.birthDate
     ? fhirPractResource.birthDate
     : missingField,
+  phone: getPhone(fhirPractResource.telecom),
+  email: getEmail(fhirPractResource.telecom),
   photo: getPhoto(fhirPractResource.photo)
 });
 
@@ -190,7 +229,7 @@ const getCarePlanActivities = activity => {
           (i + 1).toString() +
           ". " +
           activity[i].detail.code.coding[0].display +
-          "; ";
+          ";";
       }
     }
     return actStr;
@@ -220,16 +259,39 @@ const getCarePlanEnd = period => {
   return missingField;
 };
 
-const getMedDispenseDaysSupply = daysSupply => {
-  if (daysSupply && daysSupply.value && daysSupply.unit) {
-    return daysSupply.value + " " + daysSupply.unit;
+const getIntakeMethod = dosageInstruction => {
+  if (
+    dosageInstruction &&
+    dosageInstruction[0] &&
+    dosageInstruction[0].route &&
+    dosageInstruction[0].route.coding &&
+    dosageInstruction[0].route.coding[0] &&
+    dosageInstruction[0].route.coding[0].display
+  ) {
+    return dosageInstruction[0].route.coding[0].display;
   }
-  return missingField;
 };
 
-const getMedDispenseQuantity = quantity => {
-  if (quantity && quantity.value && quantity.unit) {
-    return quantity.value + " " + quantity.unit;
+const getDosageFrequency = dosageInstruction => {
+  if (
+    dosageInstruction &&
+    dosageInstruction[0] &&
+    dosageInstruction[0].timing &&
+    dosageInstruction[0].timing.repeat &&
+    dosageInstruction[0].timing.repeat.frequency
+  ) {
+    return dosageInstruction[0].timing.repeat.frequency;
+  }
+};
+const getDosagePeriod = dosageInstruction => {
+  if (
+    dosageInstruction &&
+    dosageInstruction[0] &&
+    dosageInstruction[0].timing &&
+    dosageInstruction[0].timing.repeat &&
+    dosageInstruction[0].timing.repeat.period
+  ) {
+    return dosageInstruction[0].timing.repeat.period;
   }
 };
 
@@ -387,5 +449,11 @@ export {
   mapMedicationDispenseSTU3,
   mapCarePlanSTU3,
   mapPractitionerSTU3,
-  getChildIDSTU3
+  mapFamilyHistorySTU3,
+  mapGoalSTU3,
+  getChildIDSTU3,
+  getCarePlanStart,
+  getCarePlanEnd,
+  getPhoto,
+  formatBirthDate
 };

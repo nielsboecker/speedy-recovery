@@ -1,38 +1,50 @@
 /*
-* Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
-* patients, parents and hospital staff
-*
-* Copyright (C) 2019 University College London
-*
-* This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
-* Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
-* any later version.
-* This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-* warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-* details.
-* You should have received a copy of the GNU Affero General Public License along with this program. If not,
-* see http://www.gnu.org/license/.
-* */
+ * Speedy Recovery -- A patient-centred app based on the FHIR standard facilitating communication between paediatric
+ * patients, parents and hospital staff
+ *
+ * Copyright (C) 2019 University College London
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+ * Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+ * details.
+ * You should have received a copy of the GNU Affero General Public License along with this program. If not,
+ * see http://www.gnu.org/license/.
+ * */
 
 /* This file defines Header component which creates the header at the top of each page.
  */
 
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Container, Dropdown, Icon, Image, Label, Menu } from "semantic-ui-react";
 import "./Header.css";
+import {
+  Container,
+  Icon,
+  Image,
+  Menu,
+  Dropdown,
+  Label
+} from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import { isBrowser, isTablet } from "react-device-detect";
 
-class Header extends Component {
+class Header extends Component { 
   render() {
     let showMessage;
     if (this.props.role !== "Patient") {
       showMessage = (
         <Menu.Item as={Link} to="/secured/messaging">
           <Icon name="mail" />
-          Messages
-          <Label color="teal" circular>
-            2
-          </Label>
+          {isBrowser || isTablet ? "Messages" : ""}
+          {isBrowser || isTablet ? (
+            <Label color="teal" circular>
+              {this.props.unreadNum}
+            </Label>
+          ) : (
+            ""
+          )}
         </Menu.Item>
       );
     }
@@ -41,23 +53,24 @@ class Header extends Component {
         <Menu borderless>
           <Container text>
             <Menu.Item header as={Link} to="/secured/home">
-              <Image src="images/logo_square.png" size="mini" spaced="right" />
-              Speedy Recovery
+              <Image src="images/logo_square.png" size="mini" />
+              {isBrowser || isTablet ? "Speedy Recovery" : ""}
             </Menu.Item>
             <Menu.Item as={Link} to="/secured/calendar">
               <Icon name="calendar alternate" />
-              Calendar
+              {isBrowser || isTablet ? "Calendar" : ""}
             </Menu.Item>
 
             {showMessage}
 
             <Menu.Item as={Link} to="/secured/patientinformation">
-              Patient Information
+              <Icon name="clipboard" />
+              {isBrowser || isTablet ? "Patient Info" : ""}
             </Menu.Item>
 
             <Menu.Menu position="right">
               <Dropdown
-                text={this.props.username}
+                text={isBrowser ? this.props.username : ""}
                 pointing
                 className="link item"
               >
