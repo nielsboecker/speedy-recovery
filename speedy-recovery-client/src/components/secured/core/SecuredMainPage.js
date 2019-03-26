@@ -43,9 +43,9 @@ class SecuredMainPage extends Component {
     if (!this.props.user) {
       return <Redirect to="/" />;
     }
-
+    
     const { match } = this.props;
-
+   
     return (
       //  Routes the user to their selected page
       <div>
@@ -55,8 +55,10 @@ class SecuredMainPage extends Component {
               username={this.props.user.name}
               onLogout={this.props.onLogout}
               role={this.props.user.role}
+              userId={this.props.childID}
+              practitionerid={this.props.user.id}
+              unreadNum= {this.props.unreadNum}
             />
-
             <Container>
               <Route
                 path={`(${match.url}|${match.url}/home)`}
@@ -88,6 +90,7 @@ class SecuredMainPage extends Component {
                     user={this.props.user}
                     userList={this.props.userList}
                     childID={this.props.childID}
+                    conversations = {this.props.conversations}
                   />
                 )}
               />

@@ -109,7 +109,7 @@ class ConversationPage extends Component {
     //Check for new messages every 3 seconds
     this.timer = setInterval(() => {
       this.setMessageList();
-    }, 3000);
+    }, 5000);
   }
 
   componentWillUnmount() {

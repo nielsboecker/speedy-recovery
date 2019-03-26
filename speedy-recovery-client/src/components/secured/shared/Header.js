@@ -30,7 +30,7 @@ import {
 import { Link } from "react-router-dom";
 import { isBrowser, isTablet } from "react-device-detect";
 
-class Header extends Component {
+class Header extends Component { 
   render() {
     let showMessage;
     if (this.props.role !== "Patient") {
@@ -40,7 +40,7 @@ class Header extends Component {
           {isBrowser || isTablet ? "Messages" : ""}
           {isBrowser || isTablet ? (
             <Label color="teal" circular>
-              2
+              {this.props.unreadNum}
             </Label>
           ) : (
             ""

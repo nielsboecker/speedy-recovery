@@ -157,7 +157,7 @@ class PractitionerModal extends Component {
                     }}
                     key={this.props.appointment.patientId}
                   >
-                    Chat with this patient
+                    Chat with the parent 
                   </Link>
                 </Button>
               </Grid.Row>
